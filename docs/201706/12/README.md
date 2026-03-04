@@ -5,4 +5,3 @@
 
 ## 论文列表
 1. [attention is all you need](#/201706/12/1706.03762v1-attention-is-all-you-need)
-   - evidence: 提出Transformer纯注意力架构，显著提升并行化与翻译质量。
