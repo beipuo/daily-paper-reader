@@ -1,0 +1,79 @@
+{
+  "label": "2026-03-27",
+  "date": "2026-03-27",
+  "generated_at": "2026-03-27T19:31:51",
+  "count": 5,
+  "papers": [
+    {
+      "paper_id": "202603/27/2603.25237v1-deep-learning-of-committor-and-explainable-artificial-intelligence-analysis-for-identifying-reaction-coordinates",
+      "section": "quick",
+      "title_en": "Deep learning of committor and explainable artificial intelligence analysis for identifying reaction coordinates",
+      "authors": "Toshifumi Mori, Kei-ichi Okazaki, Kang Kim, Nobuyuki Matubayasi",
+      "date": "2026-03-26",
+      "pdf": "https://arxiv.org/pdf/2603.25237v1",
+      "score": "7.0",
+      "evidence": "用于识别反应坐标和控制变量的可解释人工智能",
+      "tldr": "本文综述了一种结合深度学习与可解释人工智能（XAI）识别复杂分子系统反应坐标的新框架。该方法以集合变量为输入，通过训练神经网络预测反映转变进度的提交概率，并利用XAI技术打破深度学习的“黑箱”限制，定量评估各变量贡献。这不仅能识别出主导反应的关键分子特征，还为理解分子机制提供了清晰的物理图像，适用于多种复杂化学与生物系统。",
+      "tags": "query:xrlsr",
+      "abstract_en": "In complex molecular systems, the reaction coordinate (RC) that characterizes transition pathways is essential to understand underlying molecular mechanisms. This review surveys a framework for identifying the RC by applying deep learning to the committor, which provides the most reliable measure of the progress along a transition path. The inputs to the neural network are collective variables (CVs) expressed as functions of atomic coordinates of the system, and the corresponding RC is predicted as the output by training the network on the committor as the learning target. Because deep learning models typically operate in a black-box manner, it is difficult to determine which input variables govern the predictions. The incorporation of eXplainable Artificial Intelligence (XAI) techniques enables quantitative assessment of the contributions of individual input variables to the predictions. This approach allows the identification of CVs that play dominant roles and demonstrates that the committor distribution on the surface using important CVs is separated by well-defined boundaries. The framework provides an explainable deep learning strategy for assigning a molecular mechanism from the RC and is applicable to a wide range of complex molecular systems.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202603/27/2603.19577v1-stochastic-averaging-and-statistical-inference-of-glycolytic-pathway",
+      "section": "quick",
+      "title_en": "Stochastic Averaging and Statistical Inference of Glycolytic Pathway",
+      "authors": "Arnab Ganguly, Hye-Won Kang",
+      "date": "2026-03-20",
+      "pdf": "https://arxiv.org/pdf/2603.19577v1",
+      "score": "6.0",
+      "evidence": "从随机动力学推导简化的常微分方程模型",
+      "tldr": "本研究针对糖酵解途径中的振荡现象，提出了一个严谨的概率框架，将复杂的随机生化反应网络简化为低维确定性模型。通过将系统建模为多尺度连续时间马尔可夫链，研究者证明了在特定条件下，慢变量的动态可由二维常微分方程近似。此外，针对观测受限的情况，研究还提出了一种统计一致的参数估计方法。该成果在数学上连接了随机动力学与确定性简化模型，为生物网络的参数推断提供了理论支撑。",
+      "tags": "query:xrlsr",
+      "abstract_en": "Many biological processes exhibit oscillatory behavior. Among these, glycolytic oscillations have been extensively studied due to their well-characterized biochemical reaction networks. However, the complexity of these networks necessitates low-dimensional ordinary differential equation (ODE) models to identify core mechanisms and perform stability analysis. While previous studies proposed reduced ODE models, these were typically introduced from deterministic descriptions rather than the underlying stochastic dynamics, which more accurately represent discrete reaction events occurring at random times. In this paper, we develop a rigorous probabilistic framework for deriving a reduced Othmer-Aldridge model of the glycolytic pathway from its stochastic formulation. The full system is modeled as a multiscale continuous-time Markov chain with different time and abundance scales. Under an appropriate scaling regime and specific structural conditions, we prove that the dynamics of the slow components are approximated by a two-dimensional ODE. The proof is technically involved due to the network's complexity and strong coupling between its components. We further consider the problem of parameter estimation when observations are limited to the slow species: fructose-6-phosphate and ADP. The reduced system yields a tractable loss function depending solely on these variables. We prove that the resulting estimators are statistically consistent when the data originate from the full stochastic reaction network. Together, these results provide a mathematically rigorous framework linking stochastic biochemical reaction networks, reduced deterministic dynamics, and statistically reliable parameter estimation.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202603/27/2603.23361v2-central-dogma-transformer-iii-interpretable-ai-across-dna-rna-and-protein",
+      "section": "quick",
+      "title_en": "Central Dogma Transformer III: Interpretable AI Across DNA, RNA, and Protein",
+      "authors": "Nobuyuki Ota",
+      "date": "2026-03-24",
+      "pdf": "https://arxiv.org/pdf/2603.23361v2",
+      "score": "6.0",
+      "evidence": "跨中心法则的DNA、RNA和蛋白质可解释人工智能",
+      "tldr": "CDT-III 是一款跨越 DNA、RNA 和蛋白质的生物 AI 模型，采用模拟细胞空间结构的 Virtual Cell Embedder 架构。它通过 VCE-N 和 VCE-C 分别建模转录与翻译过程，显著提升了预测精度和可解释性。研究发现蛋白质监督能优化上游 RNA 预测，并揭示了 mRNA 与蛋白质表达变化方向常不一致的现象。该模型在药物副作用预测和基因筛选方面展现出巨大潜力。",
+      "tags": "query:am-tom",
+      "abstract_en": "Biological AI models increasingly predict complex cellular responses, yet their learned representations remain disconnected from the   molecular processes they aim to capture. We present CDT-III, which extends mechanism-oriented AI across the full central dogma: DNA, RNA, and   protein. Its two-stage Virtual Cell Embedder architecture mirrors the spatial compartmentalization of the cell: VCE-N models transcription in   the nucleus and VCE-C models translation in the cytosol. On five held-out genes, CDT-III achieves per-gene RNA r=0.843 and protein r=0.969.   Adding protein prediction improves RNA performance (r=0.804 to 0.843), demonstrating that downstream tasks regularize upstream   representations. Protein supervision sharpens DNA-level interpretability, increasing CTCF enrichment by 30%. Analysis of experimentally   measured mRNA and protein responses reveals that the majority of genes with observable mRNA changes show opposite protein-level changes (66.7%   at |log2FC|>0.01, rising to 87.5% at |log2FC|>0.02), exposing a fundamental limitation of RNA-only perturbation models. Despite this   pervasive direction discordance, CDT-III correctly predicts both mRNA and protein responses. Applied to in silico CD52 knockdown approximating   Alemtuzumab, the model predicts 29/29 protein changes correctly and rediscovers 5 of 7 known clinical side effects without clinical data.   Gradient-based side effect profiling requires only unperturbed baseline data (r=0.939), enabling screening of all 2,361 genes without new   experiments.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202603/27/2603.24783v1-causal-discovery-on-dependent-mixed-data-with-applications-to-gene-regulatory-network-inference",
+      "section": "quick",
+      "title_en": "Causal Discovery on Dependent Mixed Data with Applications to Gene Regulatory Network Inference",
+      "authors": "Alex Chen, Qing Zhou",
+      "date": "2026-03-25",
+      "pdf": "https://arxiv.org/pdf/2603.24783v1",
+      "score": "6.0",
+      "evidence": "基于观测数据的因果发现和结构方程建模",
+      "tldr": "本研究针对现代数据中普遍存在的样本相关性和混合变量（连续与离散）挑战，提出了一种用于因果发现的去相关框架。该方法通过构建包含潜在变量的结构方程模型，利用成对极大似然估计和EM算法处理相关的高斯误差及离散观测值。通过对恢复的潜在数据进行去相关转换，使标准因果发现算法能有效应用于复杂依赖数据。在单细胞RNA测序数据上的应用证明，该方法能更准确地推断基因调控网络，具有显著的预测优势和生物学一致性。",
+      "tags": "query:xrlsr",
+      "abstract_en": "Causal discovery aims to infer causal relationships among variables from observational data, typically represented by a directed acyclic graph (DAG). Most existing methods assume independent and identically distributed observations, an assumption often violated in modern applications. In addition, many datasets contain a mixture of continuous and discrete variables, which further complicates causal modeling when dependence across samples is present. To address these challenges, we propose a de-correlation framework for causal discovery from dependent mixed data. Our approach formulates a structural equation model with latent variables that accommodates both continuous and discrete variables while allowing correlated Gaussian errors across units. We estimate the dependence structure among samples via a pairwise maximum likelihood estimator for the covariance matrix and develop an EM algorithm to impute latent variables underlying discrete observations. A de-correlation transformation of the recovered latent data enables the use of standard causal discovery algorithms to learn the underlying causal graph. Simulation studies demonstrate that the proposed method substantially improves causal graph recovery compared with applying standard methods directly to the original dependent data. We apply our approach to single-cell RNA sequencing data to infer gene regulatory networks governing embryonic stem cell differentiation. The inferred regulatory networks show significantly improved predictive likelihood on test data, and many high-confidence edges are supported by known regulatory interactions reported in the literature.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202603/27/2603.25561v1-an-integrative-genome-scale-metabolic-modeling-and-machine-learning-framework-for-predicting-and-optimizing-biofuel-relevant-biomass-production-in-saccharomyces-cerevisiae",
+      "section": "quick",
+      "title_en": "An Integrative Genome-Scale Metabolic Modeling and Machine Learning Framework for Predicting and Optimizing Biofuel-Relevant Biomass Production in Saccharomyces cerevisiae",
+      "authors": "Neha K. Nair, Aaron D'Souza",
+      "date": "2026-03-26",
+      "pdf": "https://arxiv.org/pdf/2603.25561v1",
+      "score": "6.0",
+      "evidence": "代谢建模与机器学习预测生物量生产",
+      "tldr": "本研究针对酿酒酵母生物量预测难题，整合了Yeast9基因组规模代谢模型与机器学习框架。通过通量平衡分析生成数据，利用随机森林和XGBoost实现高精度预测，并结合VAE、SHAP分析及贝叶斯优化，显著提升了生物量通量，为生物燃料相关的代谢工程提供了高效的计算优化方案。",
+      "tags": "query:am-tom",
+      "abstract_en": "Saccharomyces cerevisiae is a cornerstone organism in industrial biotechnology, valued for its genetic tractability and robust fermentative capacity. Accurately predicting biomass flux across diverse environmental and genetic perturbations remains a significant challenge for rational strain design. We present a computational framework combining the Yeast9 genome-scale metabolic model with machine learning and optimization to predict, interpret, and enhance biomass flux. Flux balance analysis generated 2,000 flux profiles by varying glucose, oxygen, and ammonium uptake rates. Random Forest and XGBoost regressors achieved R2 of 0.99989 and 0.9990, respectively. A variational autoencoder revealed four distinct metabolic clusters, and SHAP analysis identified glycolysis, the TCA cycle, and lipid biosynthesis as key biomass determinants. In silico overexpression achieved a biomass flux of 0.979 gDW/hr, while Bayesian optimization of nutrient constraints produced a 12-fold increase (0.0858 to 1.041 gDW/hr). A generative adversarial network proposed stoichiometrically feasible novel flux configurations. This framework demonstrates how genome-scale simulation, interpretable ML, and generative modeling can advance yeast metabolic engineering.",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

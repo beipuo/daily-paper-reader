@@ -1,0 +1,199 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-03-27T19:30:49.253206+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 5,
+    "quick_skim_target": 11,
+    "quick_selected": 5
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2603.25237v1",
+      "title": "Deep learning of committor and explainable artificial intelligence analysis for identifying reaction coordinates",
+      "abstract": "In complex molecular systems, the reaction coordinate (RC) that characterizes transition pathways is essential to understand underlying molecular mechanisms. This review surveys a framework for identifying the RC by applying deep learning to the committor, which provides the most reliable measure of the progress along a transition path. The inputs to the neural network are collective variables (CVs) expressed as functions of atomic coordinates of the system, and the corresponding RC is predicted as the output by training the network on the committor as the learning target. Because deep learning models typically operate in a black-box manner, it is difficult to determine which input variables govern the predictions. The incorporation of eXplainable Artificial Intelligence (XAI) techniques enables quantitative assessment of the contributions of individual input variables to the predictions. This approach allows the identification of CVs that play dominant roles and demonstrates that the committor distribution on the surface using important CVs is separated by well-defined boundaries. The framework provides an explainable deep learning strategy for assigning a molecular mechanism from the RC and is applicable to a wide range of complex molecular systems.",
+      "authors": [
+        "Toshifumi Mori",
+        "Kei-ichi Okazaki",
+        "Kang Kim",
+        "Nobuyuki Matubayasi"
+      ],
+      "primary_category": "physics.chem-ph",
+      "categories": [
+        "physics.chem-ph",
+        "cond-mat.soft"
+      ],
+      "published": "2026-03-26T09:42:08+00:00",
+      "link": "https://arxiv.org/pdf/2603.25237v1",
+      "tags": [
+        "keyword:AM TOM",
+        "query:AM TOM"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "explainable AI for identifying reaction coordinates and governing variables",
+      "llm_evidence_cn": "用于识别反应坐标和控制变量的可解释人工智能",
+      "llm_evidence": "用于识别反应坐标和控制变量的可解释人工智能",
+      "canonical_evidence": "用于识别反应坐标和控制变量的可解释人工智能",
+      "llm_tldr_en": "Uses deep learning and explainable AI to identify governing variables and mechanisms in molecular systems.",
+      "llm_tldr_cn": "利用深度学习和可解释AI识别分子系统中的控制变量和机制。",
+      "llm_tldr": "利用深度学习和可解释AI识别分子系统中的控制变量和机制。",
+      "llm_tags": [
+        "query:xrlsr:composite"
+      ],
+      "matched_query_tag": "query:xrlsr:composite",
+      "matched_query_text": "Papers central to 可解释强化学习驱动的符号回归方程发现论文查找, especially work that connects or combines: symbolic regression for equation discovery; reinforcement learning driven symbolic regression; interpretable machine learning for symbolic regression; automated discovery of physical laws and equations; policy gradient methods in symbolic regression; interpretable reinforcement learning for symbolic regression papers; deep reinforcement learning methods for automated equation discovery; state of the art in reinforcement learning based symbolic regression; frameworks for explainable symbolic regression using RL agents.",
+      "matched_requirement_id": "req-composite-xrlsr",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.19577v1",
+      "title": "Stochastic Averaging and Statistical Inference of Glycolytic Pathway",
+      "abstract": "Many biological processes exhibit oscillatory behavior. Among these, glycolytic oscillations have been extensively studied due to their well-characterized biochemical reaction networks. However, the complexity of these networks necessitates low-dimensional ordinary differential equation (ODE) models to identify core mechanisms and perform stability analysis. While previous studies proposed reduced ODE models, these were typically introduced from deterministic descriptions rather than the underlying stochastic dynamics, which more accurately represent discrete reaction events occurring at random times. In this paper, we develop a rigorous probabilistic framework for deriving a reduced Othmer-Aldridge model of the glycolytic pathway from its stochastic formulation. The full system is modeled as a multiscale continuous-time Markov chain with different time and abundance scales. Under an appropriate scaling regime and specific structural conditions, we prove that the dynamics of the slow components are approximated by a two-dimensional ODE. The proof is technically involved due to the network's complexity and strong coupling between its components. We further consider the problem of parameter estimation when observations are limited to the slow species: fructose-6-phosphate and ADP. The reduced system yields a tractable loss function depending solely on these variables. We prove that the resulting estimators are statistically consistent when the data originate from the full stochastic reaction network. Together, these results provide a mathematically rigorous framework linking stochastic biochemical reaction networks, reduced deterministic dynamics, and statistically reliable parameter estimation.",
+      "authors": [
+        "Arnab Ganguly",
+        "Hye-Won Kang"
+      ],
+      "primary_category": "math.PR",
+      "categories": [
+        "math.PR",
+        "q-bio.QM",
+        "stat.ME"
+      ],
+      "published": "2026-03-20T02:40:13+00:00",
+      "link": "https://arxiv.org/pdf/2603.19577v1",
+      "tags": [
+        "keyword:AM TOM",
+        "query:AM TOM"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "deriving reduced ODE models from stochastic dynamics",
+      "llm_evidence_cn": "从随机动力学推导简化的常微分方程模型",
+      "llm_evidence": "从随机动力学推导简化的常微分方程模型",
+      "canonical_evidence": "从随机动力学推导简化的常微分方程模型",
+      "llm_tldr_en": "A probabilistic framework for deriving reduced ODE models of biochemical pathways, supporting equation discovery.",
+      "llm_tldr_cn": "一种推导生化通路简化ODE模型的概率框架，支持方程发现。",
+      "llm_tldr": "一种推导生化通路简化ODE模型的概率框架，支持方程发现。",
+      "llm_tags": [
+        "query:xrlsr:composite"
+      ],
+      "matched_query_tag": "query:xrlsr:composite",
+      "matched_query_text": "Papers central to 可解释强化学习驱动的符号回归方程发现论文查找, especially work that connects or combines: symbolic regression for equation discovery; reinforcement learning driven symbolic regression; interpretable machine learning for symbolic regression; automated discovery of physical laws and equations; policy gradient methods in symbolic regression; interpretable reinforcement learning for symbolic regression papers; deep reinforcement learning methods for automated equation discovery; state of the art in reinforcement learning based symbolic regression; frameworks for explainable symbolic regression using RL agents.",
+      "matched_requirement_id": "req-composite-xrlsr",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.23361v2",
+      "title": "Central Dogma Transformer III: Interpretable AI Across DNA, RNA, and Protein",
+      "abstract": "Biological AI models increasingly predict complex cellular responses, yet their learned representations remain disconnected from the   molecular processes they aim to capture. We present CDT-III, which extends mechanism-oriented AI across the full central dogma: DNA, RNA, and   protein. Its two-stage Virtual Cell Embedder architecture mirrors the spatial compartmentalization of the cell: VCE-N models transcription in   the nucleus and VCE-C models translation in the cytosol. On five held-out genes, CDT-III achieves per-gene RNA r=0.843 and protein r=0.969.   Adding protein prediction improves RNA performance (r=0.804 to 0.843), demonstrating that downstream tasks regularize upstream   representations. Protein supervision sharpens DNA-level interpretability, increasing CTCF enrichment by 30%. Analysis of experimentally   measured mRNA and protein responses reveals that the majority of genes with observable mRNA changes show opposite protein-level changes (66.7%   at |log2FC|>0.01, rising to 87.5% at |log2FC|>0.02), exposing a fundamental limitation of RNA-only perturbation models. Despite this   pervasive direction discordance, CDT-III correctly predicts both mRNA and protein responses. Applied to in silico CD52 knockdown approximating   Alemtuzumab, the model predicts 29/29 protein changes correctly and rediscovers 5 of 7 known clinical side effects without clinical data.   Gradient-based side effect profiling requires only unperturbed baseline data (r=0.939), enabling screening of all 2,361 genes without new   experiments.",
+      "authors": [
+        "Nobuyuki Ota"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "q-bio.GN"
+      ],
+      "published": "2026-03-24T15:57:23+00:00",
+      "link": "https://arxiv.org/pdf/2603.23361v2",
+      "tags": [
+        "keyword:AM TOM",
+        "query:AM TOM"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Interpretable AI for DNA, RNA, and protein across the central dogma",
+      "llm_evidence_cn": "跨中心法则的DNA、RNA和蛋白质可解释人工智能",
+      "llm_evidence": "跨中心法则的DNA、RNA和蛋白质可解释人工智能",
+      "canonical_evidence": "跨中心法则的DNA、RNA和蛋白质可解释人工智能",
+      "llm_tldr_en": "CDT-III models the central dogma with interpretable AI, relevant to molecular mechanisms of fruit ripening.",
+      "llm_tldr_cn": "CDT-III利用可解释AI模拟中心法则，与果实成熟的分子机制相关。",
+      "llm_tldr": "CDT-III利用可解释AI模拟中心法则，与果实成熟的分子机制相关。",
+      "llm_tags": [
+        "query:am-tom"
+      ],
+      "matched_query_tag": "query:am-tom",
+      "matched_query_text": "Molecular mechanism of amino acid signaling in tomato fruit ripening.",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.24783v1",
+      "title": "Causal Discovery on Dependent Mixed Data with Applications to Gene Regulatory Network Inference",
+      "abstract": "Causal discovery aims to infer causal relationships among variables from observational data, typically represented by a directed acyclic graph (DAG). Most existing methods assume independent and identically distributed observations, an assumption often violated in modern applications. In addition, many datasets contain a mixture of continuous and discrete variables, which further complicates causal modeling when dependence across samples is present. To address these challenges, we propose a de-correlation framework for causal discovery from dependent mixed data. Our approach formulates a structural equation model with latent variables that accommodates both continuous and discrete variables while allowing correlated Gaussian errors across units. We estimate the dependence structure among samples via a pairwise maximum likelihood estimator for the covariance matrix and develop an EM algorithm to impute latent variables underlying discrete observations. A de-correlation transformation of the recovered latent data enables the use of standard causal discovery algorithms to learn the underlying causal graph. Simulation studies demonstrate that the proposed method substantially improves causal graph recovery compared with applying standard methods directly to the original dependent data. We apply our approach to single-cell RNA sequencing data to infer gene regulatory networks governing embryonic stem cell differentiation. The inferred regulatory networks show significantly improved predictive likelihood on test data, and many high-confidence edges are supported by known regulatory interactions reported in the literature.",
+      "authors": [
+        "Alex Chen",
+        "Qing Zhou"
+      ],
+      "primary_category": "stat.ME",
+      "categories": [
+        "stat.ME",
+        "q-bio.GN",
+        "stat.AP"
+      ],
+      "published": "2026-03-25T19:57:07+00:00",
+      "link": "https://arxiv.org/pdf/2603.24783v1",
+      "tags": [
+        "keyword:AM TOM",
+        "query:AM TOM"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "causal discovery and structural equation modeling from observational data",
+      "llm_evidence_cn": "基于观测数据的因果发现和结构方程建模",
+      "llm_evidence": "基于观测数据的因果发现和结构方程建模",
+      "canonical_evidence": "基于观测数据的因果发现和结构方程建模",
+      "llm_tldr_en": "Develops a framework for causal discovery and structural equation modeling in complex mixed datasets.",
+      "llm_tldr_cn": "开发了一个用于复杂混合数据集因果发现和结构方程建模的框架。",
+      "llm_tldr": "开发了一个用于复杂混合数据集因果发现和结构方程建模的框架。",
+      "llm_tags": [
+        "query:xrlsr:composite"
+      ],
+      "matched_query_tag": "query:xrlsr:composite",
+      "matched_query_text": "Papers central to 可解释强化学习驱动的符号回归方程发现论文查找, especially work that connects or combines: symbolic regression for equation discovery; reinforcement learning driven symbolic regression; interpretable machine learning for symbolic regression; automated discovery of physical laws and equations; policy gradient methods in symbolic regression; interpretable reinforcement learning for symbolic regression papers; deep reinforcement learning methods for automated equation discovery; state of the art in reinforcement learning based symbolic regression; frameworks for explainable symbolic regression using RL agents.",
+      "matched_requirement_id": "req-composite-xrlsr",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.25561v1",
+      "title": "An Integrative Genome-Scale Metabolic Modeling and Machine Learning Framework for Predicting and Optimizing Biofuel-Relevant Biomass Production in Saccharomyces cerevisiae",
+      "abstract": "Saccharomyces cerevisiae is a cornerstone organism in industrial biotechnology, valued for its genetic tractability and robust fermentative capacity. Accurately predicting biomass flux across diverse environmental and genetic perturbations remains a significant challenge for rational strain design. We present a computational framework combining the Yeast9 genome-scale metabolic model with machine learning and optimization to predict, interpret, and enhance biomass flux. Flux balance analysis generated 2,000 flux profiles by varying glucose, oxygen, and ammonium uptake rates. Random Forest and XGBoost regressors achieved R2 of 0.99989 and 0.9990, respectively. A variational autoencoder revealed four distinct metabolic clusters, and SHAP analysis identified glycolysis, the TCA cycle, and lipid biosynthesis as key biomass determinants. In silico overexpression achieved a biomass flux of 0.979 gDW/hr, while Bayesian optimization of nutrient constraints produced a 12-fold increase (0.0858 to 1.041 gDW/hr). A generative adversarial network proposed stoichiometrically feasible novel flux configurations. This framework demonstrates how genome-scale simulation, interpretable ML, and generative modeling can advance yeast metabolic engineering.",
+      "authors": [
+        "Neha K. Nair",
+        "Aaron D'Souza"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-26T15:32:16+00:00",
+      "link": "https://arxiv.org/pdf/2603.25561v1",
+      "tags": [
+        "keyword:AM TOM",
+        "query:AM TOM"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Metabolic modeling and machine learning for biomass production",
+      "llm_evidence_cn": "代谢建模与机器学习预测生物量生产",
+      "llm_evidence": "代谢建模与机器学习预测生物量生产",
+      "canonical_evidence": "代谢建模与机器学习预测生物量生产",
+      "llm_tldr_en": "Integrates metabolic modeling and ML to predict biomass flux, a method transferable to tomato fruit development.",
+      "llm_tldr_cn": "结合代谢建模和机器学习预测生物量通量，该方法可迁移至番茄果实发育研究。",
+      "llm_tldr": "结合代谢建模和机器学习预测生物量通量，该方法可迁移至番茄果实发育研究。",
+      "llm_tags": [
+        "query:am-tom:composite"
+      ],
+      "matched_query_tag": "query:am-tom:composite",
+      "matched_query_text": "Papers central to 查找氨基酸对番茄成熟影响相关的论文, especially work that connects or combines: i; p; effect of amino acids on tomato fruit development; How do amino acids regulate the ripening process of tomatoes?; Effect of exogenous amino acid treatment on tomato fruit maturation and secondary metabolites.; Changes in amino acid composition during tomato fruit development and ripening.; Molecular mechanism of amino acid signaling in tomato fruit ripening..",
+      "matched_requirement_id": "req-composite-am-tom",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
