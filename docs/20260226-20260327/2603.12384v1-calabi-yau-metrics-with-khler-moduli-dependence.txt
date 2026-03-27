@@ -1,0 +1,876 @@
+Title: Calabi-Yau Metrics with K\"ahler Moduli Dependence
+
+URL Source: https://arxiv.org/pdf/2603.12384v1
+
+Published Time: Mon, 16 Mar 2026 00:06:30 GMT
+
+Number of Pages: 21
+
+Markdown Content:
+# Calabi–Yau Metrics with K¨ ahler Moduli Dependence 
+
+Andrei Constantin a,b, 1 , Andre Lukas b, 2 , Luca A. Nutricati b, 3 
+
+> a
+
+School of Mathematics, University of Birmingham Watson Building, Edgbaston, Birmingham B15 2TT, UK  
+
+> b
+
+Rudolf Peierls Centre for Theoretical Physics, University of Oxford Parks Road, Oxford OX1 3PU, UK 
+
+Abstract 
+
+We present a method to construct approximate analytic expressions for Ricci-flat K¨ ahler metrics on Calabi–Yau threefolds with explicit dependence on the K¨ ahler moduli. Our strategy combines numerical data obtained from machine learning with an explicit analytic Ansatz for the K¨ ahler po-tential and symbolic regression methods. Specifically, we use neural networks to learn the K¨ ahler potential at selected points in K¨ ahler moduli space, fit this data to analytic expressions with K¨ ahler moduli-dependent parameters, and determine an analytic form of these coefficients as functions of the K¨ ahler moduli using symbolic regression. In this way, we reconstruct closed-form approximations to the Ricci-flat metric that retain explicit K¨ ahler-moduli dependence. We apply this method to two Calabi–Yau threefolds with h1,1 = 2, namely a bicubic hypersurface in P2 × P2 and a bi-degree (2 , 4) hypersurface in P1 × P3, both of which admit nontrivial discrete symmetry groups that simplify the structure of the metric. In both cases, the resulting analytic expressions reproduce the numer-ically learned K¨ ahler potentials with percent-level accuracy and respect the discrete symmetry of the underlying manifold. Our results represent a concrete bridge between purely numerical results for Calabi–Yau metrics and analytic constructions, opening the door to a systematic study of their dependence on K¨ ahler moduli. 
+
+> 1
+
+a.constantin@bham.ac.uk 
+
+> 2
+
+andre.lukas@physics.ox.ac.uk 
+
+> 3
+
+luca.nutricati@physics.ox.ac.uk 
+
+1
+
+> arXiv:2603.12384v1 [hep-th] 12 Mar 2026
+
+# 1 Introduction 
+
+A central objective of string phenomenology is to derive the parameters of the Standard Model from the geometry of extra dimensions. Recent advances suggest that this objective is no longer purely aspirational. With the development of efficient numerical algorithms and, in particular, neural-network methods for approximating Ricci-flat metrics, it has become possible to compute quantities in string compactifications, such as Yukawa couplings, fermion masses, and mixing angles, that are otherwise treated as input parameters in the Standard Model [1–3]. Moreover, recent analyses indicate that the moduli space of Calabi–Yau (CY) compactifications may contain loci where the full set of Standard Model parameters can be simultaneously realised [4]. Identifying and studying such regions requires detailed control over how physical observables vary across moduli space. This dependence is highly nontrivial. While holomorphic quantities depend, at the perturbative level, only on complex structure, physical Yukawa couplings and kinetic terms require knowledge of the full Ricci-flat metric and its variation with the K¨ ahler moduli. Numerical approaches have achieved im-pressive accuracy in constructing approximate Ricci-flat metrics at given points in moduli space. Don-aldson’s algorithm provides a systematic and provably convergent approximation scheme [5], though achieving high accuracy can be computationally expensive. Moreover, since the algorithm produces metrics in integral K¨ ahler classes proportional to the first Chern class of a chosen line bundle, varying the K¨ ahler parameters requires changing the line bundle and, hence, the entire Ansatz. This makes it difficult to parametrise the metric continuously as a function of the K¨ ahler moduli. Machine-learning ap-proaches [6–13], on the other hand, offer greater flexibility in the choice of K¨ ahler class and can achieve high-precision metric reconstruction with substantially improved computational efficiency. However, the resulting metric is represented implicitly by a trained neural network at fixed values of the moduli. Although this constitutes a functional representation, it does not provide a transparent analytic expres-sion, nor does it make the moduli dependence explicit. As a consequence, extrapolating across moduli space or systematically analysing moduli dependence remains difficult. Obtaining analytic expressions for the metric (even approximate ones) is therefore of central importance. They render the dependence on the moduli explicit, streamline computations, and allow one to track systematically how physical quantities vary across moduli space. Ultimately, a proper understanding of moduli stabilisation requires that all relevant terms in the effective action be expressed explicitly in terms of the moduli, so that extrema can be identified and analysed in a controlled manner. Hybrid strategies combining numerical data with analytic reconstruction have begun to appear [14, 15], indicating that such a synthesis is feasible. In this work, we develop such a hybrid approach for the K¨ ahler-moduli sector. Concretely, we use neural networks to learn the Ricci-flat K¨ ahler potential at selected points in K¨ ahler moduli space, and then fit this data with an explicit analytic Ansatz whose coefficients are promoted to functions of the K¨ ahler parameters. We then use symbolic regression on the fit data to find analytical expressions for these coefficients. In this way, we obtain closed-form approximate formulae 2for the metric that retain explicit and controllable dependence on the K¨ ahler moduli. We restrict to Calabi–Yau threefolds with h1,1(X) = 2, in particular we study a bicubic hypersurface in P2 × P2 and a bi-degree (2 , 4) hypersurface in P1 × P3. As we shall see, the resulting analytic expressions reproduce the numerically learned K¨ ahler potentials to within a few percent, while making the moduli dependence fully explicit. The paper is organised as follows. In Section 2, we describe the general strategy we adopt. We then proceed by applying this approach to the two Calabi–Yau manifolds mentioned above, presenting the results in Sections 3 and 4. We conclude in Section 5. 
+
+# 2 General strategy 
+
+2.1 Motivation 
+
+We begin with a brief review of Donaldson’s algorithm, which provides a systematic analytic approx-imation scheme for Ricci-flat metrics, but is structurally ill-suited to incorporate explicit dependence on the K¨ ahler moduli. Given a Calabi–Yau manifold X, an ample line bundle L → X, and a basis 
+
+{sI }I=1 ,...,h 0(X,L k ) of holomorphic sections of Lk, where k is a positive integer, one considers the family of K¨ ahler potentials 
+
+Kk(H) = 1
+
+πk log 
+
+X
+
+> I,J
+
+HIJ sI sJ
+
+ , (2.1) where H is a positive-definite Hermitian matrix. In the context of Donaldson’s algorithm, the matric 
+
+H is determined, for fixed k, by imposing the balancing condition , formulated as a fixed-point equation for a natural map (the T -map) on the space of Hermitian matrices. It has been proven in Ref. [5] that, as k → ∞ , the resulting sequence of balanced metrics converges to the unique Ricci-flat metric whose K¨ ahler form lies in the class 2 π c 1(L). The dependence of the metric on complex-structure moduli enters through the sections sI and through the coefficients HIJ determined by the balancing procedure. Despite these attractive features, practical applications of Donaldson’s algorithm face several limitations. First, achieving high numerical accuracy requires relatively large values of k, typically k ≳ 6, which significantly increases the computational cost [16] and implies a rather complicated form of Eq. (2.1). More importantly for our purposes, the treatment of the K¨ ahler moduli is structurally constrained. When h1,1(X) = 1, all K¨ ahler classes are related by an overall rescaling, which affects only the total volume and not the shape of the Ricci-flat metric. In this case, approximating the metric in a fixed integral class suffices to recover the solution in any other class by a simple rescaling. For h1,1(X) > 1, however, selecting a specific K¨ ahler class becomes more subtle. In principle one can vary the class by choosing a different line bundle L, but the resulting K¨ ahler form J is always tied to c1(L) ∈ H2(X, Z). 3On the other hand, the K¨ ahler cone is continuous, and a general K¨ ahler class can be parametrised as 
+
+J =
+
+> h1,1(X)
+
+X
+
+> r=1
+
+trJr ∈ H1,1(X, R) , (2.2) where tr are real K¨ ahler parameters and the classes Jr are a suitable basis of the second cohomology. Since c1(L) takes values in integral cohomology, Donaldson’s scheme samples only a discrete subset of K¨ ahler classes. Varying the K¨ ahler parameters in any way other than by an overall rescaling requires choosing a different line bundle and hence a different Ansatz. As a result, the approximate analytic metrics obtained at each level k within Donaldson’s framework cannot incorporate explicit K¨ ahler-moduli dependence, since the K¨ ahler class is fixed by the choice of line bundle and therefore hard-coded in the Ansatz. One might nevertheless attempt to retain the Ansatz (2.1) at fixed k and determine the coefficients 
+
+HIJ by directly optimising an approximation to the Ricci-flat condition, promoting them to functions of the K¨ ahler parameters. However, the K¨ ahler class of the metric obtained from (2.1) is determined entirely by the underlying polarisation and is independent of both k and the specific choice of HIJ . As a result, varying HIJ cannot move the metric within the K¨ ahler cone, and the Ansatz is unable to realise a general parametrisation of the form (2.2). We require a different Ansatz which allows for continuous K¨ ahler class variations. 
+
+2.2 Analytic Ansatz for the K¨ ahler potential 
+
+We now discuss an Ansatz for the K¨ ahler potential capable of realising the parametrisation in Eq. (2.2). For concreteness, we consider Calabi–Yau manifolds realised as (complete intersections of) hypersurfaces in ambient spaces A, such as products of projective spaces or toric varieties. To simplify the discussion, we further assume that the K¨ ahler cone of the Calabi–Yau manifold X ⊂ A descends from that of the ambient space. In other words, the classes generating H1,1(X) are obtained as pullbacks of divisor classes on A.In this work we take A to be a product of complex projective spaces, A = Qmr=1 Pnr , and denote by 
+
+i : X , → A the inclusion of the Calabi–Yau hypersurface (or complete intersection). Let Hr ∈ H1,1(A, Z)denote the hyperplane class of the r-th projective factor. Then the classes Jr := i∗Hr ∈ H1,1(X, Z)span H1,1(X, R) and hence the K¨ ahler cone of X. A general K¨ ahler class on X can then be written as 
+
+J =
+
+> m
+
+X
+
+> r=1
+
+tr Jr ∈ H1,1(X, R) , (2.3) with K¨ ahler parameters tr which we denote collectively as t = ( t1, . . . , t m). In many cases of interest (including the examples presented below) the K¨ ahler cone is characterised by tr > 0 for all r. We also 4introduce the Calabi–Yau volume 
+
+V (t) = 13! 
+
+Z
+
+> X
+
+J3 = 16
+
+> m
+
+X
+
+> r,s,u =1
+
+drsu trtstu , drsu =
+
+Z
+
+> X
+
+Jr ∧ Js ∧ Ju (2.4) where drsu are the triple intersection numbers of X.Once a K¨ ahler class is fixed, any two K¨ ahler forms in the same cohomology class differ by a ∂ ¯∂–exact term. The K¨ ahler potential K associated with the Ricci-flat metric can therefore be written as 
+
+K = KFS + ϕ , KFS =
+
+> m
+
+X
+
+> r=1
+
+tr
+
+π log 
+
+> nr
+
+X
+
+> a=0
+
+|x(r) 
+
+> a
+
+|2
+
+!
+
+, (2.5) where ϕ is a globally defined real-valued function on the Calabi–Yau manifold, which is unique up to an additive constant and KFS is the Fubini-Study K¨ ahler potential. The ambiguity in ϕ can be removed by imposing the condition Z
+
+> X
+
+ϕ dVol FS = 0 , (2.6) where dVol FS is the measure associated to the Fubini-Study K¨ ahler potential KFS .In the neural-network approach of Ref. [12], implemented in the cymetric package, the function ϕ is represented by a neural network. This network is trained by minimising a loss function encoding the Ricci-flatness condition in the form of the complex Monge–Amp` ere equation as well as conditions to ensure that the K¨ ahler class of the Ricci-flat metric is indeed given by Eq. (2.3). (The latter is, of course, mathematically guaranteed by ϕ being a function but this has to be enforced in a numerical approach.) In the examples studied in this paper and discussed below, we use the cymetric package to compute the function ϕ numerically. We also consider an explicit analytic Ansatz for ϕ based on a finite-dimensional space of sections of an ample line bundle L = OX (k), where k = ( k1, . . . , k m), and denote by ( sI )I=1 ,...,h 0(X,L ) a basis of global holomorphic sections of L. For fixed multi-degree k, our Ansatz reads 
+
+ϕ(x, t ) = V (t)1/3
+
+P 
+
+> I,J
+
+αIJ (t/t m) sI (x) sJ (x)
+
+Qmr=1 
+
+Pnr 
+
+> a=0
+
+|x(r) 
+
+> a
+
+|2
+
+kr , (2.7) where the coefficients αIJ form a Hermitian matrix and depend only on dimensionless K¨ ahler moduli ratios, something that can be understood as follows. Under a rescaling of the K¨ ahler parameters 
+
+tr → λt r, the K¨ ahler class and the corresponding Ricci-flat metric scale as J → λJ and g → λg . Since the metric is given by gi¯j = ∂i∂¯j K, the K¨ ahler potential must therefore scale linearly, K(x, λt ) = λK (x, t )(up to a K¨ ahler transformation). Because KFS already scales linearly in t, the correction ϕ must satisfy 
+
+ϕ(x, λt ) = λ ϕ (x, t ). This homogeneity is implemented in Eq. (2.7) through the factor V (t)1/3. As such, the remaining dependence of the coefficients αIJ must only depend on dimensionless ratios, which we 5take to be tr/t m, for r = 1 , . . . , m − 1. By construction, the terms appearing in Eq. (2.7) define globally well-defined functions on X (and in fact extend to the ambient space A), independent of the choice of local trivialisation of L. This Ansatz may be interpreted as a spectral truncation to low-frequenCalabi–Yau modes of the scalar Laplacian, with a cut-off determined by the multi-degree k (see Ref. [17] for a detailed discussion). Sections of L on X are obtained by restricting ambient sections. More precisely, if X is defined as the zero locus of a single polynomial P of multi-degree ( n1 + 1 , . . . , n m + 1), we have Γ( X, L ) ∼= Γ( A, OA(k))   P · Γ( A, OA(k − d)) , (2.8) Consequently, the matrix ( αIJ ) in Eq. (2.7) contains ( h0(X, L )) 2 real parameters (subject to the Her-miticity condition). For sufficiently small multi-degree k, that is when at least one component of the line-bundle multi-degree satisfies kr ≤ nr, the restriction map from ambient sections to sections on X
+
+is injective, so that Γ( X, L ) ∼= Γ( A, OA(k)) . (2.9) and the ambient monomials provide a basis of sections on X. This is, in fact, the case for the examples considered below, since we work with relatively small values of the line-bundle degrees. For larger values of k, however, sections differing by multiples of the defining polynomial are identified upon restriction to X.
+
+2.3 Data-driven approach 
+
+Our approach to computing approximate Ricci-flat metrics based on the above Ansatz is as follows. 
+
+• For a given point t in K¨ ahler moduli space with V (t) = 1, we use the cymetric package [11] to compute the Ricci-flat metric and its associated K¨ ahler potential numerically. 
+
+• The function ϕ and, hence, the matrix ( αIJ (t/t m)) in Eq. (2.7) is determined by a fit to the numerical result for the K¨ ahler potential. We impose Eq. (2.6) to ensure that ϕ is unique. 
+
+• The above two steps are repeated for many values t in K¨ ahler moduli space with V (t) = 1. In this way, we gain information about the K¨ ahler moduli dependence of the matrices ( αIJ (t/t m)). 
+
+• Finally, we apply symbolic regression, specifically PySR [18], to the above data to find analytic expressions for the matrices ( αIJ (t/t m)). Inserting these expressions into Eqs. (2.5) and (2.7) then provides the analytic K¨ ahler potential for an approximate Ricci-flat metric. In the examples considered below, the Calabi–Yau manifolds admit nontrivial discrete symmetries, denoted by G. One might therefore attempt to reduce the number of independent coefficients in ( αIJ )6by imposing this symmetry on the function ϕ, grouping monomials into G-invariant combinations. However, we should be somewhat cautious about such an approach. If a discrete symmetry group G
+
+acts freely on X, the quotient X/G is a smooth Calabi–Yau manifold. By Yau’s theorem, it admits a unique Ricci-flat metric in each K¨ ahler class, whose pullback to X is G-invariant. By uniqueness, this coincides with the Ricci-flat metric on X. Hence, imposing such a freely-acting symmetry on our Ansatz is entirely justified. If, however, G does not act freely, the quotient X/G is generically singular and the above argument does not apply. In particular, there is no a priori reason for the Ricci-flat K¨ ahler potential on X to respect a non-freely acting symmetry. To avoid a priori assumptions, we determine ϕ from the numerical data, without imposing any sym-metries. We then analyse its structure and learn about its symmetries from the data. As it turns out, for our examples, the entire symmetry group G, including its freely and non-freely acting parts, are realised as symmetries of ϕ. Once this has been confirmed, we do constrain the Ansatz for ϕ by imposing G-invariance and repeat the fit to the numerical data for this constrained Ansatz. In order to derive this constrained Ansatz, we need to be somewhat careful about the structure of the symmetry group G. The action of G on X induces a linear action on the K¨ ahler moduli space, that is, a representation 
+
+ρ : G −→ GL  H1,1(X, R), (2.10) which preserves the K¨ ahler cone. Its kernel N := ker( ρ) is a normal subgroup of G, consisting of those symmetries which act trivially on the K¨ ahler structure, hence G/N ∼= ρ(G). When the extension splits, we can write 
+
+G = N ⋊ H , H ∼= G/N . (2.11) We then identify the N -singlets Ii(x) in Γ( X, L ) ⊗ Γ( X, L )∗, that is, specific linear combinations of 
+
+sI (x) sJ (x), and rewrite the Ansatz (2.7) as 
+
+ϕ(x, t ) = V (t)1/3
+
+P 
+
+> i
+
+αi(t/t m) Ii(x)
+
+Qmr=1 
+
+Pnr 
+
+> a=0
+
+|x(r) 
+
+> a
+
+|2
+
+kr . (2.12) Since N acts trivially on the K¨ ahler moduli, the coefficients αi are automatically N -invariant functions of t. On the other hand, the quotient group H acts non-trivially both on the moduli and on the singlets, 
+
+Ii(hx ) = r(h)ij Ij (x) , (2.13) for some representation 
+
+r : H → End  (Γ( X, L ) ⊗ Γ( X, L )∗)N  . (2.14) In order for the Ansatz (2.12) to be G-invariant, the coefficients must compensate this transformation, 
+
+αi(ρ(h)t) = ( r(h)−1)ji αj (t) . (2.15) 7With this G-symmetric set-up, we repeat the four steps in the above bullet-point list using the Ansatz (2.12) instead of Eq. (2.7), thereby determining explicit expressions for the coefficients αi(t/t m). The non-trivial transformation laws (2.15) then provide a useful and non-trivial consistency check on the numer-ical results, as illustrated in the examples below. 
+
+2.4 Examples with two K¨ ahler moduli 
+
+For simplicity we will consider examples of Calabi–Yau manifolds that are defined as hyper-surfaces in products of two projective spaces. In this sub-section we will specialise our general approach to this subset of examples. More specifically, we are working with ambient spaces of the form A = Pn1 × Pn2 and homogeneous coordinates x = ( x0, . . . , x n1 ) and y = ( y0, . . . , y n2 ) for the two projective factors. Within such ambient spaces we consider Calabi–Yau hyper-surfaces defined as the zero locus of a homogeneous polynomial 
+
+P = P (x, y ) of bi-degree ( n1 + 1 , n 2 + 1). The K¨ ahler class J is parametrized by 
+
+J = t1J1 + t2J2 , (2.16) with K¨ ahler parameters t = ( t1, t 2) and Eq. (2.5) specializes to 
+
+K(x, y, t 1, t 2) = t1
+
+π log 
+
+> n1
+
+X
+
+> a=0
+
+|xa|2
+
+!
+
++ t2
+
+π log 
+
+> n2
+
+X
+
+> a=0
+
+|ya|2
+
+!
+
++ ϕ(x, y, t 1, t 2) . (2.17) For a line bundle L = OX (k), where k = ( k1, k 2), the Ansatz for ϕ in Eq. (2.7) becomes 
+
+ϕ(x, y, t 1, t 2) = V (t1, t 2)1/3
+
+P 
+
+> I,J
+
+αIJ (t12 ) sI (x, y ) sJ (x, y )
+
+ P  
+
+> a
+
+|xa|2k1  P  
+
+> a
+
+|ya|2k2 . (2.18) with the coefficients αIJ = αIJ (t12 ) depending only on the K¨ ahler modulus ratio t12 = t1/t 2. Similarly, the G-invariant Ansatz (2.12) specialises to 
+
+ϕ(x, y, t 1, t 2) = V (t1, t 2)1/3
+
+P 
+
+> i
+
+αi(t12 ) Ii(x, y )
+
+ P  
+
+> a
+
+|xa|2k1  P  
+
+> a
+
+|ya|2k2 . (2.19) 
+
+# 3 Ricci-flat metrics on the bi-cubic 
+
+In this section, we tackle our first example, a bi-cubic hyper-surface in the ambient space A = P2 × P2
+
+with homogeneous coordinates x = ( x0, x 1, x 2) and y = ( y0, y 1, y 2) for the two projective factors. Bi-cubic Calabi–Yau manifolds X are defined as the zero locus in A of a homogeneous bi-degree (3 , 3) polynomial P = P (x, y ) and they have Hodge numbers h1,1(X) = 2 and h2,1(X) = 83. We will focus 8on a single point in complex structure moduli space, with a large symmetry group G to be discussed shortly, and explore the dependence of the Ricci-flat K¨ ahler potential on the two K¨ ahler parameters 
+
+t = ( t1, t 2). The volume takes the form 
+
+V (t1, t 2) = 32 t1t2(t1 + t2) , (3.1) and the K¨ ahler cone is characterised by t1 > 0 and t2 > 0. 
+
+3.1 The choice of bicubic threefold 
+
+To simplify our calculations we would like to consider a bi-cubic with a large symmetry group. To this end we introduce ω = e2πi/ 3 and a number of groups generated as follows. (Z(x)3 )a : xa 7 → ωx a , xb 7 → xb for b̸ = a , yc 7 → yc for c = 0 , 1, 2(Z(y)3 )a : ya 7 → ωy a , yb 7 → yb for b̸ = a , xc 7 → xc for c = 0 , 1, 2
+
+S(x,y )3 : xa 7 → xσ(a) , ya 7 → yσ(a) where σ ∈ S3
+
+Z(x,y )2 : xa 7 → ya , ya 7 → xa for a = 0 , 1, 2(3.2) The transformations above act on homogeneous coordinates and therefore define projective symmetries of P2 × P2. In particular, the diagonal phase rotation ( x0, x 1, x 2) 7 → (ωx 0, ωx 1, ωx 2) is trivial on the first P2, and similarly for the second. Hence the effective phase symmetry is ( Z(x)3 )2 × (Z(y)3 )2. Together with the simultaneous permutation symmetry S(x,y )3 and the exchange symmetry Z(x,y )2 , this yields the effective projective symmetry group 
+
+G ∼=
+
+
+
+(Z(x)3 )2 × (Z(y)3 )2
+
+⋊ (S3 × Z2) , (3.3) of order |G| = 4 2 · 6 · 2 = 972. Only the Z(x,y )2 factor acts non-trivially on the K¨ ahler class, exchanging the two K¨ ahler moduli t1 ↔ t2. Accordingly, we write 
+
+G = N ⋊ H, N =
+
+
+
+(Z3)2 
+
+> x
+
+× (Z3)2
+
+> y
+
+
+
+⋊ S3, H ∼= Z2. (3.4) The sub-space of G-invariants in the space of homogeneous polynomials of bi-degree (3 , 3) is two-dimensional and is spanned by 
+
+P1 = X
+
+> a
+
+x3
+
+> a
+
+y3
+
+> a
+
+, P2 = X
+
+> a̸=b
+
+x3
+
+> a
+
+y3 
+
+> b
+
+.
+
+Hence, the most general defining polynomial for a G-invariant bi-cubic can be written as P = λ1P1+λ2P2
+
+and this represents a one-parameter family in complex structure moduli space since an overall scaling of 9P defines the same manifold. For definiteness, we choose a particular point within this one-parameter family, namely 
+
+P = 10 P1 + 3 P2 . (3.5) It can be checked that this polynomial defines a smooth Calabi–Yau space. 
+
+3.2 Invariants 
+
+Having identified the effective projective symmetry group G, we now exploit this symmetry to simplify the analytic Ansatz for the K¨ ahler potential. In principle the coefficients αIJ in Eq. (2.18) parametrise all functions constructed from products sI sJ of sections of L. For our fit of the numerical results to the Ansatz (2.18) we will focus on the line bundle L = OX (2 , 2) on the bi-cubic. Its space of sections has dimension h0(X, OX (2 , 2)) = 36 so that the matrix ( αIJ ) in Eq, (2.18) has size 36 × 36. This is rather large for writing down explicit analytic expression. However, if our Ansatz respects the symmetry G of our chosen bi-cubic – and this will be verified numerically – then we can work with the Ansatz (2.19), focusing on the N -invariant sub-space of Γ( X, OX (2 , 2)) × Γ( X, OX (2 , 2)) ∗. It turns out this sub-space is eight-dimensional and it is spanned by the invariants 
+
+I0 = 13
+
+X
+
+> a<b
+
+|xa|2 |xb|2 |ya|2 |yb|2 I1 = 13
+
+X
+
+> a̸=b,c b<c
+
+|xa|4 |yb|2 |yc|2
+
+I2 = 16
+
+X
+
+> a̸=b
+
+|xa|4 |ya|2 |yb|2 I3 = 16
+
+X
+
+> a̸=b
+
+|xa|4 |yb|4
+
+I4 = 13
+
+X
+
+> a
+
+|xa|4 |ya|4 I5 = 16
+
+X
+
+> a,b,c
+> distinct
+
+|xa|2 |ya|2 |xb|2 |yc|2
+
+I6 = 16
+
+X
+
+> a̸=b
+
+|ya|4 |xa|2 |xb|2 I7 = 13
+
+X
+
+> a̸=b,c b<c
+
+|ya|4 |xb|2 |xc|2 .
+
+(3.6) Under the generator of the group H ∼= Z(x,y )2 these singlets transform as I1 ↔ I7 and I2 ↔ I6 with 
+
+I0, I 3, I 4, I 5 invariant. From Eq. (2.15) we, therefore, expect the coefficients αi to transform as 
+
+α1
+
+ t1
+
+t2
+
+
+
+= α7
+
+ t2
+
+t1
+
+
+
+, α2
+
+ t1
+
+t2
+
+
+
+= α6
+
+ t2
+
+t1
+
+
+
+, αi
+
+ t1
+
+t2
+
+
+
+= αi
+
+ t2
+
+t1
+
+
+
+for i = 0 , 3, 4, 5 . (3.7) As mentioned before, verifying these transformation laws from our numerical results provides a useful and non-trivial check. 10 3.3 Numerical results 
+
+Following the approach outlined in Section 2.3, we first need to compute the Ricci-flat K¨ ahler potential numerically, for a number of K¨ ahler parameter values t = ( t1, t 2). Since the dependence on the overall Calabi–Yau volume V (t) (for the bi-cubic given in Eq. (3.1)) is already explicit in the Ansatz (2.18), it is sufficient to do this for t-values with V (t) = 1. Specifically, we select the set of K¨ ahler moduli values 
+
+
+
+t = ( t1, t 2) V (t) = 1 , t1
+
+t2
+
+= pq where p, q = 1 , . . . 14 and gcd( p, q ) = 1 
+
+
+
+(3.8) resulting in a total of 127 distinct values of ( t1, t 2). 10 −1 10 0 10 1         
+
+> t1/t 2
+> 0.014 0.016 0.018 0.020 0.022 0.024 0.026 0.028
+> σ-loss 10 −110 010 1
+> t1/t 2
+> 010 20 30 40 50 Average % deviation
+> φ= 0
+> k1=k2= 1
+> k1=k2= 2
+
+Figure 1: Left: final σ-measure achieved by the neural network as a function of the moduli ratio t1/t 2.Right: average percentage deviation ⟨| KN − K|/K N ⟩ as a function of t1/t 2, comparing different ans¨ atze for the K¨ ahler potential. The blue points correspond to the pure Fubini–Study potential ( ϕ = 0), while the orange and green points show fits obtained from the Ansatz in Eq. (2.18) with ( k1, k 2) = (1 , 1) and ( k1, k 2) = (2 , 2), respectively. Increasing the truncation order leads to a significant improvement in agreement with the numerically learned K¨ ahler potential. Averaged over t1/t 2, the deviations are 17 .1%, 5 .3%, and 1 .8% for the three cases, respectively. For each choice of the K¨ ahler parameters in the above set, we use the point generator provided by the cymetric package [11] to sample the manifold defined by the polynomial (3.5) with N = 100 ,000 points and train a fully-connected neural network (width 64, depth 3, GeLU activation) to learn the function ϕ. The network is randomly initialised only at the first value of t12 = t1/t 2 considered. For subsequent calculations we proceed to the closest t12 value and initialise the neural network with the optimal parameter obtained in the previous run. This warm-start strategy leads to a substantial reduction in training time. In particular, following an initial training run of 240 epochs, all subsequent runs at different values of t12 require only 10 epochs to reach a loss comparable to, or smaller than, that 11 achieved for the first t12 value. The left panel in Fig. 1 shows the final value of the σ-loss, as defined in Ref. [11], for the t12 values in Eq. (3.8). All σ-values are in the interval [0 .013 , 0.029], which indicates that, for each choice of the K¨ ahler parameters, the neural network successfully finds a corresponding approximate Ricci-flat metric. After imposing the normalisation condition in Eq. (2.6), we determine the best-fit values of the coef-ficients αIJ using the Ansatz in (2.18) for ( k1, k 2) = (1 , 1) and ( k1, k 2) = (2 , 2). The right panel of Fig. 1 displays the percentage deviation of the analytic expression obtained from the fit relative to the numerical K¨ ahler potential learned by the neural network. We denote the analytic K¨ ahler potential by K and its numerical counterpart by KN .These results indicate that the proposed Ansatz is capable of capturing the moduli dependence of the Ricci-flat metric with good accuracy already at low truncation order. Averaging over the range in t1/t 2,the pure Fubini-Study K¨ ahler potential (blue curve in the right panel of Fig. 1) provides a relatively poor approximation with a deviation of 17%. Already for ( k1, k 2) = (1 , 1) this improves to about 5% and for ( k1, k 2) = (2 , 2) to about 2%. 10 −1 10 0 10 1     
+
+> t1/t 2
+> −30
+> −25
+> −20
+> −15
+> −10
+> −505
+> α0
+> α3
+> α4
+> α510 −110 010 1
+> t1/t 2
+> 0510 15 20 25 30 35 α2
+> α610 −110 010 1
+> t1/t 2
+> −10
+> −50510
+> α1
+> α7
+
+Figure 2: Best-fit coefficients as functions of t1/t 2 for the ( k1, k 2) = (2 , 2) truncation. Out of the 36 × 36 entries of the Hermitian matrix αIJ , only 36, the diagonal entries, are non-vanishing within numerical accuracy; these naturally organise into eight groups, which are displayed in different colours. Coefficients corresponding to monomials that belong to the same H-singlet are shown with the same colour and labelled as α0, . . . , α 7. The left panel displays coefficients associated with singlets invariant under x ↔ y, while the remaining panels show pairs of coefficients associated with singlets that are exchanged under x ↔ y, exhibiting the expected crossing behaviour at t1 = t2.The functions in (2.18) form a complete basis on the ambient projective space in the limit ( k1, k 2) → ∞ ,so increasing the truncation order should improve the accuracy further. However, to achieve this in practice the numerical calculation has to be carried out at the same level of accuracy. In the present paper we will not attempt to carry this out beyond the degree ( k1, k 2) = (2 , 2). Fig. 2 shows the best-fit numerical values of the coefficients αIJ for the case ( k1, k 2) = (2 , 2). As discussed above, for this choice, the coefficients αIJ in the Ansatz (2.18) form a hermitian matrix of 12 size 36 × 36, since h0(X, OX (2 , 2)) = 36. The fit indicates that the off-diagonal entries are strongly suppressed relative to the diagonal ones. Curves in Fig. 2 displayed with the same colour indicate coefficients that naturally group together and exhibit the same dependence on t1/t 2 up to numerical uncertainties. Put together, these observations provide strong numerical evidence that the Ricci-flat K¨ ahler potential is indeed invariant under the symmetry group G of our bi-cubic, defined in Section 3.1 and can, hence, be written in terms of the eight invariants Ii defined in Eq. (3.6), using the Ansatz in Eq. (2.19). Fitting the data to this Ansatz leads to numerical results for the eight coefficients αi = αi(t1/t 2) which are shown in Fig. 3. It is evident from these curves and can be checked quantitatively that these numerical results for αi do indeed satisfy the expected symmetry relations in Eq. (3.7). 10 −1 10 0 10 1    
+
+> t1/t 2
+> −20
+> −15
+> −10
+> −505
+> α0
+> α3
+> α4
+> α510 −110 010 1
+> t1/t 2
+> 0510 15 20 25 30
+> α2
+> α610 −110 010 1
+> t1/t 2
+> −10
+> −505
+> α1
+> α7
+
+Figure 3: Best-fit numerical values of the coefficients αi in the Ansatz (2.19) as functions of the moduli ratio t1/t 2, obtained for ( k1, k 2) = (2 , 2). Coefficient Fit expression 
+
+α0 −5.37 − 2.03 log 2(t12 )
+
+α1 3e−2.142 t12 (1 .334 + log( t12 )) + 3 log  0.869 t12 + 0 .034 t212 
+
+
+
+α2 1.39 + 0 .79 t12 + 6 log(0 .430 + t12 )
+
+α3 −0.90 + 0 .69 log 2(t12 ) + 0 .012 log 4(t12 )
+
+α4 1.66 − 0.77 log 2(t12 )
+
+α5 −6.61 − 1.84 log 2(t12 )
+
+α6 1.39 + 0 .8 t21 + 6 log(0 .430 + t21 )
+
+α7 3e−2.142 t21 (1 .334 + log( t21 )) + 3 log  0.869 t21 + 0 .034 t221 
+
+
+
+Table 1: Symbolic expressions for the coefficients αi in the Ansatz (2.19), as a function of t12 = t1/t 2
+
+or t21 = t2/t 1.13 As a final step we apply the symbolic regression, using PySR [18] with building blocks +, ·, exp, log, sin and cos, to the numerical data in Fig. 3. The resulting (simplest and most accurate) analytic expressions are listed in Table 1. Inserting these expressions, together with the invariants (3.6), into the Ansatz (2.17), (2.19) gives the analytic form of the K¨ ahler potential with on overall deviation of 2.2% from the numerically learned one. 
+
+# 4 Ricci-flat metrics on the (2 , 4) hyper-surface in P1 × P3
+
+Our second example is a Calabi–Yau hypersurface of bi-degree (2 , 4) in the ambient space A = P1 × P3.We denote homogeneous coordinates by x = ( xα)α=0 ,1 on the P1 factor and by y = ( ya)a=0 ,1,2,3 on the P3 factor. This manifold has Hodge numbers h1,1(X) = 2 and h2,1(X) = 86. As in the bicubic example, we focus on a special point in complex structure moduli space with a comparatively large discrete symmetry group. In terms of the K¨ ahler parameters t = ( t1, t 2), the volume is 
+
+V (t) = 13 t22(6 t1 + t2) , (4.1) and the K¨ ahler cone is specified by t1 > 0 and t2 > 0. Although this geometry is still relatively simple, it is intrinsically less symmetric than the bicubic, and it therefore provides a useful test of our method in a less constrained setting. 
+
+4.1 The choice of (2 , 4) hyper-surface 
+
+We choose a point in moduli space where the manifold has a symmetry G = Z(x)2 × S(z)4 , with the two factors acting as 
+
+Z(x)2 : x0 ↔ x1 , ya 7 → ya for a = 0 , 1, 2, 3
+
+S(z)4 : xb 7 → xb for b = 0 , 1 , ya 7 → yσ(a) for σ ∈ S4 and a = 0 , 1, 2, 3
+
+. (4.2) It turns out that the space of G-invariant polynomials of bi-degree (2 , 4) is 10-dimensional and spanned by the products QiPj , where i = 1 , 2 and j = 1 , . . . , 5 and 
+
+Q1 = x20 + x21 Q2 = x0x1 P1 = X
+
+> a
+
+y4
+
+> a
+
+P2 = X
+
+> a<b
+
+y2
+
+> a
+
+y2 
+
+> b
+
+P3 = X
+
+> a̸=b
+
+y3
+
+> a
+
+yb P4 = y0y1y2y3 P5 = X 
+
+> a,b,c distinct
+> b<c
+
+y2
+
+> a
+
+ybyc
+
+14 Within this 10-dimensional space of G-invariant manifolds we choose the following defining polynomial which leads to a smooth Calabi–Yau threefold: 
+
+P = Q1 (P1 − P3) + Q2 P2 . (4.3) 
+
+4.2 Invariants 
+
+The entire symmetry group G defined in the previous sub-section acts trivially on the K¨ ahler structure, so, using the notation of Eq. (2.11) we have G = N . Later, we will focus on the line bundle L = OX (2 , 2) with h0(X, L ) = 30 and an associated matrix αIJ of size 30 × 30. It turns out there are 30 G-singlets contained in Γ( X, L ) × Γ( X, L )∗ which include the ‘diagonal’ invariants 
+
+I0 = 18
+
+X
+
+> α,a
+
+|xα|4|ya|4, I1 = 112 
+
+X
+
+> α,a<b
+
+|xα|4|ya|2|yb|2,I2 = 14
+
+X
+
+> a
+
+|x0|2|x1|2|ya|4, I3 = 16
+
+X
+
+> a<b
+
+|x0|2|x1|2|ya|2|yb|2
+
+. (4.4) Unlike in the case of the bi-cubic, the symmetry G does not forbid all off-diagonal invariants. A subset of these is given by 
+
+I4 = 18
+
+ x20 x21 + x20x21
+
+ X 
+
+> a
+
+|ya|4 I5 = 112 
+
+ x20 x21 + x20x21
+
+ X 
+
+> a<b
+
+|ya|2 |yb|2
+
+I6 = 124 |x0|2|x1|2 X
+
+> a̸=b
+
+|ya|2 (yb yb + c.c) I7 = 124 
+
+X
+
+> α̸=β
+
+ |xα|2 xα xβ + c.c.  X 
+
+> a<b
+
+|ya|2|yb|2
+
+I8 = 124 
+
+X
+
+> α
+
+|xα|2 X
+
+> a̸=b
+
+y2 
+
+> a
+
+y2 
+
+> b
+
+I9 = 148 
+
+X
+
+> α̸=β
+
+|xα|2xαxβ
+
+X
+
+> a̸=b
+
+|ya|2 yayb + c.c 
+
+I10 = 148 
+
+X
+
+> α̸=β
+
+|xα|2xαxβ
+
+X
+
+> a̸=b,c b<c
+
+y2
+
+> a
+
+ybyc + c.c. I11 = 148 
+
+X
+
+> α
+
+|xα|4 X
+
+> a̸=b
+
+|ya|2 ya yb + c.c 
+
+.
+
+(4.5) There are 18 further off-diagonal invariants not listed here which will turn out to be sub-dominant. 
+
+4.3 Numerical results 
+
+We follow the same procedure as for the bicubic and choose 127 different numerical values for the ratio t1/t 2 of the two K¨ ahler moduli, as in Eq. (3.8). Using cymetric , we train a fully connected neural network with the same architecture as in the previous case (width 64, depth 3, GeLU activation) and the same ‘adiabatic’ training strategy: we begin with a full training cycle for the first value of 15 t12 = t1/t 2 and then proceed to nearest enighbours in t12 , using the trained parameter of the previous run as initialisation for the next. The left panel in Fig. 4 shows the final value of the Monge–Amp` ere loss for the selected values of t1/t 2.As in the bi-cubic case, these values clearly indicate that the neural network finds Ricci-flat metrics to good approximation. 10 −1 10 0 10 1      
+
+> t1/t 2
+> 0.016 0.018 0.020 0.022 0.024 0.026 0.028 0.030
+> σ-loss 10 −110 010 1
+> t1/t 2
+> 0510 15 20 25 30 Average % deviation
+> φ= 0 (k1, k 2) = (1 ,1) (k1, k 2) = (1 ,2) (k1, k 2) = (2 ,2)
+
+Figure 4: Left: final σ-measure as a function of the moduli ratio t1/t 2. Right: average relative deviation 
+
+⟨| KN − K|/K N ⟩ between the analytic K¨ ahler potential K and the numerically learned potential KN ,shown as a function of t1/t 2 for different truncations of the Ansatz. The blue points correspond to the pure Fubini–Study potential ( ϕ = 0), while the remaining points correspond to increasing values of (k1, k 2) as indicated in the legend. Averaged over all sampled values of t1/t 2, the deviations are 18%, 9%, 8 .5%, and 1 .9%, in the order given in the legend. Fitting the numerical value of the K¨ ahler potential obtained from the neural network with the Ansatz in Eq. (2.18), we get the results on the right panel in Fig. 4. The plot shows the error of the fit for ϕ = 0 (blue curve), which corresponds the Fubini-Study metric, as well the errors for ( k1, k 2) = (1 , 1) , (1 , 2) and (2 , 2). As expected, the most accurate fit is obtained for the highest choice of k1 and k2. Moreover, we observe that the curve corresponding to ( k1, k 2) = (1 , 2) displays deviations comparable to those of the (2 , 2) Ansatz in the regime where the x-direction is strongly squeezed, t1/t 2 ∼ 10 −1. By contrast, as the ratio t1/t 2 increases, the same (1 , 2) curve smoothly approaches and eventually merges with the (1 , 1) case. This behaviour can be understood geometrically. For small t1/t 2, the K¨ ahler class suppresses variations along the P1 directions, so the dominant contribution to the deviation originates from how accurately the Ansatz captures the geometry along the P3 factor. In this regime, the error is therefore controlled primarily by the degree k2, explaining why the (1 , 2) and (2 , 2) ans¨ atze perform similarly. Conversely, when t1/t 2 becomes large, the roles of the two factors are effectively exchanged: the geometry is now stretched along P1, and the deviation is governed almost entirely by the choice of 16 k1, leading to the observed agreement between the (1 , 2) and (1 , 1) curves. As for the bi-cubic, we can verify numerically that the function ϕ is G-invariant. Therefore, focusing on the most accurate case of ( k1, k 2) = (2 , 2) we can work with the Ansatz (2.19) and the invariants Ii,where i = 0 , . . . , 11, listed in the previous sub-section. Fig. 5 shows the fitted values of the associated coefficients αi in Eq. (2.19). 10 −1 10 0 10 1       
+
+> t1/t 2
+> −10
+> −50510 15 20 α0
+> α1
+> α2
+> α310 −110 010 1
+> t1/t 2
+> −10
+> −50510 15 20 α4
+> α5
+> α6
+> α710 −110 010 1
+> t1/t 2
+> −12 .5
+> −10 .0
+> −7.5
+> −5.0
+> −2.50.02.55.0α8
+> α9
+> α10
+> α11
+
+Figure 5: Monomial coefficients αi as functions of t1/t 2 in the ( k1, k 2) = (2 , 2) truncation. The left panel displays the diagonal coefficients, while the other two panels present the leading off-diagonal ones. The black lines corresponds to the analytic expression obtained using symbolic regression. Fig. 6 shows how the fit error increases with the number of singlet contributions that are ignored in the Ansatz (2.19) (meaning their associated coefficient are set to zero ‘by hand’). The plot shows that up to approximately twenty singlets can be neglected without a significant deterioration in accuracy. Hence, retaining only the 12 singlets listed in the previous sub-section constitutes a good approximation which achieves an accuracy of 2 .8%. For these 12 coefficients we carry out a symbolic regression, using PySR with building blocks +, ·, exp, log, sin and cos, using the numerical data shown in Fig. 5. Table 2 displays the resulting (simplest and most accurate) analytic expressions found in this way. Inserting these expressions together with the invariants in Section 4.2 into the Ansatz (2.19) gives the approximate analytic form of the Ricci-flat K¨ ahler potential. 
+
+# 5 Conclusions 
+
+In this work, we have developed a framework for constructing approximate analytic expressions for Ricci-flat metrics on Calabi–Yau three-folds with explicit dependence on the K¨ ahler moduli. Our strategy combines numerical data obtained from machine-learning techniques with an analytic Ansatz for the K¨ ahler potential built from sections of ample line bundles. Neural networks are first used to learn the K¨ ahler potential across a sampling of the K¨ ahler moduli space; the resulting data are then fitted with 17 0 10 20 30 
+
+# of neglected singlets 
+
+> 246810 12 14 16
+> Fit error (%)
+
+Figure 6: Fit error as a function of the number of neglected singlets in the analytic K¨ ahler potential. Singlets are ordered according to the size of their contribution, quantified by max t12 |αi|, from smallest to largest (left to right over the x-axis). Coefficient Fit expression 
+
+α0 1.50 + 2 .18 t12 − 0.65 t12 log( t12 ) + 0 .19 log 2(t12 )
+
+α1 4.07 + 1 .44 t12 − 0.086 t212 + 4 .35 log  0.057 + t12 
+
+
+
+α2 0.28 t12 + 1 .12 t12 e−0.40 t12 − 3.47 log  0.0818 + t12 
+
+
+
+α3 −5.25 + 1 .78 t12 − 4.00 log( t12 ) log  0.805 + t12 
+
+
+
+α4
+
+ 4.52 − 0.0026 t212 
+
+ log  0.48 + 1 .41 t12 
+
+
+
+α5 −0.45 + 7 .33 t12 − (1 .12 + 2 .09 t12 ) log( t12 )
+
+α6 −2.83 − 4.76 e−0.36 t12 − 1.23 e 0.65 t12 −t212 
+
+α7 −9.94 + (11 + 3 .44 t212 )e−0.86 t12 
+
+α8 1.2 + 24 e−1.62 −2.13 t12 − 0.093 t12 
+
+α9 3.31( e−0.8 t12 − 1) 
+
+α10 −6.42 + 0 .23 ( t12 − log( t12 )) 
+
+α11 −8.93 + 1 .03 log  0.068 + t212 
+
+
+
+α12 ,..., 29 !
+
+= 0 Table 2: Analytic expressions, obtained via symbolic regression, for coefficients αi(t12 ), i = 0 , . . . , 11, as functions of t12 ≡ t1/t 2. The remaining coefficients are sub-leading and therefore manually set to zero. analytic expressions whose coefficients are promoted to explicit functions of the K¨ ahler parameters. In this way, we obtain closed-form analytic approximations to the Ricci-flat K¨ ahler potential that retain 18 its non-trivial moduli dependence while remaining fully symbolic. To our knowledge, these examples of approximate Ricci-flat metrics with explicit K¨ ahler moduli dependence are the first of their kind. A particularly striking outcome of our analysis is that relatively small values of the line-bundle integers used in the Ansatz already yield analytic expressions that agree with the numerically learned K¨ ahler potentials at percentage level across the moduli space. This is far from obvious a priori: the Ansatz corresponds to a highly truncated finite-dimensional space, yet it captures the dominant geometric vari-ations with remarkable accuracy. The improvement with increasing line bundle integers is systematic, but even the lowest non-trivial truncations already provide a quantitatively reliable description. We have applied this strategy to two Calabi–Yau three-folds with h1,1(X) = 2, namely a bi-cubic hypersurface in P2 × P2 and a bi-degree (2 , 4) hypersurface in P1 × P3. In both case, we have chosen a single point in complex structure moduli space such that the associated manifold has a large discrete symmetry. This discrete symmetry is not freely-acting and it is not a priori clear that it should be respected by the Ricci-flat metric. However, we have checked numerically that this is indeed the case. These symmetries considerably simplify the structure of our analytic Ansatz as basis functions are forced to combine into invariant combinations. For the bi-cubic manifold, this leads to a compact and highly accurate analytic expression. For the second example, despite a smaller symmetry group and a more complicated Ansatz, most invariants turn out to have sub-leading contributions and can be neglected with only a marginal increase in error. There are several natural directions for further development. First, while the present work focuses on K¨ ahler moduli dependence, extending the framework to incorporate complex-structure moduli would be highly desirable. Achieving simultaneous analytic control over both sectors would represent a significant step towards fully moduli-dependent analytic approximations of Calabi–Yau metrics and would substan-tially broaden the scope of phenomenological applications. Second, one could attempt to bypass the intermediate neural-network stage and use symbolic regression directly, incorporating the Ricci-flatness condition into the loss function from the outset. In such an approach, one would aim to learn analytic expressions for the K¨ ahler potential by directly minimising a functional encoding the Monge–Amp` ere equation. Although computationally demanding [14], especially in higher-dimensional moduli spaces, improved implementations and parallelisation strategies may render this approach viable. Finally, we emphasise that the analytic K¨ ahler potentials presented here are fitted approximations to numerically learned Ricci-flat solutions. Computing the metric requires taking additional derivatives, so fitting and numerical errors may propagate and potentially be amplified. Therefore, one should not necessarily expect the analytically reconstructed metrics to be as close to Ricci-flatness as the underlying neural network metrics. It is possible that higher line bundle degrees ki are required to achieve compara-ble σ-measures at the metric level. Nevertheless, an important open question is whether the analytic expressions obtained here already suffice for approximate analytic computations of metric-dependent physical quantities. 19 Acknowledgements 
+
+AC and LAN are supported by the Royal Society grant DHF/R1/231142. AL acknowledges support from the STFC consolidated grant ST/X000761/1. We are grateful to Jonathan Patterson for his assistance with the Oxford Theoretical Physics computing cluster Hydra . We would also like to thank Steve Abel and Miguel Crispim Rom˜ ao for valuable discussions and for their collaboration during an earlier stage of this project. Finally, we thank the International Centre for Mathematical Sciences (ICMS), Edinburgh, for hospitality during the final stages of writing this paper. 
+
+# References 
+
+[1] Andrei Constantin, Cristofero S. Fraser-Taliente, Thomas R. Harvey, Andre Lukas, and Burt Ovrut. “Computation of quark masses from string theory”. In: Nucl. Phys. B 1010 (2025), p. 116778. doi : 10.1016/j.nuclphysb.2024.116778 . arXiv: 2402.01615 [hep-th] .[2] Giorgi Butbaia, Dami´ an Mayorga Pe˜ na, Justin Tan, Per Berglund, Tristan H¨ ubsch, Vishnu Jejjala, and Challenger Mishra. “Physical Yukawa Couplings in Heterotic String Compactifications”. In: (Jan. 2024). doi : 10.4310/ATMP.241119041341 . arXiv: 2401.15078 [hep-th] .[3] Per Berglund, Giorgi Butbaia, Tristan H¨ ubsch, Vishnu Jejjala, Dami´ an Mayorga Pe˜ na, Chal-lenger Mishra, and Justin Tan. “Precision string phenomenology”. In: Phys. Rev. D 111.8 (2025), p. 086007. doi : 10.1103/PhysRevD.111.086007 . arXiv: 2407.13836 [hep-th] .[4] Andrei Constantin, Lucas T. -Y. Leung, Andre Lukas, and Luca A. Nutricati. “Reproducing Standard Model fermion masses and mixing in string theory: A heterotic line bundle study”. In: 
+
+Phys. Rev. D 113.4 (2026), p. 046005. doi : 10.1103/fbdz-t73z . arXiv: 2507.03076 [hep-th] .[5] S. K. Donaldson. “Some numerical results in complex differential geometry”. In: (Dec. 2005). arXiv: math/0512625 .[6] Matthew Headrick and Ali Nassar. “Energy functionals for Calabi-Yau metrics”. In: Adv. Theor. Math. Phys. 17.5 (2013), pp. 867–902. doi : 10.4310/ATMP.2013.v17.n5.a1 . arXiv: 0908.2635 [hep-th] .[7] Wei Cui and James Gray. “Numerical Metrics, Curvature Expansions and Calabi-Yau Manifolds”. In: JHEP 05 (2020), p. 044. doi : 10.1007/JHEP05(2020)044 . arXiv: 1912.11068 [hep-th] .[8] Lara B. Anderson, Mathis Gerdes, James Gray, Sven Krippendorf, Nikhil Raghuram, and Fabian Ruehle. “Moduli-dependent Calabi-Yau and SU(3)-structure metrics from Machine Learning”. In: 
+
+JHEP 05 (2021), p. 013. doi : 10.1007/JHEP05(2021)013 . arXiv: 2012.04656 [hep-th] .[9] Vishnu Jejjala, Damian Kaloni Mayorga Pena, and Challenger Mishra. “Neural network approxi-mations for Calabi-Yau metrics”. In: JHEP 08 (2022), p. 105. doi : 10.1007/JHEP08(2022)105 .arXiv: 2012.15821 [hep-th] .20 [10] Anthony Ashmore, Lucille Calmon, Yang-Hui He, and Burt A. Ovrut. “Calabi-Yau Metrics, En-ergy Functionals and Machine-Learning”. In: International Journal of Data Science in the Math-ematical Sciences 1.1 (2023), pp. 49–61. doi : 10.1142/S2810939222500034 . arXiv: 2112.10872 [hep-th] .[11] Magdalena Larfors, Andre Lukas, Fabian Ruehle, and Robin Schneider. “Learning Size and Shape of Calabi-Yau Spaces”. In: (Nov. 2021). arXiv: 2111.01436 [hep-th] .[12] Magdalena Larfors, Andre Lukas, Fabian Ruehle, and Robin Schneider. “Numerical metrics for complete intersection and Kreuzer–Skarke Calabi–Yau manifolds”. In: Mach. Learn. Sci. Tech. 
+
+3.3 (2022), p. 035014. doi : 10.1088/2632-2153/ac8e4e . arXiv: 2205.13408 [hep-th] .[13] Mathis Gerdes and Sven Krippendorf. “CYJAX: A package for Calabi-Yau metrics with JAX”. In: Mach. Learn. Sci. Tech. 4.2 (2023), p. 025031. doi : 10 . 1088 / 2632 - 2153 / acdc84 . arXiv: 
+
+2211.12520 [hep-th] .[14] Viktor Mirjani´ c and Challenger Mishra. “Symbolic approximations to Ricci-flat metrics via extrin-sic symmetries of Calabi–Yau hypersurfaces”. In: Mach. Learn. Sci. Tech. 6.3 (2025), p. 035029. 
+
+doi : 10.1088/2632-2153/adf68c . arXiv: 2412.19778 [hep-th] .[15] Seung-Joo Lee and Andre Lukas. “Approximate Ricci-flat Metrics for Calabi-Yau Manifolds”. In: (June 2025). arXiv: 2506.15766 [hep-th] .[16] Michael R. Douglas, Robert L. Karp, Sergio Lukic, and Rene Reinbacher. “Numerical Calabi-Yau metrics”. In: J. Math. Phys. 49 (2008), p. 032302. doi : 10.1063/1.2888403 . arXiv: hep-th/0612075 .[17] Lara B. Anderson, James Gray, and Magdalena Larfors. “Lectures on Numerical and Machine Learning Methods for Approximating Ricci-flat Calabi-Yau Metrics”. In: Dec. 2023. arXiv: 2312. 17125 [hep-th] .[18] Miles Cranmer. Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl .2023. arXiv: 2305.01582 [astro-ph.IM] . url : https://arxiv.org/abs/2305.01582 .21

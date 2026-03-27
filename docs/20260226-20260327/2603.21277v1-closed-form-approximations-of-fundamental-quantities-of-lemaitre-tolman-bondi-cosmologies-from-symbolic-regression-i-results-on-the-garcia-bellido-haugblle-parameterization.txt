@@ -1,0 +1,560 @@
+Title: Closed-form approximations of fundamental quantities of Lemaitre-Tolman-Bondi cosmologies from Symbolic Regression: I. Results on the Garcia-Bellido-Haugb{\o}lle parameterization
+
+URL Source: https://arxiv.org/pdf/2603.21277v1
+
+Published Time: Tue, 24 Mar 2026 01:23:57 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+Astronomy & Astrophysics manuscript no. aanda ©ESO 2026 March 24, 2026 
+
+# Closed-form approximations of fundamental quantities of Lemaitre-Tolman-Bondi cosmologies from Symbolic Regression 
+
+# I. Results on the Garcia-Bellido-Haugbølle parameterization 
+
+A. Carvalho ⋆1, 2, 3, A. Krone-Martins 3, 1, A. Da Silva 1, 2, J.P. Mimoso 1, 2,C. Bœhm 4, 5 
+
+> 1
+
+Instituto de Astrofísica e Ciências do Espaço, Faculdade de Ciências, Universidade de Lisboa, Campo Grande, PT-1749-016 Lisboa, Portugal  
+
+> 2
+
+Departamento de Física, Faculdade de Ciências, Universidade de Lisboa, Campo Grande, PT1749-016 Lisboa, Portugal  
+
+> 3
+
+Donald Bren School of Information and Computer Sciences, University of California, Irvine, Irvine CA 92697, USA  
+
+> 4
+
+Sydney Institute for Astronomy, School of Physics, The University of Sydney, NSW 2006, Australia  
+
+> 5
+
+University of Edinburgh, Higgs Centre for Theoretical Physics, James Clerk Maxwell Building, Edinburgh EH9 3FD, UK Received Month Day, Year; accepted Month Day, Year 
+
+ABSTRACT 
+
+We introduce a novel set of analytic approximations for five fundamental functions in spherically symmetric, inhomoge-neous Lemaitre–Tolman–Bondi (LTB) cosmologies, derived via Symbolic Regression (SR). Focusing on the constrained Gar-cia–Bellido–Haugbølle (GBH) parameterization, we sampled the four-dimensional LTB parameter space using the bubble LTB numerical code, then applied SR to reconstruct closed-form expressions for the radial and transverse scale factors A∥(r, t), A⊥(r, t), the corresponding Hubble functions H∥(r, t), H⊥(r, t), and the angular diameter distance DA(z). Our best-fit formulas reproduce the numerical data with remarkable precision: the relative mean error across all quantities remains below 0.3%, except for the radial Hubble function, where it reaches 1.4%. These compact expressions facilitate rapid evaluation of LTB predictions—enabling fast parameter scans, likelihood analyses, and model comparisons—without recourse to time-consuming integrations. We provide explicit coe ffi cients and discuss the domain of validity, demonstrating that SR-driven approximations can serve as robust surrogates for exact LTB solutions in both theoretical investigations and observational confrontations. 
+
+Key words. Symbolic Regression – Cosmology: theory – Cosmology: large-scale structure of Universe – Methods: analytical – Distance scale – Inhomogeneous cosmologies 
+
+1. Introduction 
+
+A central task in cosmology is the fast and accurate prediction of key observables, such as distances, growth functions, and power spectra, across wide regions of parameter spaces. These predic-tions are essential for confronting theoretical models with in-creasingly precise data. However, obtaining them often requires solving systems of coupled, nonlinear di ff erential equations de-rived from general relativity, fluid dynamics, and high-energy physics. Such calculations, while indispensable, are computa-tionally demanding, particularly in applications that require re-peated evaluations, including Bayesian inference, Markov Chain Monte Carlo (MCMC) analyses, or real-time model testing. A way to address these challenges is to rely on ana-lytic fitting functions and approximate formulas. Classic ex-amples include the Carroll–Press–Turner approximation for the linear growth factor (Carroll et al. 1992), the BBKS transfer function (Bardeen et al. 1986), the nonlinear matter power-spectrum fits (Takahashi et al. 2012), and numerous formu-las for luminosity and angular-diameter distances in Fried-mann–Lemaître–Robertson–Walker (FLRW) cosmologies (e.g., Pen 1999; Wright 2006). These expressions o ff er rapid and rea-sonably accurate surrogates for complex integrals and dynamical 
+
+> ⋆
+
+calculations, enabling e ffi cient parameter exploration and model comparison. More recently, machine-learning (ML) techniques have emerged as powerful tools for constructing fast model re-gressors and emulators trained on simulation data. A diverse set of approaches has been explored in this context. Gaus-sian Process Regression (GPR) provides smooth interpolation with built-in uncertainty quantification and has been widely ap-plied to the nonlinear matter power spectrum, halo properties, and other large-scale-structure observables (e.g., Heitmann et al. 2009; Lawrence et al. 2017; Euclid Collaboration et al. 2021; Lucie-Smith et al. 2018). Neural networks, including feedfor-ward and deep learning architectures, are particularly e ff ective for modeling highly nonlinear mappings and high-dimensional outputs, such as image-based simulations and weak-lensing ob-servables (Villaescusa-Navarro et al. 2021). N-Body simulation volumes have also been emulated using supervised machine learning (see, e.g., Conceição et al. 2024) and references therein. These methods now play a central role in precision large-scale-structure analyses by enabling fast and accurate interpolation across high-dimensional cosmological parameter spaces. Despite their success, many ML emulators act as black-box predictors: they provide accurate mappings between cosmologi-cal parameters and observables, but typically do not yield com-pact analytical representations. In settings where interpretability, 
+
+Article number, page 1  
+
+> arXiv:2603.21277v1 [astro-ph.CO] 22 Mar 2026 A&A proofs: manuscript no. aanda
+
+physical insight, or the construction of human-readable surro-gates is desirable, this can be a limitation. Symbolic Regression (SR), in contrast, searches directly over functional forms to identify closed-form analytical ex-pressions that fit the data. Its strengths lie in interpretabil-ity, compactness, and the ability to discover human-readable formulas that can be inspected, simplified, and, in favor-able cases, connected to underlying physical mechanisms (Schmidt & Lipson 2009; Bongard & Lipson 2007; Gaucel et al. 2014; Sun et al. 2019; Udrescu & Tegmark 2020; Udrescu et al. 2020; Cranmer et al. 2020). Early adoptions of symbolic regression in astronomy in the machine-assisted discovery of empirical relationships in large sky-survey data sets (Graham et al. 2013) and in the first machine-derived closed-form analytical expression for galaxy photometric redshifts (Krone-Martins et al. 2014) were reveal-ing and demonstrated its potential. Further research with SR has therefore acquired significant traction among the scientific com-munity. For instance, Villaescusa-Navarro et al. (2021) search for an expression for the star formation rate density dependent on redshift ( z), σ8, ωm, and stellar feedback of simulations, com-bining N–body and hydrodynamic simulations. Cranmer et al. (2020) combine Graph Neural Networks with Genetic Symbolic regression in dark matter simulations to extract the “concentra-tion of dark matter from the mass distribution of nearby cosmic structures”. Davis & Jin (2023) explore the M•–ϕ–vmax scaling relation plane for Spiral Galaxies with PySR. Also, some recent SR methods are being developed, tailoring specific needs from science, as the core concept that in most research, the datasets come from a combination of experiments, each one using di ff er-ent experimental set-ups (e.g., Russeil et al. 2024). These developments have also motivated the application of SR to cosmological inference (e.g., Bartlett et al. 2022; Carvalho et al. 2023; Castelão & Tereno 2025) and to recon-struction problems (e.g., Bernal et al. 2021; Cranmer et al. 2020; Aizpuru et al. 2021; Bayron Orjuela-Quintana et al. 2022; Delgado et al. 2022; Shao et al. 2022; Wong & Cranmer 2022; Shao et al. 2023; Wadekar et al. 2023b,a, 2020), where the goal is to obtain accurate yet interpretable closed-form ap-proximations to key functions and observables. Related ef-forts include the reconstruction of cosmological functions and their use in consistency tests of the standard FLRW cos-mology (e.g., Bogdanos & Nesseris 2009; Nesseris & Shafieloo 2010; Nesseris & García-Bellido 2012, 2013; Sapone et al. 2014; Martinelli et al. 2020; Arjona 2020; Arjona & Nesseris 2020b,a, 2021b; Arjona et al. 2021; Arjona & Nesseris 2021a; Arjona et al. 2022; Bartlett et al. 2022; Nesseris et al. 2022; Arjona et al. 2024; Ocampo et al. 2025). This strategy is particularly relevant for cosmological mod-els whose theoretical predictions are numerically demanding, in-cluding inhomogeneous cosmologies that relax the assumption of large-scale homogeneity. In spite of the observational success of FLRW models, in-homogeneous cosmologies such as the Lemaître–Tolman–Bondi (LTB) class remain highly relevant in modern cosmology. They not only provide a framework to test the robustness of the FLRW assumption of large-scale homogeneity, by accommodating ra-dial inhomogeneities in a fully relativistic setting, but also pro-vide a practical way to investigate the impact of cosmic struc-tures (voids, over-densities, and large-scale gradients) on light propagation, distance measures, and parameter inference, which also help to assess potential back-reaction e ff ects (Buchert et al. 2000; Bolejko & Korzy´ nski 2017; Buchert & Räsänen 2012; Sussman 2011). Moreover, LTB models have long been stud-ied as alternatives to dark energy in an attempt to describe the late-time acceleration of the universe, or to investigate non-standard explanations of late-time cosmological observations (Tomita 2001; Larena et al. 2009; Rasanen 2006; Enqvist 2008; Marra & Notari 2011). They have also been used as toy models to study relativistic e ff ects that are hard to isolate in perturbative methods. These include redshift drift, relativistic corrections to structure growth, and light-cone observables. For these reasons, LTB cosmologies remain an active and relevant area of research (Buchert et al. 2000; Clarkson et al. 2009; Sussman & Izquierdo 2011; Herrera et al. 2010, 2011; Bull et al. 2012; Buchert et al. 2016, 2020; Camarena et al. 2023), especially at a time when ob-servations are becoming increasingly precise and require careful testing of our assumptions about the Universe. From a practical point of view, one limitation of working with LTB cosmologies is their high computational cost. Eval-uating observables for a given set of model parameters is nu-merically expensive. Physical quantities in LTB spacetimes are usually obtained by solving several coupled and nested ordi-nary di ff erential equations for the transverse and radial scale fac-tors, a1(r, t) and a2(r, t). This must be done together with model-defining radial functions, such as the curvature profile, mass function, and possible variations in the bang-time. In addition, computing observables along the past light cone requires the nu-merical integration of non-trivial geodesic and light-cone equa-tions. These calculations are highly sensitive to changes in model parameters and often need dense sampling to achieve su ffi cient accuracy. In practice, modern LTB solvers, such as the bubble 
+
+code (Bull 2022) used in this work or LLTB codes like VD2020 (Valkenburg 2025, 2012), typically take from tens of seconds to a minute to evaluate a single point in parameter space on a standard laptop. This computational cost makes full Bayesian inference impractical. Markov Chain Monte Carlo or nested-sampling methods would require tens to hundreds of thousands of solver evaluations, which is not feasible in high-dimensional parameter spaces. For this reason, there is strong motivation to develop fast, accurate, and interpretable surrogate models. Ex-amples include analytical approximations based on symbolic re-gression, which can replace repeated full numerical integrations in cosmological parameter inference. While ML-based emulators are now common in stan-dard FLRW cosmology, their application to inhomogeneous models, such as the LTB class, remains largely unexplored. LTB models (Lemaître 1933; Tolman 1934; Bondi 1947) de-scribe spherically symmetric, dust-dominated universes with-out assuming homogeneity, and have been widely used to study cosmic voids (Tomita 2001; Garcia-Bellido & Haugbølle 2008; Celerier et al. 2010; Clifton et al. 2008; Camarena et al. 2022), alternatives to dark energy (Enqvist & Mattsson 2007; Buchert 2008; Krasinski et al. 2010; Bolejko & Andersson 2008), and the e ff ects of inhomogeneities and backreaction (Ishibashi & Wald 2006; Clarkson et al. 2011; Valkenburg et al. 2014; Redlich et al. 2014; Green & Wald 2014; Buchert et al. 2016; Larena et al. 2009; Bester et al. 2015; Fleury et al. 2017; Camarena et al. 2021). Their numerical implementation, how-ever, is considerably more involved than in FLRW cosmology, requiring the solution of several nested di ff erential equations for each parameter set. This complexity has limited their use in large-scale cosmological inference, where fast evaluations are crucial. In this work, we present what is, to the best of our knowledge, the first application of Symbolic Regres-sion to LTB cosmologies. Focusing on the constrained García-Bellido–Haugbølle (GBH) subclass of LTB models 
+
+> Article number, page 2 A. Carvalho, et al.: Closed-form approximations of fundamental quantities of LTB cosmologies from Symbolic Regression
+
+(Garcia-Bellido & Haugbølle 2008), we generate a large dataset using the bubble LTB code (Bull 2022) and train an SR algo-rithm to obtain compact analytical expressions for five funda-mental quantities: the radial and transverse scale factors, their as-sociated Hubble rates, and the angular-diameter distance. These SR-derived formulas provide a computationally e ffi cient and interpretable alternative to full numerical integration, typically achieving relative mean errors below 0.3% for most quanti-ties, and 338% improvement in running time compared to the 
+
+bubble code. The structure of this paper is as follows. In Section 2, we briefly review the LTB formalism and the constrained GBH pa-rameterization. Section 3 introduces the Symbolic Regression method and our dataset generation process. Section 4 presents the resulting analytical formulas and evaluates their accuracy. Fi-nally, Section 5 summarizes our findings and discusses possible applications and extensions. 
+
+2. The Cosmological Model 
+
+2.1. Lemaitre Tolman Bondi cosmological model 
+
+The LTB model is derived from a spherically symmetric solu-tion to Einstein’s equations, describing an isotropic yet inho-mogeneous universe. This model excludes the contribution of dark energy, with matter density and curvature density as its pri-mary components. Unlike the FLRW metric, where the scale fac-tor and the Hubble parameter are time-dependent only, the LTB model introduces radial dependencies for these factors. In fact, the LTB metric, 
+
+ds 2 = dt 2 − a22(t, r)1 − k(r)r2 dr 2 − a21(t, r)r2dΩ2. (1) introduces two metric functions, a1(t, r) and a2(t, r) related by 1
+
+a2 = (a1r)′, (2) where a1 satisfies a Friedmann-like equation: 
+
+˙a1
+
+a1
+
+!2
+
+= 8πG
+
+3
+
+m(r)
+
+a31
+
+− k(r)
+
+a21
+
+, (3) where m(r) is related to the so-called Misner-Sharpe mass mms =
+
+4π R ρ(r) r2 dr with ρ(r) being the energy-density at some fidu-cial initial time. These allow to define transverse and radial Hubble rates as: 
+
+HT ≡ ˙a1
+
+a1
+
+(4) 
+
+HR ≡ ˙a2
+
+a2
+
+. (5) For an observer at the centre of the LTB non-homogeneity, the following di ff erential equations describe the relationships be-tween radial ( ds 2 = dΩ2 = 0) geodesic properties, time, and redshift: 
+
+dt d log(1 + z) = − a2
+
+˙a2
+
+= − 1
+
+HR
+
+, (6) 
+
+dr d log(1 + z) =
+
+p1 − k(r) r2
+
+˙a2
+
+. (7)  
+
+> 1In this work, a dot denotes the partial time ( t) derivative, while the apostrophe symbolizes the partial space ( r) derivative.
+
+Using these equations, one can calculate the angular diameter distance, DA, and luminosity distance DL as: 
+
+DA(z) = r(z) a1 (r(z), t(z)) , (8) 
+
+DL(z) = (1 + z)2 DA(z), (9) where DA is the angular distance and DL the luminosity distance. When describing an inhomogeneous universe, it is essen-tial to specify the LTB inhomogeneous profile. In this work, we adopt the constrained GBH model (Garcia-Bellido & Haugbølle 2008), described in the next section. 
+
+2.1.1. Garcia-Bellido and Haugbølle model 
+
+The GBH model (Garcia-Bellido & Haugbølle 2008) describes a central inhomogeneity characterized by the present matter den-sity ΩM (r) and expansion rate H0(r) profiles. The ΩM (r) is given by: 
+
+ΩM (r) = Ω out + Ωin − Ωout 
+
+ 1 − tanh [( r − r0)/2∆r]1 + tanh [ r0/2∆r]
+
+!
+
+. (10) In this work, we adopt a more constrained and commonly used version of the LTB model, known as the constrained LTB model, in which the time of the Big Bang, tBB , is constant for all observers, regardless of their spatial position. This constraint is achieved by imposing the following condition: 
+
+H0(r) = H0
+
+
+
+1
+
+ΩK (r) − ΩM (r)
+
+q
+
+Ω3 
+
+> K
+
+(r)sinh −1
+
+s
+
+ΩK (r)
+
+ΩM (r)
+
+ , (11) where ΩK (r) = 1 − ΩM (r). Here H0 = H0(r → ∞ ) = 100 h km s−1 Mpc −1 and h is the dimensionless Hubble parameter. This constrained version of the model has reduced flexibility com-pared to the GBH model, as it includes only a single arbitrary function, ΩM (r), and one fewer free parameter. Additionally, we adopt the popular assumption of fixing Ωout = 1, which simpli-fies the model further. With this choice, the model is parameter-ized by only four parameters: h, Ωin , r0 and ∆r.
+
+3. Methodology 
+
+In this section, we briefly describe bubble , an LTB cosmol-ogy calculator that was employed for the mocks generated (as per in Sec. 4.1). Afterward, we introduce Symbolic Regression, a machine-learning method designed to find approximated ana-lytic expressions of relations between features in a data set. We also describe TuringBot, the SR engine we adopted to search closed-form analytical expressions that relate the LTB cosmo-logical functions to the corresponding cosmological parameters, and we finally describe how we adapted it to explore the large parameter space. 
+
+3.1. bubble 
+
+bubble 2 is a numerical code for LTB models cosmology, writ-ten in C ++ . It calculates geodesic and background properties such as the scale factor, as well as observables like the ki-netic Sunyaev-Zeldovich e ff ect, the luminosity distance, and the redshift, for a set of theoretical parameters of the chosen LTB        
+
+> 2Source code can be accessed at:
+> https://gitlab.com/cosmobubble/bubble .Article number, page 3 A&A proofs: manuscript no. aanda
+
+model. The code incorporates two void profile models: the CFL model (Clifton et al. 2008) and the previously mentioned GBH model (referenced in Sec. 2.1.1), and it also allows users to im-plement their own void model. Additionally, an FLRW metric is included in this cosmological package. Given a set of parame-ters for the void model, bubble computes the geodesic quanti-ties and observables across a range of radial coordinates r and outputs these quantities in r-dependent tables. Therefore, ex-trapolations are necessary if the desired value falls between two tabulated values. The cosmological properties we are primarily interested in, such as Hr, Ht, a1, and a2 as functions of z, are obtained through the output_fnz function, declared within the 
+
+model_output.cpp file. 
+
+> 3.2. Symbolic Regression
+
+One major obstacle to using machine learning methods, espe-cially neural networks, is that the resulting models are extremely hard to interpret and thus are often treated as “black boxes.” This is a serious limitation in a physics-driven field like astro-physics, where we ideally want to understand and test the map-ping from observables to the target quantities. In contrast, sym-bolic regression (SR) can overcome this drawback, as the result-ing expressions are explicit and can be directly interpreted. In fact, the SR method AI Feynman (Udrescu et al. 2020), was able to re-discover over 100 equations from “Feynman lectures on physics”(Feynman 1963, 1964, 1965). SR is an ML method that aims to generate mathematical symbolic expressions that can describe a given data set. The method itself is historically based on Genetic Programming Koza (1992, 1994), but current methods implement a large va-riety of optimization algorithms (e.g., La Cava et al. 2021), clas-sic neural networks (e.g., Landajuela et al. 2022), and more re-cently, Generative AI heuristics based on transformers (e.g., Kamienny et al. 2022; Shojaee et al. 2023). Traditionally, SR will search for the combination of math-ematical operations that minimizes an error while promoting the simple equations it found. A common representation of an SR method is a tree, where each node is a mathematical expression, a numeric constant, or a data feature /input. The method aims to explore every combination possible of nodes. Currently, there is a broad o ff er of SR algorithms. Some of the best-performing ones, according to their accuracy when com-pared to the ground-truth process, ranked by the benchmarking tool SRBench (La Cava et al. 2021) are: MRGP (Arnaldo et al. 2014), Operon (Burlacu et al. 2020), the already mentioned AI Feynman, SBP-GP (Virgolin et al. 2019) and PySR (Cranmer 2023). A well-known closed-source software is TuringBot (TB), inspired by the pioneering – but now discontinued– Eureqa (Schmidt & Lipson 2009) method. In this work, we will use the TuringBot, which we further describe in Sec. 3.2.1. 
+
+> 3.2.1. The Turing Bot engine
+
+Here, we use the Turing Bot method (TB; TuringBot Software 2025), which is an SR method implemented in C ++ and based on Simulated Annealing. Early results obtained using TB (Ashok et al. 2020) indicated that for physics-inspired problems, it performed better than Eureqa, which was a popular and widely successful SR system (Schmidt & Lipson 2009). Due to being a multithreaded C ++ engine, TB has been highly e ffi cient compared to many of the published SR imple-mentations, which allows it to explore complex datasets. The method has been previously used in multiple contexts in physics and engineering (e.g., Li et al. 2021), including in astrophysics (Barbosa et al. 2022). A practical limitation of TB, though, is that it is a closed-source system. This, in part, restricts what can be tailored for any specific adoption of TB, such as the under-lying error metric, which can only chosen from those already implemented. On the other hand, it profits from a highly stable implementation, and this simplifies deploying the TB engine in highly distributed environments, thus enabling systematic explo-ration of large parameter spaces. This robustness and stability are the main reasons why we adopt TB in this work. Moreover, the interaction with the engine can be performed directly via config-uration and output files through the command line, which makes it straightforward to script and automate large batches of runs. The TB configuration file allows the selection of the error metric used in the minimization step, as well as specifying an explicit formula for the input features to be used by the method. Within the same file, the user can set the maximum expression complexity for TB to explore, the train–test split ratio for cross-validation, the number of best equations n to be written to the output, and the set of allowed functions that may appear in the SR expression trees, among other options. TB o ff ers a graphical user interface, which we do not use here, but it can also be exe-cuted in a fully non-interactive mode from the command line by passing the configuration file as input. The output of TB is a text file that is created at the start of the run and that is continuously updated as the engine is running. This file contains the current iteration’s best n equations, with n
+
+chosen by the user, together with metrics showing the expression algebraic complexity and the value of the selected error metric for each candidate symbolic regression solution. 
+
+> 3.2.2. Exploring the parameter space
+
+Due to its multithreaded implementation, TB can be e ffi cient when executed on a multicore environment. Nevertheless, as it is, the TB implementation does not scale to multinode environ-ments. Moreover, depending on characteristics of the data to be explored by the method, especially its volume and the number of features (possibly leading to memory transfer ine ffi ciencies between the threads), and the complexity of the equations to be searched, instead of running a single TB process over all cores of a given computer it can be more e ffi cient to run a larger number of TB processes each one using a smaller number of cores and starting with di ff erent seeds, thus starting from di ff erent parts in the parameter space. To enable the use of TB and other SR engines in scenarios involving large data sets and /or multi-node clusters and super-computers, and to possibly lead to a wider exploration of the parameter space, we have developed the Orchestrator tool (see Appendix A for more details). Orchestrator is responsible for launching, monitoring, and coordinating multiple parallel sym-bolic regression processes. It currently supports TB and, in more recent versions, also PySR. In this work, we used Orchestrator with the TB engine in the Expanse system, a cluster located in the San Diego Super-computer Center (SDSC). For our experiments, we used up to 128 CPU cores. But the Expanse system has 728 compute nodes based on AMD EPYC 7742 CPUs with 64 cores each, and 52 GPU nodes with a total of 208 V100 GPUs. It provides 247 TB of total system memory and 824 TB of flash storage. To obtain the reconstructed LTB cosmology equations from SR presented in the next section, we used a total of 39 528 CPU hours, exclud-
+
+> Article number, page 4 A. Carvalho, et al.: Closed-form approximations of fundamental quantities of LTB cosmologies from Symbolic Regression
+
+ing the experiments that led to the development of Orchestrator. 
+
+4. Results 
+
+In this section, we will present the analytical expressions achieved by the application of Symbolic Regression for the LTB-GBH model. We start by describing the data creation process, followed by the obtained approximated equations for HR, the ra-dial Hubble rate, HT , the transverse Hubble rate, a1 and a2 com-ponents of the scale factor, DA, the angular diameter distance, and dV /dz , the comoving volume element. 
+
+> 4.1. Building the Training Data
+
+We are interested in deriving analytical expressions for the pa-rameters of a inhomogeneous cosmological model. In particu-lar, we are considering the Lemaitre-Tolman-Bondi (LTB) model combined with a GBH void profile (Sec. 2.1.1). This model can be characterized mainly by 4 parameters: h the Hubble parame-ter, Ωin the matter density inside the inhomogeneity, r0 the size of the inhomogeneity region and ∆r the transition to uniformity. Thus, we have randomly generated 5000 sets (hereafter models) described by these 4 cosmological parameters inside the follow-ing intervals: 
+
+h = [0 .60 , 0.75] ∆r = [0 .1, 1] Gpc 
+
+Ωin = [0 .1, 1] r0 = [0 .1, 3] Gpc , (12) where we conditionally sampled r0 as such that r0 > ∆r. We used bubble (Sec. 3.1) to compute the numerical values of the functions we are interested in learning an approximation analyti-cal function: HR, HT , a1, a2, and DA. For each parameter model, the code produces a table of cosmological background quanti-ties as a function of redshift. For each table, we randomly select 20 rows to be able to have a redshift dependency on our target cosmological functions, as it is an important observable in cos-mology. In Fig. 1 we show both the distribution of the generated features (right, rotated histograms) and the distribution of the response cosmological products (top histograms). In the panels surrounded by the two types of histograms, we display the 2D distribution between the features and the values of the respective theoretical functions. In the ideal scenario, one would generate parameters that are approximately uniformly distributed and can cover the relevant range within the target functions. In our case, we can conclude that our parameter space shows a uniform scat-ter across the area of interest. This figure also shows us that, as expected, the redshift is highly important in the behavior of the functions to study, as one would conclude from the spatial de-pendency in their definition, written in Sec. 2.1. The data was split into training and test sets. The training data, consisting of 80% of the 5000 models, will be used as input in the Turing-Bot software, while the remaining 20% will be used in the test data for the comparison criteria that commands the number of iterations, as described in Appendix A. In this study, the configuration file for TB was identical across all explored quantities. The error minimization metric used was the root mean square error (RMSE), so that the large errors are weighted higher in the tool. For the training and testing dataset split, a value of -1 was used for the train_test_split 
+
+parameter, which means no cross-validation was performed as the Orchestrator already considers a train /test split. The use of integer constants was disabled ( integer_constants = 0), so 
+
+Color Label h Ωin r0 ∆r
+
+Blue 0.65 0.18 1315.14 Mpc 652.52 Mpc Green 0.60 0.40 1604.56 Mpc 586.46 Mpc Orange 0.70 0.62 1899.27 Mpc 651.31 Mpc Red 0.71 0.33 2212.78 Mpc 588.09 Mpc Purple 0.66 0.33 2883.71 Mpc 665.01 Mpc  
+
+> Table 1. Cosmological model parameterization considered in the com-parison plots of Fig. 2 and Fig. 3.
+
+as not to force the constants to be integers. Here, we also deac-tivated the bound_search_mode parameter, meaning the model did not attempt to search for upper or lower bounds of the target parameter, in order to reduce the complexity of the formulas to be found. To control the complexity of the generated formulas, we chose a maximum formula complexity of 60. This limits the number of terms or depth in the equations, reducing overfitting. The history_size parameter was set to 20, meaning only the top 20 best-performing formulas were stored, ensuring only the most relevant solutions were considered. The F-score beta pa-rameter was set to 1, balancing precision and recall at the same level. We also disabled data normalization transformations. Ad-ditionally, the target parameter was not allowed in the lag func-tions ( allow_target_delay = 0), as this application is not a time-series forecast. The model was also set not to force the in-clusion of all variables ( force_all_variables =0), ensuring only the most significant variables for each case were used in the formulas. Lastly, the allowed functions included basic arith-metic operations, exponential, logarithms, square roots, and hy-perbolic functions. The inclusion of hyperbolic functions was chosen because they can be expressed in terms of exponential and not because a periodic behavior is expected. These settings were selected to balance model complexity, computational e ffi -ciency, and the generalization ability of the generated formulas, ensuring that the results were both accurate and interpretable. 
+
+> 4.2. Analytical Approximations of LTB functions
+
+Below, we introduce the cosmological equations derived us-ing the Orchestrator. The cosmological quantities considered for constructing these functions include h, Ωin , r0, ∆r and z. It is im-portant to note that some functions may not include all param-eters. This omission occurs when TuringBot does not identify a su ffi ciently strong relationship between the excluded parameter and the target function. In Fig. 2 and Fig. 3 the left-hand-side plots display the true values obtained from bubble code alongside the correspond-ing estimated values for the cosmological parameters related to the models. The bottom panels in these plots illustrate the rela-tive di ff erence between the estimated curves and the theoretical curves. In the right-hand-side plots, we present the redshift dis-tribution of the models listed in Tab. 1, where the show the small symbols represent the true curve, and the solid lines indicate the curve derived from the equations obtained through the SR pro-cess. The bottom panels again show the relative error between the theoretical and the estimated curves. Additionally, in Tab.2, we provide the average and median values of the relative error (Pred. − Theo.) /Theo. × 100% for the test set concerning each cosmological function and the percentage of points above a cer-tain relative error threshold. 
+
+> Article number, page 5
+
+A&A proofs: manuscript no. aanda 020000 
+
+> Counts
+
+## 0.65 0.70 
+
+> h
+
+## 0.25 0.50 0.75 
+
+> Ωin
+
+## 1000 2000 
+
+> r0
+
+## 250 500 750 
+
+> ∆r
+
+## 2.5 5.0
+
+# HT
+
+## 24
+
+> z
+
+## 2.5 5.0
+
+# HR
+
+## 0.5 1.0
+
+# a1
+
+## 0.5 1.0
+
+# a2
+
+## 0 2000 
+
+# DA
+
+## 0 10000 
+
+# Counts 
+
+Fig. 1. 2D Distribution of the cosmological parameters generated from bubble as described in Sec. 4.1, showing the relation between the input parameters (rows) and the target output quantities (columns). In here, the most darker color corresponds to regions that are denser in points, whereas the lighter represents regions with sparser points, where the white color indicates lack of population. Additionally, the histograms for all quantities here represented are shown in the first row for the target functions and the last column for the input cosmological parameters of our Symbolic Regression methodology. 
+
+The constants Ci that appear in all reconstructed functions of this section are presented in Tab. 3. Moreover, in the functions of this section, the cosmological parameters r0 and ∆r are in Mpc. 
+
+4.2.1. Transverse scale factor 
+
+The LTB scale factors are fundamental quantities of the model, as many cosmological and astrophysical functions depending on them. One notable example is the various definitions of distance, such as the angular diameter distance for LTB, which is given in Eq. (8). We thus begin by exploring an approximated expres-sion for the transverse scale factor a1 of the LTB framework, which characterizes the expansion rate in a perpendicular direc-tion from the line of sight of the observer: 
+
+a1 = C1
+
+C2 + z ·
+
+C3 − C4r0
+
+> C5+C6
+> Ωin
+
+√1−Ω2in 
+
+> −C7r0+z
+
+
+
+, (13) Recalling how the scale factor is written in a FLRW cos-mology, a(z) = 1/(1 + z), it is interesting to note that we have obtained an expression for the transverse scale factor that has a similar dependence on the redshift, showing that the method is consistent with the leading order behavior, with the term in the parenthesis acting as a “correction term”. Moreover, to preserve the validity of the recovered expression in the FLRW limiting case, we would expect that C1 ∼ C2 ∼ C3, which we indeed see as SR found all these constants to be valued C1,2,3 ∼ 0.81. 
+
+Article number, page 6 A. Carvalho, et al.: Closed-form approximations of fundamental quantities of LTB cosmologies from Symbolic Regression 
+
+Fig. 2. Representation of the SR found expressions of the transverse scale factor a1 and the radial scale factor a2. Left panel: Comparison between the theoretical values obtained via bubble software and the estimated values from the Orchestrator, where a yellow color represents the most dense regions. In the bottom panels of each left panel, we showcase the relative error between these two values. Right panel: Redshift distribution of each parameter for the models labeled in Tab 1. The dashed line represents the theoretical distribution from bubble and the solid line represents the redshift distribution obtained from the estimated equation. 
+
+Threshold ±0.1% ±0.2% ±0.5% ±1.0% ±2.0% ±5% ±10% Average Rel. Error Median Rel. Error 
+
+a1 0.9294 0.9902 1.0000 1.0000 1.0000 1.0000 1.0000 0.0009% 0.0011% 
+
+a2 0.2783 0.5267 0.8697 0.9574 0.9945 0.9997 1.0000 0.0477% 0.0917% 
+
+HT 0.1818 0.3611 0.7396 0.8666 0.9516 0.9979 0.9999 0.037% −0.0566% 
+
+HR 0.1177 0.2216 0.4494 0.6305 0.7916 0.9429 0.9871 1.410% 0.6083% 
+
+DA 0.1162 0.2268 0.5517 0.7981 0.8931 0.9542 0.9815 0.3654% 0.0105% 
+
+Table 2. Columns 2 to 7 show the fraction of points reconstructed with relative errors less than ±0.1%, ±0.2%, ±0.5%, ±1.0%, ±2.0%, ±5%, and 
+
+±10% for each symbolic regression function listed in the first column. Columns 8 and 9 report the average and median relative errors, respectively, for each case. 
+
+Furthermore, the term Ωin /
+
+q
+
+1 − Ω2in decodes the inhomogene-ity influence of the density profile. Looking at the constants and what they are associated with, in particular C4 = 4.23582 × 10 −7
+
+and C7 = 2.02548 × 10 −4, it seems TuringBot has found coe ffi -cients that normalize its companion feature to balance their con-tribution to the expression. Do note that we have not performed any data normalization or scaling technique in this work. This highlights the interpretability of the resulting SR expressions. 
+
+4.2.2. Radial scale factor 
+
+With an expression for the transverse scale factor established, we now aim to obtain a corresponding expression for the radial counterpart. The radial scale factor a2 describes the expansion rate along the radial direction. As such, and unlike a1, it varies across the radial coordinate, as seen in Eq. 2, reflecting the nature of expansion in the LTB framework. The approximated expres-sion found by Symbolic Regression is the following: 
+
+a2 = C1
+
+C2 + z ·
+
+C3 − (C7+C4r0)sech    
+
+> C6hr 0−C5 tanh( z)
+> ∆r
+> 
+> (C8+∆ r)
+> C9+sinh
+> Ωin
+
+√1−Ω2in 
+
+> 
+
+
+
+. (14) The expression for the radial scale factor is more complex than that for the transverse factor, as expected. Nevertheless, the functional forms of a1 and a2 exhibit a similar structure, reflect-ing their connection to the same cosmological concept of the scale factor. Moreover, these expressions are closely related to how the scale factor itself is defined by the redshift in FLRW cosmology, where a(z) = 1/(1 +z). As in a1, here we also find the term Ωin /
+
+q
+
+1 − Ω2in , highlighting the inhomogeneity of the den-sity profile. Again, the values of the constants here reflect a nor-malization e ff ort by TuringBot. For instance, the constants asso-ciated with r0, which is used in Mpc units, C4 = 1.44156 × 10 −2
+
+Article number, page 7 A&A proofs: manuscript no. aanda 
+
+a1 a2 Ht Hr DA
+
+C1 0.80694 0.58403 0.45977 0.61237 0.51710 
+
+C2 0.80687 0.58501 0.24540 0.20390 0.943412 
+
+C3 0.80764 0.58071 1.33346 1.33623 0.279151 
+
+C4 4.23582 × 10 −7 1.44156 × 10 −2 9.99509 × 10 −2 3.63985 × 10 −5 5.7740 × 10 −4
+
+C5 7.32962 × 10 −2 3.84319 × 10 3 0.20482 2.60339 × 10 −5 3.96045 
+
+C6 0.19531 2.95325 × 10 −4 −1.27188 × 10 −4 0.90316 1.457922 × 10 −4
+
+C7 2.02548 × 10 −4 6.92104 × 10 2 4.85370 0.02795 -0.943412 
+
+C8 - 75.9261 7.00377 × 10 −4 0.13744 0.90973 
+
+C9 - 0.27963 1.03388 2.00312 × 10 −4 4.41448 × 10 −2
+
+C10 - - - 2.49206 × 10 −4 1.37548 × 10 2          
+
+> Table 3. Constants of the equations found by the Symbolic Regression process for a1(Eq. 13), a2(Eq. 14), Ht(Eq. 15), Hr(Eq. 16) and DA
+> (Eq. 17).
+
+and C6 = 2.95325 ×10 −4, balance the order magnitude of this dis-tance and its combination with the adimensional Hubble param-eter, respectively. Finally, it is interesting to see hyperbolic terms appearing in the a2 expression found by SR, because the GBH matter density contains an hyperbolic term tanh[( r − r0)/2∆r], and thus its derivative should introduce sech 2 functions, that then should appear in any analytic approximate expressions for a2, as we are indeed seeing from the sech term in Eq. 14. 
+
+4.2.3. Transverse Hubble rate 
+
+In LTB models, the Hubble rate consists of two components as discussed in Sec. 2.1. Hubble rates are fundamental concepts in cosmology and thus contribute to many other cosmological func-tions.Therefore, from a computational perspective, it is advanta-geous to replace the bubble pipeline for Hubble rate retrieval with approximated expressions. Below, we present the SR ex-pression Orchestrator found for the transverse component HT ,the Hubble rate in the perpendicular direction to the observer’s line of sight: 
+
+HT
+
+100 = h C1 + (C2 + z) C3
+
++ C4
+
+, 
+
+exp  C6zC7+Ω in − C8 log( z)zC7+Ω in + C8r0 log( z)
+
++ C6r0
+
+ · (C9 − Ωin ) + C5 + Ω in 
+
+ ! 
+
+km s −1Mpc −1.
+
+(15) Although this is a high complex expression, TuringBot was able to interpret this rate as the present unidimensional Hub-ble rate, scaled by a combination of factors that mainly depend on the redshift and the density, something analogous to the first Friedmann Equation found in FLRW, but here the inhomogene-ity profile strongly contributes for the transverse hubble rate, as it can be seen in the denominator of the last term of this equation. The denominator contains linear combinations of Ωin , reflecting the analytic dependence of H(r = 0) on the central density in the constrained GBH model, while the exponential term seems to act like a kernel to create a smoother transition between the void profile (which could be written in terms hyperbolic functions, but that can be approximated, as SR seems to be doing here, by a series of exponential and logarithmic corrections in terms of the redshift). Once again, the values of the constants contrast with the cosmological parameter magnitude order attached to them. 
+
+4.2.4. Radial Hubble rate 
+
+An accurate approximate expression for the radial component of the Hubble rate is essential for the overall LTB framework, as it governs the light-cone evolution and the relation between the radial and the transverse expansions. The Orchestrator found the following expression for HR:
+
+HR
+
+100 = h C1 + (C2 + z)C3 − C4 ∆r
+
+− C5 (C6 − Ωin ) r0
+
+C7 ·  C8 − C9r0 + z−1 − tanh( C10 (r0 − ∆r) − z)
+
+!
+
+km s −1Mpc −1.
+
+(16) It is important to note that the radial component exhibits greater complexity due to its stronger dependence on the void profile, which encodes the inhomogeneous structure regime of LTB. Nevertheless, the expressions for HT and HR share sev-eral notable similarities. Although HR explicitly contains a hy-perbolic tangent, its functional behavior is e ff ectively exponen-tial, as tanh( x) = (e2x − 1) /(e2x + 1). A comparable exponen-tial dependence is also present in the lengthy denominator of the 
+
+HT expression, indicating that both components are governed by similar underlying functional forms, albeit modulated di ff erently by the inhomogeneity parameters. Moreover, the GBH general matter density ΩM (r) (Eq.10) has hyperbolic terms as a func-tion of the spatial cosmological parameters ( r0, ∆r). Our process was able to capture this behavior as tanh( f (r0, ∆r)), highlight-ing the SR capability of capturing physically motivated expres-sions. Furthermore, the first three constants, C1, C2, and C3, are of comparable magnitude in both expressions, with C2 and C3
+
+di ff ering only at the percent level. These constants consistently appear in the shared structural term C1 + (C2 + z)C3 , suggest-ing that Symbolic Regression has identified a common baseline redshift dependence for both Hubble components. 
+
+4.2.5. Angular diameter distance 
+
+To accurately model most cosmological observables, it is neces-sary to accurately compute the angular diameter distance DA(z). In LTB cosmologies with a central observer, this quantity is given exactly by Eq. 8 which shows that it depends on both the null geodesic solution and the transverse scale factor. Ac-cordingly, whatever approximation is obtained by a method like SR, it must inherit the geometric complexity of the LTB space-time, including its sensitivity to radial inhomogeneities. The best-derived formula for DA we obtained here was: 
+
+> Article number, page 8
+
+A. Carvalho, et al.: Closed-form approximations of fundamental quantities of LTB cosmologies from Symbolic Regression 
+
+Fig. 3. Representation of the SR found expressions of the transverse Hubble rate HT , the radial Hubble rate HR, and the angular diameter distance 
+
+DA. Left panel: Comparison between the theoretical values obtained via bubble software and the estimated values from the Orchestrator, where a yellow color represents the most dense regions. In the bottom space of each left panel, we showcase the relative error between these two values. Right panel: Redshift distribution of each parameter for the models labeled in Tab. 1. The dashed line represents the theoretical distribution from 
+
+bubble and the solid line represents the redshift distribution obtained from the estimated equation. 
+
+DA(z) = DH
+
+"
+
+− C9(z + C10 ) +
+
+C1 tanh 
+
+
+
+z p(C2 − Ωin )( C3 − C4r0) + C5
+
+C6−C7Ωin 
+
+!# 
+
+Mpc. (17) It is noteworthy that the obtained expression is inversely pro-portional to the Hubble parameter, which aligns with units of distance, thus setting the characteristic distance scale of the ap-proximated relation. Then, we can see that the linear term re-produces the expected low-redshift behavior of DA, while the hyperbolic tangent seems to capture the turnover and saturation of the angular diameter distance at intermediate redshifts, also capturing the dependencies on central density contrast Ωin and and the void size ( r0). Additionally, the components a ff ecting r0
+
+exhibit a contrasting ordering relative to r0, thereby normalizing this parameter, as we observe with the Hubble rates. 
+
+4.3. Reconstruction accuracy 
+
+Tab. 2 summarizes the cumulative distribution of relative errors for each reconstructed function in our study. Columns 2 to 7 dis-play the fraction of points reconstructed with relative errors less than ±0.1%, ±0.2%, ±0.5%, ±1.0%, ±2.0%, ±5%, and ±10%, respectively. The last two columns (Columns 8 and 9) show av-erage and median relative errors for each case. Overall, these results indicate that the reconstruction accu-racy improves rapidly as the relative-error threshold increases for all reconstructed functions. This is an indication of well-
+
+Article number, page 9 A&A proofs: manuscript no. aanda 
+
+behaved error distributions without significant heavy tails. For most reconstructed quantities, more than ∼ 95% of the points are recovered within ±2%. Nearly all remaining points lie within the 
+
+±5% – ±10% range. This provides evidence for a robust global performance of the symbolic regression approach. The combi-nation of high reconstruction fractions at loose thresholds and small average and median relative errors further suggests that large deviations are rare and do not dominate the error statistics. The transverse scale factor a1 exhibits a high precision, with over 99% of predictions falling within a ±0.2% error margin, and 100% within ±0.5%. This indicates that the derived symbolic ex-pression for a1 closely matches the numerically computed values across the parameter space. The radial scale factor a2 and transverse Hubble rate HT also show high precision, with approximately 87% and 74% of pre-dictions, respectively, lying within ±0.5%, and over 95% within 
+
+±2.0%. In contrast, the radial Hubble rate HR and angular diame-ter distance DA, which are more sensitive to radial inhomogene-ity and redshift dependencies, achieve lower accuracy at strict thresholds with around 45% and 55% within ±0.5%, respec-tively. Nevertheless, both functions maintain robust agreement at broader thresholds, with 94% of HR and over 98% of DA esti-mates accurate to within ±10%. These results highlight the capacity of Symbolic Regression to reproduce complex cosmological functions with high accu-racy, particularly for quantities with simpler redshift and spatial dependence, while still yielding reasonable approximations for more intricate observables. 
+
+5. Conclusions 
+
+Here, we presented an application of Symbolic Regression to obtain closed-form approximations for quantities in Lemaître-Tolman-Bondi cosmologies, focusing on the constrained Garcia-Bellido-Haugbølle parametrization. To do so, we used simulated data from the bubble code and a distributed SR workflow that we built around the TuringBot engine. We derived formulas for the radial and transverse scale factors, the associated Hubble rates, and the angular diameter distance. Our expressions repro-duce the simulated data across the full parameter domain that was explored, and they resulted in mean relative errors less than 0.5% for most quantities and 1.5% for the radial Hubble rate. These formulas obtained here reduce the need for costly in-tegration of the LTB models, improving execution time by sev-eral orders of magnitude. This makes likelihood evaluations and model comparison using LTM models more tractable. Moreover, the closed-form nature of the SR approximations helps their in-terpretability and simplifies their incorporation into data anal-ysis pipelines and /or inference methods. Our findings indicate that SR can produce reliable and interpretable surrogate mod-els for inhomogeneous cosmologies, complementing the existing harder to interpret machine learning emulators and computation-ally costly traditional fitting approaches using data simulators The method developed, including our parallel orchestration framework, can be directly applied and extended to other LTB parameterizations, to models with non-constant bang time, or to other categories of relativistic inhomogeneous cosmologies. We plan further studies to assess the performance of SR solutions in full Bayesian inference pipelines using real datasets and to ex-plore the recovery of additional observables. The present study thus opens a path to generating analytic approximations for mod-eling relativistic inhomogeneities in the era of high-accuracy cosmology, as needed to make full use of modern datasets such as Euclid, Rubin /LSST, and the Nancy Grace Roman Space Tele-scope. 
+
+Acknowledgements. This work used the SDSC Expanse machine at San Diego Supercomputer Center through allocation PHY230141 (PIs Alberto Krone-Martins, António Silva, Celine Boehm) from the Advanced Cyberin-frastructure Coordination Ecosystem: Services & Support (ACCESS) program, which is supported by U.S. National Science Foundation grants #2138259, #2138286, #2138307, #2137603, and #2138296. We additionally thank the PHY230141 team, Hartley Tran, Esmerald Aliaj, Sang-Woo Jun, and Joshua Garcia for important discussions related to the development of this work. AC acknowledges support from the FCT research grant 2020.06644.BD and both FCT, Fulbright Portugal, and IIE for sponsoring a research visit of 6 months in University of California-Irvine. The authors are also grateful to the Fundação para a Ciência e a Tecnologia (FCT) for the IA running research grants UIDB /04434 /2020, UIDP /04434 /2020, EXPL /FIS-AST /1368 /2021 (ML_CLUSTER, DOI 10.54499 /EXPL /FIS-AST /1368 /2021) and PTDC /FIS-AST /0054 /2021 (BEYLA, DOI 10.54499 /PTDC /FIS-AST /0054 /2021). 
+
+References 
+
+Aizpuru, A., Arjona, R., & Nesseris, S. 2021, Phys. Rev. D, 104, 043521 Arjona, R. 2020, J. Cosmology Astropart. Phys., 2020, 009 Arjona, R., Lin, H.-N., Nesseris, S., & Tang, L. 2021, Phys. Rev. D, 103, 103513 Arjona, R., Melchiorri, A., & Nesseris, S. 2022, J. Cosmology Astropart. Phys., 2022, 047 Arjona, R. & Nesseris, S. 2020a, J. Cosmology Astropart. Phys., 2020, 042 Arjona, R. & Nesseris, S. 2020b, Phys. Rev. D, 101, 123525 Arjona, R. & Nesseris, S. 2021a, Phys. Rev. D, 104, 103532 Arjona, R. & Nesseris, S. 2021b, Phys. Rev. D, 103, 063537 Arjona, R., Nesseris, S., Tutusaus, I., Sobral Blanco, D., & Bonvin, C. 2024, arXiv e-prints, arXiv:2409.15170 Arnaldo, I., Krawiec, K., & O’Reilly, U.-M. 2014, in Proceedings of the 2014 Annual Conference on Genetic and Evolutionary Computation, GECCO ’14 (New York, NY, USA: Association for Computing Machinery), 879–886 Ashok, D., Scott, J., Wetzel, S., Panju, M., & Ganesh, V. 2020, arXiv e-prints, arXiv:2010.11328 Barbosa, F. O., Santucci, R. M., Rossi, S., et al. 2022, ApJ, 940, 30 Bardeen, J. M., Bond, J. R., Kaiser, N., & Szalay, A. S. 1986, The Astrophysical Journal, 304, 15 Bartlett, D. J., Desmond, H., & Ferreira, P. G. 2022, arXiv e-prints, arXiv:2211.11461 Bayron Orjuela-Quintana, J., Nesseris, S., & Cardona, W. 2022, arXiv e-prints, arXiv:2211.06393 Bernal, J. L., Caputo, A., Villaescusa-Navarro, F., & Kamionkowski, M. 2021, Phys. Rev. Lett., 127, 131102 Bester, H. L., Larena, J., & Bishop, N. T. 2015, Mon. Not. Roy. Astron. Soc., 453, 2364 Bogdanos, C. & Nesseris, S. 2009, J. Cosmology Astropart. Phys., 2009, 006 Bolejko, K. & Andersson, L. 2008, JCAP, 10, 003 Bolejko, K. & Korzy´ nski, M. 2017, Int. J. Mod. Phys. D, 26, 1730011 Bondi, H. 1947, MNRAS, 107, 410 Bongard, J. & Lipson, H. 2007, Proceedings of the National Academy of Sci-ences, 104, 9943 Buchert, T. 2008, Gen. Rel. Grav., 40, 467 Buchert, T., Coley, A. A., Kleinert, H., Roukema, B. F., & Wiltshire, D. L. 2016, Int. J. Mod. Phys. D, 25, 1630007 Buchert, T., Kerscher, M., & Sicka, C. 2000, Phys. Rev. D, 62, 043525 Buchert, T., Mourier, P., & Roy, X. 2020, Gen. Rel. Grav., 52, 27 Buchert, T. & Räsänen, S. 2012, Ann. Rev. Nucl. Part. Sci., 62, 57 Bull, P. 2022, Phil Bull Code Repositories, https://philbull.com/#code 
+
+Bull, P., Clifton, T., & Ferreira, P. G. 2012, Phys. Rev. D, 85, 024002 Burlacu, B., Kronberger, G., & Kommenda, M. 2020, in Proceedings of the 2020 Genetic and Evolutionary Computation Conference Companion, GECCO ’20 (New York, NY, USA: Association for Computing Machinery), 1562–1570 Camarena, D., Marra, V., Sakr, Z., & Clarkson, C. 2021, Mon. Not. Roy. Astron. Soc., 509, 1291 Camarena, D., Marra, V., Sakr, Z., & Clarkson, C. 2022, Class. Quant. Grav., 39, 184001 Camarena, D. et al. 2023, Astron. Astrophys., 671, A68 Carroll, S. M., Press, W. H., & Turner, E. L. 1992, Annual Review of Astronomy and Astrophysics, 30, 499 Carvalho, A., Oliveira, D. M., Krone-Martins, A., & Da Silva, A. 2023, in 2023 IEEE 19th International Conference on e-Science (e-Science), 1–2 Castelão, D. & Tereno, I. 2025, arXiv e-prints, arXiv:2509.15453 Celerier, M.-N., Bolejko, K., & Krasinski, A. 2010, Astron. Astrophys., 518, A21 
+
+Article number, page 10 A. Carvalho, et al.: Closed-form approximations of fundamental quantities of LTB cosmologies from Symbolic Regression 
+
+Clarkson, C., Clifton, T., & February, S. 2009, JCAP, 06, 025 Clarkson, C., Ellis, G., Larena, J., & Umeh, O. 2011, Rept. Prog. Phys., 74, 112901 Clifton, T., Ferreira, P. G., & Land, K. 2008, Phys. Rev. Lett., 101, 131302 Conceição, M., Krone-Martins, A., da Silva, A., & Moliné, Á. 2024, A&A, 681, A123 Cranmer, M. 2023, arXiv e-prints, arXiv:2305.01582 Cranmer, M., Sanchez-Gonzalez, A., Battaglia, P., et al. 2020, arXiv e-prints, arXiv:2006.11287 Davis, B. L. & Jin, Z. 2023, ApJ, 956, L22 Delgado, A. M., Wadekar, D., Hadzhiyska, B., et al. 2022, MNRAS, 515, 2733 Enqvist, K. 2008, Gen. Rel. Grav., 40, 451 Enqvist, K. & Mattsson, T. 2007, JCAP, 02, 019 Euclid Collaboration, Knabenhans, M., Stadel, J., et al. 2021, MNRAS, 505, 2840 Feynman, R. P. 1963, Feynman lectures on physics - Volume 1 Feynman, R. P. 1964, Feynman lectures on physics. Volume 2: Mainly electro-magnetism and matter Feynman, R. P. 1965, Feynman lectures on physics. Volume 3: Quantum mechancis Fleury, P., Clarkson, C., & Maartens, R. 2017, JCAP, 03, 062 Garcia-Bellido, J. & Haugbølle, T. 2008, J. Cosmology Astropart. Phys., 2008, 003 Gaucel, S., Keijzer, M., Lutton, E., & Tonda, A. 2014, in EuroGP 2014, LNCS, Vol. 8599 (Springer), 25–36 Graham, M. J., Djorgovski, S. G., Mahabal, A. A., Donalek, C., & Drake, A. J. 2013, MNRAS, 431, 2371 Green, S. R. & Wald, R. M. 2014, Class. Quant. Grav., 31, 234003 Heitmann, K., Higdon, D., White, M., et al. 2009, ApJ, 705, 156 Herrera, L., Di Prisco, A., & Ibanez, J. 2011, Phys. Rev. D, 84, 064036 Herrera, L., Di Prisco, A., Ospino, J., & Carot, J. 2010, Phys. Rev. D, 82, 024021 Ishibashi, A. & Wald, R. M. 2006, Class. Quant. Grav., 23, 235 Kamienny, P.-A., d’Ascoli, S., Lample, G., & Charton, F. 2022, in Proceedings of the 36th International Conference on Neural Information Processing Systems, NIPS ’22 (Red Hook, NY, USA: Curran Associates Inc.), event-place: New Orleans, LA, USA Koza, J. R. 1992, Genetic programming: on the programming of computers by means of natural selection (Cambridge, MA, USA: MIT Press) Koza, J. R. 1994, Statistics and Computing, 4, 87 Krasinski, A., Hellaby, C., Bolejko, K., & Celerier, M.-N. 2010, Gen. Rel. Grav., 42, 2453 Krone-Martins, A., Ishida, E. E. O., & de Souza, R. S. 2014, MNRAS, 443, L34 Kurtzer, G. M., Sochat, V., & Bauer, M. W. 2017, PLOS ONE, 12, 1 La Cava, W., Orzechowski, P., Burlacu, B., et al. 2021, arXiv e-prints, arXiv:2107.14351 Landajuela, M., Lee, C. S., Yang, J., et al. 2022, in Advances in Neural Infor-mation Processing Systems, ed. S. Koyejo, S. Mohamed, A. Agarwal, D. Bel-grave, K. Cho, & A. Oh, Vol. 35 (Curran Associates, Inc.), 33985–33998 Larena, J., Alimi, J.-M., Buchert, T., Kunz, M., & Corasaniti, P.-S. 2009, Phys. Rev. D, 79, 083011 Lawrence, E., Heitmann, K., Kwan, J., et al. 2017, ApJ, 847, 50 Lemaître, G. 1933, Annales de la Société Scientifique de Bruxelles, A53, 51 Li, Z., Ji, J., & Zhang, Y. 2021, arXiv e-prints, arXiv:2111.12210 Lucie-Smith, L., Peiris, H. V., Pontzen, A., & Lochner, M. 2018, MNRAS, 479, 3405 Marra, V. & Notari, A. 2011, Class. Quant. Grav., 28, 164004 Martinelli, M., Martins, C. J. A. P., Nesseris, S., et al. 2020, A&A, 644, A80 Nesseris, S. & García-Bellido, J. 2012, J. Cosmology Astropart. Phys., 2012, 033 Nesseris, S. & García-Bellido, J. 2013, Phys. Rev. D, 88, 063521 Nesseris, S., Sapone, D., Martinelli, M., et al. 2022, A&A, 660, A67 Nesseris, S. & Shafieloo, A. 2010, MNRAS, 408, 1879 Ocampo, I., Sapone, D., Nesseris, S., et al. 2025, arXiv e-prints, arXiv:2507.22780 Pen, U.-L. 1999, ApJS, 120, 49 Rasanen, S. 2006, JCAP, 11, 003 Redlich, M., Bolejko, K., Meyer, S., Lewis, G. F., & Bartelmann, M. 2014, As-tron. Astrophys., 570, A63 Russeil, E., de Franca, F. O., Malanchev, K., et al. 2024, in Proceedings of the Genetic and Evolutionary Computation Conference, GECCO ’24 (New York, NY, USA: Association for Computing Machinery), 961–970 Sapone, D., Majerotto, E., & Nesseris, S. 2014, Phys. Rev. D, 90, 023012 Schmidt, M. & Lipson, H. 2009, Science, 324, 81 Shao, H., de Santi, N. S. M., Villaescusa-Navarro, F., et al. 2023, ApJ, 956, 149 Shao, H., Villaescusa-Navarro, F., Genel, S., et al. 2022, ApJ, 927, 85 Shojaee, P., Meidani, K., Farimani, A. B., & Reddy, C. K. 2023, in Proceed-ings of the 37th International Conference on Neural Information Processing Systems, NIPS ’23 (Red Hook, NY, USA: Curran Associates Inc.) Sun, S., Ouyang, R., Zhang, B., & Zhang, T.-Y. 2019, MRS Bulletin, 44, 559 Sussman, R. A. 2011, Class. Quant. Grav., 28, 235002 Sussman, R. A. & Izquierdo, G. 2011, Class. Quant. Grav., 28, 045006 Takahashi, R., Sato, M., Nishimichi, T., Taruya, A., & Oguri, M. 2012, ApJ, 761, 152 Tolman, R. C. 1934, Proc. Nat. Acad. Sci., 20, 169 Tomita, K. 2001, Mon. Not. Roy. Astron. Soc., 326, 287 TuringBot Software. 2025, TuringBot Documentation, symbolic regression soft-ware documentation Udrescu, S.-M., Tan, A., Feng, J., et al. 2020, arXiv e-prints, arXiv:2006.10782 Udrescu, S.-M. & Tegmark, M. 2020, Science Advances, 6, eaay2631 Valkenburg, W. 2012, General Relativity and Gravitation, 44, 2449 Valkenburg, W. 2025, vd2020: VoidDistances for 2020, https://github.com/ valkenburg/vd2020 , gitHub repository; code to solve for the (wL)LTB metric, geodesics, and angular diameter distances Valkenburg, W., Marra, V., & Clarkson, C. 2014, Mon. Not. Roy. Astron. Soc., 438, L6 Villaescusa-Navarro, F., Anglés-Alcázar, D., Genel, S., et al. 2021, ApJ, 915, 71 Virgolin, M., Alderliesten, T., & Bosman, P. A. N. 2019, in Proceedings of the Genetic and Evolutionary Computation Conference, GECCO ’19 (New York, NY, USA: Association for Computing Machinery), 1084–1092 Wadekar, D., Thiele, L., Hill, J. C., et al. 2023a, MNRAS, 522, 2628 Wadekar, D., Thiele, L., Villaescusa-Navarro, F., et al. 2023b, Proceedings of the National Academy of Science, 120, e2202074120 Wadekar, D., Villaescusa-Navarro, F., Ho, S., & Perreault-Levasseur, L. 2020, arXiv e-prints, arXiv:2012.00111 Wong, K. & Cranmer, M. 2022, in Machine Learning for Astrophysics, 25 Wright, E. L. 2006, A Cosmology Calculator for the World Wide Web, 
+
+https://www.astro.ucla.edu/~wright/CosmoCalc.html , online tool and documentation 
+
+Article number, page 11 A&A proofs: manuscript no. aanda  
+
+> Fig. A.1. Scalability of TuringBot on the Expanse system. The figure shows the number of symbolic expressions generated per minute as a function of the number of threads.
+
+Appendix A: The Orchestrator 
+
+This appendix describes the orchestration framework developed to launch, manage, and coordinate multiple parallel Turing-Bot executions across multi-core computing environments. The framework was implemented in Python, evolving from an ini-tial prototype developed in R, and was explicitly designed for deployment on high-performance computing (HPC) systems. All large-scale experiments presented in this work were exe-cuted on the Expanse supercomputer, hosted at the San Diego Supercomputer Center (SDSC) and operated under the Ad-10 
+
+vanced Cyberinfrastructure Coordination Ecosystem: Services & Support (ACCESS) program. Expanse consists of 728 com-pute nodes equipped with dual AMD EPYC 7742 processors (64 cores per node), 52 GPU-enabled nodes with NVIDIA V100 GPUs, approximately 247 TB of system memory, and 824 TB of flash storage. Job scheduling and resource allocation are han-dled through the SLURM workload manager, with tasks submitted via the sbatch command using shell scripts written in SLURM 
+
+syntax. 
+
+A.1. Scalability Analysis 20 
+
+To optimize the number of cores that each individual TuringBot process would be using, we first performed a tailored analysis of the scalability of TuringBot using our dataset and targeted pa-rameter space on the Expanse system as a function of the number of concurrent threads. It is widely known that while increasing the number of threads enables additional parallel computations, excessive parallelism can introduce non-negligible overhead as-sociated with thread management, memory contention, and con-text switching. Consequently in most real-life workloads, the performance does not increase linearly, and not even monotoni-30 
+
+cally, with the number of threads. Fig. A.1 reports the number of candidate symbolic expres-sions generated per minute as a function of the number of threads, for the datasets described in Sec. 4.1. The results in-dicate that performance saturates beyond a moderate number of threads. Based on these measurements, we selected eight threads as an optimal operating point, balancing computational through-put against resource utilization and scheduling overhead. 
+
+A.2. Pipeline Architecture 
+
+To e ffi ciently exploit multi-core nodes and distributed cluster re-40 
+
+sources, we developed a dedicated orchestration software layer that manages multiple TuringBot processes running in parallel.     
+
+> Start
+> Parallel SR Processes
+> Concatenated Solutions
+> Quick SR process
+> Iteration solution
+> Rel. Error ≤threshold? or max. iter. reached?
+> Stop
+> Yes No
+> Fig. A.2. Simplified flowchart illustrating the Orchestrator workflow used to automatically generate input files for the Symbolic Regression engine using multiple parallel batch process dispatches.
+
+In cluster environments such as Expanse, TuringBot is executed within containerized environments, and here we use Singularity (Kurtzer et al. 2017) and adopt container images in the Singular-ity Image Format ( .sif ). The orchestrator framework we implemented adopts aclient–host execution model. Computationally intensive tasks, including parallel TuringBot processes, are dispatched to com-pute nodes, while a dedicated control node is responsible for 50 
+
+and handles workflow management, job coordination, and data aggregation. The Orchestrator framework is configured through a user-defined configuration file specifying resource allocation, execution parameters, container paths, and stopping criteria. One example of such configuration file can be found at Sect. A.3. A schematic overview of the Orchestrator pipeline can be seen in Fig. A.2. The internal workflow is organized into two main stages: 1. Exploration stage. Multiple parallel TuringBot instances are launched across the cluster and executed for a user- 60 
+
+defined duration (Parallel SR Processes). Upon completion, the symbolic expressions discovered by each instance are ag-gregated into a single file by concatenating the individual outputs produced by each instance. This consolidated set of candidate equations serves as input for the subsequent stage (Concatenated Solutions). 2. Refinement stage. A single TuringBot instance is executed for a shorter duration to refine and optimize the candidate ex-pressions identified during the exploration stage (Quick SR Process). The resulting set of optimized expressions is then 70 
+
+redistributed as input to each parallel process in the next it-eration (Iteration Solution). 
+
+> Article number, page 12 A. Carvalho, et al.: Closed-form approximations of fundamental quantities of LTB cosmologies from Symbolic Regression
+
+These two stages are executed iteratively until either the maxi-mum number of iterations specified by the user is reached or a predefined error threshold is satisfied. 
+
+A.3. Example of Orchestrator configuration parameters 
+
+[CPU] nthreads = ; number of threads to be used in each of the longer processes nprocesses = ; number of parallel processes 80 
+
+time = ; seconds for the longer process to be executed ncicles = ; how many cicles threshold = ; threshold value for the comparison made at the end of each cicle [directory] pwd = ; work directory (host) folder_name = ; leave empty folder_path = ${pwd}/${folder_name} ; do not 90 
+
+edit host_account = ; host account address client_folder = ; output directory (client) [sbatch] job-name = ; slurm job name output-name = ; name of slurm processess print output memory = ; Expanse memory account = ; Expanse project 100 
+
+email = ; what e-mail slurm will send update messages to shell_suffix = ; full path and suffix of the batch files that the engine will create ( host), ex: ${directory:folder_path}/ shellfile package_path = ; where the package is installed (host) [TuringBot] 110 
+
+config_path = ; configuration file path of Turing Bot (host) concat_suffix = ; full path and suffix of the concatenated files (host), ex: ${directory: folder_path}/Hralt_concat equation_suffix = ; full path and suffix of the end of the cicle result file (host), ex: ${ directory:folder_path}/Hralt_sol training_path = ; full path of the train data ( host) 120 
+
+test_path = ; full path of the test data (client )use_prior_path = ; path of previous results to use (host). Leave empty if none

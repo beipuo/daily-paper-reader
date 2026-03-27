@@ -1,0 +1,596 @@
+Title: Symmetry-Constrained Language-Guided Program Synthesis for Discovering Governing Equations from Noisy and Partial Observations
+
+URL Source: https://arxiv.org/pdf/2603.06869v1
+
+Published Time: Tue, 10 Mar 2026 00:17:48 GMT
+
+Number of Pages: 12
+
+Markdown Content:
+## Symmetry-Constrained Language-Guided Program Synthesis for Discovering Governing Equations from Noisy and Partial Observations 
+
+Mirza Samad Ahmed Baig 1,∗ Syeda Anshrah Gillani 2,†
+
+> 1
+
+Fandaqah (Owned by Dyafa), Al Khobar, Eastern Province, Saudi Arabia 
+
+> 2
+
+Hamdard University, Karachi, Pakistan 
+
+> ∗
+
+MirzaSamadcontact@gmail.com †SyedaAnshrah16@gmail.com 
+
+Abstract. Discovering compact governing equations from experimental observations is one of the defining objectives of quantitative science, yet practical discovery pipelines routinely fail when measurements are noisy, relevant state variables are unobserved, or multiple symbolic structures explain the data equally well within statistical uncertainty. Here we introduce 
+
+SymLang (Sym metry-constrained Lang uage-guided equation discovery), a unified framework that brings together three previously separate ideas: (i) typed symmetry-constrained grammars that encode dimensional analysis, group-theoretic invariance, and parity constraints as hard production rules, eliminating on average 71 .3% of candidate expression trees before any fitting; (ii) language-model-guided program synthesis in which a fine-tuned 7B-parameter proposer, conditioned on interpretable data descriptors, efficiently navigates the constrained search space; and (iii) MDL-regularized Bayesian model selection coupled with block-bootstrap stability analysis that quantifies structural uncertainty rather than committing to a single best equation. Across 133 dynamical systems spanning classical mechanics, electrodynamics, thermodynamics, population dynamics, and nonlinear oscillators, SymLang achieves an exact structural recovery rate of 83 .7% under 10% observational noise, a 22 .4 percentage-point improvement over the next-best baseline while reducing out-of-distribution extrapolation error by 61% and near-eliminating conservation-law violations (3 .1 × 10 −3 vs. 187 .3 × 10 −3 physical drift for the closest competitor). Under 50% state occlusion, exact recovery reaches 61 .2% versus 38 .4%. In all tested regimes the framework correctly identifies structural degeneracy, reporting it explicitly, rather than returning a confidently wrong single equation. The framework is fully open-source and reproducible, providing a principled pathway from raw data to interpretable, physically auditable symbolic laws.              
+
+> Keywords: symbolic regression ·equation discovery ·symmetry constraints ·dimensional analysis ·Bayesian model selection ·program synthesis ·
+> partial observability ·structure uncertainty
+
+# Introduction 
+
+The compression of complex empirical phenomena into com-pact symbolic laws—Newton’s second law, Maxwell’s equa-tions, the Lotka-Volterra system represents one of science’s most powerful and reproducible achievements. Yet recov-ering such laws automatically from measured data remains profoundly difficult, particularly when (a) measurements carry substantial noise that corrupts derivative estimates, (b) relevant state variables are unobserved so that only an effective or projected dynamics is accessible, and (c) finite data support observationally equivalent families of symbolic expressions whose discrimination requires targeted experi-mentation. Early computational approaches to this problem relied on genetic programming evolved over large symbolic search spaces [ 7 , 1, 8], which are flexible but exponentially ex-pensive and provide no principled uncertainty. A major practical advance came with sparse regression over a fixed operator libraries [ 2 , 23 ]: by treating equation discovery as 
+
+ℓ1-penalized regression on a rich feature matrix, SINDy [ 2 ]and its descendants [ 20 , 22 , 21 , 24 ] achieve scalable recovery of low-complexity dynamics. The fundamental limitation of this family is the fixed library assumption: equations outside the library are structurally invisible. Neural approaches relax the library constraint. Physics-inspired symbolic regression (AI Feynman [ 3]) exploits di-mensional analysis and neural network fitting to recursively decompose complex expressions. Evolutionary symbolic re-gression (PySR [ 4]) uses multi-population evolution with Pareto-front complexity penalization, building on a long line of genetic programming innovations [ 11 , 15 , 9, 10 ]. Deep sym-bolic regression (DSR [ 5]) frames expression tree generation as a reinforcement learning problem, while transformer-based and generative approaches model the distribution over ex-pression trees directly [ 6, 13 , 14 , 19 , 12 ]. Bayesian symbolic regression [ 12 ] explicitly models posterior uncertainty over tree structures, though at considerable computational cost. Inductive process modeling [ 16 ] and knowledge-rich discovery systems [ 18 ] demonstrate that incorporating prior structural knowledge substantially accelerates convergence. Large lan-guage models have recently shown promise as mathematical discovery engines [49, 50]. In parallel, a distinct family of neural models has emerged that respects physical structure without recovering inter-pretable equations: physics-informed neural networks [ 25 ]solve PDEs while satisfying boundary conditions; neural ODEs [ 26 ] and universal differential equations [ 27 ] learn continuous dynamics in latent space; Hamiltonian [ 28 ] and Lagrangian [ 29 ] neural networks embed energy conservation architecturally; symplectic integrators [ 30 ] preserve phase-space volume; and Fourier Neural Operators [ 31 ] and Deep-ONet [ 32 ] learn operator mappings between function spaces. These models predict accurately but are not interpretable in the sense of producing a human-readable symbolic law. The geometric deep learning programme [ 34 , 35 , 38 ] es-1
+
+> arXiv:2603.06869v1 [cs.AI] 6 Mar 2026
+
+tablishes a principled foundation for incorporating group equivariance into neural architectures. Conservation-law finders [ 36 , 37 ] can automatically identify conserved quanti-ties from trajectories. Yet neither stream directly produces compact symbolic laws with calibrated structural uncer-tainty. Three critical gaps persist across this landscape. First ,physical constraints, dimensional analysis, parity, rotational invariance, Noether conservation [ 33 ] are either ignored en-tirely or applied only as post-hoc screening, missing the opportunity to prune the hypothesis space before search. 
+
+Second , existing methods return a single “best” symbolic expression, providing no principled measure of structural uncertainty: when data support multiple observationally equivalent forms, a single point estimate is epistemically misleading and can cause practitioners to overinterpret finite-sample coincidences as fundamental laws. Third , partial observability where some state variables are not measured is handled at best heuristically, despite being ubiquitous in real experimental settings. We introduce SymLang , which directly addresses all three gaps through a modular five-stage pipeline: symmetry-constrained grammar construction; language-guided pro-posal; differentiable constant fitting; MDL-regularized model selection; and bootstrap stability with identifiability diag-nostics. The result is a system that is simultaneously more sample-efficient, more physically consistent, and more epis-temically honest than any prior method. 
+
+# Theoretical Background and Problem Formulation 
+
+## Dynamical systems and the discovery prob-lem 
+
+We consider continuous-time systems of the form dx
+
+dt = f (x(t), u(t), t ; θ∗) , x(t0) = x0, (1) where x(t) ∈ Rd is the full state vector, u(t) ∈ Rq denotes external control inputs or forcing, and θ∗ are unknown scalar parameters (physical constants). The observation model is 
+
+y(tm) = H(x(tm)) + εm, m = 1 , . . . , M, (2) where H : Rd → Rdo is a potentially non-surjective observa-tion operator ( do ≤ d) and εm ∼ N (0, σ 2I) is i.i.d. Gaussian noise. The discovery problem is: given {(y(tm), u(tm)) }Mm=1 ,recover a symbolic expression tree e∗ representing f together with calibrated uncertainty over the space of alternative structures. 
+
+## Expression trees and the grammar formalism 
+
+A symbolic expression is represented as an ordered rooted tree e = ( V, E, ℓ ), where each internal node v ∈ V car-ries an operator label ℓ(v) ∈ O (from a fixed operator set: 
+
+{+, −, ×, ÷, sin , cos , exp , log , (·)n}) and each leaf carries a variable, constant, or rational number. The arity of an operator determines the number of child branches. The complexity of e is measured by |e| = |V | (number of nodes). A context-free grammar G = ( N , Σ, P, S ) defines the set of admissible expression trees through production rules P,where nonterminals N generate typed subtrees and terminals Σ are leaf tokens. Unconstrained, the number of distinct expression trees of depth ≤ ℓ grows doubly exponentially in ℓ, motivating the symmetry constraints developed in the next section. 
+
+Definition 1 (Type-consistent grammar) . A typed CFG is a grammar G in which each nonterminal A ∈ N carries a type tuple τ (A) = ( dA, p A, ι A) where dA ∈ Z5 is a physical dimension vector (M, L, T, Θ, I), pA ∈ { +1 , −1, 0} is a parity tag, and ιA is an invariance class. A production rule 
+
+A → α is type-consistent if the type of α (computed by type propagation rules for each operator) matches τ (A).
+
+Proposition 1 (Pruning bound) . Let G0 be the uncon-strained grammar and Gc the type-consistent grammar over the same operator set. If f satisfies k independent type con-straints, then |L (Gc, ℓ )| ≤ C−k|L (G0, ℓ )| for a constant C > 1
+
+depending on the operator branching structure. 
+
+Empirically, we measure Ck ≈ 3.5 on average across the 133-system benchmark, corresponding to the 71 .3% pruning rate at depth ℓ ≤ 12. 
+
+# The SymLang Framework 
+
+SymLang proceeds through five modular stages. Fig. 1 illus-trates the overall architecture; Algorithm 1 gives pseudocode for the complete pipeline. 
+
+## Stage 1: Preprocessing and derivative esti-mation 
+
+Raw observations {y(tm)} must be smoothed and differen-tiated before symbolic discovery. Direct finite differences amplify noise at rate O(σ/ ∆t), which is unacceptable for typical experimental sampling rates [ 52 ]. We estimate ˙˜y by solving the smoothing-spline variational problem [51]: ˆy(t) = arg min 
+
+> ˜y∈W 2,2
+> M
+
+X
+
+> m=1
+
+ y(tm) − ˜y(tm)2 + α
+
+Z T
+
+> 0
+
+ ˜y′′ (t)2 dt, (3) where W2,2 is the Sobolev space of functions with square-integrable second derivatives and α is selected by generalized cross-validation (GCV). For highly non-smooth signals (e.g., 2Algorithm 1: Method discovery pipeline                                                               
+
+> Input: Observations {y(tm)},Inputs {u(tm)},Symmetry spec. S,Budget N, Top-K
+> Output: Ranked equations {(ei, w i, σ i)}Ki=1
+> // Preprocessing
+> 1˙˜y←EstimateDerivatives ({y(tm)})
+> 2¯y,U ← Nondimensionalize ({y(tm)})
+> 3G ← BuildTypedGrammar (U,S)
+> 4s←ComputeDataSummary  ¯y,˙¯y
+> // Candidate generation & scoring
+> 5E ← ∅
+> 6for i= 1 , . . . , N do
+> 7e←LMPropose (G,s)
+> 8if e∈ E then continue
+> 9ˆθ(e)←FitConstants  e, ¯y,˙¯y
+> 10 S(e)←MDLScore
+> 
+> e, ˆθ(e),¯y,˙¯y
+> 
+> 11 E ← E ∪   e, S(e)
+> 12 end
+> // Selection & stability analysis
+> 13 {(ei,Si)} ← TopK (E, K )
+> 14 {(ei, w i, σ i)} ← BootstrapStability  {ei},¯y,˙¯y, B 
+> 15 return {(ei, w i, σ i)}Ki=1
+
+discontinuous forcing), we instead solve the total-variation regularized differentiation problem [53, 52]: ˆz = arg min 
+
+> z
+
+y − D z 22 + β ∥z∥TV , (4) where D is the integration operator and ∥ · ∥ TV is the total-variation seminorm. Method selection (spline vs. TV) is made by comparing one-step-ahead prediction error on a held-out segment of 10% of the trajectory, with hyperparameters 
+
+α, β tuned on the remaining validation portion using nested cross-validation. 
+
+## Stage 2: Nondimensionalization and unit con-straints 
+
+Physical variables carry dimensions in the SI basis (M, L, T, Θ, I ). We infer characteristic scales x⋆i from data statistics (inter-quartile range, dominant oscillation period) and define dimensionless rescaled variables ¯xi = xi/x ⋆i .Nondimensionalization achieves three objectives: (a) reduces numerical ill-conditioning by bringing all quantities to order unity; (b) makes the Buckingham Π theorem [ 33 ] directly applicable, constraining which functional combinations can appear in f ; (c) enables hard unit checking at each gram-mar production rule, since after nondimensionalization every admissible expression for ˙ ¯xi is dimensionless. Unit constraints are implemented as a dimension-type propagation system over the operator set. The key rules are: [A + B] = [ A] = [ B] (requires equality) ,
+
+[A · B] = [ A] ⊗ [B] (tensor product of dim. vectors) ,
+
+[sin( A)] ⇒ [A] = 0 (dimensionless argument required) .
+
+(5) Non-integer powers Ar further require [ A] = 0. This elimi-nates entire subtrees without evaluation, achieving the bulk of the 71 .3% pruning rate at shallow depths. 
+
+## Stage 3: Symmetry-constrained grammar construction 
+
+Beyond unit consistency, many physical systems obey addi-tional group-theoretic symmetries that further constrain the admissible expression trees. We implement four constraint families: 
+
+Parity constraints. If observations are consistent with 
+
+fi(−x) = −fi(x) (odd dynamics, e.g., restoring forces), the grammar’s top-level nonterminal for component i is tagged 
+
+ODD , and production rules that could yield even expressions are blocked (even powers, even transcendentals cos , cosh )unless multiplied by an explicit odd factor. We test parity empirically by computing the anti-symmetry ratio ranti =
+
+∥y(−t) − (−y(t)) ∥2/∥y(t)∥2 over available pairs; if ranti <
+
+0.05 we enforce the parity constraint. 
+
+Rotational invariance. For dynamics invariant under 
+
+SO (3) (or SO (2) for planar systems), scalar output com-ponents may depend only on group invariants: ∥x∥2, x · u,
+
+∥x × u∥2, and traces of symmetric bilinear forms. We re-strict the grammar to generate such invariant combinations as atomic terminals, preventing dependence on individual Cartesian components. 
+
+Time-translation invariance. Autonomous systems obey f (x, t ) = f (x, t + τ ) for all τ , implying no explicit 
+
+t dependence. We test this by checking whether t improves fit on held-out segments; if not, t is removed as a terminal from the grammar. For periodically forced systems with known frequency ω, we admit sin (ωt ) and cos (ωt ) as typed terminals with appropriate parity. 
+
+Galilean and Lorentz invariance. For mechanical sys-tems, we optionally enforce Galilean boost invariance by expressing velocities as relative differences vi − vj and dis-placements as xi − xj , eliminating origin-dependent spurious terms. Relativistic systems can further impose Lorentz in-variance through the Minkowski metric invariants. The complete constraint pipeline is implemented as a forward pass over the CFG production rules, with type annotations propagated bottom-up through the expression tree. This 3typed-grammar approach draws directly from the program synthesis literature [ 46 , 45 , 47 , 48 ]: the key innovation here is specialising a general typed CFG to encode physical sym-metry types rather than software-engineering types. The grammar is constructed once per problem instance (based on detected symmetries) and reused for all proposals. Gram-mar pruning reduces the effective search space from O(e|O| ℓ
+
+)expressions at depth ℓ to O(e|O c|ℓ
+
+) where |O c| ≪ |O| .
+
+## Stage 4: Language-guided program synthesis 
+
+Data summaries. Before any proposals, we compute a concise interpretable descriptor vector s from the prepro-cessed trajectories: 
+
+• Spectral features : FFT power peaks {(ωk, A k)}5 
+
+> k=1
+
+and estimated power-law scaling. 
+
+• Symmetry scores : anti-symmetry ratio, correlation under time reversal and spatial reflection. 
+
+• Conserved-quantity candidates : time-derivative of proxy quantities (kinetic energy, angular momentum); low-drift candidates are flagged and reported. 
+
+• Correlation structure : pairwise Pearson correlations among ¯ xi, ˙¯xi as a proxy for coupling topology. These summaries are serialized into a compact structured-text prefix of ≲ 200 tokens and passed to the language model as a conditioning context. 
+
+Language model architecture and training. We fine-tune a 7B-parameter decoder-only transformer [ 49 , 50 ] to autoregressively generate S-expression strings representing expression trees consistent with the grammar type system. The base model is pre-trained on mathematical text and code. Fine-tuning uses a corpus of 820 000 (data-summary, expres-sion) pairs generated by forward simulation from: (i) the Feynman Symbolic Regression Benchmark [ 3] (119 equa-tions); (ii) ODE systems from BioModels [ 58 ]; (iii) syn-thetically generated Hamiltonian and dissipative systems. Training minimises the negative log-likelihood of the tar-get expression conditioned on the data summary. During RL fine-tuning, grammatically inconsistent proposals receive zero reward, providing an implicit curriculum that steers the model toward type-consistent expressions without hard-coding specific functional forms. 
+
+Proposal generation and deduplication. We generate 
+
+N = 2000 candidate skeletons per problem instance, us-ing nucleus sampling with p = 0 .9 to encourage diversity. Structurally equivalent trees (modulo commutativity and associativity of + , ×) are deduplicated by canonical form. Deduplicated candidates are sorted by grammar-prior log-probability (a proxy for complexity) and passed to constant fitting. Wall-clock time for proposal generation is < 5% of total pipeline time. 
+
+## Stage 5: Constant fitting and physical regu-larization 
+
+For each candidate structure e with p free scalar constants 
+
+θ ∈ Rp, we solve the derivative-matching optimization: ˆθ(e) = arg min 
+
+> θM
+
+X
+
+> m=1
+
+˙˜¯ym − e( ¯ ym; θ) 22
+
+| {z }
+
+> derivative mismatch
+
++γ Ω( θ), (6) where Ω( θ) = ∥θ∥22 is an ℓ2 regularizer that prevents patho-logical constants. We use L-BFGS-B with 5 random restarts (initial seeds drawn from U[−5, 5] p); for p ≤ 4 a coarse grid search on [ −10 , 10] p (resolution 0 .25) provides a global initializer. When a conserved-quantity candidate I is detected by the data summary step, we append a soft physical penalty: 
+
+Lphys (e, θ ) = η
+
+> M
+
+X
+
+> m=1
+
+ ddt I( ¯ ym)
+
+2
+
+, (7) encouraging parameterizations that conserve the detected quantity without hard-coding it structurally. The weight 
+
+η > 0 is tuned by a one-dimensional bisection search on a held-out segment, ensuring the physical penalty does not dominate the derivative mismatch. 
+
+# Model Selection and Uncertainty Quantification 
+
+## MDL-regularized evidence scoring 
+
+A central design principle of SymLang is to separate proposal from selection : the language model is responsible for gen-erating plausible candidates, but the selection among them is governed by a principled information-theoretic criterion independent of the proposer. Under Gaussian residuals with estimated noise variance ˆσ2 = 1 
+
+> M−p
+
+P 
+
+> m
+
+∥ ˙˜¯ym − e( ¯ym; ˆθ)∥2 (computed on a held-out 20% segment), the negative log-likelihood is: 
+
+− log p(D | e, ˆθ) = M
+
+2 log(2 πˆσ2) + 
+
+P 
+
+> m
+
+∥ ˙˜¯ym − e( ¯ ym; ˆθ)∥2
+
+2ˆ σ2 .
+
+(8) The description length len (e) counts the cost of encoding the expression tree and its constants: len( e) = X
+
+> v∈nodes( e)
+
+log 2 |O v |
+
+| {z }
+
+> tree structure
+
++ p · log 2(cmax /ϵ )
+
+| {z }
+
+> constants
+
+, (9) where |O v | is the local branching factor at node v, cmax = 10 and ϵ = 10 −6 define constant range and precision. The MDL score is then: 
+
+S(e) = − log p(D | e, ˆθ) + λ len( e), (10) 4with regularisation strength λ chosen by leave-one-trajectory-out cross-validation on the training set. This criterion is related to BIC [ 41 ], AIC [ 42 ], and the minimum description length principle [ 39 , 40 , 44 , 43 , 17 ], but is specifically de-signed for symbolic expressions whose structural complexity is better measured by tree description length than param-eter count alone. Normalised model weights over top-K
+
+candidates are: 
+
+w(e) ∝ exp  −S (e)/T , (11) where T > 0 is a temperature hyperparameter (default 
+
+T = 1). 
+
+## Profile likelihood and Fisher information identifiability 
+
+A compact symbolic form can still be scientifically ambiguous if one or more of its free constants are non-identifiable from the available data. We diagnose this by computing the observed Fisher information matrix at the optimum: ˆI(e) = −∇ 2 
+
+> θ
+
+log p(D | e, θ ) ˆθ , (12) using finite differences over ˆθ ± ϵej for each parameter direc-tion. If λmin (ˆI) < λ thr = 10 −4, the corresponding constant is flagged as non-identifiable [ 54 , 55 ]. The profile likelihood curve ˆS(θj ) = min θ−j S(e(θj , θ −j )) is also reported, provid-ing a visual diagnostic of parameter ridges and multi-modal posteriors. 
+
+## Bootstrap stability and structure uncertainty 
+
+Parameter identifiability is a local criterion. To assess struc-tural stability—whether the top-ranked expression form re-mains dominant under data perturbations—we employ a block-bootstrap procedure: 1. Draw B = 200 bootstrap resamples of contiguous time windows (block length 10∆ t, chosen to preserve short-range temporal correlations). 2. Refit constants ˆθb(e) on each resample b.3. Compute rank stability σ(e) = B−1 PBb=1 1[rank b(e) = rank 1(e)], where rank b is the MDL rank on resample b.4. Compute constant coefficient of variation CV j (e) =std b(ˆθb,j )/|mean b(ˆθb,j )|.Candidates with σ < 0.7 or max j CV j > 0.5 are flagged as 
+
+structurally unstable and down-weighted (weight multiplied by σ2). The final output is a ranked set {(ei, w i, σ i)}Ki=1 with explicit degeneracy flags, enabling downstream scientists to interpret which equations are robustly identified and which require additional data. 
+
+## Partial observability strategies 
+
+When the observation operator H is not full-rank, direct recovery of f is generally ill-posed. SymLang offers two complementary strategies: 
+
+Effective dynamics (always identifiable). We learn a closed effective equation ˙y = g(y, u) directly on the observ-ables. This is guaranteed to be identifiable (given sufficient data) but may require a more complex g than the underlying 
+
+f , since the projection introduces effective memory terms. We report the effective equation with an explicit “effective law” flag in the output. 
+
+MDL-penalized latent augmentation. Alternatively, we introduce k auxiliary latent variables z ∈ Rk with simple prescribed dynamics (linear, ˙zi = aizi + bi) and discover a joint system on ( y, z). The latent dimension k is penalized by an additional MDL term μk log M (favouring smaller latent spaces), and k is chosen by comparing MDL scores for 
+
+k = 0 , 1, 2, 3. This strategy can sometimes reveal a simpler effective law than the pure-observable approach, at the cost of introducing latent variables whose interpretation requires additional validation. 
+
+# Experimental Design and Benchmark 
+
+## Benchmark construction 
+
+To enable rigorous, reproducible comparison, we construct a benchmark of 133 dynamical systems across five physical domains, assembled following best practices from [9, 10]. 
+
+• Classical mechanics (CM, 31 systems): Hamiltonian systems from the Feynman SR benchmark [ 3] including Kepler, pendulum, coupled oscillator, and relativistic momentum systems. All obey energy conservation. 
+
+• Electrodynamics (ED, 22 systems): Maxwell-derived circuit equations (RLC networks, transmission lines, res-onators) with Gaussian noise on measured voltages and currents. 
+
+• Thermodynamics (TD, 19 systems): Ideal gas dy-namics, heat diffusion, Arrhenius kinetics, and coupled heat-mass transfer. 
+
+• Population dynamics (PD, 28 systems): Lotka– Volterra variants, SIR and SEIR epidemic models, and predator-prey networks from BioModels [58]. 
+
+• Nonlinear oscillators (NO, 33 systems): Duffing, van der Pol, FitzHugh–Nagumo, and Stuart–Landau os-cillators, with and without periodic forcing. Trajectories are generated by 4th-order Runge–Kutta integra-tion with time step ∆ t = 10 −2. Gaussian observation noise is added post-integration at five levels: 0 .1%, 1%, 5%, 10%, 5and 30% of the signal inter-quartile range. Train/test splits are 80/20 by trajectory, with all hyperparameters tuned on validation trajectories held out from training. 
+
+## Evaluation protocol and metrics 
+
+We evaluate on three complementary tiers: 
+
+Tier I — Symbolic recovery. Tests exact structural recovery: whether the inferred expression tree is symbolically equivalent to the ground truth, up to trivial rearrangements (commutativity, associativity, constant folding). This is the strictest possible evaluation. We report: 
+
+• Exact recovery rate (%) : fraction of systems with correct structure. 
+
+• Physical recovery rate (%) : fraction where the correct conserved structure is identified. 
+
+• NRMSE (test) : ∥ ˆy − y∥2/∥y∥2 on held-out trajectories. 
+
+Tier II — Extrapolation and physical consistency. 
+
+Tests whether recovered equations remain valid outside the training distribution: 
+
+• NRMSE (OOD) : on trajectories with initial conditions and parameters sampled from 3 × the training range. 
+
+• Physical drift : 1
+
+> M
+
+P 
+
+> m
+
+|I (y(tm)) − I (y(t0)) | for the ground-truth conserved quantity. 
+
+• Symmetry violation : maximum residual of known symme-try constraints over held-out states. 
+
+Tier III — Partial observability. Tests recovery when 25%, 50%, or 75% of state components are randomly hid-den. Additionally, we report the fraction of genuinely non-identifiable systems that are correctly flagged as ambiguous rather than returned as a confident wrong equation. 
+
+## Baselines and compute budget 
+
+All methods are evaluated under matched compute budgets (640 GPU-hours total per method) and identical random seeds. Baselines: SINDy [2 ] with polynomial and trigono-metric library; SINDy extensions (PDE-SINDy [ 20 ], weak-form [ 22 ], coordinate discovery [ 21 ], Pareto-optimal [ 24 ]); 
+
+AI Feynman [3]; PySR [ 4 ] (20 populations, Pareto front complexity ≤ 30); DSR [5] (risk-seeking policy gradient with entropy regularization). Hyperparameters for each baseline are chosen by validation NRMSE on held-out segments. All experiments run on 8 × NVIDIA A100 (80 GB) GPUs. 
+
+# Results 
+
+## Tier I: Structural recovery under noise 
+
+Table 1 reports exact structural and physical-law recovery across noise levels. SymLang achieves 96 .2% exact recovery at 1% noise, 83 .7% at 10% noise, and 64 .8% at 30% noise substantially above all baselines at every level. The gain over PySR (next-best) is 22 .4 percentage points at 10% noise; over DSR it is 26 .5 pp; over SINDy it is 48 .8 pp. Physical-law (conservation structure) recovery reaches 89 .2% for SymLang versus 41 .7% for PySR, more than doubling the rate directly attributable to the conservation-law soft penalty (Eq. 7) and the grammar’s exclusion of dimensionally inconsistent expressions. Table 5 reveals that gains are consistent across all five do-mains. The largest absolute improvement over PySR occurs in classical mechanics (+22 .8 pp), where energy conservation constraints dramatically prune the grammar; the smallest in nonlinear oscillators (+23 .1 pp), where the absence of simple conservation laws reduces the grammar’s advantage but the LM’s spectral-feature conditioning still outperforms evolutionary search. 
+
+## Tier II: Extrapolation and physical consis-tency 
+
+A critical practical question is whether recovered equations remain reliable outside the training regime. Table 2 shows that grammar-enforced constraints carry through to predic-tion: SymLang ’s OOD NRMSE is 0 .063, versus 0 .162 for PySR (61% reduction) and 0 .341 for SINDy (81% reduction). Physical drift is reduced by 98% relative to PySR (3 .1 × 10 −3
+
+vs. 187 .3 × 10 −3), and symmetry violation is reduced by 97% (2 .8×10 −3 vs. 91 .4×10 −3). This near-elimination of physical inconsistency is a direct consequence of grammar-level en-forcement: discovered equations satisfy unit and symmetry constraints by construction, so they cannot violate these constraints during extrapolation, an invariant that uncon-strained search can never guarantee. The contrast with SINDy is especially instructive: SINDy’s interpolation NRMSE (0 .143) is already 4 .6× worse than 
+
+SymLang ’s, and its OOD NRMSE (0 .341) is 5 .4× worse, reflecting the fundamental limitation of a fixed polynomial-trigonometric library when the true dynamics involves tran-scendental functions or rational expressions. 
+
+## Tier III: Partial observability 
+
+Table 3 shows performance under progressive state occlusion. At 25% hidden, SymLang achieves 78 .3% recovery versus 62 .4% (DSR) and 58 .7% (PySR). At 50% hidden, the gap widens: 61 .2% vs. 38 .4% (DSR), a 59% relative improve-ment. At 75% hidden, all methods degrade substantially, but SymLang still leads by 14 .3 pp over DSR. Critically, SymLang correctly identifies 91 .3% of genuinely non-identifiable systems as ambiguous at 50% occlusion, rather than returning a confident but incorrect equation. No baseline provides this capability: SINDy, PySR, DSR, and AI Feynman all return a single ranked equation in every case, with no mechanism to express that the data are insufficient to discriminate among structural alternatives. This difference 6has direct scientific implications: a practitioner receiving an ambiguous flag knows that additional measurements or targeted experiments are needed, whereas receiving a single confident equation may lead to drawing false mechanistic conclusions. 
+
+## Sample efficiency 
+
+Fig. 2(a) shows exact recovery as a function of observed time steps on a log scale. The efficiency advantage of SymLang 
+
+is striking: it reaches 80% recovery at ≈4,800 time steps, whereas PySR requires ≈19 ,000 steps (4 × more) and SINDy never reaches 80% within the tested range. The advantage is most pronounced at small sample sizes (100–1,000 steps), where grammar pruning prevents overfitting to noise fluctua-tions, exactly the regime relevant to expensive experimental measurements such as time-resolved spectroscopy or in-situ electron microscopy. 
+
+## Structure uncertainty quantification 
+
+Fig. 2(b) illustrates three archetypical structural uncertainty regimes encountered across the benchmark. In (b1) the data uniquely identify a single expression ( >96% model weight on e1, high bootstrap stability): SymLang reports this with high confidence. In (b2) two expressions are observationally equivalent on the training support, producing an ≈49/48 weight split with low stability scores: SymLang correctly signals this degeneracy, which in our benchmark corresponds to mathematically equivalent parameterizations of the same dynamics (e.g., A sin (ωt + ϕ) vs. A1 sin (ωt ) + A2 cos (ωt )). In (b3), continuous parametric degeneracy produces a diffuse weight distribution over the top-4 structures: this occurs, for example, in weakly nonlinear oscillators, where polynomial and trigonometric approximations are observationally indis-tinguishable on the training trajectory. In all three cases, 
+
+SymLang ’s output correctly characterizes the epistemic sit-uation, providing actionable information for downstream experimental design. 
+
+## Ablation study 
+
+Table 4 quantifies the contribution of each SymLang com-ponent. Removing the symmetry-constrained grammar (re-placing with an unconstrained CFG over the same operators) reduces exact recovery from 83 .7% to 66 .2% ( −17 .5 pp) and increases wall-clock time by 4 .2× due to fitting physically nonsensical candidates. Replacing the LM proposer with uniform grammar sampling reduces recovery by 11 .3 pp and increases runtime by 3 .7×, confirming that the LM’s data-conditioned proposals efficiently direct search toward plausible forms. Replacing MDL selection with raw likeli-hood maximization reduces recovery by 14 .6 pp, illustrating how unconstrained likelihood overfits complex structures. Removing bootstrap stability (returning only top-1 by MDL   
+
+> Figure 1: SymLang pipeline. Observations are preprocessed and nondimensionalized; a symmetry-pruned typed grammar (solid arrow) defines admissible expression trees, with constraints also imposing a soft conservation-law penalty during fitting (dashed arrow). An LM proposer conditioned on data summaries efficiently navigates the constrained space; MDL scoring and block-bootstrap stability yield ranked equations with calibrated structural uncertainty.
+
+score) has the smallest effect on exact recovery ( −3.4 pp) but eliminates the uncertainty information that distinguishes 
+
+SymLang from a black-box oracle. 
+
+# Discussion 
+
+## Interpretation of results 
+
+The performance hierarchy across methods reflects funda-mental differences in inductive bias. SINDy’s reliance on a fixed library is its central limitation: any system whose dynamics involves functional forms outside the library is structurally invisible, and this ceiling is evident across all noise levels and domains. AI Feynman’s dimensional-analysis subroutines give it a structural advantage over unconstrained search, but its reliance on recursive neural network fitting creates brittleness under partial observability and high noise. PySR’s Pareto-front evolution is the strongest unconstrained baseline, but evolutionary search wastes substantial budget on physically nonsensical candidates that a typed grammar would have eliminated before evaluation. DSR’s reinforce-ment learning framework is more sample- efficient than evo-lution, but the absence of hard physical constraints means the policy must learn them empirically from data, requir-ing much more training data to implicitly discover what 
+
+SymLang enforces structurally. 
+
+SymLang ’s core advantage is the separation of physical constraints from statistical learning : constraints are enforced through grammar typing (a deductive, zero-shot process re-quiring no data), while the LM provides data-conditioned search guidance and MDL provides principled model selec-tion. Each component does what it is best suited for, without asking any single component to simultaneously satisfy physi-cal constraints, search efficiently, and quantify uncertainty. 
+
+## Structure uncertainty as a scientific tool 
+
+The ability to report structural degeneracy rather than sup-pressing it behind a single point estimate is arguably the most scientifically significant contribution of SymLang . When 
+
+SymLang reports a 50/50 weight split between two struc-7Figure 2: (a) Sample efficiency. Exact structural recovery (%) versus observed time steps (10133-system benchmark, 20 seeds). Dashed verticals mark the 80threshold crossings for SymLang (≈4.8k steps) and PySR ( ≈19k steps); the double arrow quantifies the 4 × sample advantage of grammar-constrained search. (b) Structure uncertainty regimes. Model weight distributions for three representative systems. (b1) Identifiable: >96% weight mass on e1, high bootstrap stability. (b2) Binary-degenerate: near-equal 49/48 split correctly signals that two symbolic forms are observationally equivalent on training data. (b3) Continuously degenerate: diffuse weight distribution signals intrinsic non-identifiability. Only SymLang produces these diagnostics; all baselines return a single point estimate with no uncertainty. 
+
+Figure 3: Recovery rate vs. noise level. Exact structural recovery (%) across all 133 systems as a function of noise level (IQR-normalised). 
+
+SymLang maintains the largest absolute margin over all baselines across the full noise range tested. The advantage widens at high noise, confirming that grammar-constrained search is especially valuable when data quality degrades. 
+
+turally distinct equations, this is not a failure mode; it is an accurate statement of what the available data can deter-mine. A practitioner receiving this output knows precisely what additional experiment would resolve the ambiguity (e.g., measuring at a point in parameter space where the two expressions make distinct predictions). This connects naturally to Bayesian optimal experimental design [ 57 , 56 ]: the model weight distribution over structures directly defines an acquisition function for selecting the next measurement 
+
+Figure 4: Per-domain exact structural recovery at 10% noise. 
+
+CM = classical mechanics, ED = electrodynamics, TD = thermodynam-ics, PD = population dynamics, NO = nonlinear oscillators. SymLang 
+
+leads in every domain; the largest gains occur in CM (energy conserva-tion pruning) and ED (dimensional constraints on circuit equations). 
+
+to maximally reduce structural uncertainty. 
+
+## Physical interpretability and auditability 
+
+Beyond predictive accuracy, SymLang ’s output supports two forms of interpretability not achievable by neural prediction models: (i) mechanistic transparency the discovered equa-tion is a readable symbolic expression that can be inspected, compared against domain knowledge, and tested against 8Table 1: Exact structural and physical-law recovery (Tier I, 133 systems). Mean ± s.e.m. over 20 random seeds per method/noise combination. Bold : best; underline : second-best. All SymLang –next-best differences significant at p< 0.01 (Bonferroni-corrected paired Wilcoxon signed-rank tests). Exact recovery (%) Method 1% noise 5% noise 10% noise 30% noise NRMSE (test) Phys. recov. (%) 
+
+SymLang (ours) 96 .2±0.9 91 .4±1.1 83 .7±1.4 64 .8±1.8 0.031 ±0.003 89 .2±2.1
+
+PySR 78 .3±1.6 72 .1±1.8 61 .3±2.0 44 .7±2.3 0.074 ±0.005 41 .7±2.8DSR 73 .6±1.7 66 .4±2.0 57 .2±2.1 40 .3±2.4 0.089 ±0.006 38 .4±2.9AI Feynman 68 .9±1.8 61 .2±2.0 51 .8±2.2 34 .6±2.3 0.102 ±0.007 33 .1±2.6SINDy 52 .4±2.0 43 .7±2.1 34 .9±2.1 19 .3±1.8 0.143 ±0.008 22 .6±2.1
+
+Table 2: Extrapolation fidelity and physical consistency (Tier II, 10% noise). “OOD” = initial conditions and parameters sampled from 3 × the training range. “Phys. drift” measures conservation-law violation over held-out OOD trajectories; “Sym. viol.” measures symmetry residuals. Both lower is better. Method NRMSE (interp.) NRMSE (OOD) Phys. drift ( ×10 −3) Sym. viol. ( ×10 −3) OOD / interp. ratio 
+
+SymLang 0.031 ±0.003 0.063 ±0.005 3.1±0.4 2.8±0.3 2.0×
+
+PySR 0.074 ±0.005 0.162 ±0.012 187 .3±14 .2 91 .4±8.7 2.2×
+
+DSR 0.089 ±0.006 0.201 ±0.015 163 .6±12 .8 108 .2±9.4 2.3×
+
+AI Feynman 0.102 ±0.007 0.238 ±0.018 209 .1±16 .3 124 .7±10 .2 2.3×
+
+SINDy 0.143 ±0.008 0.341 ±0.024 312 .4±21 .7 187 .3±14 .9 2.4×
+
+Table 3: Partial observability (Tier III, 10% noise). “Ambig. flag”: fraction of genuinely non-identifiable systems correctly flagged as ambiguous (only SymLang provides this). †DSR uses latent aug-mentation which gives it an advantage at high occlusion. Exact recovery (%) Method 25% hid. 50% hid. 75% hid. Ambig. (%) 
+
+SymLang 78 .3±1.7 61 .2±2.1 39 .4±2.3 91 .3±2.7
+
+DSR † 62 .4±2.0 38 .4±2.3 25 .1±2.0PySR 58 .7±2.1 34 .1±2.2 21 .3±1.9AI Feynman 51 .3±2.1 28 .6±2.1 17 .4±1.8SINDy 31 .7±1.9 18 .2±1.7 9.6±1.4
+
+Table 4: Ablation study (10% noise, 133 systems). Each row removes one component of SymLang in isolation. Parenthetical: absolute change from full model. ×: wall-clock time relative to full 
+
+SymLang .Variant Recovery (%) OOD NRMSE Clock Full SymLang 83 .7 0.063 1.0×−Grammar (unconstrained CFG) 66 .2 ( −17 .5) 0.114 4.2×−LM proposal (uniform sample) 72 .4 ( −11 .3) 0.089 3.7×−MDL (raw likelihood) 69 .1 ( −14 .6) 0.097 0.9×−Bootstrap (no uncertainty) 80 .3 ( −3.4) 0.071 0.7×−Phys. penalty (no Lphys ) 79 .8 ( −3.9) 0.079 0.9×−TV diff. (spline only) 81 .1 ( −2.6) 0.068 0.8×
+
+limiting cases; and (ii) physical auditability because every candidate expression was generated within a unit-consistent, symmetry-respecting grammar, any discovered law is guar-anteed to satisfy known physical invariances. This is not merely a nice property; it is essential for scientific credibility: a law that violates unit consistency or a known symmetry cannot be correct, regardless of its predictive accuracy on training data. 
+
+Table 5: Per-domain exact recovery at 10% noise, 5 000 time steps. CM=classical mechanics, ED=electrodynamics, TD=thermodynamics, PD=population dynamics, NO=nonlinear oscil-lators. Numbers in parentheses: N systems. SymLang leads in every domain. Method CM (31) ED (22) TD (19) PD (28) NO (33) 
+
+SymLang 91.2 88.3 84.3 78.5 77.4 
+
+PySR 68.4 65.1 60.7 58.9 54.3 DSR 63.7 61.2 55.1 54.7 51.8 AI Feyn. 60.3 56.8 52.4 47.1 44.6 SINDy 42.1 37.4 34.7 31.2 29.6 
+
+## Limitations and open problems 
+
+Three limitations deserve explicit discussion. First , symme-try specification requires user input: the practitioner must identify which symmetries (parity, rotational invariance, etc.) are applicable to their system. In well-studied domains, this is straightforward, but in genuinely novel physical regimes the applicable symmetry group may be unknown. Future work could automate symmetry detection from data (e.g., using the correlation-based tests we already apply for parity detection, extended to continuous groups via Lie algebra inference). 
+
+Second , the language model introduces a soft inductive bias: it has been trained on known physical systems and may assign low probability to genuinely novel functional forms that have no precedent in its training distribution. This is the classic tension between exploiting prior knowledge (which accelerates search in familiar regimes) and exploring genuinely novel structures (which requires broad coverage). One mitigation is to interleave LM-guided proposals with uniform grammar samples, maintaining a diversity floor. 
+
+Third , high-dimensional state spaces ( d ≳ 20) create com-binatorial challenges: the number of admissible functional forms for f : Rd → Rd grows superexponentially, and even 9a constrained grammar may contain too many candidates for exhaustive evaluation. Beam search, branch-and-bound, or importance sampling strategies are natural extensions for this regime. 
+
+## Future directions 
+
+Several extensions are immediately motivated by the current results: 
+
+Grammar extensions. The current grammar covers al-gebraic and transcendental operators. Important extensions include: integral operators (for delay-differential and Volterra integral equations [ 27 ]); Itˆ o stochastic differential operators (for noisy dynamics); partial differential operators (for spa-tially extended systems, extending SINDy-PDE [ 20 ]); and noncommutative operator algebras (for quantum systems). 
+
+Automatic symmetry discovery. Rather than requir-ing user specification of applicable symmetries, one could learn the symmetry group from data as a pre-processing step for example, by fitting Lie group generators to trajec-tory data [ 34 , 35 ] and then automatically constructing the corresponding grammar constraints. 
+
+Active experimental design. The ranked candidate list with model weights {(ei, w i)} defines a probabilistic model over possible governing laws. Bayesian experimental de-sign [ 57 , 56 ] can select the next experiment (measurement location, forcing profile, or initial condition) that maximally reduces the entropy of this distribution, providing a closed-loop discovery pipeline from data to hypothesis to experiment to refined discovery. 
+
+Multi-fidelity and heterogeneous data. Real experi-mental datasets often combine high-fidelity but sparse mea-surements with low-fidelity but abundant proxy signals. A natural extension would weight the derivative-matching loss by measurement fidelity and incorporate multiple data sources (time series, steady-state measurements, integral constraints) within a single unified scoring framework. 
+
+# Methods 
+
+## Derivative estimation details 
+
+The smoothing-spline estimator (Eq. 3) is solved using the natural cubic spline representation with knots at the observa-tion times. The GCV criterion [ 51 ] selects α by minimizing GCV (α) = ∥I−H(α)) y∥2/M   
+
+> (1 −tr( H(α)) /M )2
+
+where H(α) is the hat matrix of the smoothing spline. The TV problem (Eq. 4) is solved by the split Bregman algorithm [ 52 , 53 ] with 200 iterations. Method selection (spline vs. TV) uses one-step-ahead mean absolute error on a 10% held-out terminal segment. 
+
+## Constant fitting details 
+
+The L-BFGS-B optimiser runs for at most 10 4 function evaluations per restart, with convergence tolerance 10 −8 on the gradient norm. The regularisation weight γ is set by a one-dimensional line search , minimising validation NRMSE. The conservation-law penalty weight η is set by bisection on (10 −4, 1) until the penalty contributes < 5% of the total loss on validation data. 
+
+## MDL regularisation parameter 
+
+The regularisation strength λ in Eq. 10 is selected by leave-one-trajectory-out cross-validation (LOO-CV): λ∗ =arg min λ 1
+
+> R
+
+PRr=1 NRMSE (e∗
+
+> λ
+
+(D−r ), Dr ), where e∗ 
+
+> λ
+
+is the top-ranked expression at regularisation λ fit on all trajecto-ries except r, and evaluated on r. The search grid is 
+
+λ ∈ { 0.01 , 0.05 , 0.1, 0.5, 1, 2, 5}.
+
+## Statistical testing 
+
+All pairwise comparisons between SymLang and baselines use the paired Wilcoxon signed-rank test (paired by random seed) with Bonferroni correction for 4 comparisons per metric. Effect sizes are reported as Cohen’s d computed on the per-seed recovery rates. All reported means and standard errors are computed over Rseed = 20 independent random seeds controlling trajectory generation, noise realization, L-BFGS-B initialisation, and bootstrap resampling. 
+
+## Reproducibility 
+
+All experiments use fixed random seeds (0–19) for full repro-ducibility. Hyperparameters are logged in a YAML config file for each experiment. Dataset generation code, train/test splits, and baseline configurations are versioned and will be released with the codebase. Figure and table genera-tion scripts are included, allowing each display item to be reproduced from raw result logs with a single command. 
+
+# Extended Data 
+
+Ext. Fig. 1. Sample efficiency curves (Fig. 2a) with ±1s.e.m. error bands per domain and per method, across all 20 seeds. 
+
+Ext. Fig. 2. Full model weight distributions, bootstrap rank-stability histograms, and Fisher information eigenvalue spectra for all 133 systems, organized by domain, noise level, and partial-observability tier. 10 Ext. Fig. 3. Grammar pruning efficiency as a function of maximum node depth ℓmax = 2–16, broken down by con-straint type (unit, parity, SO (3), time-translation, Galilean) and by domain. 
+
+Ext. Fig. 4. Profile likelihood curves ˆS(θj ) for five repre-sentative systems illustrating identifiable, ridge, and multi-modal parameter landscapes. 
+
+Ext. Tab. 1. Full Tier I recovery results at six noise levels (0 .1% , 1% , 5% , 10% , 30% , 50%) per domain for all methods. 
+
+Ext. Tab. 2. Sensitivity analysis for MDL regularisation parameter λ, bootstrap block length, number of proposals N ,and number of restarts, confirming stability over one order of magnitude in each. 
+
+Ext. Tab. 3. Per-system results for five representative and five adversarial systems, including recovered expression, ground-truth expression, structural match flag, NRMSE, physical drift, and top-K model weights. 
+
+Ext. Tab. 4. Head-to-head comparison of SymLang 
+
+effective-dynamics vs. latent-augmentation strategies under all three occlusion levels, broken down by domain. 
+
+# Data Availability 
+
+The Feynman Symbolic Regression Benchmark is pub-licly available at https://space.mit.edu/home/tegmark/ aifeynman.html . BioModels database ODE systems are available at https://www.ebi.ac.uk/biomodels/ . All syn-thetic dynamical systems, their parameters, train/test splits, and processed derivative estimates will be deposited in a Zenodo repository (DOI assigned upon acceptance) together with full experimental logs. 
+
+# Author Contributions 
+
+M.S.A.B. conceived the framework, developed the symmetry-constrained grammar formalism and theoretical analysis, and designed the experimental protocol. S.A.G. developed the language-model proposal engine, implemented MDL selection and bootstrap diagnostics, and led the benchmark evaluation and statistical analysis. Both authors jointly interpreted results, wrote the manuscript, and approved the final version. 
+
+# Competing Interests 
+
+The authors declare no competing interests. 
+
+# References 
+
+[1] Schmidt, M. & Lipson, H. Distilling free-form natural laws from experimental data. Science 324 , 81–85 (2009). [2] Brunton, S. L., Proctor, J. L. & Kutz, J. N. Discovering governing equations from data by sparse identification of nonlinear dynamical systems. Proc. Natl Acad. Sci. USA 
+
+113 , 3932–3937 (2016). [3] Udrescu, S.-M. & Tegmark, M. AI Feynman: a physics-inspired method for symbolic regression. Sci. Adv. 6,eaay2631 (2020). [4] Cranmer, M. Interpretable machine learning for science with PySR and SymbolicRegression.jl. arXiv 2305.01582 (2023). [5] Petersen, B. K. et al. Deep symbolic regression: recovering mathematical expressions via risk-seeking policy gradients. 
+
+ICLR (2021). [6] Biggio, L. et al. Neural symbolic regression that scales. ICML 
+
+(2021). [7] Koza, J. R. Genetic Programming (MIT Press, Cambridge, MA, 1992). [8] Bongard, J. & Lipson, H. Automated reverse engineering of nonlinear dynamical systems. Proc. Natl Acad. Sci. USA 
+
+104 , 9943–9948 (2007). [9] La Cava, W. et al. Contemporary symbolic regression meth-ods and their relative performance. NeurIPS Datasets & Benchmarks (2021). [10] Orzechowski, P., La Cava, W. & Moore, J. H. Where are we now? A large benchmark study of recent symbolic regression methods. GECCO (2018). [11] Kommenda, M. et al. Parameter identification for symbolic regression using nonlinear least squares. Genet. Program. Evolvable Mach. 21 , 471–501 (2020). [12] Jin, Y. et al. Bayesian symbolic regression. arXiv 1910.08892 (2020). [13] Shojaee, P. et al. Transformer-based planning for symbolic regression. NeurIPS (2023). [14] Kamienny, P.-A. et al. End-to-end symbolic regression with transformers. NeurIPS (2022). [15] Sahoo, S., Lampert, C. & Martius, G. Learning equations for extrapolation and control. ICML (2018). [16] Bridewell, W. et al. Inductive process modeling. Mach. Learn. 
+
+71 , 1–32 (2008). [17] Delahaye-Duriez, A. et al. Rare disease gene discovery with machine learning and data-driven symbolic regression. Nat. Comput. Sci. 2, 667–678 (2022). [18] Kim, S. et al. Integration of neural network-based symbolic regression in deep learning for scientific discovery. IEEE Trans. Neural Netw. Learn. Syst. 32 , 4166–4177 (2021). [19] Holt, S., Qian, Z. & van der Schaar, M. Deep generative symbolic regression. ICLR (2023). [20] Rudy, S. H. et al. Data-driven discovery of partial differential equations. Sci. Adv. 3, e1602614 (2017). [21] Champion, K. et al. Data-driven discovery of coordinates and governing equations. Proc. Natl Acad. Sci. USA 116 ,22445–22451 (2019). [22] Messenger, D. A. & Bortz, D. M. Weak SINDy for partial differential equations. J. Comput. Phys. 443 , 110525 (2021). [23] Tibshirani, R. Regression shrinkage and selection via the lasso. J. R. Stat. Soc. B 58 , 267–288 (1996). 
+
+11 [24] Zheng, Y. et al. Pareto-optimal regularized regression. ICML 
+
+(2022). [25] Raissi, M., Perdikaris, P. & Karniadakis, G. E. Physics-informed neural networks. J. Comput. Phys. 378 , 686–707 (2019). [26] Chen, R. T. Q. et al. Neural ordinary differential equations. 
+
+NeurIPS (2018). [27] Rackauckas, C. et al. Universal differential equations for scientific machine learning. arXiv 2001.04385 (2020). [28] Greydanus, S., Dzamba, M. & Yosinski, J. Hamiltonian neural networks. NeurIPS (2019). [29] Cranmer, M. et al. Lagrangian neural networks. arXiv 
+
+2003.04630 (2020). [30] Zhong, Y. D., Dey, B. & Chakraborty, A. Symplectic ODE-Net. ICLR (2020). [31] Li, Z. et al. Fourier neural operator for parametric PDEs. 
+
+ICLR (2021). [32] Lu, L. et al. Learning nonlinear operators via DeepONet. 
+
+Nat. Mach. Intell. 3, 218–229 (2021). [33] Noether, E. Invariante Variationsprobleme. Nachr. Ges. Wiss. G¨ ottingen 1918 , 235–257 (1918). [34] Bronstein, M. M. et al. Geometric deep learning. arXiv 
+
+2104.13478 (2021). [35] Cohen, T. & Welling, M. Group equivariant convolutional networks. ICML (2016). [36] Liu, Z., Madhavan, V. & Tegmark, M. Machine learning conservation laws from differential equations. Phys. Rev. E 
+
+106 , 045307 (2022). [37] Mattheakis, M. et al. Hamiltonian neural networks for solving equations of motion. Phys. Rev. E 105 , 065305 (2022). [38] Atz, K., Grisoni, F. & Schneider, G. Geometric deep learning on molecular representations. Nat. Mach. Intell. 3, 1023–1032 (2021). [39] Rissanen, J. Modeling by shortest data description. Auto-matica 14 , 465–471 (1978). [40] Gr¨ unwald, P. D. The Minimum Description Length Principle 
+
+(MIT Press, Cambridge, MA, 2007). [41] Schwarz, G. Estimating the dimension of a model. Ann. Stat. 
+
+6, 461–464 (1978). [42] Akaike, H. A new look at the statistical model identification. 
+
+IEEE Trans. Autom. Control 19 , 716–723 (1974). [43] Jefferys, W. H. & Berger, J. O. Ockham’s razor and Bayesian analysis. Am. Sci. 80 , 64–72 (1992). [44] MacKay, D. J. C. Information Theory, Inference, and Learn-ing Algorithms (Cambridge Univ. Press, Cambridge, 2003). [45] Albarghouthi, A. Introduction to program synthesis. Found. Trends Program. Lang. 8, 1–134 (2021). [46] Gulwani, S., Polozov, O. & Singh, R. Program synthesis. 
+
+Found. Trends Program. Lang. 4, 1–119 (2017). [47] Ellis, K. et al. DreamCoder: bootstrapping inductive pro-gram synthesis. PLDI (2021). [48] Kub´ al´ ık, J., Derner, E. & Babuˇ ska, R. Multi-objective sym-bolic regression for physics-aware dynamic systems. arXiv 
+
+2010.07296 (2020). [49] Romera-Paredes, B. et al. Mathematical discoveries from program search with large language models. Nature 625 ,468–475 (2024). [50] Wang, C. et al. Scientific discovery in the age of artificial intelligence. Nature 620 , 47–60 (2023). [51] Craven, P. & Wahba, G. Smoothing noisy data with spline functions. Numer. Math. 31 , 377–403 (1978). [52] Chartrand, R. Numerical differentiation of noisy, nonsmooth data. ISRN Appl. Math. 2011 , 164564 (2011). [53] Rudin, L. I., Osher, S. & Fatemi, E. Nonlinear total variation based noise removal algorithms. Physica D 60 , 259–268 (1992). [54] Raue, A. et al. Structural and practical identifiability analysis of partially observed dynamical models. Bioinformatics 25 ,1923–1929 (2009). [55] Villaverde, A. F. & Banga, J. R. Structural properties of dynamic systems biology models. Processes 5, 29 (2017). [56] Settles, B. Active Learning (Morgan & Claypool, San Rafael, CA, 2012). [57] Chaloner, K. & Verdinelli, I. Bayesian experimental design: a review. Stat. Sci. 10 , 273–304 (1995). [58] Le Nov` ere, N. et al. BioModels database. Nucleic Acids Res. 
+
+34 , D689–D691 (2006). 
+
+12
