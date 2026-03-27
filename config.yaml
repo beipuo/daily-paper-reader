@@ -25,3 +25,45 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: AM TOM
+      description: 查找氨基酸对番茄成熟影响相关的论文
+      enabled: true
+      keywords:
+        - keyword: tomato Solanum lycopersicum
+          keyword_cn: 番茄
+          query: t
+        - keyword: ripe
+          keyword_cn: 成熟
+          query: i
+        - keyword: plant
+          keyword_cn: 植物
+          query: p
+        - keyword: amino acids
+          keyword_cn: 氨基酸
+          query: effect of amino acids on tomato fruit development
+        - keyword: tomato ripening
+          keyword_cn: 番茄成熟
+          query: physiological mechanisms of tomato fruit ripening
+      intent_queries:
+        - query: How do amino acids regulate the ripening process of tomatoes?
+          query_cn: 氨基酸如何调节番茄的成熟过程？
+          enabled: true
+          source: manual
+          note: ''
+        - query: Effect of exogenous amino acid treatment on tomato fruit maturation and secondary metabolites.
+          query_cn: 外源氨基酸处理对番茄果实成熟及次生代谢物的影响。
+          enabled: true
+          source: manual
+          note: ''
+        - query: Changes in amino acid composition during tomato fruit development and ripening.
+          query_cn: 番茄果实发育和成熟过程中氨基酸组成的变化。
+          enabled: true
+          source: manual
+          note: ''
+        - query: Molecular mechanism of amino acid signaling in tomato fruit ripening.
+          query_cn: 番茄果实成熟中氨基酸信号传导的分子机制。
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-03-27T05:15:55.565Z'
