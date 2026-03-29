@@ -1,0 +1,58 @@
+{
+  "mode": "skims",
+  "generated_at": "2026-03-29T06:35:56.630692+00:00",
+  "stats": {
+    "mode": "skims",
+    "forced_all_quick": true,
+    "min_score": 8.0,
+    "deep_divecandidates": 1,
+    "deep_cap": null,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": null,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2603.07226v1",
+      "title": "Nondestructive assessment of ripeness in kiwifruit with near-infrared pulse illumination",
+      "abstract": "We investigate the ripeness of kiwifruit nondestructively with near-infrared pulse illumination. With this measurements in time domain, only one frequency (the wavelength 800 nm is required. Measurements were performed on three golden kiwifruits over a period of ten days. To quantify changes in temporal profiles of the detected light, we introduce two indices: the relative ripeness $r(n)$ and the first Wasserstein distance $W_1(n)$. Both indices exhibit nonmonotonic behavior.",
+      "authors": [
+        "Hiyori Ishiji",
+        "Hiroki Kanatsu",
+        "Masaki Komatsubara",
+        "Shingo Minata",
+        "Masaki Uesugi",
+        "Kohei Yuguchi",
+        "Manabu Machida"
+      ],
+      "primary_category": "physics.bio-ph",
+      "categories": [
+        "physics.bio-ph",
+        "physics.optics"
+      ],
+      "published": "2026-03-07T14:13:05+00:00",
+      "link": "https://arxiv.org/pdf/2603.07226v1",
+      "tags": [
+        "keyword:PLANT",
+        "query:PLANT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "nondestructive assessment of ripeness in fruit",
+      "llm_evidence_cn": "水果成熟度的无损评估",
+      "llm_evidence": "水果成熟度的无损评估",
+      "canonical_evidence": "水果成熟度的无损评估",
+      "llm_tldr_en": "Uses near-infrared pulse illumination to nondestructively assess the ripeness of kiwifruit over time.",
+      "llm_tldr_cn": "利用近红外脉冲照明无损评估猕猴桃随时间变化的成熟度。",
+      "llm_tldr": "利用近红外脉冲照明无损评估猕猴桃随时间变化的成熟度。",
+      "llm_tags": [
+        "query:plant"
+      ],
+      "matched_query_tag": "query:plant",
+      "matched_query_text": "physiological processes of plant maturation and ripening",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ]
+}

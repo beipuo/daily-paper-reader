@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-02-28 ~ 2026-03-29 <!--dpr-date:20260228-20260329-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/20260228-20260329/2603.07226v1-nondestructive-assessment-of-ripeness-in-kiwifruit-with-near-infrared-pulse-illumination" data-sidebar-item="{&quot;title&quot;: &quot;Nondestructive assessment of ripeness in kiwifruit with near-infrared pulse illumination&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2603.07226v1-nondestructive-assessment-of-ripeness-in-kiwifruit-with-near-infrared-pulse-illumination&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;plant&quot;}], &quot;evidence&quot;: &quot;水果成熟度的无损评估&quot;}">Nondestructive assessment of ripeness in kiwifruit with near-infrared pulse illumination</a>
   * 2026-03-27 <!--dpr-date:20260327-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202603/27/2603.25237v1-deep-learning-of-committor-and-explainable-artificial-intelligence-analysis-for-identifying-reaction-coordinates" data-sidebar-item="{&quot;title&quot;: &quot;Deep learning of committor and explainable artificial intelligence analysis for identifying reaction coordinates&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2603.25237v1-deep-learning-of-committor-and-explainable-artificial-intelligence-analysis-for-identifying-reaction-coordinates&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;xrlsr&quot;}], &quot;evidence&quot;: &quot;用于识别反应坐标和控制变量的可解释人工智能&quot;}">Deep learning of committor and explainable artificial intelligence analysis for identifying reaction coordinates</a>
