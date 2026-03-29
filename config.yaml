@@ -384,6 +384,15 @@ subscriptions:
         - keyword: photorespiration
           keyword_cn: 光呼吸
           query: amino acid metabolism during plant photorespiration
+        - keyword: plant amino acid metabolism
+          keyword_cn: 植物氨基酸代谢
+          query: biochemical pathways of amino acid metabolism in plants
+        - keyword: nitrogen assimilation
+          keyword_cn: 氮同化
+          query: nitrogen assimilation and amino acid synthesis in plants
+        - keyword: amino acid catabolism
+          keyword_cn: 氨基酸分解代谢
+          query: degradation and catabolism of amino acids in plant tissues
       intent_queries:
         - query: molecular mechanisms of amino acid biosynthesis in higher plants
           query_cn: 高等植物氨基酸生物合成的分子机制
@@ -405,4 +414,4 @@ subscriptions:
           enabled: true
           source: manual
           note: ''
-      updated_at: '2026-03-29T06:46:47.115Z'
+      updated_at: '2026-03-29T06:47:37.140Z'
