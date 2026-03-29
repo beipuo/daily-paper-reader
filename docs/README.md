@@ -7,25 +7,21 @@
 
 ## 每次日报
 - 最新运行日期：2026-02-28 ~ 2026-03-29
-- 运行时间：2026-03-29 06:36:09 UTC
+- 运行时间：2026-03-29 06:52:59 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：0
 - 精读区：0
-- 速读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-今日聚焦猕猴桃成熟度的无损检测，探索近红外脉冲照明在果品评估中的高效应用。
-该研究展示了利用非接触式光学手段精准判定果实状态的技术潜力，评分高达 8.0。
-建议关注光学传感在食品质检中的落地，未来挑选水果将有望告别“盲盒”时代。
+> 今日无新推荐，系统未产出可展示论文。
 - 详情：[/20260228-20260329/README](/20260228-20260329/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Nondestructive assessment of ripeness in kiwifruit with near-infrared pulse illumination](/20260228-20260329/2603.07226v1-nondestructive-assessment-of-ripeness-in-kiwifruit-with-near-infrared-pulse-illumination)  
-   标签：评分：8.0/10、query:plant
-   evidence：水果成熟度的无损评估
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">

@@ -1,23 +1,8 @@
 {
   "label": "2026-02-28 ~ 2026-03-29",
   "date": "2026-02-28 ~ 2026-03-29",
-  "generated_at": "2026-03-29T06:36:18",
-  "count": 1,
-  "papers": [
-    {
-      "paper_id": "20260228-20260329/2603.07226v1-nondestructive-assessment-of-ripeness-in-kiwifruit-with-near-infrared-pulse-illumination",
-      "section": "quick",
-      "title_en": "Nondestructive assessment of ripeness in kiwifruit with near-infrared pulse illumination",
-      "authors": "Hiyori Ishiji, Hiroki Kanatsu, Masaki Komatsubara, Shingo Minata, Masaki Uesugi, Kohei Yuguchi, Manabu Machida",
-      "date": "2026-03-07",
-      "pdf": "https://arxiv.org/pdf/2603.07226v1",
-      "score": "8.0",
-      "evidence": "水果成熟度的无损评估",
-      "tldr": "本研究提出了一种利用800nm近红外脉冲照明对猕猴桃成熟度进行无损检测的方法。通过对黄金猕猴桃进行为期十天的时域测量，研究者引入了相对成熟度r(n)和第一瓦瑟斯坦距离W1(n)两个指标来量化检测光时间剖面的变化。该方法仅需单一频率即可捕捉果实成熟过程中的光学特性演变，为水果品质监控提供了新的物理评估手段。",
-      "tags": "query:plant",
-      "abstract_en": "We investigate the ripeness of kiwifruit nondestructively with near-infrared pulse illumination. With this measurements in time domain, only one frequency (the wavelength 800 nm is required. Measurements were performed on three golden kiwifruits over a period of ten days. To quantify changes in temporal profiles of the detected light, we introduce two indices: the relative ripeness $r(n)$ and the first Wasserstein distance $W_1(n)$. Both indices exhibit nonmonotonic behavior.",
-      "selection_source": "fresh_fetch"
-    }
-  ],
+  "generated_at": "2026-03-29T06:52:59",
+  "count": 0,
+  "papers": [],
   "errors": []
 }
