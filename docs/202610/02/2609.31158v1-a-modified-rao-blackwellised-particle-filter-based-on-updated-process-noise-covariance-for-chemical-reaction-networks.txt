@@ -1,0 +1,774 @@
+Title: A Modified Rao-Blackwellised Particle Filter Based on Updated Process Noise Covariance for Chemical Reaction Networks
+
+URL Source: https://arxiv.org/pdf/2609.31158v1
+
+Published Time: Mon, 28 Sep 2026 00:59:15 GMT
+
+Number of Pages: 7
+
+Markdown Content:
+# A Modified Rao-Blackwellised Particle Filter Based on Updated Process Noise Covariance for Chemical Reaction Networks 
+
+Suryasnata Dash 1, Abhishek Dey 2
+
+Abstract — It is necessary to characterize chemical reaction networks (CRNs) accurately to facilitate engineering of both synthetic and naturally occurring biological systems. Estimation of multiple unknown parameters and states in CRNs requires first, an identifiability analysis, and then adoption of a suitable estimation technique. In this paper, we took an example of a reduced order gene expression system, performed parameter sensitivity analysis for multiple unknown parameters, and used a modified Rao-Blackwellised particle filter (RBPF) to estimate parameters and states. The proposed framework estimates parameters using a particle filter and states using an extended Kalman filter (EKF) with process noise covariance updated recursively based on chemical Langevin equation (CLE). We compared the accuracy of parameter estimation, error in state estimation, and whiteness of the innovation sequence for the proposed filter with fixed choices of noise covariance. We found that the RBPF with updated noise covariance finds a balance between these three criteria, demonstrating its suitability for joint state and parameter estimation for stochastic CRNs. 
+
+I. INTRODUCTION Chemical reaction networks (CRN) represent biomolecular systems using chemical reactions and conservation laws. Mathematical modeling of CRNs is required for engineering new biological systems or analyzing existing ones. CRNs are mathematically represented through ordinary differential equations (ODE) based on mass conservation law. Chemical master equation (CME) gives a probabilistic structure of the system equations but faces computational issues due to high dimensions [1]. As an alternative, chemical Langevin equa-tion (CLE) can be used for stochastic differential equation (SDE)-based representation of CRNs [2]. Often there are multiple unknown parameters in these mathematical models, and Bayesian estimation frameworks are typically used to estimate them. Since noise affects biomolecular systems intrinsically and extrinsically, along with its nonlinear dy-namics, frameworks like extended Kalman filter (EKF) [3], [4], [5], unscented Kalman filters (UKF) [6], [7] can be used. While these methods are computationally easier, Kalman filtering handles Gaussian noise. For non-Gaussian noise and multi-parameter estimation, particle filters (PF) can be used for state and parameter estimation. A comparison of EKF, UKF and PF was done for estimating state and parameters of temperature based cellular response in E. coli [8]. The states and parameters of heart rate model was estimated using PF [9]. Parameter estimation in gene regulatory networks                 
+
+> 1,2Suryasnata Dash, Abhishek Dey are with Department of Elec-trical Engineering National Institute of Technology, Rourkela, Sector-1, Rourkela, Odisha, India, 769008
+
+523ee1001@nitrkl.ac.in, deyab@nitrkl.ac.in 
+
+is done using PF with resampling based on Metropolis-Hastings acceptance criteria [10]. Joint state and parameter estimation have been implemented through PFs [11] and have also been applied in reduced approximations of stochastic reaction networks [12]. Block PF have also been used for state estimation in reaction-diffusion systems [13]. However, a recurring problem in estimation with conventional PFs is particle degeneracy. To overcome this problem, a variant of PF, regularized particle filter (RPF) is used in efficient estimation of states in biomolecular networks [14]. Another variant, Rao-Blackwellised particle filter (RBPF), where a subset of state is marginalized out for closed form solution to reduce high dimension problem and improve performance can also be used. Early application of RBPF considered N
+
+Kalman filters for N particles [15]. This increases compu-tational burden. The algorithm was improved where only parameters were considered for particle filtering and Kalman filters were implemented through mean estimates [16]. Sys-tem parameters are estimated using Rao-Blackwellisation approach where Zakai equations are used for parameter marginalization and estimation [17]. Recently, a RBPF con-sisting of noise adaptive Kalman filter is implemented for estimating unknown time varying system covariances [18]. Typically, estimation of multiple unknown parameters are not feasible with extended Kalman filters. In this paper, we consider a modified RBPF framework to estimate multiple unknown parameters in a chemical reaction network. Within this framework, the parameters are estimated using a particle filter and states are estimated using a Kalman filter with updated process noise covariance based on CLE. Previously, an updating process noise covariance was implemented for EKF using CLE to estimate states and parameters [19]. This approach was also extended to reduced order models of biomolecular systems [20]. We found that the proposed RBPF with updated process noise covariance achieves a balance between the accuracy of particle filter for parameter estimation and optimality of the EKF for state estimation while compared to fixed choices of process noise covariance. The paper introduces RBPF briefly in Section II. Section III describes the CRNs applied for estimation purpose. Sec-tion IV describes methods used for state and parameter esti-mation along with implemented RBPF. Results are analyzed in Section V and concluded in Section VI. II. RAO-BLACKWELLISED PARTICLE FILTER RBPF is used for state and parameter estimation based on measured data. The algorithm integrates Kalman filter and PF methodologies, decreasing the dimensionality of the arXiv:2609.31158v1 [eess.SY] 25 Sep 2026 particle filter while maintaining performance. It is a hybrid estimation method that reduces variance in sequential Monte Carlo by applying the Rao-Blackwell theorem. It simplifies the posterior calculations of states and parameters through conditional probability implementations [15]. A discrete-time nonlinear state-space model is given as, ζk+1 = f (
+
+ζk,
+
+θk) + GkWk,
+
+yk+1 = C
+
+ζk+1 + vk+1, (1) where 
+
+ζk ∈ Rn×1 and 
+
+θk ∈ Rm×1 are state and parameter vectors respectively for kth time step. Gk represents the noise coefficient matrix. Wk ∼ N (0, Q0) and vk+1 ∼ N (0, R)
+
+are independent Gaussian process and measurement noise processes. Based on Bayesian framework, the posterior probability is represented as p(
+
+ζk,
+
+θk | y1: k) and can be simplified to, 
+
+p(
+
+ζk,
+
+θk | y1: k) = p(
+
+ζk |
+
+θk, y1: k)p(
+
+θk | y1: k) (2) The key assumption in RBPF is that the conditional posterior 
+
+p(
+
+ζk |
+
+θk, y1: k) is Gaussian and is computed using a single Kalman filter. Particle filtering is used for 
+
+θk calculation. The 
+
+ith particle weight is updated using likelihood function: 
+
+wik ∝ p(yk |
+
+θ ik,
+
+ζ ik|k−1),
+
+The particle approximation to the marginal posterior using impulse function is: 
+
+p(
+
+θk | y1: k) ≈
+
+> N
+
+# ∑
+
+> i=1
+
+wik
+
+δ (
+
+θk −
+
+θ ik), (3) with conditional posterior: 
+
+p(
+
+ζk |
+
+θk, y1: k) = N (
+
+ζk;
+
+ζk|k−1, Pk). (4) Here, Pk denotes the error covariance of state. The measure-ment update step of EKF is used to solve (4) in closed form. The posterior state and parameter are used to solve EKF priori equations as in regular Kalman filtering approach. As in conventional or bootstrap PF, weights are normalized and estimate of parameter is obtained with N particles, θk =
+
+> N
+
+# ∑
+
+> i=1
+
+ˆwik
+
+θ ik. (5) The time update of resampled parameter particles utilize posterior parameter values, where ith parameter particle is sampled from probability distribution, 
+
+p(
+
+θ ik+1 |
+
+θ ik) = N (
+
+θ ik, Σk). (6) Here, Σk is the parameter covariance which is a positive definite matrix with small diagonal values and 
+
+θk is the posterior parameter value of previous time instant. III. BIOMOLECULAR SYSTEM EXAMPLE Next, we take an example of biomolecular system, gene regulation model, with corresponding CRN and write astochastic difference equation model based on CLE. A gene regulation model encapsulates transcription and translation through a two-phase biochemical process. The processes are represented through CRNs to model the system dynamics conveniently. 
+
+a) Transcription: The gene ( G) binds reversibly with a free RNA polymerase ( Po) to form the transcription complex (C1), which subsequently generates mRNA transcript ( T ): G + Po
+
+> kbp
+
+−−⇀↽−−
+
+> kup
+
+C1, C1 ktx 
+
+−−→ G + Po + T.
+
+b) Translation: mRNA transcript ( T ) binds reversibly to a free ribosome ( Ri) to produce a complex ( C2), which produces protein ( X): T + Ri
+
+> kbr
+
+−−⇀↽−−
+
+> kur
+
+C2, C2 ktl 
+
+−−→ T + Ri + X.
+
+c) Degradation: mRNA transcript and protein degrade via first-order reactions: T dT
+
+−−→ ∅, X dX
+
+−−→ ∅.
+
+Here, kbp , kup , ktx , kbr , kur , ktl , dT , and dX denote the cor-responding kinetic parameters. Applying conservation laws for total polymerase ( Ptot = Po + C1) and total ribosome population( Rtot = Ri + C2) along with quasi steady state assumption, the reduced order deterministic model for the system in discrete domain for sampling interval ∆ is, 
+
+Tk+1 = Tk + ∆
+
+(
+
+ktx Ptot 
+
+( GK1 + G
+
+)
+
+− dT Tk
+
+)
+
+,
+
+Xk+1 = Xk + ∆
+
+(
+
+ktl Rtot 
+
+( Tk
+
+K0 + Tk
+
+)
+
+− dX Xk
+
+)
+
+, (7) for (k + 1)th time instant. In [20], we have given a reduced order CLE model for the same gene expression system. Similarly, the stochastic dynamics in discrete time is given as, 
+
+Tk+1 = Tk + ∆
+
+(
+
+ktx Ptot 
+
+( GK1 + G
+
+)
+
+− dT Tk
+
+)
+
++ √∆
+
+(
+
+−√dT TkW3
+
++
+
+√
+
+ktx Ptot 
+
+( GK1 + G
+
+)
+
+W1
+
+)
+
+Xk+1 = Xk + ∆
+
+(
+
+ktl Rtot 
+
+( Tk
+
+K0 + Tk
+
+)
+
+− dX Xk
+
+)
+
++ √∆
+
+(
+
+−√dX XkW4
+
++
+
+√
+
+ktl Rtot 
+
+( Tk
+
+K0 + Tk
+
+)
+
+W2
+
+)
+
+,
+
+(8) where W i ∼ N (0, 1) are independent Gaussian noise terms, 
+
+K0 = ktl +kur  
+
+> kbr
+
+and K1 = ktx +kup  
+
+> kbp
+
+.IV. METHODOLOGY In this section, we describe the methodology employed for sensitivity analysis of parameter and its estimation using the proposed RBPF for the stochastic gene expression system. 
+
+a) Sensitivity Analysis: To determine which parame-ters can be identified and estimated, sensitivity analysis of parameter with respect to measurements is taken. Using 
+
+biocrnpyler [21] and bioscrape [22] package in python for reduced order gene expression model, we perform the sensitivity analysis and the results are shown in Fig. 1 and tabulated in Table. I. Degradation parameters dX and dT show highest sensitivity which is valid as mathematically these parameters are directly related to change in state, followed by ktl and ktx . So, using measurements which denote the states itself in this case, dX and dT were calculated using graphical method [23], 
+
+dX = log (2)
+
+t(X) 12
+
+, dT = log (2)
+
+t(T ) 12
+
+. (9) 
+
+t(.) 12
+
+denotes the time taken to reach halfway between the initial and final concentration. Mathematically we take, time taken to reach double of initial concentration. These calcu-lated parameters can be used for estimating other parameters 
+
+ktx and ktl .TABLE I: SENSITIVITY ANALYSIS OF MEASURED STATES WITH RESPECT TO PARAMETERS                      
+
+> Outputs Sensitivity
+> ktx K1ktl K0dTdX
+> T5712.37 -32.64 00-57104 0X127.57 -0.73 9867.1 -1.71 -1275.3 -98633
+> 000 00 00     0  
+>  0000  0000  0000  0000  0000 00000
+
+(a)    
+
+> 000 00 00     0  
+>  0000  0000  0000  0000  0000 00000
+
+(b) 
+
+Fig. 1: Sensitivity analysis for (a) T and (b) X state 
+
+b) Data Generation: The datasets for estimation are generated through stochastic simulation algorithm (SSA) which takes care of intrinsic noise in CRNs, the process noise in Kalman filter. 50 datasets were generated and measure-ments contained the observed state along with measurement noise using randint in MATLAB of range [−1, 1] for T state and [−3, 3] for X state.         
+
+> 0100 200 300 400 500 600 700 800
+> Time (s)
+> 020 40 60 80 100 120
+> mRNA Transcript Population
+
+(a)         
+
+> 0100 200 300 400 500 600 700 800
+> Time (s)
+> 0100 200 300 400 500 600 700 800 900 1000
+> Protein Population
+
+(b) 
+
+Fig. 2: A (a) mRNA transcript (T) and (b) protein (X) dataset generated for the gene expression system through SSA where 
+
+Ptot = 100, Rtot = 100, G = 10, ktx = ktl = 0.1, kup = kur =
+
+0.05, kbp = kbr = 0.02, dT = 0.01, dX = 0.01 
+
+c) RBPF with updated process noise covariance: After determining the parameters which can be estimated using measurements, we utilized RBPF incorporating EKF with updating process noise covariance based on CLE to estimate states and parameters. The system equation in CLE is rep-resented as, 
+
+ζk+1 =
+
+ζk + ∆(V A (
+
+ζk,
+
+θk)) + V diag (√∆(A (
+
+ζk,
+
+θk))) Wk,
+
+(10) where V is stoichiometric matrix and A (
+
+ζk,
+
+θk) is the propensity vector. Using (10) for state prediction, pro-cess noise covariance matrix is updated using Gk =
+
+V diag (
+
+√
+
+∆(A (
+
+ζk|k,
+
+θk|k))) . The updated process noise co-variance is represented as, ˆQk = GkQ0GTk , (11) where Q0 = In×n. The particle filter predicts parameters with the transition probability based on posterior parameter values of previous time step. The time update of particle is based on, 
+
+θ ik+1|k ∼ N (
+
+θ ik|k , Σk). (12) Initially Σk is decreasing with time i.e Σk = 10 −(k−1)Σk,but continuously reducing it may risk in inaccurate conver-gence of parameter. After a certain threshold, it maintains a constant covariance Σk = diag (10 −7, 10 −6) (for ktl and 
+
+ktx ). Also, for resampling step we adopt stratified resampling procedure as it ensures to maintain the diversity of sample size. We consider adaptive resampling with effective sample size, Neff = 1/ ∑Ni=1
+
+( ˆwi)2, to reduce unnecessary resampling operations and preserve sample diversity over time [24]. When Neff < N, where N denotes the threshold sample size, we resample the particles. The algorithm of the framework is shown in Algorithm 1. V. RESULTS RBPF is applied to estimate states and parameters ktl and 
+
+ktx with adaptive resampling for 50 datasets. Degradation parameters were calculated using (9) across 50 datasets resulting in mean 0 .0100, 0 .0101 and standard deviation 6.08 × 10 −4, 8 .63 × 10 −4 for dT and dX respectively. As seen in Fig. 2, the transcript ( T ) growth itself is little more noisy than protein ( X) growth. The nature of measurement may also affect performance tests of RBPF. Each simulation was run for 800 seconds. State vector is 
+
+ζk = [ Tk, Xk]T and parameter vector is 
+
+θk = [ ktl , ktx ]T . Initial state is 
+
+ζ0 = [ 0, 0]
+
+and parameters are initially picked from uniform distribution where range is between half and double of nominal parameter i.e, ktl ∼ [0.05 , 0.2], ktx ∼ [0.05 , 0.2]. Both transcript (T) and protein (X) are taken as measurements, hence C = I2×2
+
+Measurement noise covariance R = diag (1, 3) and initial error covariance matrix P0|0 = 5In×n. We observe that number of datasets showing parameter convergence for ktl and ktx 
+
+differs for different particle sizes using RBPF with updating process noise covariance ( ˆ Qk) as shown in Table. II. Not all datasets show both ktl and ktx convergence. Some show convergence for either of the parameter and some for both. Algorithm 1 Implemented Rao-Blackwellised Particle Filter (RBPF) 
+
+Require: Initial particles {
+
+ζ i
+
+> 0|0
+
+,
+
+θ i
+
+> 1|0
+
+}Ni=1, P0|0 and weights 
+
+w(i) 
+
+> 0
+
+= 1
+
+> N
+
+Initial state and parameter {
+
+ζ0|0,
+
+θ0|0} 
+
+> 1:
+
+for each time step k = 1, 2, . . . , Nk do  
+
+> 2:
+
+Obtain {
+
+ζk|k,
+
+θk|k} 
+
+> 3:
+
+Kalman priori update:  
+
+> 4:
+
+construct ˆ Qk based on CLE using (11) and {
+
+ζk|k,
+
+θk|k} 
+
+> 5:
+
+construct Jacobian Ak =   
+
+> ∂f(
+> ζk|k,
+> θk|k)
+> ∂ ζ k|k
+> 6:
+
+Pk+1|k = AkPk|k(Ak)⊤ + ˆQk 
+
+> 7:
+
+for each particle i = 1, . . . , N do  
+
+> 8:
+
+Prediction step 
+
+ζ ik+1|k = f (
+
+ζk|k ,
+
+θ ik+1|k) 
+
+> 9:
+
+Compute weight wik+1 ∝ N (yk+1;C
+
+ζ ik+1|k, Sk+1),
+
+where Sk+1 = CP k+1|kC⊤ + R 
+
+> 10:
+
+end for  
+
+> 11:
+
+Mean of prior state 
+
+ζk+1|k = 1 
+
+> N
+
+∑Ni=1
+
+ζ ik+1|k 
+
+> 12:
+
+Normalize weights ˆ wik+1 ← ˆwik+1   
+
+> ∑Nj=1ˆwjk+1
+> 13:
+
+Estimate posterior parameter 
+
+θk+1|k+1 =
+
+∑Ni=1
+
+θ ik+1|k ˆwik+1 
+
+> 14:
+
+Compute effective sample size Neff = 1    
+
+> ∑Nj=1(ˆwjk+1)2
+> 15:
+
+if Neff < N0 then  
+
+> 16:
+
+Resample with stratified resampling  
+
+> 17:
+
+for i = 1, 2, . . . N do  
+
+> 18:
+
+u ∼ U (0, 1)
+
+ˆr = u+i−1 
+
+> N
+> 19:
+
+for j = 1, 2, . . . N do  
+
+> 20:
+
+cw jk+1 = ∑ jt=1 ˆwtk+1 
+
+> 21:
+
+if cw jk+1 ≥ ˆr then  
+
+> 22:
+
+update 
+
+θ ik+1|k+1 =
+
+θ jk+1|k
+
+break  
+
+> 23:
+
+end if  
+
+> 24:
+
+end for  
+
+> 25:
+
+end for  
+
+> 26:
+
+end if  
+
+> 27:
+
+Kalman gain Kk+1 = Pk+1|kC⊤(CP k+1|kC⊤ + R)−1 
+
+> 28:
+
+for each particle i = 1, . . . , N do 
+
+> 29:
+
+ζ ik+1|k+1 =
+
+ζ ik+1|k + Kk+1(yk+1 − C
+
+ζ ik+1|k)
+
+Update particle 
+
+θ ik+2|k+1 ∼ N (
+
+θ ik+1|k+1, Σk+1) 
+
+> 30:
+
+end for  
+
+> 31:
+
+Mean posterior 
+
+ζk+1|k+1 = 1 
+
+> N
+
+∑Ni=1
+
+ζ ik+1|k+1 
+
+> 32:
+
+Pk+1|k+1 = ( I − Kk+1C)Pk+1|k 
+
+> 33:
+
+end for 
+
+As particle number increases ktl datasets showing parameter convergence is more as compared to ktx . RBPF requires TABLE II: NUMBER OF DATASETS (OUT OF 50) WITH PARAMETERS CONVERGING ( ±5% OF TRUE VALUE) FOR DIFFERENT PARTICLE SIZE FOR ˆQk            
+
+> Particle number Datasets with ktl pa-rameter convergence Datasets with ktx pa-rameter convergence 50 824 100 19 23 200 21 15 500 23 5
+
+lower number of particles as compared to conventional PF, and based on results in Table. II, we select particle size of 100. The estimation performance was also compared with constant process noise covariances, Q = 0.1 × In×n,
+
+Q = 1 × In×n, Q = 10 × In×n to implemented ˆ Qk. A histogram plot shows the distribution of estimated parameter across 50 datasets for different process noise covariance in Fig. 3. The mean and standard deviation of estimated parameters across all datasets are tabulated in Table. III. Estimated ktl 
+
+parameter has similar mean and standard deviation for ˆQk
+
+as compared to constant Q. In case of ktx , mean estimated value is better in case of ˆQk as compared to higher fixed process noise covariance matrices. Contour plots of ktl and TABLE III: PARAMETER ESTIMATION WITH DIFFER-ENT PROCESS NOISE COVARIANCE                              
+
+> Para-meter
+> Q=0.1×In×nQ=In×nˆQkQ=10 ×In×n
+> Mean Stand-ard De-via-tion Mean Stand-ard De-via-tion Mean Stand-ard De-via-tion Mean Stand-ard De-via-tion
+> ktl 0.094 0.006 0.099 0.01 0.101 0.009 0.108 0.016
+> ktx 0.116 0.037 0.162 0.047 0.118 0.03 0.17 0.029
+
+ktx as a bivariate distribution is also plotted for different process noise covariances in Fig. 4. The true value is nearer to the mean of distribution in case of ˆ Qk and Q = 0.1In×n as compared to other fixed Q values. We previously reported [20] a trade-off between normal-ized root mean square error (NRMSE) and parameter conver-gence time for EKF with updated process noise covariance where ˆQk was on the vertex of a curve close to a rectan-gular hyperbola. However, using same methods to calculate NRMSE and parameter convergence time in RBPF, we do not observe similar pattern with ˆQk. Based on sensitivity analysis, ktl does not affect T state and effect of ktx on X state is low compared to ktl . Hence we only show trade-off for dependent parameters i.e, NRMSE of T with ktx convergence time and X with ktl convergence time. In Fig. 5(a), ˆQk has more NRMSE and mean convergence time as compared to other fixed Q values. While NRMSE for ˆQk is lower than 
+
+Q = 0.1 × In×n in Fig. 5(b), mean convergence time is still higher than other fixed Q matrices. The mean convergence time is considered for only parameter-converging datasets for respective parameters. NRMSE of both measured states 0.08 0.1 0.12 0.14 0.16 
+
+> ktl
+> 0510 15
+
+(a)     
+
+> 0.08 0.1 0.12 0.14 0.16
+> ktl
+> 0510 15
+
+(b)     
+
+> 0.08 0.1 0.12 0.14 0.16
+> ktl
+> 0510 15
+
+(c)     
+
+> 0.08 0.1 0.12 0.14 0.16
+> ktl
+> 0510 15
+
+(d)      
+
+> 0.05 0.1 0.15 0.2 0.25 0.3
+> ktx
+> 0510 15
+
+(e)      
+
+> 0.05 0.1 0.15 0.2 0.25 0.3
+> ktx
+> 0510 15
+
+(f)      
+
+> 0.05 0.1 0.15 0.2 0.25 0.3
+> ktx
+> 0510 15
+
+(g)      
+
+> 0.05 0.1 0.15 0.2 0.25 0.3
+> ktx
+> 0510 15
+
+(h) 
+
+Fig. 3: Histogram plots of estimated ktl for (a) Q = 0.1×In×n,(b) Q = 1 × In×n, (c) ˆQk, (d) Q = 10 × In×n and estimated 
+
+ktx for (e) Q = 0.1 × In×n, (f) Q = 1 × In×n, (g) ˆQk, (h) Q =
+
+10 ×In×n where solid line denotes true ktl = 0.1 and ktx = 0.1. Dotted line denotes estimated ktl mean and ktx mean across 50 datasets. for ˆQk is more compared to Q = In×n or Q = 10 × In×n.A possible explanation for not observing any trade-off as in [20] can be that, unlike the EKF where the process noise covariance directly influences the Kalman gain and hence the parameter adaptation dynamics, in RBPF the unknown parameters are estimated through particle weighting and resampling. Consequently, the effect of the process noise co-variance is indirect, acting only through the conditional state estimates and the particle likelihood, thereby diminishing the pronounced trade-off observed in the EKF-based approach. To check the optimality of the filter we performed white-  
+
+> 0.05 0.1 0.15
+> ktl
+> 0.05 0.1 0.15 0.2 0.25
+> ktx
+
+(a)   
+
+> 0.05 0.1 0.15
+> ktl
+> 0.05 0.1 0.15 0.2 0.25
+> ktx
+
+(b)   
+
+> 0.05 0.1 0.15
+> ktl
+> 0.05 0.1 0.15 0.2 0.25
+> ktx
+
+(c)   
+
+> 0.05 0.1 0.15
+> ktl
+> 0.05 0.1 0.15 0.2 0.25
+> ktx
+
+(d) 
+
+Fig. 4: Contour plot of ktl and ktx bivariate distribution for (a) Q = 0.1 × In×n, (b) Q = 1 × In×n, (c) ˆ Qk, (d) Q = 10 × In×n
+
+where blue marker is the estimated mean parameter and red marker is the true parameter. Distance between markers are (a) 0.017 (b) 0.062 (c) 0.018 (d) 0.071 respectively. Plots are generated using a grid of parameter mean across 50 datasets and apply mvksdensity function in MATLAB to obtain probability density function to represent contour lines.     
+
+> 00.005 0.01 0.015 0.02
+> Normalized Root Mean Square Error
+> 0200 400 600 800
+> Convergence time (s)
+
+(a)       
+
+> 0.5 11.5 22.5 3
+> Normalized Root Mean Square Error 10 -3
+> 0200 400 600 800
+> Convergence time (s)
+
+(b) 
+
+Fig. 5: Trade-off between (a) ktx convergence time vs. NRMSE of T state and (b) ktl convergence time vs. NRMSE of X state for different process noise covariance matrices ness test [25] for both observed states T and X with 95% confidence limits. The whiteness test of innovation sequence for T show that RBPF with Q = 0.1 × In×n, ˆQk have comparable results while innovation sequence for Q = In×n,
+
+Q = 10 × In×n is more white. In case of X, RBPF with ˆQk, Q = In×n and Q = 10 × In×n have similar and better whiteness of innovation sequence than Q = 0.1 × In×n. The autocorrelation lags outside 95% confidence limits for 100 lags are shown in Table. IV. VI. CONCLUSION A modified RBPF was implemented for the reduced order gene expression system, where a possibility of multiple unknown parameters exist. Sensitivity analysis helped in obtaining identifiable parameters and were estimated through 0 20 40 60 80 100 
+
+> Lags
+> -0.2 00.2 0.4 0.6
+> Autocorrelation value for T
+
+(a)      
+
+> 020 40 60 80 100
+> Lags
+> -0.4 -0.2 00.2
+> Autocorrelation value for X
+
+(b) 
+
+Fig. 6: Whiteness test for (a) T and (b) X for 100 lags with 
+
+u = 1.96 √Nk
+
+TABLE IV: WHITENESS TEST OF OBSERVED STATES FOR DIFFERENT PROCESS NOISE COVARIANCE FOR 50 DATASETS 
+
+Number of correlation lags outside confidence limits 
+
+Q =
+
+0.1 ×
+
+In×n
+
+Q = In×n ˆQk
+
+Q =
+
+10 ×
+
+In×n
+
+T 33 15 36 4
+
+X 35 3 2 2
+
+RBPF with EKF based on updating process noise covariance matrix. We compared the accuracy of parameter estimates and optimality of filter performance for the proposed RBPF with fixed choices of process noise covariance. We observed that the accuracy of parameter estimates for updating noise covariance RBPF is comparable to the best performing cases of fixed noise covariance. We know that increasing the process noise covariance reduces the state estimation NRMSE as the EKF part relies more on measurements than the model. This trend is also reflected in the innovation whiteness test where the number of autocorrelation coef-ficients outside 95% confidence limit reduces substantially for Q = In×n and 10 In×n for the transcript ( T ) measurement. For the protein measurement ( X), RBPF with updated Q produces similar whiteness results as in In×n and 10 In×n, sig-nificantly outperforming 0 .1In×n. However, these improved optimality results does not necessarily imply better parameter estimates especially for the ktx parameter which is primarily inferred from the T measurements. A larger process noise covariance reduces the estimation error and produces more white innovation sequence through tighter state correction in EKF, and thereby reduces the ability of particle filter to distinguish between likelihood of competing parameter particles. In contrast, the RBPF with updated process noise covariance based on first principles of CLE achieves parame-ter estimation accuracy comparable to the best cases of fixed noise covariance and simultaneously maintains satisfactory innovation whiteness characteristics. These results indicate that the proposed filter provides a balance between optimality of the state EKF and accuracy of the parameter PF in the RBPF framework. REFERENCES [1] D. T. Gillespie, “Exact stochastic simulation of coupled chemical re-actions,” The journal of physical chemistry , vol. 81, no. 25, pp. 2340– 2361, 1977. [2] D. T. Gillespie, “The chemical Langevin equation,” The Journal of Chemical Physics , vol. 113, no. 1, pp. 297–306, 2000. [3] X. Sun, L. Jin, and M. Xiong, “Extended Kalman filter for estima-tion of parameters in nonlinear state-space models of biochemical networks,” PLOS ONE , vol. 3, pp. 1–13, 11 2008. [4] N. Meskin, H. Nounou, M. Nounou, A. Datta, and E. R. Dougherty, “Parameter estimation of biological phenomena modeled by S-systems: An extended Kalman filter approach,” in 2011 50th IEEE Conference on Decision and Control and European Control Confer-ence , pp. 4424–4429, 2011. [5] G. Lillacci and M. Khammash, “Parameter estimation and model selection in computational biology,” PLoS Computational Biology ,vol. 6, 2010. [6] S. M. Baker, C. H. Poskar, and B. H. Junker, “Unscented Kalman filter with parameter identifiability analysis for the estimation of multiple parameters in kinetic models,” EURASIP Journal on Bioinformatics and Systems Biology , vol. 2011, no. 1, p. 7, 2011. [7] N. Meskin, H. Nounou, M. Nounou, and A. Datta, “Parameter estimation of biological phenomena: An unscented Kalman filter approach,” IEEE/ACM Transactions on Computational Biology and Bioinformatics , vol. 10, no. 2, pp. 537–543, 2013. [8] X. Liu and M. Niranjan, “State and parameter estimation of the heat shock response system using Kalman and particle filters,” Bioinfor-matics , vol. 28, pp. 1501–1507, 06 2012. [9] D. Du, Z. Hu, and Y. Du, “Model identification and physical exercise control using nonlinear heart rate model and particle filter,” in 2019 IEEE 15th International Conference on Automation Science and Engineering (CASE) , pp. 405–410, 2019. [10] X. Shen and H. Vikalo, “Inferring parameters of gene regulatory networks via particle filtering,” EURASIP Journal on Advances in Signal Processing , vol. 2010, no. 1, p. 204612, 2010. [11] M. Rathinam and M. Yu, “State and parameter estimation from exact partial state observation in stochastic reaction networks,” The Journal of Chemical Physics , vol. 154, p. 034103, 01 2021. [12] Z. Fang, A. Gupta, and M. Khammash, “Stochastic filters based on hybrid approximations of multiscale stochastic reaction networks,” in 2020 59th IEEE Conference on Decision and Control (CDC) ,pp. 4616–4621, IEEE, 2020. [13] J. A. F. Magalhaes, O. B. Neto, and F. Corona, “Block particle filters for state estimation of stochastic reaction-diffusion systems,” IFAC-PapersOnLine , vol. 56, no. 2, pp. 10270–10275, 2023. [14] Z. Fang, A. Gupta, and M. Khammash, “Convergence of regularized particle filters for stochastic reaction networks,” SIAM Journal on Numerical Analysis , vol. 61, no. 2, pp. 399–430, 2023. [15] P. Li, R. Goodall, and V. Kadirkamanathan, “Estimation of parameters in a linear state space model using a Rao-Blackwellised particle filter,” 
+
+IEE Proceedings-control theory and applications , vol. 151, no. 6, pp. 727–738, 2004. [16] F. Mustiere, M. Bolic, and M. Bouchard, “A modified Rao-blackwellised particle filter,” in 2006 IEEE International Conference on Acoustics Speech and Signal Processing Proceedings , vol. 3, pp. III–III, IEEE, 2006. [17] Z. Fang, A. Gupta, and M. Khammash, “Effective filtering approach for joint parameter-state estimation in sdes via Rao-Blackwellization and modularization,” in 2024 IEEE 63rd Conference on Decision and Control (CDC) , pp. 7786–7791, IEEE, 2024. [18] T. Badar, S. S¨ arkk¨ a, Z. Zhao, and A. Visala, “Rao–Blackwellized particle filter using noise adaptive Kalman filter for fully mixing state-space models,” IEEE Transactions on Aerospace and Electronic Systems , vol. 60, no. 5, pp. 6972–6982, 2024. [19] A. Dey, K. Chakrabarti, K. K. Gola, and S. Sen, “A Kalman filter approach for biomolecular systems with noise covariance updating,” in 2019 Sixth Indian Control Conference (ICC) , pp. 262–267, IEEE, 2019. [20] S. Dash, A. S. S. Kumar, and A. Dey, “An extended Kalman filter with updated noise covariance for parameter estimation in chemical reaction networks,” in 2025 11th International Conference on Control, Decision and Information Technologies (CoDIT) , vol. 1, pp. 1577–1582, IEEE, 2025. [21] W. Poole, A. Pandey, A. Shur, Z. A. Tuza, and R. M. Murray, “BioCRNpyler: Compiling chemical reaction networks from biomolec-ular parts in diverse contexts,” PLOS Computational Biology , vol. 18, pp. 1–19, 04 2022. [22] A. Swaminathan, W. Poole, A. Pandey, V. Hsiao, and R. M. Murray, “Fast and flexible simulation and parameter estimation for synthetic biology using bioscrape,” Journal of Open Source Software , vol. 8, no. 87, p. 5057, 2023. [23] U. Alon, An introduction to systems biology: design principles of biological circuits . Chapman and Hall/CRC, 2019. [24] L. Martino, V. Elvira, and F. Louzada, “Effective sample size for im-portance sampling based on discrepancy measures,” Signal Processing ,vol. 131, pp. 386–401, 2017. [25] R. Mehra, “On the identification of variances and adaptive Kalman filtering,” IEEE Transactions on automatic control , vol. 15, no. 2, pp. 175–184, 1970.

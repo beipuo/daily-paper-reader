@@ -1,0 +1,65 @@
+{
+  "label": "2026-10-02",
+  "date": "2026-10-02",
+  "generated_at": "2026-10-02T23:01:30",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202610/02/2609.31158v1-a-modified-rao-blackwellised-particle-filter-based-on-updated-process-noise-covariance-for-chemical-reaction-networks",
+      "section": "quick",
+      "title_en": "A Modified Rao-Blackwellised Particle Filter Based on Updated Process Noise Covariance for Chemical Reaction Networks",
+      "authors": "Suryasnata Dash, Abhishek Dey",
+      "date": "2026-09-25",
+      "pdf": "https://arxiv.org/pdf/2609.31158v1",
+      "score": "6.0",
+      "evidence": "表征生物系统中的化学反应网络",
+      "tldr": "针对化学反应网络（CRN）中参数与状态估计的挑战，本文提出了一种改进的Rao-Blackwellised粒子滤波（RBPF）算法。该方法结合粒子滤波估计参数，并利用基于化学朗之万方程（CLE）递归更新过程噪声协方差的扩展卡尔曼滤波（EKF）来估计状态，有效提升了随机CRN系统参数与状态联合估计的精度与稳定性。",
+      "tags": "query:profile-4",
+      "abstract_en": "It is necessary to characterize chemical reaction networks (CRNs) accurately to facilitate engineering of both synthetic and naturally occurring biological systems. Estimation of multiple unknown parameters and states in CRNs requires first, an identifiability analysis, and then adoption of a suitable estimation technique. In this paper, we took an example of a reduced order gene expression system, performed parameter sensitivity analysis for multiple unknown parameters, and used a modified Rao-Blackwellised particle filter (RBPF) to estimate parameters and states. The proposed framework estimates parameters using a particle filter and states using an extended Kalman filter (EKF) with process noise covariance updated recursively based on chemical Langevin equation (CLE). We compared the accuracy of parameter estimation, error in state estimation, and whiteness of the innovation sequence for the proposed filter with fixed choices of noise covariance. We found that the RBPF with updated noise covariance finds a balance between these three criteria, demonstrating its suitability for joint state and parameter estimation for stochastic CRNs.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/02/2609.34186v1-an-interactive-simulator-for-integrating-biochemical-models-with-experimental-data",
+      "section": "quick",
+      "title_en": "An interactive simulator for integrating biochemical models with experimental data",
+      "authors": "Herbert M. Sauro, Dan Nguyen, Long Nguyenle, Steven S. Andrews, Frank T. Bergmann, Joseph L. Hellerstein, Lucian P. Smith, H. Steven Wiley",
+      "date": "2026-09-28",
+      "pdf": "https://arxiv.org/pdf/2609.34186v1",
+      "score": "6.0",
+      "evidence": "将生化模型与实验数据整合",
+      "tldr": "该研究针对生物学建模工具复杂、实验生物学家使用门槛高的问题，开发了DeskIridium桌面平台与WebIridium网页模拟器。该系统支持Antimony语法编辑、参数实时调节、AI辅助交互及SBML模型导出，旨在降低建模难度并提升实验数据整合效率，为生物学研究提供更易用的模拟环境。",
+      "tags": "query:profile-4",
+      "abstract_en": "Biological models based on mathematical simulations (e.g., ordinary differential equations) are hugely beneficial for understanding biological processes and predicting the outcomes of experiments. Such models are built using a variety of sophisticated modeling tools. Unfortunately, the complexity of these tools is often a barrier to use by experimental biologists. To improve the usability and impact of biological models, we have created a desktop platform (DeskIridium) and a web-based simulator (WebIridium, hosted as a GitHub page) that, in combination, provide features that promote ease of use by experimental biologists, including: human-readable editing of models via the Antimony syntax; sliders for adjusting parameter values while simultaneously displaying simulation results in real time; zero-install distribution; AI chat integration; and generation of standalone Python implementations of SBML models to support reproducibility. The desktop version uses the well-established libroadrunner simulation package; the web-based application uses an Emscripten translated version of COPASI. Both simulators are SBML-compatible, allowing users to easily import previously built models or edit existing models using the easy-to-use antimony language. We used modern AI methods for software development and share the lessons we learned. Binaries, source code, and the web interface are available at: https://github.com/sys-bio/IridiumSimulator and https://github.com/sys-bio/WebIridium.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/02/2609.37826v1-nutrient-competition-as-a-general-mechanism-of-regulation-in-photosymbiosis",
+      "section": "quick",
+      "title_en": "Nutrient Competition as a General Mechanism of Regulation in Photosymbiosis",
+      "authors": "Jordan A. Gault, Nils Rädecker, Iliana B. Baums, Thilo Gross",
+      "date": "2026-09-29",
+      "pdf": "https://arxiv.org/pdf/2609.37826v1",
+      "score": "6.0",
+      "evidence": "氮限制与宿主对无机氮的同化",
+      "tldr": "该研究探讨了刺胞动物与藻类共生关系中氮限制的调节机制。通过广义建模方法，研究分析了宿主与共生体在氮竞争下的动态稳定性。结果表明，氮限制足以通过种内和种间竞争的相互作用稳定共生系统，并揭示了宿主氮同化能力增强时，系统稳定性对光合产物转运的依赖性，为理解共生关系的演化与维持提供了理论依据。",
+      "tags": "query:q5",
+      "abstract_en": "Nitrogen limitation is a key mechanism regulating the mutualism between photosymbiotic cnidarians and their algal symbionts. Algal-derived photosynthate facilitates host assimilation of inorganic nitrogen, specifically ammonium. The resulting competition between symbiotic partners for inorganic nitrogen leads to a negative feedback loop wherein symbiont density is effectively controlled through facilitation of their competitor. However, it is unclear whether this feedback loop is sufficient to stabilize the interaction absent other forms of regulation. Using a generalized modeling approach, we identify the conditions under which cnidarian-algal competition for nitrogen yields dynamically stable symbioses. We show that nitrogen limitation is sufficient to stabilize the interaction through the interplay of intraspecific (symbiont-symbiont) and interspecific (host-symbiont) competition. As host assimilation of inorganic nitrogen increases, the system shifts from being stabilized by intraspecific competition between symbionts to interspecific competition between host and symbionts, necessitating a positive coupling of symbiont density to host nitrogen assimilation via photosynthate translocation for dynamic stability.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/02/2610.01142v1-protocol-for-discovering-convergent-molecular-networks-across-multi-omics-datasets-using-network-propagation",
+      "section": "quick",
+      "title_en": "Protocol for Discovering Convergent Molecular Networks across Multi-Omics Datasets Using Network Propagation",
+      "authors": "Charles O. Olwal, Declan M. Winters, Immy A. Ashley, Valerie Vandersall, Amberin Rahman, Alexandra Lindsey Djomkam Zune, Kyla F. Dangerfield, Yennifer Delgado, Sara K. Makanani, Sophie F. Blanc, Shipra Sharma, Mehdi Bouhaddou",
+      "date": "2026-10-01",
+      "pdf": "https://arxiv.org/pdf/2610.01142v1",
+      "score": "6.0",
+      "evidence": "通路富集与分子网络",
+      "tldr": "该研究提出了一种利用网络传播技术发现多组学数据中趋同分子网络的方法。针对多组学数据在基因层面重叠有限的挑战，该协议通过将各组学数据集的显著基因映射至先验分子相互作用网络，利用信号扩散与数学整合，识别跨组学层的核心生物学机制，为解析复杂表型背后的协同分子变化提供了有效框架。",
+      "tags": "query:profile-4",
+      "abstract_en": "Phenotypic outcomes arise from coordinated changes across molecular layers. Although multi-omics data capture complementary molecular signals, integrating them into coherent biological mechanisms remains challenging due to limited overlap at the gene level. Network propagation maps significant gene hits from each dataset onto a prior knowledge molecular interaction network and diffuses their signals to neighboring genes. Mathematical integration of propagated networks, followed by clustering and pathway enrichment, reveals shared molecular networks, pinpointing the core biology captured across orthogonal molecular layers.",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
