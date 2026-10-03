@@ -6,35 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-10-02
-- 运行时间：2026-10-02 23:01:28 UTC
+- 最新运行日期：2026-10-03
+- 运行时间：2026-10-03 22:30:42 UTC
 - 运行状态：成功
-- 本次总论文数：4
+- 本次总论文数：1
 - 精读区：0
-- 速读区：4
+- 速读区：1
 
 ### 今日简报（AI）
-今日速读 4 篇生物计算与系统生物学前沿进展，涵盖化学反应网络滤波、交互式建模及光共生机制。
-重点关注基于更新过程噪声协方差的粒子滤波算法，以及营养竞争在光共生调节中的通用机制。
-建议优先关注计算建模在实验数据整合中的应用，以提升复杂生物系统分析的准确性。
-- 详情：[/202610/02/README](/202610/02/README)
+今日速读《从个体轨迹到群体密度：异质生长定律的弱形式推断》，探索复杂系统建模新视角。
+该研究提出了一种从个体运动轨迹反推群体生长规律的数学框架，为理解异质性演化提供了新工具。
+建议关注复杂系统动力学领域的读者阅读，以了解如何通过弱形式推断简化非线性建模过程。
+- 详情：[/202610/03/README](/202610/03/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [A Modified Rao-Blackwellised Particle Filter Based on Updated Process Noise Covariance for Chemical Reaction Networks](/202610/02/2609.31158v1-a-modified-rao-blackwellised-particle-filter-based-on-updated-process-noise-covariance-for-chemical-reaction-networks)  
-   标签：评分：6.0/10、query:profile-4
-   evidence：表征生物系统中的化学反应网络
-2. [An interactive simulator for integrating biochemical models with experimental data](/202610/02/2609.34186v1-an-interactive-simulator-for-integrating-biochemical-models-with-experimental-data)  
-   标签：评分：6.0/10、query:profile-4
-   evidence：将生化模型与实验数据整合
-3. [Nutrient Competition as a General Mechanism of Regulation in Photosymbiosis](/202610/02/2609.37826v1-nutrient-competition-as-a-general-mechanism-of-regulation-in-photosymbiosis)  
-   标签：评分：6.0/10、query:q5
-   evidence：氮限制与宿主对无机氮的同化
-4. [Protocol for Discovering Convergent Molecular Networks across Multi-Omics Datasets Using Network Propagation](/202610/02/2610.01142v1-protocol-for-discovering-convergent-molecular-networks-across-multi-omics-datasets-using-network-propagation)  
-   标签：评分：6.0/10、query:profile-4
-   evidence：通路富集与分子网络
+1. [From Individual Trajectories to Population Densities: Weak-Form Inference of Heterogeneous Growth Laws](/202610/03/2609.31955v1-from-individual-trajectories-to-population-densities-weak-form-inference-of-heterogeneous-growth-laws)  
+   标签：评分：6.0/10、query:xrlsr
+   evidence：从轨迹中推断生长定律和非线性动力学
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,23 @@
+{
+  "label": "2026-10-03",
+  "date": "2026-10-03",
+  "generated_at": "2026-10-03T22:30:45",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202610/03/2609.31955v1-from-individual-trajectories-to-population-densities-weak-form-inference-of-heterogeneous-growth-laws",
+      "section": "quick",
+      "title_en": "From Individual Trajectories to Population Densities: Weak-Form Inference of Heterogeneous Growth Laws",
+      "authors": "Rainey Lyons, Vanja Dukic, David M Bortz",
+      "date": "2026-09-25",
+      "pdf": "https://arxiv.org/pdf/2609.31955v1",
+      "score": "6.0",
+      "evidence": "从轨迹中推断生长定律和非线性动力学",
+      "tldr": "该研究提出了一种基于弱形式估计非线性动力学（WENDy）的数据驱动框架，旨在从单细胞延时显微成像数据中推断细胞生长规律及个体间的生理差异。该方法通过模型选择和经验贝叶斯收缩技术，能够有效识别最佳生长模型并量化异质性参数，为理解细胞生长动力学提供了稳健的统计工具。",
+      "tags": "query:xrlsr",
+      "abstract_en": "Single-cell time-lapse microscopy now provides high-resolution size trajectories for thousands of individual cells, yet principled methods for simultaneously learning the functional form of growth laws and the distribution of cell-to-cell physiological variability remain limited. We present a data-driven framework based on the recent Weak-form Estimation of Nonlinear Dynamics (WENDy) algorithm to (i) select the best supported growth law from a set of candidate laws, and (ii) recover individual-level growth parameters via empirical Bayes shrinkage within a random-effects model. We demonstrate the approach on both synthetic individual size data incorporating commonly found growth laws and recorded real size trajectories, showing that the method accurately recovers both growth-law structure and parameter heterogeneity at reasonable noise levels. We finally end with a discussion on how the results obtained by the method here can be upscaled to the population level.",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

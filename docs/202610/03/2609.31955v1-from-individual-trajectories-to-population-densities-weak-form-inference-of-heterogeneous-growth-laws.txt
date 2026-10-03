@@ -1,0 +1,818 @@
+Title: From Individual Trajectories to Population Densities: Weak-Form Inference of Heterogeneous Growth Laws
+
+URL Source: https://arxiv.org/pdf/2609.31955v1
+
+Published Time: Tue, 29 Sep 2026 00:18:10 GMT
+
+Number of Pages: 23
+
+Markdown Content:
+# From Individual Trajectories to Population Densities: Weak-Form Inference of Heterogeneous Growth Laws 
+
+## Rainey Lyons ∗1, Vanja Dukic 1, and David M. Bortz 11Department of Applied Mathematics, University of Colorado, Boulder CO 80309-0526, USA September 29, 2026 
+
+Abstract 
+
+Single-cell time-lapse microscopy now provides high-resolution size trajectories for thousands of individual cells, yet principled methods for simultaneously learning the functional form of growth laws and the distribution of cell-to-cell physiological variability remain limited. We present a data-driven framework based on the recent Weak-form Estimation of Nonlinear Dynamics (WENDy) algorithm to (i) select the best supported growth law from a set of candidate laws, and (ii) recover individual-level growth parameters via empirical Bayes shrinkage within a random-effects model. We demonstrate the approach on both synthetic individual size data incorporating commonly found growth laws and recorded real size trajectories, showing that the method accurately recovers both growth-law structure and parameter heterogeneity at reasonable noise levels. We finally end with a discussion on how the results obtained by the method here can be upscaled to the population level. 
+
+# 1 Introduction 
+
+Quantitative models of biological growth often begin with a time series of size measurements from one or more individuals. At the level of a single cell, organism, or cohort member, this time series data is commonly described by an ordinary differential equation (ODE) of the form ˙x = g(x; θ),
+
+where x(t) represents the size of an individual at time t and g is the growth rate function parameter-ized by a vector θ. However, modern biological experiments, particularly in the context of cell assays, increasingly provide hundreds or thousands of individual trajectories, not just population averages. These experiments have revealed that it is not enough to describe the growth of the population by a single averaged growth law. For example individual heterogeneity in growth rates has been recognized as a mechanism capable of producing dispersion and multi-modality in evolving size distributions [3], which is a feature that cannot be captured by a single deterministic growth rate. More broadly, trait variation within the population can change ecological dynamics through mechanisms such as nonlin-ear averaging, selection among individuals, and induced correlations between traits and demographic performance. Consequently, populations with identical average parameter values but different levels of variability can develop different size distributions, altering prediction accuracy and mechanistic un-derstanding of the dynamics. These considerations motivate the explicit estimation of the parameter distributions rather than reliance on a single representative growth curve. At the population scale, hyperbolic structured population models [13] provide a natural framework for describing the evolution of size distributions. In these models, transport in a physiological structure variable (e.g., size for size-structured models) is driven by a growth law, while birth, death, division, and coagulation-fragmentation terms encode demographic or cellular events as source, sink, or boundary 
+
+> ∗rainey.lyons@colorado.edu
+
+1arXiv:2609.31955v1 [q-bio.PE] 25 Sep 2026 processes. Traditionally, the modeling assumptions made here are that individuals follow the same structure-dependent dynamics with some works allowing for nonlocal dependence on the population density [2, 17, 19]. These models are well studied from an inverse problem perspective. Multiple works have studied how to infer model ingredients of such equations from aggregate density measurements [1, 7, 15, 29, 41]. The case of heterogeneous growth rates is a much more recent field of study. Recent forward-problem analyses [16] studied how heterogeneity in the individual growth rates can affect the Malthusian fitness of a cell population under two different test cases. Whereas for the inverse problem, [3] studied methods for recovering a growth rate distribution from density data using a cohort mixture decomposition and was able to approximate the growth-rate heterogeneity from density data. This literature establishes that population densities can, in principle, contain information about hidden growth and division mechanisms. In contrast, single-individual trajectory data provide a more Lagrangian perspective: rather than inferring growth mechanisms only from evolving histograms, one may attempt to infer the growth law and the distribution of individual parameters directly from marked trajectories, and then propagate those estimates back to the population level. From the statistical side, individual heterogeneity has been studied through a nonlinear mixed-effects framework. Random-effect formulations are a powerful tool for size trajectory data as they separate population level parameters from individual-specific deviations [27, 42]. Particularly, these techniques have seen use in organism growth, where empirical-Bayes and random effects versions of von Bertalanffy and Gompertz growth models have been used to estimate individual variation within a population [51,52]. While these approaches provide a principled statistical interpretation of individual variability, they typically require that the growth law be specified in advance and that parameter estimation proceed by repeated nonlinear fitting or forward simulation. When several candidate growth laws are plausible, this can become computationally expensive and statistically delicate. Moreover, the empirical spread of fitted individual parameters need not equal biological heterogeneity as it may also contain uncertainty due to measurement noise, noninformative trajectories, numerical approximation, and practical non-identifiability. Classical forward solver based methods of direct nonlinear trajectory fitting have additional limita-tions in the present setting. Output error methods generally require repeated numerical solves of the candidate dynamics, careful treatment of initial conditions, and nonlinear optimization over each indi-vidual. These difficulties are amplified when one is interested in between individual heterogeneity and in comparing several plausible growth laws. Weak-form scientific machine learning (WSciML) provides an alternative route. Sparse identification methods such as SINDy [8] and PDE-FIND [44] demonstrated that parsimonious governing equations can be learned from data via sparse regression over candidate libraries. Weak-form extensions such as WSINDy [30, 31] replace pointwise derivative estimation by integration against smooth test functions and use integration-by-parts to move derivatives from noisy data to known test functions, thereby improving robustness to measurement noise. For parameter es-timation methods, the Weak-form Estimation of Nonlinear Dynamics (WENDy) method [6] estimates parameters to a known model directly from the weak-form residuals without any forward simulations while simultaneously accounting for the errors-in-variables structure in the regression. These features make WENDy particularly well suited to the problem at hand as each trajectory can be converted into a weak-form regression problem where candidate growth laws can be fit in parallel and parameter uncertainty can be estimated without relying on unstable numerical derivatives. Since their development, WSciML methods have been extended well beyond benchmark ODE and PDE discovery. WSINDy has been adapted to online and streaming identification of PDEs [35], data-driven model predictive control [28], stochastic network dynamics [47], mean-field equations from particle data [32], and interaction laws from individual cell trajectories [37]. WSINDy has also been applied to multiple biological and physical applications including the coarse-graining of nearly periodic Hamiltonian systems [34], the study of information requirements for model recovery in magnetohy-drodynamics [49], the discovery of interpretable atmospheric models [40], discovery of low-dimensional soliton dynamics from scattering data [38], inference of structured-population growth, mortality, and birth processes [29], and the recovery of mean-field movement equations from sparse ecological data [39]. In parallel, WENDy recast weak-form regression as an errors-in-variables parameter-inference prob-lem and has since been extended to nonlinear-in-parameter models, statistical assessment of estimator bias and coverage, and computationally efficient practical-identifiability analysis for partially observed systems [6, 21, 45]. Collectively, this literature demonstrates that WSciML methods provide more than a noise-robust substitute for numerical differentiation; they offer a general framework for system 2identification across biological, physical, and engineering systems. In this work, we develop a WENDy-based framework for learning heterogeneous (in parameter) growth laws from individual size trajectories. We assume that individual growth laws share the same functional form ( g), but their biological parameters (inherent growth rate, maximum size) vary across the population. Given a collection of these individual level trajectories, we use WENDy to fit and compare a finite set of candidate growth laws and estimate the individual level growth parameters for the selected model. We then use an empirical-Bayes random-effects shrinkage correction to separate true heterogeneity from the uncertainty induced by noisy finite trajectories. This correction is essential for the second component of this manuscript: the upscaling of this individual level inference to a population level growth rate. We take the time to clarify the main contributions of this work. First, we formulate growth law selection from individual trajectories as a weak-form model-comparison problem rather than as a collection of derivative estimates or output error methods. Using the computational efficiency and embarrassingly parallelizable structure of WENDy, we estimate individual growth parameters and map the resulting linear-in-parameter coefficients to biologically interpretable quantities. Next, we incorporate an empirical-Bayes random-effects layer that corrects the noise inflated parameter variance and yields an estimate of the true population-level heterogeneity. Both of these layers are directly based on the uncertainty estimates from the WENDy method. Finally, we discuss multiple upscaling methods for propagating this inference to the population scale. Although the examples and problem here focus on size growth of individuals, the framework can be tuned to apply more broadly to any system in which individual trajectories are observed and population dynamics are strongly affected by heterogeneity. The manuscript is organized as follows. Section 2 formalizes the problem and introduces important notation and assumptions used throughout the work. Section 3 describes in detail the methods used at the individual level including the WENDy method, model selection criteria, and mixed-effects correction for population level heterogeneity. Section 4 then showcases the results of the method and tests the results on both synthetic data (generated from commonly used growth laws) and real biological measurements. Section 5 then discusses methods to upscale the learned growth laws to the population density level. Finally, Section 6 provides a summary of the results, limitations of the methods, and an outlook of the open problems with the methods presented here. 
+
+# 2 Problem statement, assumptions, and notation 
+
+We assume we are given a time-series measurement of (marked) individual sizes from an experiment of one species. These size measurements of individual i = 1 , 2, . . . , I are denoted by {x(i) 
+
+> m
+
+}Mi
+
+> m=1
+
+, where 
+
+x(i) 
+
+> m
+
+denotes the size (e.g., length, mass, volume) of individual i at time t(i) 
+
+> m
+
+with some fixed sampling rate ∆ t. We further assume that for this species there exists a parameterized, universal smooth growth law g such that ˙x(i) = g
+
+
+
+x(i); θ(i)
+
+, (1) where θ(i) ∈ Rp is a vector of individualistic parameters. That is, each individual’s size evolves according to the same underlying dynamical system, but with parameters that vary across individuals which capture physiological differences such as inherent growth rate and maximal size. Our goal is twofold: (i) select the functional structure of g from a family of candidate models G, and (ii) recover the distribution of the parameters, P, across the population. Regarding this distribution, many possible assumptions could be made regarding the correlation between the daughter and mother’s parameters. For this preliminary work, we take as a working assumption that the parameters for each individual are i.i.d. and leave this dependence as a study for future work with the ideas of following the approach from [14]. In the sections to follow, we will use multiple, mathematically equivalent, forms of the growth model, 
+
+g, in (1). This is because the method of choice works best when the model is linear-in-parameters (LiP), but the candidate models may not always depend linearly on the biologically interpretable parameters. To denote this change of form in a general way, we make use of the variables θ and w to represent the vector of biologically interpretable parameters and the vector of LiP parameters, respectively. As an example, for the logistic equation ˙ x = rx (1 − x/S max ) = w1x + w2x2, we have θ = ( r, S max )⊤ and 
+
+w = ( w1, w 2)⊤ and we write g(x; θ) to mean the former equation and g(x; w) to mean the latter. 32.1 Overview of the method 
+
+Before diving into detail in Section 3, we provide a brief overview of the method used in this paper. The proposed method will have two main components. First, we aim to select a proper growth model from a class of candidate laws, G. This is done through utilizing the computational efficiency of the Weak-form Estimation of Nonlinear Dynamics (WENDy) method and the embarrassingly parallelizable nature of the problem. Using WENDy to quickly fit a large number of trajectories, we can then select a model based on the summed per-trajectory weak-form BIC. After a model has been selected, the learned WENDy parameters (after transformation) provide an estimate of the distribution of the biological parameter P. However, as this estimate was done at the individual level, its variance can be corrupted by measurement error. Therefore, the second step of the proposed method is to correct the variance of the distribution via empirical Bayes shrinkage. This combines the information provided by the individual level fits from WENDy with the information at the population level and allows us to correct the estimated variance. A graphical overview of the method is provided in Figure 1. 
+
+# 3 Methods 
+
+In this section, we provide a brief overview of the methods used in this manuscript. We begin with a description of the WENDy algorithm for parameter estimation. We then discuss how the algorithm is used for the model selection step and then for recovering individual trajectory fits. Finally, we discuss how these parameter fits are adjusted to account for the mixed effects due to measurement noise. For detailed descriptions of the WENDy framework, we refer the reader to [6, 36, 45]. 
+
+## 3.1 Weak-form Estimation of Nonlinear Dynamics (WENDy) 
+
+Following the notation from before, let x(i)(t) denote the size of individual i at time t ∈ (0 , T ), and assume ddt x(i)(t) = g
+
+
+
+x(i)(t); w(i)
+
+, (2) where g is written in a linear-in-parameters form, e.g., g(x) = PJj=1 wj fj (x). Given noisy observations 
+
+{x(i) 
+
+> m
+
+}Mi 
+
+> m=1
+
+≈ { x(i)(t(i) 
+
+> m
+
+)}Mi
+
+> m=1
+
+,
+
+WENDy estimates w(i) without directly approximating ˙ x(i), avoiding known problems with numerical differentiation of noisy data. This is done by using the eponymous weak-form of (2). Let {ϕk}Kk=1 be a collection of smooth test functions compactly supported in the observation interval. Multiplying (2) by ϕk, integrating in time, and applying integration by parts yields the weak-form equation 
+
+−
+
+Z T
+
+> 0
+
+x(i)(t) ˙ϕk(t) d t =
+
+Z T
+
+> 0
+
+g(x(i)(t); w)ϕk(t) d t, k = 1 , . . . , K. (3) Since the derivative has been transferred from the measured state x(i) to the known test function ϕk,the quantity ˙ϕk can be evaluated analytically. Thus, the weak formulation replaces unstable derivative approximation with integration against smooth test functions. Discretizing the integrals in (3) using the observed data yields a finite-dimensional residual system 
+
+r(w) := Gw − b, (4) where b ∈ RK stacks the weak time-derivative terms bk ≈ − R x(i)(t) ˙ϕk(t) d t, and Gw ∈ RK stacks the weak model terms ( Gw)k ≈ R g(x(i)(t); w)ϕk(t) d t. The basic weak-form parameter estimate is obtained by solving 
+
+w⋆ = arg min  
+
+> w
+
+∥r(w)∥22. (5) For models which can be written in a linear in parameters form, this reduces to a linear least-squares problem, 
+
+b = Gw . (6) 4Inputs: individual size trajectories {x(i)                         
+
+> k}Ii=1 and candidate growth laws
+> G(exponential, logistic, Gompertz, linear & metabolic von Bertalanffy)
+> Model selection. WENDy fits every trajectory under every gℓ∈Gin parallel; the summed per-trajectory weak-form BIC selects the growth law bg.
+> Parameter estimation & empirical-Bayes shrinkage.
+> Random effects separate true between-individual heterogeneity from noise, recovering the parameter distribution bP.
+> Outputs: selected law bg•individual fits {bw(i)} • heterogeneity (bμ, bτ , bP)•shrunk estimates eθ(i)•accuracy (RRMSE, E2)
+
+Figure 1: Overview of the method. From marked individual size trajectories and a finite candidate growth-law class G, the model-selection stage fits every trajectory under every candidate with WENDy in parallel and selects the law bg by the summed per-trajectory weak-form BIC (top: data, true, and WENDy-fit trajectories at the 5th, 50th, and 95th RRMSE percentiles). The parameter-estimation 
+
+stage maps the fitted weights to biological parameters and applies an empirical-Bayes random-effects shrinkage that separates true between-individual heterogeneity from noise-induced spread (bottom: recovered r and Smax distributions for the raw WENDy, shrunken, and true parameters). The panels show a representative synthetic example (metabolic von Bertalanffy law, 5% additive noise). 5In practice, the integrals are approximated using quadrature. Let 
+
+x(i) := 
+
+
+
+x(i)1
+
+...
+
+x(i)
+
+> M
+
+ ∈ RM
+
+denote the observed time series, and let Φ and ˙Φ denote the matrices whose rows contain the test functions and their derivatives evaluated at the measurement times, scaled by the chosen quadrature weights (in our case, the trapezoidal quadrature scaling q = ( 12 , 1, 1, . . . , 1, 1, 12 )). For a model that is linear in parameters, the discrete weak-form system simply takes the form 
+
+b = − ˙Φx (i), G = ΦΘ (x(i)), (7) where Θ(u) is the feature matrix obtained by evaluating the prescribed model terms at the data. For example, if f1(u) = u and f2(u) = u2 for the logistic equation, then 
+
+Θ(x(i)) = 
+
+
+
+f1(x(i)1 ) f2(x(i)1 )... ...
+
+f1(x(i) 
+
+> M
+
+) f2(x(i) 
+
+> M
+
+)
+
+ .
+
+In this work, we use compactly supported piecewise polynomial test functions of the form 
+
+ϕk(t) = 
+
+(
+
+C
+
+
+
+1 −   t−tk
+
+> r
+
+2p
+
+, |t − tk| ≤ r, 
+
+0, otherwise ,
+
+where tk is the center of the test function, C is a normalization constant, p determines the smoothness of the test function, and r > 0 is the radius of its support. The support radius controls the balance between noise averaging and temporal localization: larger supports provide greater denoising through integration, whereas smaller supports provide more localized constraints but are more sensitive to measurement noise. This compact structure is also important for mediating the quadrature error collected during the integral approximations above. Indeed, with Euler–Maclaurin arguments (see [31]), the trapezoidal rule’s quadrature error is determined by the smoothness of the test function and can therefore be mitigated by choosing a sufficiently smooth test function. For the work here, we use the canonical method for radius selection presented in [6], however, we note that there are more methods for test function selection like the one presented in [48] which may be used. 
+
+## 3.2 Noise model and weighted WENDy estimation 
+
+A central feature of WENDy is that it accounts for the fact that measurement noise enters both sides of the weak-form regression system. Indeed, the vector b depends on the noisy state measurements, and the matrix or nonlinear map defining G also depends on the same noisy data. Consequently, the weak-form regression problem is an errors-in-variables problem, and ordinary least squares can be biased when the noise level is non-negligible. We assume the observed data satisfies 
+
+x(i) = x(i)⋆ + ε, E[ε] = 0 , Cov( ε) = Σ x(i) ,
+
+where x(i)⋆ denotes the unknown noise-free signal. In our artificial experiments below, we assume the true measurements are corrupted by additive Gaussian noise, where Σ (i) 
+
+> x
+
+= ˆ σ2I and ˆ σ is chosen such that the resulting noise ratio is of a specified level, σnr , i.e., ˆ σ = σnr ∥x(i)⋆∥RMS , see [31] for details. Since the weak residual r(x(i), w) is a function of the noisy measurements, a first-order expansion around the noise-free trajectory gives 
+
+r(x(i), w) ≈ r(x(i)⋆, w) + J(i) 
+
+> x
+
+(w)ε,
+
+where J(i) 
+
+> x
+
+(w) is the Jacobian of the weak residual with respect to the data. Therefore, the covariance of the residual can be approximated by 
+
+R(w) := J(i) 
+
+> x
+
+(w)Σ (i) 
+
+> x
+
+J(i) 
+
+> x
+
+(w)⊤. (8) 6Following the WENDy framework, this covariance model may be augmented by higher-order correction terms that account for nonlinear dependence of the weak residual on the noisy measurements. Rather than solving the unweighted least-squares problem (5), WENDy approximately solves the generalized least-squares problem 
+
+w⋆ = arg min  
+
+> w
+
+r(w)⊤R(w)−1r(w), (9) where R(w) denotes the working covariance model for the weak residuals. Because R(w) depends on the unknown parameters, WENDy uses an iteratively reweighted least-squares procedure. In other words, at each iteration, the residual covariance is estimated using the current parameter it-erate, the weak-form system is pre-whitened using this covariance estimate, and the resulting weighted least-squares problem is solved to update the parameter estimate. This procedure is repeated until convergence. 
+
+## 3.3 Candidate growth laws and WENDy-based model selection 
+
+We can use WENDy to compare a finite collection of prescribed candidate growth laws. Rather than learning an unrestricted governing equation from a large candidate library as with WSINDy 1, we assume that the relevant growth law belongs to a finite model class G = {g1, . . . , g L} , where each model gℓ corresponds to a prescribed functional form ddt x(i)(t) = gℓ
+
+
+
+x(i)(t); w(i)
+
+> ℓ
+
+
+
+. (10) Here, w(i) 
+
+> ℓ
+
+∈ Rdℓ denotes the individual-specific parameter vector for model gℓ, and dℓ is the number of fitted linear parameters in that candidate law. In other words, 
+
+gℓ(x; w(i) 
+
+> ℓ
+
+) = X
+
+> j∈Sℓ
+
+w(i) 
+
+> ℓ,j
+
+fj (x), (11) where Sℓ is the subset of basis functions associated with model gℓ (see Table 1). When biologically appropriate, sign constraints are imposed during the WENDy regression so that the fitted coefficients correspond to admissible growth laws. For each candidate model gℓ, we construct the reduced weak-form library associated with Sℓ and apply WENDy independently to each individual trajectory. That is, for each pair ( i, ℓ ), WENDy produces an estimate 
+
+bw(i) 
+
+> ℓ
+
+= arg min 
+
+> w(i)
+> ℓ
+
+r(i) 
+
+> ℓ
+
+(w(i) 
+
+> ℓ
+
+) 2
+
+,
+
+with the weak residual 
+
+r(i) 
+
+> ℓ
+
+(w(i) 
+
+> ℓ
+
+) = b(i) − G(i) 
+
+> ℓ
+
+w(i) 
+
+> ℓ
+
+. (12) Here, b(i) contains the weak time-derivative terms for individual i, and G(i) 
+
+> ℓ
+
+is the weak-form design matrix obtained from the active terms in model gℓ as described in Section 3.1. After fitting all individuals under model gℓ, we compute the individual weak residual sum of squares RSS (i) 
+
+> ℓ
+
+= b(i) − G(i) 
+
+> ℓ
+
+bw(i)
+
+> ℓ
+> 22
+
+,
+
+and define Ki := dim  b(i) to be the number of weak-form equations (or equivalently the number of test functions) used for individual i. The aggregate weak residual sum of squares for model gℓ is then RSS ℓ = X
+
+> i∈I ℓ
+
+RSS (i) 
+
+> ℓ
+
+, (13) where Iℓ denotes the set of trajectories successfully fit under model gℓ. 
+
+> 1In the case all of the desired models are polynomial in structure such as the exponential, logistic, and linear von Bertalanffy growth laws, WSINDy is a perfectly applicable equation learning method. However, many of WSINDy’s convergent properties fail when library terms are not monomial or trigonometric [33].
+
+7As the parameters are estimated separately for each individual, a natural model-selection criterion would be the summed per-trajectory weak-form BIC, BIC (i) 
+
+> ℓ
+
+= Ki log RSS (i)
+
+> ℓ
+
+Ki
+
+!
+
++ dℓ log( Ki), (14) with aggregate score BIC sum  
+
+> ℓ
+
+= X
+
+> i∈I ℓ
+
+BIC (i) 
+
+> ℓ
+
+. (15) This criterion treats each individual trajectory as its own fixed-effects weak-form regression problem and then sums the resulting model-comparison scores across the population. However, as the test functions are allowed to overlap, neighboring rows of the weak-form system integrate largely the same measurements and are therefore strongly correlated. Instead, we replace Ki in (14) and (15) with the effective number of weak-form equations defined as 
+
+K(i)eff ,ℓ := K2
+
+> i
+
+∥R(i) 
+
+> ℓ
+
+∥2
+
+> F
+
+,
+
+where R(i) 
+
+> ℓ
+
+is the residual covariance matrix given in (8) which is computed by WENDy and ∥ · ∥ F
+
+denotes the Frobenius norm. After model selection, the corresponding WENDy estimates { bw(i) 
+
+> bℓ
+
+}i∈I bℓ are retained as the individual-level growth parameters. When relevant, these coefficient estimates are subsequently mapped to bio-logically interpretable parameters, such as an intrinsic growth rate r(i) and an asymptotic size S(i)max .
+
+## 3.4 Estimating heterogeneity in the population 
+
+After selecting a growth law, WENDy provides an individual-level coefficient estimate bw(i) for each successfully fit trajectory i ∈ I bℓ. These estimates are retained as the raw individual-level dynamical fits. However, the empirical distribution of the raw WENDy estimates generally overstates the true biological heterogeneity. This is due to each estimate containing both true individual-to-individual variation and uncertainty induced by measurement noise, finite sampling, and numerical quadrature. This is demonstrated for the exponential equation in Fig. 2 where we see the variance of the WENDy estimates increasing with the noise level. Following similar ideas to those presented in [4, 51, 52], we use an empirical-Bayes random-effects correction to estimate the population-level distribution of biologically interpretable growth parameters. 
+
+Figure 2: Learned parameter distribution for artificial exponential growth data from the raw WENDy algorithm presented in Section 3 as the measurement noise ratio σnr increases. Note for this model 
+
+w = θ.8Let 
+
+θ(i) = hbℓ
+
+
+
+w(i)
+
+denote the biological parameter vector associated with the selected law, where hbℓ is a function which maps the linear WENDy weights w to the biological parameters of interest for model bℓ. In the examples considered here, θ(i) consists of the intrinsic growth rate r(i) and, when the selected law has a finite asymptote, the asymptotic size S(i)max . For example, for the logistic law, ˙ x = w1x + w2x2, the biological parameters are 
+
+r = w1, Smax = − w1
+
+w2
+
+, and h(w) = 
+
+ w1
+
+− w1
+
+> w2
+
+
+
+.
+
+We denote the raw WENDy estimate of these parameters by bθ(i)
+
+= hbℓ
+
+  bw(i) .
+
+The working assumption in this paper is that the biological parameters vary across individuals according to a population-level distribution. In the implementation used here, we assume that each biological parameter is normally distributed across the population. That is, for a scalar biological parameter θ such as r or Smax , we assume 
+
+θ(i) ∼ N (μ, τ 2), i ∈ I bℓ, (16) where μ is the population mean and τ 2 is the between-individual biological variance. This normality assumption is primarily a convenient and interpretable first model for population heterogeneity. Other choices, such as log-normal, gamma, truncated normal, mixture, or fully nonparametric distributions, may be substituted when positivity, skewness, multimodality, or subpopulation structure is expected. In particular, for strictly positive quantities such as r and Smax , a log-normal random-effects model is a natural alternative. To separate biological variability from estimation uncertainty, we approximate the uncertainty in each biological-parameter estimate. Let bΣ(i) 
+
+> w
+
+denote the covariance estimate for the WENDy coefficient vector bw(i). This covariance is computed from the weak-form generalized least-squares system as 
+
+bΣ(i) 
+
+> w
+
+=
+
+
+
+G(i)⊤ 
+
+R(i)−1
+
+G(i)
+
+−1
+
+,
+
+where G(i) is the weak-form library matrix for trajectory i and R(i) is the corresponding weak residual covariance. The covariance is then propagated from coefficient space to biological-parameter space using the delta method [50]. That is, if Ji = Dh bℓ
+
+  bw(i) is the Jacobian of the map from WENDy coefficients to biological parameters, then 
+
+bΣ(i) 
+
+> θ
+
+= Ji bΣ(i) 
+
+> w
+
+J⊤ 
+
+> i
+
+. (17) For scalar shrinkage of a parameter θ, we write s2 
+
+> i
+
+= Var 
+
+bθ(i)
+
+
+
+. In other words, the raw WENDy biological-parameter estimate is modeled as 
+
+bθ(i) | θ(i) ∼ N (θ(i), s 2 
+
+> i
+
+), (18) while the true individual parameter satisfies the population model (16), the estimate satisfies 
+
+bθ(i) ∼ N (μ, τ 2 + s2 
+
+> i
+
+). (19) The population parameters μ and τ 2 are estimated by restricted maximum likelihood. That is, for a fixed value of τ 2, we define the total variance as Vi(τ 2) := τ 2 + s2 
+
+> i
+
+and estimate the population mean as 
+
+bμ(τ 2) = 
+
+P
+
+> i∈I bℓ
+
+bθ(i)/V i(τ 2)
+
+P
+
+> i∈I bℓ
+
+1/V i(τ 2) . (20) The restricted profile log-likelihood (up to an additive constant) is given by 
+
+ℓR(τ 2) = − 12
+
+X
+
+> i∈I bℓ
+
+log Vi(τ 2) + log 
+
+X
+
+> i∈I bℓ
+
+1
+
+Vi(τ 2)
+
+ + X
+
+> i∈I bℓ
+
+bθ(i) − bμ(τ 2)
+
+2
+
+Vi(τ 2)
+
+ . (21) 9We estimate bτ 2 = arg max τ 2≥0 ℓR(τ 2), and then set bμ = bμ(bτ 2). The estimated standard deviation 
+
+bτ = √bτ 2 is interpreted as the estimated biological between-individual variability in the parameter θ,after accounting for WENDy estimation uncertainty. The Bayes shrinkage posterior mean of the latent individual parameter is 
+
+eθ(i) = bμ + γi
+
+bθ(i) − bμ
+
+
+
+, γi = bτ 2
+
+bτ 2 + s2
+
+> i
+
+. (22) The factor γi ∈ [0 , 1] is the shrinkage gain. When the WENDy estimate for individual i is precise relative to the population variability, s2 
+
+> i
+
+≪ bτ 2, and γi ≈ 1, so little shrinkage is applied. On the other hand, when the individual estimate is highly uncertain, s2 
+
+> i
+
+≫ bτ 2, and γi ≈ 0, so the posterior mean is pulled strongly toward the population mean. The posterior variance of the individual parameter is Var 
+
+
+
+θ(i)| bθ(i)
+
+= bτ 2s2
+
+> i
+
+bτ 2 + s2
+
+> i
+
+= γis2 
+
+> i
+
+. (23) It is important to distinguish the role of the raw WENDy estimates from the role of the empirical-Bayes shrinkage. The raw WENDy parameters bw(i) are used as the individual-level fitted dynam-ics because they minimize the weak-form residual for each trajectory. The empirical-Bayes layer is instead used to estimate the population distribution of biological parameters and to correct the noise-inflated spread of the raw individual estimates. Thus, the primary population-level outputs are 
+
+bμ, bτ 2, s2 
+
+> ii∈I bℓ
+
+, and {γi}i∈I bℓ
+
+. The shrunken quantities eθ(i) are interpreted as empirical-Bayes poste-rior summaries of the parameter distribution, not necessarily as improved individual trajectory-level fits. This distinction is important because shrinkage may worsen the fit to particular individuals, especially individuals whose true growth parameters are far from the population mean, while still improving the estimation of the population-level distribution. 
+
+# 4 Results 
+
+## 4.1 Synthetic data 
+
+We evaluate the proposed method on synthetic ensembles generated from each of the five candidate growth laws in Table 1, with controlled heterogeneity and additive measurement noise. The synthetic study isolates the three quantities the method aims to recover from data: the functional form of 
+
+g, the individual-level coefficients {w(i)}, and the population-level heterogeneity τ 2 in the biological parameters r and Smax .
+
+4.1.1 Test models 
+
+To assess the generality of the method, we consider five canonical growth laws that span a range of qualitative behaviors which are presented in Table 1. While this set of models spans many biological applications, it is by no means complete and the members of this set of models should be adjusted based on the application at hand.                                    
+
+> Model Name Usual r.h.s. WENDy r.h.s. Example systems Exponential rx w1xCell growth [10, 43] Logistic rx (1 −x/S max )w1x+w2x2Plant height [46] Gompertz rx log( Smax /x )w1x+w2xlog xTumor growth [26]; Oocyte dynamics [18] Linear von Bertalanffy r(Smax −x)w1+w2xFish length [5, 52] Metabolic von Bertalanffy r(S1/3max x2/3−x)w1x+w2x2/3Allometric body-size growth
+
+Table 1: Candidate growth laws used for WENDy-based model selection. x denotes individual size, 
+
+r > 0 is the intrinsic growth rate, and Smax > 0 the asymptotic size. The third column gives the linear-in-coefficients form of the right-hand side (r.h.s.) used in weak-form regression. For each model in Table 1, we generate I = 500 synthetic trajectories as follows: The biological parameters θ(i) = ( r(i), S (i)max ) are drawn i.i.d. from a multivariate Gaussian whose mean is set to 10 a biologically reasonable value for the model in question and whose covariance is chosen to produce a coefficient of variation of 10% in each component. Each trajectory is obtained by integrating the corresponding ODE with a fourth-order Runge–Kutta scheme on a uniform grid until a “death event” occurs, after which independent Gaussian measurement noise is added with signal-to-noise ratio σnr .For more details on how the synthetic data is generated see Appendix A. There are three properties of this protocol worth pointing out. First, the heterogeneity is built in to the parameters, not to the dynamics. In other words, each individual obeys the deterministic ODE (1) exactly and all observed spread in the trajectories is either a consequence of parameter spread or of measurement noise. Second, all initial sizes are drawn from a narrow Gaussian distribution, so the method must succeed without a common reference point between the trajectories. Finally, we do not perturb θ(i) over the course of a trajectory. This of course is possible using time-varying parameter estimation methods, but as this has yet to be developed for WENDy, we leave this to future work. 
+
+4.1.2 Model Selection 
+
+We quantify the performance of the BIC model selection step via the selection success rate (i.e., the rate at which the true model was successfully identified) of model selection over 100 realizations of different noise levels. In Figure 3, we plot the success rate as a function of the noise level. We see that up until about ≈ 25% noise, the method is correctly able to select the true model. At this threshold, distinguishing features of the model such as location of inflection points and existence of asymptotic sizes are no longer visible in the data, resulting in similar BIC scores between all models. 10 -5 10 -4 10 -3 10 -2 10 -1 10 0
+
+> noise ratio
+> 00.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1
+> selection success rate
+> Model selection accuracy vs noise level
+> Exponential Gompertz Logistic von Bertalanffy (metabolic) von Bertalanffy (linear)
+
+Figure 3: Mean success rate of the model selection process described in Section 3.3 as a function of the additive measurement noise. The mean is taken over 100 realizations of each noise level. 
+
+4.1.3 Parameter recovery 
+
+We quantify per-trajectory parameter accuracy via the relative ℓ2-error 
+
+E2
+
+bw(i)
+
+= ∥ bw(i) − w(i)true ∥2
+
+∥w(i)true ∥2
+
+, (24) and report the median over individuals together with the ±1 standard deviation envelope across Monte Carlo realizations in Figure 4. This is a standard performance metric in parameter identification and in particular the WENDy framework [6,21,45]. Across all five models the median E2 grows linearly with the noise ratio, E2 ∝ σnr . This linear scaling is the expected behavior of an asymptotically consistent 11 weak-form estimator under sub-noise-level perturbations, and matches the theoretical predictions of [6, 33]. 10 -5 10 -4 10 -3 10 -2 10 -1 10 0  
+
+> noise ratio
+> 10 -8
+> 10 -6
+> 10 -4
+> 10 -2
+> 10 0
+> 10 2
+> median E 2 (' 1 std)
+> Parameter error
+> Exponential Gompertz Logistic von Bertalanffy (metabolic) von Bertalanffy (linear) E2/<1.00
+
+Figure 4: Median E2 error and standard deviation for the five artificial data sets from the models in Table 1 over various noise levels. This median is taken over 100 realizations of each noise level. We also report the relative error in the recovered between-individual standard deviation, 
+
+Eτ (bτ ) = |bτ − τtrue ||τtrue | , (25) for each biological parameter ( r for all laws, and Smax for the four saturating laws), and compare the estimated heterogeneity from the raw WENDy estimates and the shrunken estimates in Figure 5. We show only the results for noise levels above σnr > 10 −3 since, as expected, for exceptionally low noise, the estimators are close to identical implying the raw WENDy estimates can accurately recover the heterogeneity without any added post processing. However, at higher noise levels, the raw estimates increasingly overestimate heterogeneity, requiring the empirical Bayes shrinkage correction. We do point out that, depending on the estimated noise, the shrinkage correction can over correct causing an under representation of the heterogeneity. Finally, at exceptionally high noise levels (e.g., σnr ≥ 0.15), both estimators degrade, but in different ways. The raw WENDy estimate strongly overshoots the true heterogeneity. On the other hand, the shrinkage estimate saturates the Eτ error at 1, representing the shrinkage gains γi have collapsed to zero and every individual estimate is pulled to the population mean. In this regime, the data is simply insufficient to resolve heterogeneity from noise. 
+
+## 4.2 Real Data 
+
+In this subsection, we apply the method to openly available experimental data sets and explore how the results of the method compare to the results of previous studies. 
+
+4.2.1 E. coli Cells 
+
+We applied the above method to single-cell length trajectories of E. coli cells grown in three M9 minimal media (alanine, glycerol, and glucose-casamino-acid) at 28 ◦C, from the openly available dataset of [23] hosted on [24]. Length trajectories were obtained by phase-contrast microscopy in a mother-machine device at 4-minute frame rate, with each trajectory covering one cell cycle from birth to division. The mean reported generation times in the three media are ⟨Td⟩ = 214, 164, and 65 minutes, and the corresponding dataset sizes are Ntot = 816, 648, and 737 cell cycles. We subsample uniformly to 
+
+N = 500 trajectories per medium for direct cross-medium comparability. We also apply minor pruning of trajectories (those with less than 6 observations) and truncate any trajectory with sharp decline (over 0.4 μm in one time frame) as these appear to be mostly tracking errors on a small subset of trajectories. 12 Figure 5: Eτ trend as measurement noise increases for the biological parameters r and Smax . Note that at higher noise levels, the raw WENDy estimates can substantially over estimate the true variance. On the other hand, the shrinkage method collapses all of the estimates to the mean parameter resulting in an error of 1. The summed per-trajectory BIC criterion of Section 3.3 strongly prefers the exponential law for the three data sets with population means bμr = 3 .38 ×10 −3, 4 .49 ×10 −3, and 1 .01 ×10 −2 min −1 for alanine, glycerol, and glucose-cas, respectively (Figure 6). Each agrees with the values of ln 2 /⟨Td⟩ reported in [23] to approximately 4–6% (alanine +4 .3%, glycerol +6 .2%, glucose-cas −5.6%). The recovered biological coefficients of variation are bτr /bμr = 0 .17, 0 .22, and 0 .26, respectively. 
+
+Figure 6: Comparison of the recovered single-cell E. coli growth rates for the different media (alanine (blue), glycerol (orange), and glucose-casamino acid (green)) using the size trajectory data from [23]. 
+
+A: Population distributions of the intrinsic growth rate r; dashed vertical lines mark the estimate of each medium’s mean growth rate reported in [23]. B: Population mean ˆ μr (circles) and biological heterogeneity ±ˆτr (error bars), compared with the values reported in [23] (black ×). Error bars represent population heterogeneity in r, not standard error of the mean. C: Biological coefficient of variation ˆ τr /ˆμr as a function of the population mean growth rate. All panels use N = 500 trajectories per medium, subsampled uniformly from the full dataset. 
+
+4.2.2 HeLa Cells 
+
+The HeLa cell volume growth dataset of [10] (openly available on Dryad [9]) comprises 1,696 single-cell volume trajectories measured by fluorescence exclusion microscopy (FXm) at 10-minute intervals across four independent replicates. HeLa cells expressing the hgeminin-GFP cell cycle reporter were imaged 13 asynchronously and each trajectory was partitioned into G1 and S-G2 segments. To characterize the growth mode, the original authors computed discrete volume derivatives dV 
+
+> dt
+
+over 50-minute sliding windows, binned the resulting growth speeds by instantaneous volume, and fit linear slopes to the population-averaged dV 
+
+> dt
+
+versus V relationship, yielding estimates of the volume-specific growth rate 
+
+r ≈ 0.038–0 .047 hr −1. When this analysis was stratified by cell cycle phase, the authors found that the specific growth rate in S-G2 exceeds that in G1 by approximately 15%, with each phase exhibiting a rate that is approximately constant across cell volumes. Applying our WENDy-based method to their data confirms these findings. The BIC model selec-tion unambiguously identifies exponential growth ( dV 
+
+> dt
+
+= rV ) as the best-supported law in both phases, outperforming the two-parameter logistic, Gompertz, and von Bertalanffy models. The WENDy es-timated population-mean growth rates are rG1 ≈ 0.033 hr −1 and rSG2 ≈ 0.046 hr −1. The S-G2 rate falls within the aforementioned work’s estimated 0.038–0.047 range, while the G1 rate sits slightly below it. This discrepancy is most likely due to the G1 trajectories including the first ≈1.3 hours after cytokinesis, during which the authors observed a non-exponential phase, which they removed from their growth-rate estimates. The WENDy results are presented in Figure 7 where we present a scatter plot of learned parameter values for those 135 cells observed in both phases of growth and the parameter distribution over the population. Matching the observations reported in [10], we see a significant increase in the mean growth rate estimate between the G1 and S-G2 phases. -0.02 0 0.02 0.04 0.06 0.08 0.1 0.12         
+
+> rG1 (hour -1 )
+> -0.02 00.02 0.04 0.06 0.08 0.1 0.12
+> rS-G2  (hour -1 )
+> Paired growth rates (n = 135 cells) 00.02 0.04 0.06 0.08 0.1
+> r (hour -1 )
+> 0510 15 20 25 30 35
+> pdf
+> WENDy Params: G1 vs S-G2
+> G1 ( 7=0.0330, <=0.0159) S-G2 ( 7=0.0456, <=0.0121)
+
+Figure 7: Left: Scatter plot of the estimated growth rates of HeLa cells observed in both phases of growth against the line y = x. Right: Normalized estimated parameter population distributions of the two growth phases. 
+
+4.2.3 Loblolly Pines 
+
+In this example, we make use of a Loblolly pine tree size dataset [25,42]. This dataset consists of height measurements of 14 Pinus taeda trees, each grown from a distinct seed source and whose heights were measured at ages 3, 5, 10, 15, 20, and 25 years. Heights of the trees range from approximately 4 to 60 feet, spanning the transition from early exponential-like growth into the decelerating phase where trunk diameter and height approach asymptotic limits. This data set is generally used as a standard benchmark for nonlinear mixed-effect models since its inclusion in R’s datasets package. For our purposes, this data set presents an interesting challenge for WENDy as the data is relatively sparser than datasets typically used in weak-form benchmarks, causing a problem when calculating the numerical quadrature. This can be solved via linear interpolation of the data points to ensure adequate resolution for the weak-form test function integrals in the WENDy method (see [22] for an exploration of WENDy with interpolated data). We point out that interpolation does not add information of the dynamics to WENDy, but simply allows us to fill out the numerical quadrature. With these interpolated trajectories, the BIC model selection identifies the linear von Bertalanffy model ( dh 
+
+> dt
+
+= r(Smax − h)), consistent with the asymptotic regression model used by Pinheiro and Bates [42] in their treatment of this dataset, and in contrast to the logistic model originally fit by 14 Figure 8: Example linear von Bertalanffy trajectories (blue dashed) selected and fit with the WENDy method for the sparse Loblolly Pine data (gray dots). Kung [25]. The 5th percentile, median, and 95th percentile trajectory fits as well as their root relative mean squared error (RRMSE) are provided in Figure 8. 
+
+# 5 A discussion on upscaling to the population-level 
+
+While the method above provides a robust model selection and parameter distribution estimation method, it remains to show how one progresses from these estimates, ( g, bP), to population level predictions. To this end, let u(t, x, θ ) denote the density of individuals with size x and parameter vector θ at time t. Ignoring source and sink processes such as birth, death, and cell division 2, the deterministic dynamics (1) imply that u follows the continuity equation 
+
+∂tu(t, x, θ ) + ∂x
+
+ g(x; θ) u(t, x, θ ) = 0 . (26) This equation describes conservation of individuals in the joint state-parameter space. The observable population density in size alone is the marginal 
+
+ρ(t, x ) = 
+
+Z
+
+u(t, x, θ ) d θ, (27) and integrating (26) with respect to θ yields 
+
+∂tρ(t, x ) + ∂x
+
+ geff (t, x ) ρ(t, x ) = 0 , geff (t, x ) := Eg(x; θ) | x, t  =
+
+R g(x; θ) u(t, x, θ ) d θρ(t, x ) . (28) Equation (28) is exact, but not closed in ρ alone: geff depends on the conditional law of θ given size x
+
+at time t, which is generally not equal to the marginal P(θ) because the dynamics induce a correlation between θ and x. The remainder of this section discusses two complementary ways to approximately close (28) from the outputs of WENDy. 
+
+## 5.1 The mixture-of-cohorts closure 
+
+Following the work of [3], we can discretize the parameter distribution by M representatives {θ(m)}Mm=1 
+
+with corresponding weights {α(m)}Mm=1 satisfying P 
+
+> m
+
+αm = 1. Then one can approximate the density as a sum of cohorts: 
+
+u(t, x, θ ) ≈
+
+> M
+
+X
+
+> m=1
+
+αm um(t, x ) δ θ − θ(m), (29)  
+
+> 2In the case that these dynamics are homogeneous across the population, their inclusion falls naturally. The more realistic and more complicated case of additional heterogeneous parameters affecting these dynamics is left as future work.
+
+15 where each cohort density um satisfies a one-dimensional transport equation with its own deterministic growth rate 
+
+∂tum(t, x ) + ∂x
+
+ g(x; θ(m)) um(t, x ) = 0 , m = 1 , . . . , M. (30) The population density is approximated as ρ(t, x ) ≈ P 
+
+> m
+
+αm um(t, x ). For the method of choosing representatives for simulation/prediction, any quadrature rule on the estimated parameter distribution bP yields valid representative parameters and weights. For a natural data-driven choice, we recommend clustering the individual parameter estimates and taking θ(m) (or alternatively w(m)) as the centroid of cluster m and αm as its mass fraction. In Figure 9 A&B , we use the k-means clustering algorithm for both the biological parameter space and LiP parameter space for 
+
+M = 20 groups. We generally find that fewer cohort groups are needed (for the same accuracy) when the clustering is done on the biological parameters θ = ( r, S max )T rather than in the weight space given by w. This is demonstrated in Figure 9 C where we simulate size-at-age population densities with k-means clustering applied in both parameter spaces and is confirmed on all models in Figure 10 where we compare the L1 norm, L1(ρtrue (T, ·), ρ pred (T, ·)) = R |ρtrue (T, x ) − ρpred (T, x )| dx, for the true density and predicted density as a function of the number of cohort representatives. Notice that performing the clustering algorithm in the biological parameter space greatly out performs clustering in the LiP space. 
+
+## 5.2 Effective-velocity closure 
+
+The simplest closure to equation (28) is to simply replace the conditional expectation with an uncon-ditional approximation: 
+
+geff (x) ≈ Eθ∼ bP [g(x; θ)] ,
+
+and make use of the single resulting transport equation. For laws linear in w this reduces to using 
+
+g(x; ¯ w) where ¯ w is the mean of the WENDy weights (see Figure 9 C). This closure is computationally more efficient than the cohort-mixture approach as, for predictions or simulations, one only needs to solve a single PDE as oppose to the M weighted PDEs (30). However, this approximation cannot reproduce the correct long-time asymptotics and is, therefore, a short-time approximation. For exam-ple, for every saturating candidate model in Table 1, each individual approaches its own asymptotic size, i.e., x(i)(t) → S(i)max as t → ∞ . The long-time marginal density (again ignoring source and sink processes) is therefore the pushforward of the parameter distribution through the transport map: 
+
+ρ∞(x) = 
+
+Z
+
+δ(x − Smax (θ)) d P(θ),
+
+which is (generally) a non-degenerate distribution. On the other hand, the effective velocity closure uses a single effective maximum size ¯Smax in the dynamics and therefore the long-time limit of the population density is to concentrate at this effective maximum size, e.g., ρ∞(x) = δ(x − ¯Smax ). 
+
+# 6 Discussion 
+
+In conclusion, we have presented a WSciML method for growth law selection and parameter identifi-cation of heterogeneous parameters in a population of growing individuals. The method combines the WENDy method for parameter identification, BIC model selection, and empirical Bayes shrinkage to correct for artificial variance due to measurement noise. We tested the method on several artificial data sets to explore its performance at different noise regimes. From Figure 3, it is clear that the model selection struggles at high noise ( σnr ≈ 25%) at which point the identifying features of the models become indistinguishable from noise. In such a high noise regime, it is better to fix an interpretable model from either first principles or from literature reference. It is worth noting that the parameter estimation step can still succeed in this regime for a fixed model. Indeed from Figure 4, we see the trend of the median parameter error continues to grow proportional to the noise level. This is a com-monly encountered strength of weak-form approaches due to all derivatives being removed from the noisy state variable and has been reported in many studies [6, 21, 30, 31, 45, 48]. The results of this work are a promising first step to the full inference of individual to population level heterogeneous growth dynamics. There are still multiple open questions to the work discussed here which are active frontiers. First, this study is primarily focused on growth rates and leaves the 16 Figure 9: A & B: K-means clustering algorithm applied to the learned parameter space for the artificial logistic data set with σnr = 0 .05. Plot A shows the k-means algorithm applied to the biological parameter space ( r, S max ) and plot B to the LiP space ( w1, w 2). Coloring represents the cohort groups with crosses ( ×) representing the representative of the nearby cohort. C: Population-at-age density simulations using the clustering results above. Solid lines represent empirical densities from the data, with the black line representing the initial density and the red line representing the size density of individuals at age 35. The dotted ( · · · ) line represents the simulation using the mean parameter whereas the dashed (- -) lines use the results of the two clustering algorithms. 17 Figure 10: L1 accuracy of the cohort mixture method as a function of the number of cohort represen-tatives M , for each growth law fit to clean data. Solid lines represent the clustering done in LiP space and dashed lines represent the biological parameter space. treatment of death, division, birth, and other processes as future work; however, these processes are critical for prediction at the population level. Additionally, the rigorous convergence of the cohort method discussed in Section 5 to the population density described by (26) (including source terms) is, to our knowledge, an open question. Results concerning similar methods in the traditional setting of structured population models (i.e., when each individual follows the same characteristic equations) such as the Escalator Boxcar Train (EBT) and splitting-particle methods have been well established [11,12, 20] and the techniques used for these methods should be applicable to this problem. Third, regarding the E. coli example of Section 4.2.1, the original work [23] concludes that the recorded trajectories could be super-exponential, however, none of the models implemented in this work describe this behavior and the more traditional growth model for bacteria cells was selected. It is possible that, if given the option, the model selection stage of the method (or an equation learning algorithm like WSINDy) could select a super-exponential model over the exponential model in our work. Finally, the development of a full mixed-effects-aware WENDy method, where the population mean and variance are used directly in the WENDy parameter estimation, could substantially improve the method presented here. 
+
+Data Availability: All code used in this manuscript will be made available upon publication on the repository github.com/MathBioCU/Heterogeneous Growth Laws. 
+
+Acknowledgments: The research reported in this publication was supported in part by the NIGMS Division of Biophysics, Biomedical Technology and Computational Biosciences (grant R35GM149335 to DMB); NSF Division of Molecular and Cellular Biosciences MODULUS (grant 2054085 to DMB); NSF Division Of Environmental Biology (EEID grant DEB-2109774 to VD), and NIFA Biological Sciences (grant 2019-67014-29919 to VD). The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript. This work utilized the Blanca condo computing resource at the University of Colorado Boulder. Blanca is jointly funded by computing users and the University of Colorado Boulder. The authors would like to thank N. Heitzman-Breen (CU Boulder) for useful discussion regarding mixed-effect modeling and would also like to thank M. Doumic (Sorbonne Universit´ es, Inria, ´Ecole polytechnique, CMAP) for insightful discussion about heterogeneity in growth rates for cell populations. 18 References 
+
+[1] A. Ackleh , Parameter identification in size-structured population models with nonlinear individ-ual rates , Mathematical and Computer Modelling, 30 (1999), pp. 81–92. [2] A. S. Ackleh and K. Ito , Measure-valued solutions for a hierarchically size-structured popula-tion , Journal of Differential Equations, 217 (2005), pp. 431–455. [3] H. T. Banks and B. G. Fitzpatrick , Estimation of growth rate distributions in size structured population models , Quarterly of Applied Mathematics, 49 (1991), pp. 215–235. [4] S. Benzekry, C. Lamont, A. Beheshti, A. Tracz, J. M. L. Ebos, L. Hlatky, and P. Hahnfeldt , Classical Mathematical Models for Description and Prediction of Experimental Tumor Growth , PLoS Computational Biology, 10 (2014), p. e1003800. [5] R. J. H. Beverton and S. J. Holt , On the Dynamics of Exploited Fish Populations , Springer Netherlands, Dordrecht, 1993. [6] D. M. Bortz, D. A. Messenger, and V. Dukic , Direct Estimation of Parameters in ODE Models Using WENDy: Weak-form Estimation of Nonlinear Dynamics , Bulletin of Mathematical Biology, 85 (2023). [7] T. Bourgeron, M. Doumic, and M. Escobedo , Estimating the division rate of the growth-fragmentation equation with a self-similar kernel , Inverse Problems, 30 (2014), p. 025007. [8] S. L. Brunton, J. L. Proctor, and J. N. Kutz , Discovering governing equations from data by sparse identification of nonlinear dynamical systems , Proceedings of the National Academy of Sciences, 113 (2016), pp. 3932–3937. [9] C. Cadart, M. Piel, and M. Cosentino Lagomarsino , High throughput measurement of single HeLa cell volume growth and cell cycle progression using FXm . Dryad, data set, Jan. 2022. DOI: https://doi.org/10.6078/D12M6C .[10] C. Cadart, L. Venkova, M. Piel, and M. Cosentino Lagomarsino , Volume growth in animal cells is cell cycle dependent and shows additive fluctuations , eLife, 11 (2022), p. e70816. [11] J. A. Carrillo, P. Gwiazda, K. Kropielnicka, and A. K. Marciniak-Czochra , The Escalator Boxcar Train Method for a System of Age-Structured Equations in the Space of Measures ,SIAM Journal on Numerical Analysis, 57 (2019), pp. 1842–1874. [12] J. A. Carrillo, P. Gwiazda, and A. Ulikowska , Splitting-particle methods for structured population models: Convergence and applications , Mathematical Models and Methods in Applied Sciences, 24 (2014), pp. 2171–2197. [13] O. Diekmann, M. Gyllenberg, and J. A. J. Metz , On models of physiologically structured populations and their reduction to ordinary differential equations , Journal of Mathematical Biol-ogy, 80 (2020), pp. 189–204. [14] M. Doumic, M. Hoffmann, N. Krell, and L. Robert , Statistical estimation of a growth-fragmentation model observed on a genealogical tree , Bernoulli, 21 (2015). [15] M. Doumic, B. Perthame, and J. P. Zubelli , Numerical solution of an inverse problem in size-structured population dynamics , Inverse Problems, 25 (2009), p. 045008. [16] M. Doumic, A. Rat, and M. Tournus , Comparison between effective and individual growth rates in a heterogeneous population , Royal Society Open Science, 13 (2026), p. 251119. [17] C. D¨ ull, P. Gwiazda, A. Marciniak-Czochra, and J. Skrzeczkowski , Spaces of Measures and Their Applications to Structured Population Models , Cambridge University Press, 2021. [18] L. Fostier, M. Lesage, V. Thermes, F. Cl´ ement, and R. Yvinec , Data-driven PINN inference of oocyte dynamics in fish ovaries , preprint, HAL:hal-05536280, (2026). 19 [19] P. Gwiazda, T. Lorenz, and A. Marciniak-Czochra , A nonlinear structured population model: Lipschitz continuity of measure-valued solutions with respect to model ingredients , Journal of Differential Equations, 248 (2010), pp. 2703–2735. [20] P. Gwiazda, B. Miasojedow, J. Skrzeczkowski, and Z. Szyma´ nska , Convergence of the EBT method for a non-local model of cell proliferation with discontinuous interaction kernel , IMA Journal of Numerical Analysis, 43 (2023), pp. 590–626. [21] N. Heitzman-Breen, V. Dukic, and D. M. Bortz , A Practical Identifiability Criterion Lever-aging Weak-Form Parameter Estimation , Bulletin of Mathematical Biology, 88 (2026), p. 70. [22] N. Heitzman-Breen, R. Lyons, P. Jain, M. K. Jolly, and D. M. Bortz , Weak form scientific machine learning for systems biology: A tutorial on WENDy , bioRxiv, (2026). [23] P. Kar, S. Tiruvadi-Krishnan, J. M¨ annik, J. M¨ annik, and A. Amir , Distinguishing dif-ferent modes of growth using single-cell data , eLife, 10 (2021), p. e72565. [24] P. Kar, S. Tiruvadi-Krishnan, J. M¨ annik, J. M¨ annik, and A. Amir , Distinguish-ing different modes of growth using single-cell data . Harvard Dataverse, 2021. DOI: https: //doi.org/10.7910/DVN/BNQUDW .[25] F. H. Kung , Fitting logistic growth curve with predetermined carrying capacity , in Proceedings of the Statistical Computing Section, American Statistical Association, 1986, pp. 340–343. [26] A. K. Laird , Dynamics of Tumor Growth , British Journal of Cancer, 18 (1964), pp. 490–502. [27] M. J. Lindstrom and D. M. Bates , Nonlinear Mixed Effects Models for Repeated Measures Data , Biometrics, 46 (1990), p. 673. [28] C. L´ opez, M. Partridge, S. De Pascuale, J. Lore, A. Christlieb, S. Becker, and D. M. Bortz , WSINDy for model predictive control with applications to fusion, drones, and chaos , Proceedings of the Royal Society A, (2026). [29] R. Lyons, V. Dukic, and D. M. Bortz , Learning structured population models from data with WSINDy , PLOS Computational Biology, 21 (2025), p. e1013742. [30] D. A. Messenger and D. M. Bortz , Weak SINDy For Partial Differential Equations , Journal of Computational Physics, 443 (2021), p. 110525. [31] , Weak SINDy: Galerkin-Based Data-Driven Model Selection , Multiscale Modeling & Simu-lation, 19 (2021), pp. 1474–1497. [32] , Learning mean-field equations from particle data using WSINDy , Physica D: Nonlinear Phenomena, 439 (2022), p. 133406. [33] , Asymptotic consistency of the WSINDy algorithm in the limit of continuum data , IMA Journal of Numerical Analysis, (2024), p. drae086. [34] D. A. Messenger, J. W. Burby, and D. M. Bortz , Coarse-graining hamiltonian systems using WSINDy , Scientific Reports, 14 (2024), p. 14457. [35] D. A. Messenger, E. Dall’Anese, and D. M. Bortz , Online weak-form sparse identification of partial differential equations , in Proceedings of the Third Mathematical and Scientific Ma-chine Learning Conference, vol. 190 of Proceedings of Machine Learning Research, PMLR, 2022, pp. 241–256. [36] D. A. Messenger, G. Dwyer, and V. Dukic , Weak-form inference for hybrid dynamical systems in ecology , Journal of The Royal Society Interface, 21 (2024), p. 20240376. [37] D. A. Messenger, G. E. Wheeler, X. Liu, and D. M. Bortz , Learning anisotropic interac-tion rules from individual trajectories in a heterogeneous cellular population , Journal of the Royal Society Interface, 19 (2022), p. 20220412. 20 [38] S. Minor, V. Dukic, and D. M. Bortz , Learning effective soliton dynamics from scattering data , 2026. [39] S. Minor, B. D. Elderd, B. Van Allen, D. M. Bortz, and V. Dukic , Weak form learning for mean-field partial differential equations: An application to insect movement , SIAM Journal on the Life Sciences, (2026). Accepted; arXiv:2510.07786. [40] S. Minor, D. A. Messenger, V. Dukic, and D. M. Bortz , Learning Physically Interpretable Atmospheric Models from Data with WSINDy , Journal of Geophysical Research: Machine Learn-ing and Computation, 2 (2025), p. e2025JH000602. [41] B. Perthame and J. P. Zubelli , On the inverse problem for a size-structured population model ,Inverse Problems, 23 (2007), pp. 1037–1052. [42] J. C. Pinheiro and D. M. Bates , Mixed-Effects Models in S and S-PLUS , Statistics and Computing, Springer, New York, 2000. [43] L. Robert, M. Hoffmann, N. Krell, S. Aymerich, J. Robert, and M. Doumic , Division in Escherichia coliis triggered by a size-sensing rather than a timing mechanism , BMC Biology, 12 (2014), p. 17. [44] S. H. Rudy, S. L. Brunton, J. L. Proctor, and J. N. Kutz , Data-driven discovery of partial differential equations , Science Advances, 3 (2017), p. e1602614. [45] N. Rummel, D. A. Messenger, S. Becker, V. Dukic, and D. M. Bortz , WENDy for Nonlinear-in-Parameters ODEs , arXiv:2502.08881, (2025). [46] S. Sun and L. E. Frelich , Flowering phenology and height growth pattern are associated with maximum plant height, relative growth rate and stem tissue mass density in herbaceous grassland species: Plant phenology and functional traits , Journal of Ecology, 99 (2011), pp. 991–1000. [47] M. Tian, D. A. Messenger, V. Dukic, N. Rodr´ ıguez, and D. M. Bortz , Learning effective models from network dynamics data with multiple initial conditions using weak form SINDy , 2026. [48] A. Tran and D. M. Bortz , Weak form scientific machine learning: Test function construction for system identification , SIAM Journal on Scientific Computing, 48 (2026), pp. C890–C915. [49] G. Vasey, D. A. Messenger, D. M. Bortz, A. Christlieb, and B. O’Shea , Influence of initial conditions on data-driven model identification and information entropy for ideal MHD problems , Journal of Computational Physics, 524 (2025), p. 113719. [50] J. M. Ver Hoef , Who Invented the Delta Method? , The American Statistician, 66 (2012), pp. 124–127. [51] S. Vincenzi, A. J. Crivelli, S. Munch, H. J. Skaug, and M. Mangel , Trade-offs between accuracy and interpretability in von Bertalanffy random-effects models of growth , Ecological Ap-plications, 26 (2016), pp. 1535–1552. [52] S. Vincenzi, D. Jesensek, and A. J. Crivelli , Biological and statistical interpretation of size-at-age, mixed-effects models of growth , Royal Society Open Science, 7 (2020). 
+
+# A Artificial Simulations 
+
+For each growth law in Table 1 we generate I = 500 independent trajectories by the following procedure. For each individual i = 1 , 2, . . . , I , the biological parameters r(i) and S(i)max (r(i) only in the case of exponential growth) are drawn independently from positive Gaussian distributions by acceptance– rejection (i.e., candidates are repeatedly drawn from a normal distribution until the selected parameter is positive). In mathematical notation, we sample r(i) ∼ N +(μr , σ r ) and S(i)max ∼ N +(μs, σ s). For scaling, we choose ( μr , σ r ) = (0 .2, 0.02) and ( μs, σ s) = (50 , 5). This scaling allows for interpretable size units in a variety of applications (e.g., centimeters for fish length, kilograms for mammals, and microns for cells) and for both parameters, the coefficient of variation approximates a reasonable 10%. 21 The initial size of each individual is a fraction of that individual’s maximum size, x(i)0 = η(i)S(i)max with 
+
+η(i) ∼ N +(0 .05 , 0.01) and also clipped so that η(i) ∈ [10 −3, 0.5] to keep growth observable. Each trajectory is then simulated using MATLAB’s ode45 solver with relative and absolute tol-erances set to 10 −10 on a uniform grid with constant sampling of ∆ t = 0 .2. The trajectory simulation is terminated at a “death event” where the size crosses a particular target size xT := min {100 x0, 0.9Smax }.Examples of the trajectories for each model are shown in Figure 11. 
+
+Figure 11: Size-at-age trajectory plots for each artificial data set used in the paper. 
+
+# B Robustness to sampling: a bootstrap experiment 
+
+The synthetic experiments of Section 4 report point summaries computed from a single ensemble of 
+
+I = 500 individuals over many realizations of the target noise level. Because both the individuals and their measurements are random, those summaries are effectively random variables, and a practitioner applying the method to one experimental cohort has access to exactly one draw of measurement noise. Therefore, it is important to quantify how much of the reported performance is attributable to the particular ensemble that happened to be observed via random sampling. We now briefly describe the experiment. Fix a growth law gℓ ∈ G and a noise ratio σnr , and let 
+
+D = {(x(i)⋆, θ (i))}Ii=1 denote the noise-free synthetic ensemble generated as in Appendix A. For each of B replicates b = 1 , . . . , B we 1. draw indices i(b)1 , . . . , i (b) 
+
+> n
+
+i.i.d. uniformly from {1, . . . , I }, i.e. resample n = I individuals with replacement ;2. draw an independent additive-noise realization for each resampled individual, x(ij ) = x(ij ) 
+
+> ⋆
+
++ε(b,j )
+
+with ε(b,j ) ∼ N (0 , ˆσ2 
+
+> ij
+
+I) and ˆ σij = σnr ∥x(ij ) 
+
+> ⋆
+
+∥RMS ;3. rerun the entire model selection process of Section 3. Nothing is cached between replicates, so the induced spread reflects the total variability of the method with respect to which individuals are sampled and how they are measured. Individuals drawn more than once in a replicate receive independent noise realizations. 22 We test the model selection’s robustness to sampling using B = 100 subsamples. The selection rate, interpreted as the percent of times the model was correctly selected, is reported in Fig. 12. We see a similar behavior to that of Fig. 3 where model selection begins to drastically fail at around 
+
+σnr ≈ 0.25. This suggests the model selection step (and its failure) is not strongly dependent on the given trajectories. 
+
+Figure 12: Selection success rate as a function of the noise ratio, σnr for B = 100 independent samplings of the trajectories. 23

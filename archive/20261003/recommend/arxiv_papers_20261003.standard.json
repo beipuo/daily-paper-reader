@@ -1,0 +1,53 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-03T22:30:36.197745+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.31955v1",
+      "title": "From Individual Trajectories to Population Densities: Weak-Form Inference of Heterogeneous Growth Laws",
+      "abstract": "Single-cell time-lapse microscopy now provides high-resolution size trajectories for thousands of individual cells, yet principled methods for simultaneously learning the functional form of growth laws and the distribution of cell-to-cell physiological variability remain limited. We present a data-driven framework based on the recent Weak-form Estimation of Nonlinear Dynamics (WENDy) algorithm to (i) select the best supported growth law from a set of candidate laws, and (ii) recover individual-level growth parameters via empirical Bayes shrinkage within a random-effects model. We demonstrate the approach on both synthetic individual size data incorporating commonly found growth laws and recorded real size trajectories, showing that the method accurately recovers both growth-law structure and parameter heterogeneity at reasonable noise levels. We finally end with a discussion on how the results obtained by the method here can be upscaled to the population level.",
+      "authors": [
+        "Rainey Lyons",
+        "Vanja Dukic",
+        "David M Bortz"
+      ],
+      "primary_category": "q-bio.PE",
+      "categories": [
+        "q-bio.PE"
+      ],
+      "published": "2026-09-25T20:01:31+00:00",
+      "link": "https://arxiv.org/pdf/2609.31955v1",
+      "tags": [
+        "keyword:植物氨基酸",
+        "query:植物氨基酸"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "inference of growth laws and nonlinear dynamics from trajectories",
+      "llm_evidence_cn": "从轨迹中推断生长定律和非线性动力学",
+      "llm_evidence": "从轨迹中推断生长定律和非线性动力学",
+      "canonical_evidence": "从轨迹中推断生长定律和非线性动力学",
+      "llm_tldr_en": "A data-driven framework to select growth laws and recover parameters from single-cell size trajectories.",
+      "llm_tldr_cn": "一种数据驱动框架，用于从单细胞尺寸轨迹中选择生长定律并恢复参数。",
+      "llm_tldr": "一种数据驱动框架，用于从单细胞尺寸轨迹中选择生长定律并恢复参数。",
+      "llm_tags": [
+        "query:xrlsr:composite"
+      ],
+      "matched_query_tag": "query:xrlsr:composite",
+      "matched_query_text": "Papers central to 可解释强化学习驱动的符号回归方程发现论文查找, especially work that connects or combines: symbolic regression for equation discovery; reinforcement learning driven symbolic regression; interpretable machine learning for symbolic regression; automated discovery of physical laws and equations; policy gradient methods in symbolic regression; interpretable reinforcement learning for symbolic regression papers; deep reinforcement learning methods for automated equation discovery; state of the art in reinforcement learning based symbolic regression; frameworks for explainable symbolic regression using RL agents.",
+      "matched_requirement_id": "req-composite-xrlsr",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
