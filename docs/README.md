@@ -6,26 +6,22 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-10-03
-- 运行时间：2026-10-03 22:30:42 UTC
+- 最新运行日期：2026-10-04
+- 运行时间：2026-10-04 22:07:36 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：0
 - 精读区：0
-- 速读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-今日速读《从个体轨迹到群体密度：异质生长定律的弱形式推断》，探索复杂系统建模新视角。
-该研究提出了一种从个体运动轨迹反推群体生长规律的数学框架，为理解异质性演化提供了新工具。
-建议关注复杂系统动力学领域的读者阅读，以了解如何通过弱形式推断简化非线性建模过程。
-- 详情：[/202610/03/README](/202610/03/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202610/04/README](/202610/04/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [From Individual Trajectories to Population Densities: Weak-Form Inference of Heterogeneous Growth Laws](/202610/03/2609.31955v1-from-individual-trajectories-to-population-densities-weak-form-inference-of-heterogeneous-growth-laws)  
-   标签：评分：6.0/10、query:xrlsr
-   evidence：从轨迹中推断生长定律和非线性动力学
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">
