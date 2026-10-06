@@ -1,8 +1,51 @@
 {
   "label": "2026-10-06",
   "date": "2026-10-06",
-  "generated_at": "2026-10-06T00:30:46",
-  "count": 0,
-  "papers": [],
+  "generated_at": "2026-10-06T23:37:47",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202610/06/2610.04843v1-multicatalyst-reactions-induce-abrupt-transition-in-a-dense-catalytic-reaction-network-model",
+      "section": "quick",
+      "title_en": "Multicatalyst reactions induce abrupt transition in a dense catalytic reaction network model",
+      "authors": "Kota Mitsumoto, Shuji Ishihara",
+      "date": "2026-10-04",
+      "pdf": "https://arxiv.org/pdf/2610.04843v1",
+      "score": "6.0",
+      "evidence": "细胞内催化反应网络模型",
+      "tldr": "本研究将细胞内催化反应网络的 Furusawa-Kaneko 模型推广至多催化剂反应，并结合动态平均场理论分析其动力学特征。研究发现营养丰富时，催化剂数量会改变系统的分叉结构：单催化剂引发连续相变，而多催化剂则诱导双稳态与不连续突变，为代谢动力学中的突然切换提供了新的理论机制。",
+      "tags": "query:profile-4",
+      "abstract_en": "We generalize the Furusawa--Kaneko model, a simple model of intracellular catalytic reaction networks, to multicatalyst reactions and analyze the generalized model using dynamical mean-field theory. In the thermodynamic and dense-network limit, we derive exact effective equations and analyze their fixed points for arbitrary degree distributions. Under nutrient-poor conditions, network heterogeneity suppresses the metabolic--starvation transition irrespective of the number of catalysts per reaction. In contrast, under nutrient-rich conditions, the bifurcation structure changes with the number of catalysts. With one catalyst per reaction, only continuous transitions occur, whereas two or more catalysts give rise to bistable phases and discontinuous transitions. The bifurcation structure also differs between two and three catalysts per reaction, with three catalysts allowing bistability between metabolic states with different cell growth rates. Our results provide a possible mechanism for bistability and abrupt switching in metabolic dynamics.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/06/2610.05242v1-approximating-parameter-regions-for-multistationarity-and-multistability-in-mass-action-systems",
+      "section": "quick",
+      "title_en": "Approximating Parameter Regions for Multistationarity and Multistability in Mass-Action Systems",
+      "authors": "Dylan Antonio S. J. Talabis, Victoria May P. Mendoza, Bryan S. Hernandez",
+      "date": "2026-10-04",
+      "pdf": "https://arxiv.org/pdf/2610.05242v1",
+      "score": "6.0",
+      "evidence": "化学反应网络的可解释代理模型",
+      "tldr": "针对质量作用化学反应网络中多平稳态与多稳态参数区域难以显式刻画的问题，本文提出了一种结合自适应采样与可解释机器学习的计算框架。该框架利用代理模型引导高效采样并结合规则归纳提取判定特征，成功实现了复杂反应网络中多稳态参数区域的高效发现与可解释表征。",
+      "tags": "query:xrlsr",
+      "abstract_en": "Identifying kinetic parameters and conserved quantities that support multistationarity and multistability remains challenging in chemical reaction network analysis. Structural theory provides existence and exclusion results, but does not always yield explicit, interpretable descriptions of the corresponding parameter regimes. We present a computational and machine-learning framework for discovering and characterizing parameter regimes with numerical evidence of multistationarity and multistability in mass-action systems. We refer to these numerically detected behaviors as approximate multistationarity and approximate multistability. The framework combines Latin hypercube sampling, adaptive sampling, and interpretable surrogate modeling. Logistic-regression and neural-network surrogates are trained separately on accumulated detection labels and independently guide later sampling toward regions with high scores for approximate multistationarity or multistability. Boundary refinement targets transitions between detected and undetected numerical classes. Buckingham--Pi groups are then used with CN2 rule induction to obtain interpretable empirical descriptions of detected regimes. Illustrative networks yield rules consistent with known multistationarity conditions, while the Schlögl model demonstrates adaptive enrichment of multistationarity detections. In the hybrid histidine kinase model and the sequential dual phosphorylation cycle, adaptive sampling substantially increased the number of parameter - total pairs with detected multistability relative to global sampling under equal sampling budgets. The framework complements analytical chemical reaction network theory by providing efficient, parameter-resolved discovery and characterization of multistationary and multistable regimes.",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202610/06/2610.06042v1-go-based-clustering-for-learning-cluster-level-causal-gene-regulatory-networks",
+      "section": "quick",
+      "title_en": "GO-Based Clustering for Learning Cluster-Level Causal Gene Regulatory Networks",
+      "authors": "Azlaan Mustafa Samad, Wei Zhang, Adèle H Ribeiro",
+      "date": "2026-10-05",
+      "pdf": "https://arxiv.org/pdf/2610.06042v1",
+      "score": "6.0",
+      "evidence": "因果基因调节网络与基因本体论",
+      "tldr": "针对高维基因调控网络因果推断计算困难且现有聚类因果方法依赖难以构建的无环可接受划分的问题，本文提出了GO4CD算法。该算法利用基因本体论（GO）的层级结构构建具备生物学意义且符合因果推断可接受性的多粒度基因模块，并结合CLOC算法进行因果网络学习。在大肠杆菌调控网络上的实验表明，GO4CD显著降低了不可接受率，能有效学习聚类级别的因果基因调控网络。",
+      "tags": "query:profile-4",
+      "abstract_en": "Discovery of causal relationships in high-dimensional Gene Regulatory Networks (GRN) is computationally challenging and often difficult to interpret due to dense connections. Therefore, grouping genes together into functional modules can improve tractability and biological interpretability. However, existing cluster level causal discovery methods assume access to a predefined admissible partitions, requiring the graph over clusters to be acyclic. Constructing such partitions is therefore challenging. In this work, we introduce GO-based Clustering for Causal Discovery (GO4CD), an algorithm that uses Gene Ontology (GO) to construct biologically meaningful gene partitions at multiple levels of granularity, while favoring those more likely to be admissible for causal discovery. GO4CD groups together genes participating in a shared biological process, and propagates gene annotations through the ontology hierarchy to achieve different granularity of partitions. Furthermore, we integrate GO4CD with Causal Learning over Clusters (CLOC) algorithm and evaluate recovery of true Markov equivalence class both with an oracle of conditional independencies and on simulated gene expression data using multivariate conditional independence tests. We evaluate GO4CD on multiple E.coli regulatory subnetworks and find that it is inadmissible in 18.1% of the cases, compared with 65.3-82.3% for the semantic-similarity baselines. Our results indicate that GO4CD is substantially better suited to learning causal GRNs defined over biologically meaningful gene clusters.",
+      "selection_source": "fresh_fetch"
+    }
+  ],
   "errors": []
 }

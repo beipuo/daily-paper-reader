@@ -1,0 +1,3013 @@
+Title: Multicatalyst reactions induce abrupt transition in a dense catalytic reaction network model
+
+URL Source: https://arxiv.org/pdf/2610.04843v1
+
+Published Time: Tue, 06 Oct 2026 01:15:24 GMT
+
+Number of Pages: 19
+
+Markdown Content:
+Multicatalyst reactions induce abrupt transition in a dense catalytic reaction network model 
+
+Kota Mitsumoto 1, ∗ and Shuji Ishihara 1, 2, †
+
+> 1
+
+Graduate School of Arts and Sciences, The University of Tokyo, Komaba 3-8-1, Meguro-ku, Tokyo 153-8902, Japan 
+
+> 2
+
+Universal Biology Institute, The University of Tokyo, Komaba 3-8-1, Meguro-ku, Tokyo 153-8902, Japan 
+
+(Dated: October 6, 2026) We generalize the Furusawa–Kaneko model, a simple model of intracellular catalytic reaction networks, to multicatalyst reactions and analyze the generalized model using dynamical mean-field theory. In the thermodynamic and dense-network limit, we derive exact effective equations and analyze their fixed points for arbitrary degree distributions. Under nutrient-poor conditions, network heterogeneity suppresses the metabolic–starvation transition irrespective of the number of catalysts per reaction. In contrast, under nutrient-rich conditions, the bifurcation structure changes with the number of catalysts. With one catalyst per reaction, only continuous transitions occur, whereas two or more catalysts give rise to bistable phases and discontinuous transitions. The bifurcation structure also differs between two and three catalysts per reaction, with three catalysts allowing bistability between metabolic states with different cell growth rates. Our results provide a possible mechanism for bistability and abrupt switching in metabolic dynamics. 
+
+I. INTRODUCTION 
+
+Network representation is a powerful theoretical ap-proach for modeling and understanding the dynamics of complex systems [1–4], including social [5, 6], ecologi-cal [7], information [8], neuronal [9], and metabolic sys-tems [10, 11]. A network represents dynamical variables as nodes and their interactions as edges, allowing struc-tural properties such as mean connectivity, degree distri-butions, and modularity to be characterized. How these structural properties affect the dynamics of such com-plex systems has been studied [12–14]. Beyond these conventional structural properties, attention has increas-ingly focused on hypergraph structures, in which three or more nodes are connected by a single hyperedge to rep-resent higher-order interactions, and to their effects on dynamics [15, 16]. In a variety of systems, phase transi-tions that are continuous with only pairwise interactions can become discontinuous when higher-order interactions are introduced, accompanied by bistability and hystere-sis [17–28]. These findings motivate the investigation of higher-order interactions as a possible mechanism under-lying abrupt switching behavior in biological systems. Metabolic networks are representative biological sys-tems with higher-order interactions [29, 30]. Chemical reactions generally involve the transformation of multi-ple reactant species into products, and in metabolic sys-tems, they are typically catalyzed by another chemical species, so that multiple species participate in a single reaction. The Furusawa–Kaneko model [31–35] is a sim-plified metabolic network model that incorporates only the catalytic aspect of such reactions. Specifically, in-tracellular chemical reactions are represented as simple   
+
+> ∗kmitsumoto@g.ecc.u-tokyo.ac.jp
+> †csishihara@g.ecc.u-tokyo.ac.jp
+
+catalytic reactions j + k → i + k, in which the chemical species j is converted into i, catalyzed by k. Even under this simplification, each reaction still connects the three nodes i, j, and k through a hyperedge, so that the model retains a hypergraph structure. This model also incor-porates nutrient uptake through the membrane and dilu-tion due to cell growth. Recently, the Furusawa–Kaneko model was solved exactly in the dense-connectivity and thermodynamic limits using dynamical mean-field the-ory (DMFT) [36]. DMFT is based on a generating-functional formalism for dynamical paths [37–43] and enables ensemble averaging over random network topolo-gies with arbitrary degree distributions [44–46]. The ex-act analysis in Ref. [36] revealed three distinct phases: a metabolic phase with sustained cell growth driven by catalytic reactions, an overnutrition phase in which in-tracellular composition consists solely of nutrients, and a starvation phase in which nutrient supply is insuffi-cient to sustain cell growth. Comparison across differ-ent degree distributions showed that network heterogene-ity promotes cell growth under nutrient-poor conditions, thereby suppressing starvation. In particular, for scale-free topology, a common structural feature of metabolic networks characterized by highly heterogeneous power-law degree distributions [1, 2, 10, 47–49], the starvation phase disappears from the phase diagram. By contrast, the metabolic–overnutrition transition at high nutrient supply is insensitive to the degree distribution, with its phase boundary remaining unchanged across different de-gree distributions. Moreover, it has also been shown that, despite the presence of higher-order interactions, all phase transitions are continuous irrespective of the degree distribution. In this paper, we analyze the Furusawa–Kaneko model with multicatalyst reactions (see Fig. 1) using DMFT, and show that multicatalyst reactions give rise to bistable phases and discontinuous phase transitions. Metabolic arXiv:2610.04843v1 [cond-mat.stat-mech] 4 Oct 2026 2networks often contain sequential reaction pathways in which different enzymes catalyze successive reaction steps [50–54]. These enzymes have also been suggested to form multienzyme complexes, bringing the enzymes act-ing on successive reactions into close proximity [55–57]. As a coarse-grained representation of such reactions, we generalize the catalytic reaction in the Furusawa–Kaneko model to j + k1 + · · · + kν → i + k1 + · · · + kν , in which the conversion of j into i is catalyzed by ν chemical species. The case ν = 1 corresponds to the original Furusawa– Kaneko model. The case ν = 2 is illustrated schemat-ically in Fig. 1. Using DMFT for arbitrary degree dis-tributions, we derive effective dynamical equations con-ditioned on the in- and out-degrees, which become exact in the dense-connectivity and thermodynamic limits. As in Ref. [36], we analyze the fixed-point structure of net-works with Poisson, uniform, and power-law degree dis-tributions. Under nutrient-poor conditions, starvation is suppressed as the network becomes more heteroge-neous, irrespective of ν, and the starvation phase dis-appears for the power-law out-degree distribution. The metabolic–starvation transition observed for the Poisson and uniform distributions is continuous for all ν. Under nutrient-rich conditions, by contrast, the phase behavior changes qualitatively with ν. For ν ≥ 2, a bistable phase appears in which the metabolic and overnutrition states coexist. The transition from the metabolic state to the overnutrition state is discontinuous, and once the system falls into the overnutrition state, reversing the parameter change does not restore the metabolic state. For ν ≥ 3, another bistable phase emerges in which two metabolic states with different cell growth rates coexist, giving rise to discontinuous switching between distinct growth states as the parameters are varied. This qualitative phase be-havior is common to the Poisson, uniform, and power-law degree distributions. We also perform numerical simula-tions at finite mean connectivity (see Appendix Sec. A for numerical methods) and confirm that the mean-field theory provides a good description of finite-connectivity systems. This paper is organized as follows. In Sec. II, we de-scribe the model in detail. In Sec. III, we present the effective mean-field equations and their fixed-point so-lutions, with the detailed derivation given in Appendix Sec. C. In Sec. IV, we provide a comprehensive analysis of the bifurcation structure for the Poisson degree dis-tribution at arbitrary ν. In Sec. V, we present phase diagrams for the Poisson, uniform, and power-law degree distributions for ν = 1, 2, and 3. Sec. VI is devoted to the analysis of nutrient-poor conditions for ν = 2 and 3, where we show that starvation is suppressed as the degree distribution becomes more heterogeneous and disappears for the power-law distribution. In Sec. VII, we investigate the physical quantities associated with the two bistable phases that emerge for ν = 3 under nutrient-rich condi-tions. Finally, Sec. VIII summarizes our results. catalytic action  
+
+> <latexit sha1_base64="teChsBxvmp47CQP5QObaS/4zP/E=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp74guroI1lHuYBMYS7c6NL7sXdJRIPOyttFQsrBQu1Els7G/+ARX6CWEa0sXDuciAavMxxu7Pfzjcz+zGiLjPTIqQV4Pr6BwaHgsOhkdGx8XBkYjJvanVDojlJkzWjKAomlZlKcxazZFrUDSoookwLYm3DuS80qGEyTd2ymjotK8KuyqpMEiyE0qwSiZEEcS3a7fCeEwPPUlrkA7ZhBzSQoA4KUFDBQl8GAUz8SsADAR2xMtiIGegx957CIYSQW8coihECojVcd/FU8lAVz05O02VLWEXG30BmFOLkhdyQNnkmd+SVfP2by3ZzOL00cRc7XKpXwsfT2c+eLAV3C/Z+WD0ZVezQ0cD0eZ8N+64+Ta8rv0gdqztxjmr+OUXfTI6mFna36mrJsEfdRRyVpc77Ggfn7exaJm7PkSvyhvpekhZ5QoXVxrt0naaZCxwP/u8wdDv5hQS/nFhKL8aS696gBGEGZmEep2EFkrAJKchhVQoncApn3BF3y91zD51QLuBxpuCXcY/fN02shQ==</latexit>
+
+i 
+
+> <latexit sha1_base64="HIFBjaj5Jlr6DrJUAI6iz+NAU1g=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLduYln7sXdJRIPOyttFQsrBQu1Els7G/+ARX6CWEa0sXD2ciAavMxxu7Pfzjcz+zGCLkumRUjLx/X1DwwO+YcDI6Nj48HQxGTO1OqGSLOiJmtGQeBNKksqzVqSJdOCblBeEWSaF2ob7D7foIYpaeqW1dRpSeGrqlSRRN5CKLVXDkVIjDgW7nbirhMB15Ja6AO2YQc0EKEOClBQwUJfBh5M/IoQBwI6YiWwETPQk5x7CocQQG4doyhG8IjWcK3iqeiiKp5ZTtNhi1hFxt9AZhii5IXckDZ5JnfklXz9m8t2crBemrgLHS7Vy8Hj6cxnT5aCuwW7P6yejAp2yDQwPd5nw76jT9PtyitSx+osjqnmnVPwzMQ0tbC7VUdLCXvUHYSpLHbe1zg4b2fW0lF7jlyRN9T3krTIEyqsNt7F6xRNX+B4xP8OQ7eTW4jFl2NLqcVIYt0dFD/MwCzM4zSsQAI2IQlZrErhBE7hjDvibrl77qETyvlczhT8Mu7xGznrrIY=</latexit>
+
+j
+
+⋯ 
+
+> <latexit sha1_base64="5GiCzGXNI6YomrG5vGbYP0TYXHw=">AAADBHichVI7SwNBEJ6crxgfidoINsEQsQp74guroI1lHuYBMYS7c41L7sXdJRIPWwvB1hRWChaindja2PgHLPITxDKijYVzlwPR4GWO2539dr6Z2Y8RdZmZFiHtADcwODQ8EhwNjY1PTIYjU9N5U6sbEs1JmqwZRVEwqcxUmrOYJdOiblBBEWVaEGtbzn2hQQ2TaeqO1dRpWRGqKttnkmAhlK1V+EokRhLEtWivw3tODDxLaZEP2IU90ECCOihAQQULfRkEMPErAQ8EdMTKYCNmoMfcewrHEEJuHaMoRgiI1nCt4qnkoSqenZymy5awioy/gcwoxMkLuSEd8kxuySv5+jeX7eZwemniLna5VK+ET2ezn31ZCu4WHPyw+jL2sUNHA9PnfTYcuvo0va78InWs7sQ5qvnnFH0zOZpa2N26qyXDHnUXcVSWuu9rHLU62Y1M3F4gV+QN9b0kbfKECquNd+k6TTMXOB7832HodfJLCX41sZJejiU3vUEJwhzMwyJOwxokYRtSkMOqVTiDc2hxJ9wdd889dEO5gMeZgV/GPX4DArqtKw==</latexit>
+
+k1 
+
+> <latexit sha1_base64="KfE5W9pf4G8FTWA4iwzAQFwQ51s=">AAADBnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAJIS7cxOX3It7RGKwFxtLFSsFCxHsxFaw8Q9Y5CeIZUQbC+cuB6LByxy3O/vtfDOzHyNoEjNMQto+bmBwaHjEPxoYG5+YDIampnOGaukizYqqpOoFgTeoxBSaNZkp0YKmU14WJJoX6lv2fb5BdYOpyo7Z1GhZ5msKqzKRNxHK1islxaqEIiRGHAv3OnHXiYBrSTX0ASXYBRVEsEAGCgqY6EvAg4FfEeJAQEOsDC3EdPSYc0/hEALItTCKYgSPaB3XGp6KLqrg2c5pOGwRq0j468gMQ5S8kBvSIc/klrySr39ztZwcdi9N3IUul2qV4PFs5rMvS8bdhL0fVl9GFTu0NTA83teCfUefptuVV6SG1e04WzXvnIJnJltTE7tbd7Rk2KPmILbKYvd9jYPTTmYjHW0tkCvyhvpekjZ5QoWVxrt4naLpCxyP+N9h6HVyS7H4amwltRxJbLqD4oc5mIdFnIY1SMA2JCGLVRmcwBmcc0fcHXfPPXRDOZ/LmYFfxj1+AxRLrk0=</latexit>
+
+kω
+
+: catalyst  : nutrient 
+
+cell growth  
+
+> <latexit sha1_base64="cHnPTXe44g2I7KjAZso51Vkea4E=">AAADBHichVI7TwJBEB7OF+ID1MbEhkgwVpcFFcWKaGPJQx4JEHJ3rnjhXrk7MEhsLUxspbDSxMJoZ2xtbPwDFvwEY4nRxsK544wxhmMutzv77Xwzs1+G1yTRMAnpeJih4ZHRMe+4b2JyatofmJnNGWpdF2hWUCVVL/CcQSVRoVlTNCVa0HTKybxE83xt27rPN6huiKqyazY1Wpa5qiLuiwJnIpQpyfVKIETYaDwWXYkH/zsRltgWAseSauADSrAHKghQBxkoKGCiLwEHBn5FiAABDbEytBDT0RPtewrH4ENuHaMoRnCI1nCt4qnooAqerZyGzRawioS/jswghMkLuSFd8kxuySv56purZeewemnizve4VKv4T+cznwNZMu4mHPyyBjL2sUNLA8PlfS04tPVpOl25RWpY3YqzVHPPybtmsjQ1sbsNW0sRe9RsxFJZ6L2vcdTuZjbT4dYSuSJvqO8l6ZAnVFhpvAvXKZq+wPH4mYFgfycXZSMxdi21GkpsOYPihQVYhGWchnVIwA4kIYtVq3AG59BmTpg75p556IUyHoczB3+MefwGnwqtyw==</latexit>
+
+μ <latexit sha1_base64="cRe6gcIpPi3nw3TkpDNOFV+tPf0=">AAADG3ichVJLLwNRFD7Gu17FRmIz0RCr5rTUK5EIG0tKW4lKMzOumphXZm5LTeoH+AMWYkFYiPAnbERsLfwEsSRsLJw7HRELdSZz77nfPd855345qmPoHkd8apAam5pbWtvaIx2dXd090d6+rGeXXI1lNNuw3TVV8ZihWyzDdW6wNcdliqkaLKfuLIj7XJm5nm5bq7zisA1TKVr6lq4pnKBCdCDP9pyyYvh7BT/vmrJV4tWqPCsXC9EYxhGT49PTsnCEkZPCsVRySk6ESAxCW7Kj75CHTbBBgxKYwMACTr4BCnj0rUMCEBzCNsAnzCVPD+4ZVCFC3BJFMYpQCN2htUin9RC16CxyegFboyoG/S4xZRjGR7zEV7zDK3zGzz9z+UEO0UuFdrXGZU6h53Bg5eNflkk7h+0f1r+MLepQaODVeZ8Pu4E+lbCrepEOVRdxQrX6OdW6mYSmnLqbCrTUqUcnQITKWu195f2j15WZ9LA/gmf4Qvqe4hPeksJW+U27WGbpYxqP7xmQ/3ayyXhiIp5aHo/NzYeD0gaDMASjNA2TMAeLsAQZqnoA53ANN9KJdCvdSw+1UKkh5PTDL5MevwBjWLar</latexit> 
+
+→xnut ↑ = g 
+
+> <latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+
+d
+
+FIG. 1. Schematic illustration of a model of a cell incorporat-ing multicatalyst reactions, nutrient uptake, and cell growth. The catalytic reaction j + k1 + · · · + kν → i + k1 + · · · + kν
+
+represents the conversion of the chemical species j into the i
+
+catalyzed by the k1, . . . , k ν . The ν = 2 case is shown as an ex-ample. The model consists of catalytic chemical species and nutrients. Nutrients are catalytically inactive and can pass through the cell membrane with the permeability d. The equi-librium abundance of nutrients in the external environment is g. The cell grows at a rate μ, which is also a dynamical variable. 
+
+II. MODEL 
+
+We consider a generalized Furusawa–Kaneko model, in which a cell is represented as a membrane-bound com-partment containing N chemical species that interact through multicatalyst reactions on a random network, as illustrated in Fig. 1. The abundance of each chemical species is denoted by xi(t) for i = 1 , 2, ..., N . The mul-ticatalyst reactions in this model take the simple form 
+
+j+k1 +· · · +kν → i+k1 +· · · +kν , representing the conver-sion of chemical species j into i, catalyzed by k1, . . . , k ν .In this reaction, the production rate of xi and consump-tion rate of xj are both given by xj xk1 · · · xkν , so that the total abundance xi + xj is conserved. The chemical species are divided into two groups: catalytic chemical species and nutrients, denoted by Gcat and Gnut , respec-tively. Their fractions are denoted by αcat and αnut ,satisfying αcat + αnut = 1. Nutrients are assumed to be catalytically inactive. In Ref. [31, 32, 36], catalytic chemical species are further classified into membrane-penetrable and membrane-unpenetrable species, with the former able to diffuse out of the cell. However, previ-ous studies have shown that this additional classifica-tion does not qualitatively change the behavior of the model [32, 36]. We therefore assume here that all cat-alytic chemical species are unpenetrable. Nutrients can diffuse across the membrane and ex-change with the external environment at rate d(g − xi), respectively, where d is the membrane permeability, and 
+
+g is the equilibrium abundance of nutrients in the exter-nal environment. For convenience, we introduce param-eters ( di, g i), defined as (0 , 0) for i ∈ G cat and ( d, g ) for 
+
+i ∈ G nut . Nutrient uptake drives cell growth, which uni-formly dilutes the abundances of intracellular chemical species by a term −μx i, where μ = 1
+
+N
+
+PNi=1 di(gi − xi)is the cell growth rate. Here and below, the abundance 3
+
+xi, time t, permeability d, equilibrium nutrient abun-dance g, and growth rate μ are dimensionless; we follow the nondimensionalization procedure in Ref. [36], which assumes that the cell-volume growth is determined by the net increase in the total amount of chemical species, which leads to the above definition of the cell growth rate (see Appendix Sec. B). Taken together, the dynamics of xi(t) is governed by the following equations: ˙xi(t) = 1
+
+c
+
+> N
+
+X
+
+> j=1
+
+X
+
+> {k}∈G cat
+
+Ck1...k ν 
+
+> ij
+
+xj (t)xk1 (t) · · · xkν (t)
+
+− 1
+
+c
+
+> N
+
+X
+
+> j=1
+
+X
+
+> {k}∈G cat
+
+Ck1...k ν 
+
+> ji
+
+xi(t)xk1 (t) · · · xkν (t)+ di(gi − xi(t)) − μ(t)xi(t), (1) where P 
+
+> {k}∈G cat
+
+denotes the summation over all tuples (k1, . . . , k ν ) such that each ki belongs to Gcat . The first and the second terms represent the catalytic reactions incoming to and outgoing from the i-th chemical species, respectively. The tensor {Ck1...k ν 
+
+> ij
+
+} encodes the topology of catalytic reaction network, where Ck1...k ν 
+
+> ij
+
+is equal to 1 if the reaction j + k1 + · · · + kν → i + k1 + · · · + kν
+
+exists and 0 otherwise. c is the mean connectivity of the network, i.e., 1
+
+> N
+
+P 
+
+> i,j,k 1,...,k ν
+
+Ck1...k ν 
+
+> ij
+
+= c. The factor 1 /c 
+
+normalizes the catalytic reaction terms so that the reac-tion flux into each species remains O(1) in the large-c
+
+limit. This normalization allows networks with differ-ent values of c to be compared on the same reaction-rate scale and to calculate the dense-connectivity limit exactly using DMFT (see Appendix Sec. C). The third and fourth terms represent nutrient exchange with the environment and dilution due to cell growth, respec-tively. By summing Eq. (1) over i, one finds PNi=1 ˙xi(t) = 
+
+μ(t)( N −PNi=1 xi(t)); hence, positive μ(t) enforces a con-straint on the long-time behavior of the average abun-dance of chemical species, leading to lim 
+
+> t→∞
+
+1
+
+N
+
+> N
+
+X
+
+> i=1
+
+xi(t) = 1 . (2) If the growth rate becomes negative, the cell instead shrinks and eventually dies. In the model, we assume constant catalytic reaction rates following previous stud-ies [31, 32, 36]. We also do not explicitly model cell di-vision, since its inclusion does not affect the conclusions of the analysis below. To derive the effective dynamical equations for ran-dom networks, we adopt the configuration model [3, 45, 58, 59], which allows us to construct random networks with arbitrary distributions of in-degrees p(in)  
+
+> u
+
+and out-degrees p(out)  
+
+> v
+
+, both having mean c. Here, the in-degree and out-degree of a node count the numbers of incom-ing and outgoing reaction edges, respectively. To con-struct a network, we first independently draw the in-degree ui and out-degree vi for each node from distri-butions p(in)  
+
+> u
+
+and p(out)  
+
+> v
+
+, respectively. For each combi-nation ( i, j, k 1, . . . , k ν ), the connection Ck1...k ν 
+
+> ij
+
+is then set to 1 with probability uivj 
+
+> N c (N α cat )ν
+
+and to 0 otherwise. The factor 1 /(N α cat )ν accounts for the random selec-tion of the ν catalysts from the N α cat catalytic chemical species in Gcat . For sufficiently large N , this construction yields networks with the prescribed degree distributions. Below, we consider three kinds of distributions: a Pois-son distribution, px = cxe−c/x ! (corresponding to the Erd˝ os–R´ enyi (ER) network [60]), a uniform distribution, 
+
+px = 1 /2rc defined on the interval [(1 − r)c, (1 + r)c]with 0 < r ≤ 1, and a power-law distribution, px =2c(c + 1) /(x + c)( x + c + 1)( x + c + 2) ∼ x−3 [61]. Intro-ducing the rescaled degree y = x/c , in the dense-network limit c ≫ 1, the corresponding distributions converge to 
+
+δ(y − 1), 1 /2r for 1 − r ≤ y ≤ 1 + r, and 2 /(y + 1) 3
+
+for y ≥ 0, respectively. Thus, networks with uniform or power-law degree distributions retain structural hetero-geneity even in the dense limit, whereas the ER network approaches a regular (homogeneous) random network. 
+
+III. EFFECTIVE DYNAMICAL EQUATIONS AND FIXED POINTS 
+
+In the thermodynamic limit, N → ∞ , and for dense connectivity, c ≫ 1, we analyze the dynamics governed by Eq. (1) using DMFT. By averaging over the network topology for given degree distributions, we derive ex-act effective dynamical equations for the typical abun-dances of catalytic chemical species and nutrients with in-degree u and out-degree v, denoted by xcat ,uv (t) and 
+
+xnut ,uv (t), respectively. The resulting dynamics is inde-pendent of the catalytic degree because the catalyzed chemical species do not feed back into its own dynam-ics through the catalytic activity. The derivation of the DMFT equations is presented in Appendix Sec. C. The effective dynamical equations are given by ˙xcat ,uv (t) = uc min (t)mν
+
+> cat
+
+(t) − vc mν
+
+> cat
+
+(t)xcat ,uv (t)
+
+− μ(t)xcat ,uv (t), (3) ˙xnut ,uv (t) = uc min (t)mν
+
+> cat
+
+(t) − vc mν
+
+> cat
+
+(t)xnut ,uv (t)+ d(g − xnut ,uv (t)) − μ(t)xnut ,uv (t), (4) where min (t) = P 
+
+> u,v vc
+
+p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+(αcat xcat ,uv (t) +
+
+αnut xnut ,uv (t)). mcat (t) = P 
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+xcat ,uv (t) and 
+
+mnut (t) = P 
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+xnut ,uv (t) represent the aver-age abundances of catalytic chemical species and nutri-ents, respectively. The growth rate is given by μ(t) = 
+
+dα nut (g − mnut (t)). By averaging Eqs. (3) and (4) over u
+
+and v, and using the definition of min (t), one finds that the average abundance of all chemical species converges to lim 
+
+> t→∞
+
+(αcat mcat (t) + αnut mnut (t)) = 1 (5) 4if μ(t) > 0, corresponding to Eq. (2). When Eq. (5) is satisfied, the growth rate μ and the average abundance of nutrient mnut can be expressed in terms of mcat as 
+
+μ(t) = d(αnut g − 1 + αcat mcat (t)) , (6) 
+
+mnut (t) = (1 − αcat mcat (t)) /α nut , (7) respectively. At the fixed point, the following relations hold: 
+
+x∗ 
+
+> cat ,uv
+
+= 
+
+> uc
+
+m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν
+
+μ∗ + vc (m∗
+
+> cat
+
+)ν , (8) 
+
+x∗ 
+
+> nut ,uv
+
+= dg + uc m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν
+
+μ∗ + d + vc (m∗
+
+> cat
+
+)ν , (9) where A∗ = lim t→∞ A(t). These expressions show that the chemical abundances increase with increasing in-degree u and decreases with increasing out-degree v. By averaging x∗ 
+
+> cat ,uv
+
+and x∗ 
+
+> nut ,uv
+
+over u and v, we obtain 
+
+m∗ 
+
+> cat
+
+= m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν X(μ∗, (m∗
+
+> cat
+
+)ν ), (10) 
+
+m∗ 
+
+> nut
+
+= ( dg + m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν )X(μ∗ + d, (m∗
+
+> cat
+
+)ν ), (11) where X(a, b ) = P 
+
+> v
+
+p(out)  
+
+> v
+
+/(a + vc b). At ν = 1, these equations coincide with those derived in Ref. [36]. No-tably, m∗ 
+
+> cat
+
+and m∗ 
+
+> nut
+
+do not depend on the in-degree distribution; hence, macroscopic quantities such as μ∗
+
+are independent of the in-degree distribution. Substitut-ing Eqs. (6) and (7) into Eqs. (10) and (11), we obtain a closed set of equations for m∗ 
+
+> cat
+
+and m∗
+
+> in
+
+. We numeri-cally solve these equations for the Poisson, uniform, and power-law out-degree distributions.  
+
+> IV. BIFURCATION STRUCTURE FOR THE POISSON DISTRIBUTION
+
+Before examining the dependence on the out-degree distribution, we first analyze the bifurcation structure for the Poisson distribution. In the dense-network limit, the Poisson out-degree distribution approaches δ(v/c −1), and min (t) coincides with the average abundance of all chemical species. If the initial condition is chosen such that the average abundance of all chemical species is one, 
+
+min (t) = 1 holds at all times as long as μ(t) > 0. By averaging Eq. (3) over u and v and using Eq. (6), we obtain ˙mcat (t) = mcat (t)mν−1cat (t) − mν
+
+> cat
+
+(t) − μ(mcat (t)) 
+
+= mcat (t)[ fν (mcat (t)) − μ(mcat (t))] , (12) where we define fν (mcat ) = mν−1cat (1 − mcat ). The fixed points are given by m∗ 
+
+> cat
+
+= 0 and the solutions of 
+
+μ(m∗
+
+> cat
+
+) = fν (m∗
+
+> cat
+
+), and the direction of the flow is deter-mined by the sign of fν (mcat ) − μ(mcat ). We refer to the states corresponding to m∗ 
+
+> cat
+
+= 0 and μ(m∗
+
+> cat
+
+) = fν (m∗
+
+> cat
+
+)as the overnutrition and metabolic states, respectively. The growth rate in the metabolic state is given by 
+
+μ(m∗
+
+> cat
+
+) = fν (m∗
+
+> cat
+
+), whereas that in the overnutrition state is μ∗ = d(αnut g − 1). When μ < 0, the relation in Eq. (5) no longer holds; the cell shrinks and eventually dies. We therefore seek fixed-point solutions with μ > 0. The growth rate of the over-nutrition state is positive only when αnut g > 1. Thus, for αnut g < 1, a positive-growth fixed point, if it exists, must be a metabolic state. However, as shown in the left column of Fig. 2, when αnut g < 1 − αcat , μ(mcat ) and 
+
+fν (mcat ) have no intersection with μ(mcat ) > 0; hence, no positive-growth fixed-point solution exists in this pa-rameter region. We refer to this region as the starvation phase, or Phase S (see also Figs. 3(a)–(c) for the phase diagrams). For αnut g > 1, the overnutrition state has a positive growth rate, and a bifurcation between the overnutrition and metabolic states can occur. For ν = 1, as reported in Ref. [36], a transcritical bifurcation occurs between the two states. As illustrated in the top-right panel in Fig. 2, for d > d c, where dc = 1 /(αnut g − 1), μ(mcat ) and 
+
+f1(mcat ) = 1 −mcat have no intersection at mcat > 0, and the overnutrition state is stable. As d decreases below dc,the fixed point at mcat = 0 becomes unstable, while the stable fixed point shifts continuously to mcat > 0, cor-responding to the metabolic state. We refer to the pa-rameter regions where the overnutrition state is uniquely stable and where the metabolic state is uniquely stable as Phase O and Phase I, respectively. For ν ≥ 2, the bifur-cation structure is qualitatively different, as shown in the middle and bottom panels of the right column in Fig. 2. For sufficiently large d, μ(mcat ) and fν (mcat ) have no in-tersection at mcat > 0, and only the overnutrition state is stable, corresponding to Phase O. As d decreases, a pair of intersections emerges at finite mcat . The fixed point at 
+
+mcat = 0 and the intersection at larger mcat are stable, while the intersection at smaller mcat is unstable, leading to bistable phase distinct from Phase I. We refer to this bistable phase, in which the overnutrition and metabolic states coexist, as Phase II (see also Figs. 3(a)–(c)). For 1 − αcat < α nut g < 1, no bifurcation between the overnutrition and metabolic states occurs. For ν = 1 and 2, as illustrated in the top and middle panels of the middle column in Fig. 2, μ(mcat ) and fν (mcat ) have only one intersection for any d, and thus only a single stable metabolic state exists in this parameter region, corre-sponding to Phase I. For ν ≥ 3, however, bifurcations between different metabolic states can occur when αnut g
+
+is close to one, as shown in the bottom-middle panel in Fig. 2. For sufficiently large or small d, μ(mcat ) and 
+
+fν (mcat ) have only one intersection, whereas for inter-mediate d, three intersections appear. The intersections at the smallest and largest mcat are stable, while the in-termediate one is unstable. Consequently, two metabolic states with different growth rates coexist as stable fixed points: the state with smaller mcat has a lower growth rate, while that with larger mcat has a higher growth rate. We refer to this bistable region as Phase III (see also Figs. 3(a)–(c)). 5<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="cwq1kxbzayX5dNM/uuSkC+6PK+A=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCrMii8EIWhjmYd5QBLC7jrRJftiH5G4+APprARTKViIjZ3YauMPWOQTxDKijYV3NwuiwWSWnblz5p47Zw5X0GXJtAhpB5ih4ZHRseB4aGJyajocmZnNmZptiDQrarJmFATepLKk0qwlWTIt6AblFUGmeaG2657n69QwJU3dtxo6LSv8oSpVJZG3EMqXVJvdZrlKJErixBtsb8D5QRT8kdQiH1CCA9BABBsUoKCChbEMPJj4FYEDAjpiZXAQMzCSvHMKpxBCro1ZFDN4RGs4H+Ku6KMq7t2apscW8RYZfwOZLMTIC7khHfJMbskr+fq3luPVcLU0cBW6XKpXws35zOdAloKrBUc/rIGMKip0PTD7vM+BY8+fhq+qX6aOt7t5rmv9awp9K7meWqhu0/NSQo26h7gui9331U/OO5mtdMxZIlfkDf29JG3yhA6r9XfxOkXTLWwP7m8z9Aa5lTi3Hl9LrUYTO36jBGEBFmEZu2EDErAHSch62s7gAlpMk7lj7pmHbioT8Dlz8Gswj98aPq5F</latexit> 
+
+ω = 1 
+
+<latexit sha1_base64="TVm3Fs1ldTcD1qoBUXRBGpOFtKE=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCpMgi8EIWhjmYd5QBLC7jqJQ/bF7iYSgz+QzkowlYKF2NiJrTb+gEU+QSwj2lh4d7MgGkxm2Zk7Z+65c+ZwRV1mpkVIx8ONjI6NT3gnfVPTM7P+wNx8xtRqhkTTkiZrRk4UTCozlaYtZsk0pxtUUESZZsXqnn2erVPDZJp6YDV0WlSEisrKTBIshLIFtcbv8NFSIEjCxBl8fxBxgyC4I64FPqAAh6CBBDVQgIIKFsYyCGDil4cIENARK0ITMQMj5pxTOAUfcmuYRTFDQLSKcwV3eRdVcW/XNB22hLfI+BvI5CFEXsgN6ZJnckteyde/tZpODVtLA1exx6V6yd9aTH0OZSm4WnD0wxrKKKNC2wNzwPuacOz403BVDcrU8XY7z3ZtcE1xYCXbUwvVbTleMtSoO4jtstR7X/3kvJvaToaaK+SKvKG/l6RDntBhtf4uXSdoso3tEfnbDP1BJhqObITXE2vB2K7bKF5YgmVYxW7YhBjsQxzSjrYzuIA21+LuuHvuoZfKeVzOAvwa3OM3HNyuRg==</latexit> 
+
+ω = 2 
+
+<latexit sha1_base64="nCmwRW2aI33r39+lToYC4KMSALw=">AAADCnichVI5SwNREJ6sV4xHojaCzWKIWIUXb6yCNpY5zCFJCLvrS1yyF3tE4uIfEDsLC7VQsBA7O7HUwj9gkZ8glhFtLJzdLIgGk1n2vXnfm29m3sfwmiQaJiFNH9PXPzA45B8OjIyOjQdDE5NZQ7V0gWYEVVL1PM8ZVBIVmjFFU6J5TaeczEs0x9c2nftcneqGqCrbZkOjJZmrKmJFFDgToZ2iYrHFKmUXy6EwiRLX2E4n5jlh8Cyhhj6gCLugggAWyEBBARN9CTgw8CtADAhoiJXARkxHT3TvKRxCALkWRlGM4BCt4VrFU8FDFTw7OQ2XLWAVCX8dmSxEyAu5IS3yTG7JK/n6N5ft5nB6aeDOt7lUKwePptOfPVky7ibs/bB6MirYoaOB0eV9Nuy7+jS8rrpFaljdiXNU656T75rJ0dTE7tZcLUXsUXMRR2Wh/b76wWkrvZ6K2HPkiryhvpekSR5RYaX+LlwnaeoMxyP2dxg6nexCNLYSXU4uheMb3qD4YQZmYR6nYRXisAUJyGBVGU7gHC6YY+aOuWce2qGMz+NMwS9jnr4B2GuvRg==</latexit> 
+
+ω → 3
+
+<latexit sha1_base64="d/swuYlwXPbLyn1Xto9cldB9CZg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjba5WEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3+LerGM=</latexit> 
+
+I
+
+<latexit sha1_base64="d/swuYlwXPbLyn1Xto9cldB9CZg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjba5WEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3+LerGM=</latexit> 
+
+I
+
+<latexit sha1_base64="d/swuYlwXPbLyn1Xto9cldB9CZg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjba5WEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3+LerGM=</latexit> 
+
+I
+
+<latexit sha1_base64="d/swuYlwXPbLyn1Xto9cldB9CZg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjba5WEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3+LerGM=</latexit> 
+
+I
+
+<latexit sha1_base64="7Ait/SI91OqjV7FdpbElncDItPY=">AAADJHichVI7SwNBEB7Pd3zk1EawUUPExmMv4AMr0Ua7GI0KGsLdudEj91juNpF4pBb8AxZWCgoitvoDbCzsxMLGXiwVbSycuxyIBi973O7Mt/PNzH6Mygzd5YQ8NQnNLa1t7R2dsa7unt642Ne/5tolR6NZzTZsZ0NVXGroFs1ynRt0gzlUMVWDrqvFBf9+vUwdV7etVV5hNGcqO5Ze0DWFI5QXR5a2dl2maNSbkKUU49U6Py8miESCNVxvyKGRgHClbfEDtmAbbNCgBCZQsICjbYACLn6bIAMBhlgOPMQctPTgnkIVYsgtYRTFCAXRIu476G2GqIW+n9MN2BpWMfB3kDkMSfJILsgbuSOX5IV8/ZvLC3L4vVTwVGtcyvLxw8GVz4YsE08Ouz+showCduhr4Ea8z4O9QJ9K2FVUJMPqfpyvWnRONTKTrynH7mYCLXXskQWIr7JWe195/+htZTaT9MbIKXlFfU/IE7lFha3yu3a2TDPHOB7y32GoN9ZSkjwlTS6nEnPz4aB0wBCMwjhOwzTMwSKkIYtVD+AKruFGOBfuhQfhsRYqNIWcAfi1hOdv1qG5Og==</latexit> 
+
+III 
+
+<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="SM7yAjqjh5nyny/JR68Y6FQvGr0=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjZ25mEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3/KSrGk=</latexit> 
+
+O
+
+<latexit sha1_base64="mv0Fgy70F52+3umFp7qx53vaWLY=">AAADFHichVJLS8NAEB7j+9lWL4KXYlG8WDYFH3gSvdhbH7YVWilJ3NrQNFmSbUsN/QP+AD2IBwUV8S94K4Inbx76E8RjRS8enKQBUbGdkN3Zb+ebmf0YmWmqxQlp9Qn9A4NDwyOjY+MTk1M+f2A6bRkVU6EpxdAMc0+WLKqpOk1xlWt0j5lUKssazcilbec+U6WmpRr6Lq8zul+WDnW1oCoSRyjvD0RzRYtJCrWXxXCE8UY07w+RMHEt+NcRPScEnsUM/zvk4AAMUKACZaCgA0dfAwks/LIgAgGG2D7YiJnoqe49hQaMIbeCURQjJERLuB7iKeuhOp6dnJbLVrCKhr+JzCAskGdyS9rkkdyRF/L5by7bzeH0Usdd7nApy/uOZ5MfPVll3DkUv1k9GQXs0NHA6vI+G2quPnWvq26RDKs7cY5q3XPKXTM5mnLsbt3VUsUemYs4Kiud91WPTtvJjcSCvUguySvqe0FapIkK69U35SpOE2c4HuLvYfjrpCNhcTW8Eo+ENre8QRmBOZiHJZyGNdiEHYhBCqvW4Byu4UY4Ee6FpvDQCRX6PM4M/DDh6Qv6PLLn</latexit> 
+
+II 
+
+<latexit sha1_base64="mv0Fgy70F52+3umFp7qx53vaWLY=">AAADFHichVJLS8NAEB7j+9lWL4KXYlG8WDYFH3gSvdhbH7YVWilJ3NrQNFmSbUsN/QP+AD2IBwUV8S94K4Inbx76E8RjRS8enKQBUbGdkN3Zb+ebmf0YmWmqxQlp9Qn9A4NDwyOjY+MTk1M+f2A6bRkVU6EpxdAMc0+WLKqpOk1xlWt0j5lUKssazcilbec+U6WmpRr6Lq8zul+WDnW1oCoSRyjvD0RzRYtJCrWXxXCE8UY07w+RMHEt+NcRPScEnsUM/zvk4AAMUKACZaCgA0dfAwks/LIgAgGG2D7YiJnoqe49hQaMIbeCURQjJERLuB7iKeuhOp6dnJbLVrCKhr+JzCAskGdyS9rkkdyRF/L5by7bzeH0Usdd7nApy/uOZ5MfPVll3DkUv1k9GQXs0NHA6vI+G2quPnWvq26RDKs7cY5q3XPKXTM5mnLsbt3VUsUemYs4Kiud91WPTtvJjcSCvUguySvqe0FapIkK69U35SpOE2c4HuLvYfjrpCNhcTW8Eo+ENre8QRmBOZiHJZyGNdiEHYhBCqvW4Byu4UY4Ee6FpvDQCRX6PM4M/DDh6Qv6PLLn</latexit> 
+
+II 
+
+<latexit sha1_base64="SM7yAjqjh5nyny/JR68Y6FQvGr0=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjZ25mEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3/KSrGk=</latexit> 
+
+O
+
+<latexit sha1_base64="SM7yAjqjh5nyny/JR68Y6FQvGr0=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjZ25mEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3/KSrGk=</latexit> 
+
+O
+
+<latexit sha1_base64="d/swuYlwXPbLyn1Xto9cldB9CZg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjba5WEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3+LerGM=</latexit> 
+
+I
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="reVeO0xneSjdUfT2NPvRPZCFHBo=">AAADKXichVI7S8NQFD6N7/qKugguxaK4WG7EF+Igujja1qpgJSTxtg3mRXJTqaF/QNwdnBQcxM1VNxdXB8G6OomjoouDJ2nAF6Yn5N5zv3u+c879OLKlqQ4jpBbjmppbWtvaO+KdXd09vXxf/5pjurZCc4qpmfaGLDlUUw2aYyrT6IZlU0mXNbou7yz59+tlajuqaayyikW3dKloqAVVkRhCIj8qjOclzSpJope39QTC1fnvgOGyanFeEPkkSZHAEn8dIXSSENqKyb9BHrbBBAVc0IGCAQx9DSRw8NsEAQhYiG2Bh5iNnhrcU6hCHLkuRlGMkBDdwbWIp80QNfDs53QCtoJVNPxtZCZghNyRM/JCbsg5eSIf/+byghx+LxXc5TqXWmLv/mD2vSFLx51B6YvVkFHADn0NnIj3ebAb6FMJu4qKtLC6H+erFp1Tjszka8qwu9lASxV7tALEV1mpv6+8d/iSncuMeKPkhDyjvsekRq5RYaP8qpymaeYIx0P4PQx/nbWJlDCdmkpPJhcWw0FphyEYhjGchhlYgGVYgRxWPYALuIQr7py75e65h3ooFws5A/DDuMdPTee75A==</latexit> 
+
+1 → ωcat < ω nut g < 1
+
+<latexit sha1_base64="alIA8o0/90lJV6YDXQ8TnjozaRk=">AAADJ3ichVK5TsNAEB3MfRtokGgiQhAN0RpxCVEgaCi5AkhJZNlmE1b4kr0OClZ+gB+goAKJAtHQQktDRwUiJSWiDIKGgrFjiSMijOXd2bfzZmafRrV15nJCyg1CY1NzS2tbe0dnV3dPr9jXv+lanqPRlGbplrOtKi7VmUlTnHGdbtsOVQxVp1vq3lJwv1Wgjsssc4MXbZo1lLzJckxTOEKyOJJRdHtXkf2MY8RMj5fy89L4dwwDS7IYJ0kSWqzWkSInDpGtWOIbZGAHLNDAAwMomMDR10EBF780SEDARiwLPmIOeiy8p1CCDuR6GEUxQkF0D9c8ntIRauI5yOmGbA2r6Pg7yIxBgtyTc1Iht+SCPJOPP3P5YY6glyLuapVLbbn3cHD9/V+WgTuH3S/Wv4wcdhho4NZ5nw/7oT7FqKt6kTZWD+IC1ernVOtmCjTl2N1sqCXDHu0QCVTWqu8rHBxV1ufWEv4oOSUvqO8JKZMbVNgsvGpnq3TtGMdD+j0Mtc7mRFKaTk6tTsYXFqNBaYMhGIYxnIYZWIBlWIEUVj2ES7iCa+FcuBMehMdqqNAQcQbghwlPn9Htu2M=</latexit> 
+
+ωnut g < 1 → ωcat 
+
+<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="IAjRt9ahyhkA03zM6fwyTDqEevw=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp74guroI1lHuYBMYS7c6NL7sXdJRIPOyttFQsrBQu1Els7G/+ARX6CWEa0sXDuciAavMxxu7Pfzjcz+zGiLjPTIqQV4Pr6BwaHgsOhkdGx8XBkYjJvanVDojlJkzWjKAomlZlKcxazZFrUDSoookwLYm3DuS80qGEyTd2ymjotK8KuyqpMEiyE0nwlEiMJ4lq02+E9JwaepbTIB2zDDmggQR0UoKCChb4MApj4lYAHAjpiZbARM9Bj7j2FQwght45RFCMERGu47uKp5KEqnp2cpsuWsIqMv4HMKMTJC7khbfJM7sgr+fo3l+3mcHpp4i52uFSvhI+ns589WQruFuz9sHoyqtiho4Hp8z4b9l19ml5XfpE6VnfiHNX8c4q+mRxNLexu1dWSYY+6izgqS533NQ7O29m1TNyeI1fkDfW9JC3yhAqrjXfpOk0zFzge/N9h6HbyCwl+ObGUXowl171BCcIMzMI8TsMKJGETUpDDqhRO4BTOuCPulrvnHjqhXMDjTMEv4x6/AaSurE0=</latexit> 
+
+1
+
+<latexit sha1_base64="nKm8cll8/rZ6fHA/HGRmQL0Nu20=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp7AR9YBW0s8zAPiCHcnRtdci/uLpF42Flpq1hYKVioldja2fgHLPITxDKijYVzlwPR4GWO2539dr6Z2Y8RdZmZFiHtADcwODQ8EhwNjY1PTIYjU9MFU2sYEs1LmqwZJVEwqcxUmreYJdOSblBBEWVaFOsbzn2xSQ2TaeqW1dJpRRF2VVZjkmAhlMlVIzGSIK5Fex3ec2LgWVqLfMA27IAGEjRAAQoqWOjLIICJXxl4IKAjVgEbMQM95t5TOIQQchsYRTFCQLSO6y6eyh6q4tnJabpsCavI+BvIjEKcvJAb0iHP5I68kq9/c9luDqeXFu5il0v1avh4NvfZl6XgbsHeD6svo4YdOhqYPu+zYd/Vp+V15RepY3UnzlHNP6fom8nR1MLuVl0tGfaou4ijstR9X/PgvJNby8btBXJF3lDfS9ImT6iw2nyXrjM0e4Hjwf8dhl6nkEzwy4mlTDKWWvcGJQhzMA+LOA0rkIJNSEMeq1I4gVM44464W+6ee+iGcgGPMwO/jHv8Bv0KrG0=</latexit> 
+
+S
+
+<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="IAjRt9ahyhkA03zM6fwyTDqEevw=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp74guroI1lHuYBMYS7c6NL7sXdJRIPOyttFQsrBQu1Els7G/+ARX6CWEa0sXDuciAavMxxu7Pfzjcz+zGiLjPTIqQV4Pr6BwaHgsOhkdGx8XBkYjJvanVDojlJkzWjKAomlZlKcxazZFrUDSoookwLYm3DuS80qGEyTd2ymjotK8KuyqpMEiyE0nwlEiMJ4lq02+E9JwaepbTIB2zDDmggQR0UoKCChb4MApj4lYAHAjpiZbARM9Bj7j2FQwght45RFCMERGu47uKp5KEqnp2cpsuWsIqMv4HMKMTJC7khbfJM7sgr+fo3l+3mcHpp4i52uFSvhI+ns589WQruFuz9sHoyqtiho4Hp8z4b9l19ml5XfpE6VnfiHNX8c4q+mRxNLexu1dWSYY+6izgqS533NQ7O29m1TNyeI1fkDfW9JC3yhAqrjXfpOk0zFzge/N9h6HbyCwl+ObGUXowl171BCcIMzMI8TsMKJGETUpDDqhRO4BTOuCPulrvnHjqhXMDjTMEv4x6/AaSurE0=</latexit> 
+
+1
+
+<latexit sha1_base64="nKm8cll8/rZ6fHA/HGRmQL0Nu20=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp7AR9YBW0s8zAPiCHcnRtdci/uLpF42Flpq1hYKVioldja2fgHLPITxDKijYVzlwPR4GWO2539dr6Z2Y8RdZmZFiHtADcwODQ8EhwNjY1PTIYjU9MFU2sYEs1LmqwZJVEwqcxUmreYJdOSblBBEWVaFOsbzn2xSQ2TaeqW1dJpRRF2VVZjkmAhlMlVIzGSIK5Fex3ec2LgWVqLfMA27IAGEjRAAQoqWOjLIICJXxl4IKAjVgEbMQM95t5TOIQQchsYRTFCQLSO6y6eyh6q4tnJabpsCavI+BvIjEKcvJAb0iHP5I68kq9/c9luDqeXFu5il0v1avh4NvfZl6XgbsHeD6svo4YdOhqYPu+zYd/Vp+V15RepY3UnzlHNP6fom8nR1MLuVl0tGfaou4ijstR9X/PgvJNby8btBXJF3lDfS9ImT6iw2nyXrjM0e4Hjwf8dhl6nkEzwy4mlTDKWWvcGJQhzMA+LOA0rkIJNSEMeq1I4gVM44464W+6ee+iGcgGPMwO/jHv8Bv0KrG0=</latexit> 
+
+S
+
+<latexit sha1_base64="7ZvApAYrKBEMjMxBOcp0rVDjBSo=">AAADE3ichVJLLwNRFD4d73oNNhKbiYawaU6LFithY9mWPhKVZmZcTMwrM9NKTfwBe7FgQ0IifoIdFjaWFn6CWBI2Fs6djoiFOpO599zvnu+cc78cxdY110N8iggtrW3tHZ1d0e6e3r5+cWCw4FpVR2V51dItp6TILtM1k+U9zdNZyXaYbCg6Kyo7S/y+WGOOq1nmqle32bohb5napqbKHkEVUSwb1Qmj4pcdQyJsf7IixjCemkpPJeckjGNg3EnMpFNJKREiMQgtY4nvUIYNsECFKhjAwASPfB1kcOlbgwQg2IStg0+YQ54W3DPYhyhxqxTFKEImdIfWLTqthahJZ57TDdgqVdHpd4gpwRg+4iW+4j1e4TN+/pnLD3LwXuq0Kw0usyv9B8MrH/+yDNo92P5h/cvYpA65Bm6T9/mwG+hTD7tqFmlTdR7HVWueU2maiWvqUXezgZYa9WgHCFdZbbyvtnf0ujKfG/PH8QxfSN9TfMJbUtisvannWZY7pvH4ngHpb6eQjCdS8ZnsdGxhMRyUThiBUZigaUjDAixDBvJUtQYncA4XwqFwLdwId41QIRJyhuCXCQ9fGY+y/A==</latexit> 
+
+μ(mcat )
+
+<latexit sha1_base64="u+Et19ko95H8MbZUw7MkJTFDlbc=">AAADFXichVLLSsNQEB3j+9mqG8FNsCh1UyaifbgS3bj0VRVsCUm8rcG8SNJqDf6AP+BCEBRExW9wpYg7Vy78BHGp6MaFc9OIuLBOyL1zz50zM/cwqmPono/41CQ0t7S2tXd0dnX39PbF4v0Dq55dcTWW12zDdtdVxWOGbrG8r/sGW3dcppiqwdbU7Tl+v1Zlrqfb1opfc1jRVMqWXtI1xSdIjg+U5IJVSZpyUHBNkdD9cTmewBTiRHoqLXJHSmey5EzmclIORYkQbgmIbMGOv0MBNsEGDSpgAgMLfPINUMCjbwMkQHAIK0JAmEueHt4z2Icu4lYoilGEQug2rWU6bUSoRWee0wvZGlUx6HeJKcIoPuIlvuI9XuEzfv6ZKwhz8F5qtKt1LnPk2MHQ8se/LJN2H7Z+WP8yStQh18Br8L4AdkJ9alFXjSIdqs7juGqNc6oNM3FNfeouG2qpU49OiHCVtfr7qnuHr8vTS6PBGJ7iC+l7gk94Qwpb1TftbJEtHdF4fM+A+LezOpGS0qmpxcnEzGw0KB0wDCOQpGnIwAzMwwLkqeouHMM5XAiHwrVwK9zVQ4WmiDMIv0x4+AKwULPs</latexit> 
+
+fω(mcat )
+
+<latexit sha1_base64="IAjRt9ahyhkA03zM6fwyTDqEevw=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp74guroI1lHuYBMYS7c6NL7sXdJRIPOyttFQsrBQu1Els7G/+ARX6CWEa0sXDuciAavMxxu7Pfzjcz+zGiLjPTIqQV4Pr6BwaHgsOhkdGx8XBkYjJvanVDojlJkzWjKAomlZlKcxazZFrUDSoookwLYm3DuS80qGEyTd2ymjotK8KuyqpMEiyE0nwlEiMJ4lq02+E9JwaepbTIB2zDDmggQR0UoKCChb4MApj4lYAHAjpiZbARM9Bj7j2FQwght45RFCMERGu47uKp5KEqnp2cpsuWsIqMv4HMKMTJC7khbfJM7sgr+fo3l+3mcHpp4i52uFSvhI+ns589WQruFuz9sHoyqtiho4Hp8z4b9l19ml5XfpE6VnfiHNX8c4q+mRxNLexu1dWSYY+6izgqS533NQ7O29m1TNyeI1fkDfW9JC3yhAqrjXfpOk0zFzge/N9h6HbyCwl+ObGUXowl171BCcIMzMI8TsMKJGETUpDDqhRO4BTOuCPulrvnHjqhXMDjTMEv4x6/AaSurE0=</latexit> 
+
+1
+
+<latexit sha1_base64="nKm8cll8/rZ6fHA/HGRmQL0Nu20=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp7AR9YBW0s8zAPiCHcnRtdci/uLpF42Flpq1hYKVioldja2fgHLPITxDKijYVzlwPR4GWO2539dr6Z2Y8RdZmZFiHtADcwODQ8EhwNjY1PTIYjU9MFU2sYEs1LmqwZJVEwqcxUmreYJdOSblBBEWVaFOsbzn2xSQ2TaeqW1dJpRRF2VVZjkmAhlMlVIzGSIK5Fex3ec2LgWVqLfMA27IAGEjRAAQoqWOjLIICJXxl4IKAjVgEbMQM95t5TOIQQchsYRTFCQLSO6y6eyh6q4tnJabpsCavI+BvIjEKcvJAb0iHP5I68kq9/c9luDqeXFu5il0v1avh4NvfZl6XgbsHeD6svo4YdOhqYPu+zYd/Vp+V15RepY3UnzlHNP6fom8nR1MLuVl0tGfaou4ijstR9X/PgvJNby8btBXJF3lDfS9ImT6iw2nyXrjM0e4Hjwf8dhl6nkEzwy4mlTDKWWvcGJQhzMA+LOA0rkIJNSEMeq1I4gVM44464W+6ee+iGcgGPMwO/jHv8Bv0KrG0=</latexit> 
+
+S
+
+<latexit sha1_base64="fUNXGbqWt2adjnZz0iOWL2J8nVU=">AAADFnichVJLS8NAEJ7Gd3206kXwUiwVT2UjvhAPohePfdgHtKUkcduG5kWyrdTgH/APKHgQBcHif/AiokcvHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6Tl4wYGh4ZHRsf84xOTU4Hg9Eza0mumRFOSruhmVhQsqsgaTTGZKTRrmFRQRYVmxOquc5+pU9OSdW2fNQxaUIWyJpdkSWAIFYOz/FZeUIyKULTzphrSauy4XAyGSZS4Fup2eM8Jg2cxPfgBeTgAHSSogQoUNGDoKyCAhV8OeCBgIFYAGzETPdm9p3AMfuTWMIpihIBoFdcynnIequHZyWm5bAmrKPibyAxBhLyQJmmTJ3JLXsnXv7lsN4fTSwN3scOlRjFwMpf87MtScWdQ+WH1ZZSwQ0cDq8f7bDh09Wl4XfWKNLC6E+eo1jun2DOToynD7jZcLWXs0XARR2Wp87760Wk7uZmI2IvkiryhvpekRe5RYa3+Ll3HaeIcx4P/OwzdTno5yq9FV+Mr4e0db1BGYR4WYAmnYR22YQ9ikMKqDbiAG2hyZ9wd98A9dkI5n8eZhV/GPX8DoTK0QA==</latexit> 
+
+1 < ω nut g
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+<latexit sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit> 
+
+mcat 
+
+> <latexit  sha1_base64="zirsVZtbCrB7sT0AdZU1oB+/kSc=">AAADC3ichVI5SwNREJ6sV4xHojaCTTBELCS8FS+sgjaWOcyBSQi760tcshd7ROLiHxDsBAtRULAQSzuxE8E/YJGfIJYRbSyc3SyIBpNZ9r1535tvZt7H8JokGiYhTR/T1z8wOOQfDoyMjo0HQxOTWUO1dIFmBFVS9TzPGVQSFZoxRVOieU2nnMxLNMfXNp37XJ3qhqgq22ZDoyWZqypiRRQ4E6GdSrmoWAvhomyVQxESI66FOx3WcyLgWUINfUARdkEFASyQgYICJvoScGDgVwAWCGiIlcBGTEdPdO8pHEIAuRZGUYzgEK3hWsVTwUMVPDs5DZctYBUJfx2ZYYiSF3JDWuSZ3JJX8vVvLtvN4fTSwJ1vc6lWDh5Npz97smTcTdj7YfVkVLBDRwOjy/ts2Hf1aXhddYvUsLoT56jWPSffNZOjqYndrblaitij5iKOykL7ffWD01Z6PRW158gVeUN9L0mTPKLCSv1duE7S1BmOB/t3GDqd7GKMXYktJ5ci8Q1vUPwwA7Mwj9OwCnHYggRksKoCJ3AOF8wxc8fcMw/tUMbncabglzFP39kEsAQ=</latexit>
+> fω, μ
+
+FIG. 2. Bifurcation diagram of mcat in the dense-network limit for a Poisson out-degree distribution when αcat mcat (t) + 
+
+αnut mnut (t) = 1. The solid and open circles on the horizontal axis represent stable and unstable fixed points m∗
+
+cat . The black arrows indicate the flow of mcat , which is determined by whether μ(mcat ) = d(αnut g − 1 + αcat mcat ) is larger or smaller than 
+
+fν (mcat ) = mν−1cat (1 − mcat ). The phases S, O, I, II, and III correspond to the starvation phase, overnutrition phase, metabolic phase, bistable phase between metabolic and overnutrition states, and bistable phase between high-growth metabolic and low-growth metabolic states, respectively. 
+
+For the Poisson degree distribution, the bifurcation structure can be understood from the shape of fν (mcat )in the interval 0 ≤ mcat ≤ 1. The qualitative differ-ence between ν = 1 and ν ≥ 2 originates from whether 
+
+fν (mcat ) is monotonically decreasing in this interval. The difference between ν = 2 and ν ≥ 3, on the other hand, arises from the absence or presence of an inflection point. For any ν ≥ 3, fν (mcat ) has a single inflection point in the interval 0 < m cat < 1; hence, increasing ν beyond 3 does not introduce any qualitatively new bifurcation structure. 
+
+V. PHASE DIAGRAM 
+
+In the previous section, we analyzed the bifurcation structure for the Poisson out-degree distribution in de-tail. For other out-degree distributions, the fixed points can be obtained by solving Eqs. (10) and (11). One im-mediately finds from Eq. (10) a solution with m∗
+
+cat = 0, corresponding to the overnutrition state. For this solu-tion, x∗
+
+cat ,uv vanishes, while x∗
+
+nut ,uv = 1 /α nut for all u and 
+
+v; hence, the overnutrition state is independent of the out-degree distribution. In contrast, the metabolic state depends on the out-degree distribution; consequently, the phase diagram also varies with the out-degree distribu-tion, as shown below. Figure 3 summarizes the phase diagrams for the Pois-son, uniform, and power-law out-degree distributions for 
+
+ν = 1, 2, and 3. The phase behavior strongly depends on the out-degree distribution at low αnut g, i.e., nutrient-poor conditions. As shown in Figs. 3(a)–(c), for the Pois-son distribution, Phase S emerges when αnut g < 1 − αcat ,irrespective of ν. As the network becomes heterogeneous, Phase S is suppressed. For the uniform distribution, the Phase S region is smaller than that for the Poisson distri-bution, as shown in Figs. 3(d)–(f), and for the power-law distribution, Phase S disappears for any ν. Therefore, the suppression of starvation by network heterogeneity is robust, irrespective of ν. In Sec. VI, we examine the behavior of physical quantities under nutrient-poor con-ditions and the mechanism underlying this suppression. In contrast to the nutrient-poor regime, the phase be-havior under nutrient-rich conditions exhibits only quan-titative changes with the out-degree distribution (see Fig. 3). For ν = 1, as reported in Ref. [36], the phase 600.2 0.4 0.6 0 0.3 0.8 1 1
+
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+
+00.2 0.4 0.6 0 0.3 0.8 1 1.2 
+
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+
+0510 15 20 0 0.3 0.8 1 1.2 
+
+0510 15 20 0 0.3 0.8 1 1.2 
+
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> → <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+
+0510 15 20 0 0.3 0.8 1 1.2 
+
+0510 15 20 0 0.3 0.8 1 1.2 
+
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> → <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+
+00.5 11.5 20 0.3 0.8 1 1.2 
+
+00.5 11.5 20 0.3 0.8 1 1.2 
+
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> → <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> → <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+
+0510 15 20 0 0.3 0.8 1 1.2 
+
+0510 15 20 0 0.3 0.8 1 1.2  <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit> 
+
+> → <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+
+00.5 11.5 20 0.3 0.8 1 1.2 
+
+00.5 11.5 20 0.3 0.8 1 1.2 
+
+00.5 11.5 20 0.3 0.8 1 1.2 
+
+00.5 11.5 20 0.3 0.8 1 1.2 
+
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> → <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> → <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+
+00.2 0.4 0.6 0 0.3 0.8 1 1
+
+00.2 0.4 0.6 0 0.3 0.8 1 1.2 
+
+00.2 0.4 0.6 0 0.3 0.8 1 1
+
+00.2 0.4 0.6 0 0.3 0.8 1 1.2 
+
+> <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> → <latexit  sha1_base64="PWKp9rdarON9CUQ3QEBKpzgJozE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUm4guroI1lHuYBSQi760SX7GPY3UTj4g+ksxJMpWAhNnZiq40/YJFPEMuINhbe3SyIBjez7MydM/fcOXO4ApMlwySk4+OGhkdGx/zjgYnJqelgaGY2Z2h1XaRZUZM1vSDwBpUllWZNyZRpgemUVwSZ5oXajn2eb1DdkDR1z2wyWlb4A1WqSiJvIpQv8Yzp2nElFCEx4oxwfxB3gwi4I6mFPqAE+6CBCHVQgIIKJsYy8GDgV4Q4EGCIlcFCTMdIcs4pnEIAuXXMopjBI1rD+QB3RRdVcW/XNBy2iLfI+OvIDEOUvJAb0iXP5Ja8kq9/a1lODVtLE1ehx6WsEmzNZz4HshRcTTj8YQ1kVFGh7YHh8T4Ljhx/mq4qr0yGt9t5tmveNQXPSranJqrbdLyUUCNzENtlsfe+xsl5N7OVjlpL5Iq8ob+XpEOe0GG18S5ep2i6je0R/9sM/UFuJRZfj62lViOJbbdR/LAAi7CM3bABCdiFJGQdbWdwAW2uxd1x99xDL5XzuZw5+DW4x2/RPq9O</latexit>
+> →
+> <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d
+> <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d
+> <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d <latexit  sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit>
+> d
+
+(a)  (b)  (c) 
+
+(d)  (e)  (f) 
+
+(g)  (h)  (i) 
+
+> Poisson (regular) Uniform Power-law
+
+<latexit sha1_base64="cwq1kxbzayX5dNM/uuSkC+6PK+A=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCrMii8EIWhjmYd5QBLC7jrRJftiH5G4+APprARTKViIjZ3YauMPWOQTxDKijYV3NwuiwWSWnblz5p47Zw5X0GXJtAhpB5ih4ZHRseB4aGJyajocmZnNmZptiDQrarJmFATepLKk0qwlWTIt6AblFUGmeaG2657n69QwJU3dtxo6LSv8oSpVJZG3EMqXVJvdZrlKJErixBtsb8D5QRT8kdQiH1CCA9BABBsUoKCChbEMPJj4FYEDAjpiZXAQMzCSvHMKpxBCro1ZFDN4RGs4H+Ku6KMq7t2apscW8RYZfwOZLMTIC7khHfJMbskr+fq3luPVcLU0cBW6XKpXws35zOdAloKrBUc/rIGMKip0PTD7vM+BY8+fhq+qX6aOt7t5rmv9awp9K7meWqhu0/NSQo26h7gui9331U/OO5mtdMxZIlfkDf29JG3yhA6r9XfxOkXTLWwP7m8z9Aa5lTi3Hl9LrUYTO36jBGEBFmEZu2EDErAHSch62s7gAlpMk7lj7pmHbioT8Dlz8Gswj98aPq5F</latexit> 
+
+ω = 1  <latexit sha1_base64="TVm3Fs1ldTcD1qoBUXRBGpOFtKE=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCpMgi8EIWhjmYd5QBLC7jqJQ/bF7iYSgz+QzkowlYKF2NiJrTb+gEU+QSwj2lh4d7MgGkxm2Zk7Z+65c+ZwRV1mpkVIx8ONjI6NT3gnfVPTM7P+wNx8xtRqhkTTkiZrRk4UTCozlaYtZsk0pxtUUESZZsXqnn2erVPDZJp6YDV0WlSEisrKTBIshLIFtcbv8NFSIEjCxBl8fxBxgyC4I64FPqAAh6CBBDVQgIIKFsYyCGDil4cIENARK0ITMQMj5pxTOAUfcmuYRTFDQLSKcwV3eRdVcW/XNB22hLfI+BvI5CFEXsgN6ZJnckteyde/tZpODVtLA1exx6V6yd9aTH0OZSm4WnD0wxrKKKNC2wNzwPuacOz403BVDcrU8XY7z3ZtcE1xYCXbUwvVbTleMtSoO4jtstR7X/3kvJvaToaaK+SKvKG/l6RDntBhtf4uXSdoso3tEfnbDP1BJhqObITXE2vB2K7bKF5YgmVYxW7YhBjsQxzSjrYzuIA21+LuuHvuoZfKeVzOAvwa3OM3HNyuRg==</latexit> 
+
+ω = 2  <latexit sha1_base64="7e92XAx3tBnxzRwYHsO7FmcU4mo=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCpMfCMIQRvLPMwDkhB210lcsi92N5EY/IF0VoKpFCzExk5stfEHLPIJYhnRxsI7mwXRYDLLztw5c8+dM4crGops2YS0PdzQ8MjomHfcNzE5Ne0PzMymLb1qSjQl6YpuZkXBooqs0ZQt2wrNGiYVVFGhGbGyx84zNWpasq4d2HWDFlShrMklWRJshDJ5rcrv8KvFQJCEiTP43iDiBkFwR0wPfEAeDkEHCaqgAgUNbIwVEMDCLwcRIGAgVoAGYiZGsnNO4RR8yK1iFsUMAdEKzmXc5VxUwz2raTlsCW9R8DeRyUOIvJAb0iHP5Ja8kq9/azWcGkxLHVexy6VG0d+cT34OZKm42nD0wxrIKKFC5oHV530NOHb8qbuq+mUaeDvLY671ryn2rcQ8tVHdluOljBoNB2EuS9331U7OO8ntRKixRK7IG/p7SdrkCR3Wau/SdZwmWtgekb/N0BukV8KRjfB6fC0Y3XUbxQsLsAjL2A2bEIV9iEHK0XYGF9Dimtwdd889dFM5j8uZg1+De/wGH3quRw==</latexit> 
+
+ω = 3 
+
+<latexit sha1_base64="nKm8cll8/rZ6fHA/HGRmQL0Nu20=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp7AR9YBW0s8zAPiCHcnRtdci/uLpF42Flpq1hYKVioldja2fgHLPITxDKijYVzlwPR4GWO2539dr6Z2Y8RdZmZFiHtADcwODQ8EhwNjY1PTIYjU9MFU2sYEs1LmqwZJVEwqcxUmreYJdOSblBBEWVaFOsbzn2xSQ2TaeqW1dJpRRF2VVZjkmAhlMlVIzGSIK5Fex3ec2LgWVqLfMA27IAGEjRAAQoqWOjLIICJXxl4IKAjVgEbMQM95t5TOIQQchsYRTFCQLSO6y6eyh6q4tnJabpsCavI+BvIjEKcvJAb0iHP5I68kq9/c9luDqeXFu5il0v1avh4NvfZl6XgbsHeD6svo4YdOhqYPu+zYd/Vp+V15RepY3UnzlHNP6fom8nR1MLuVl0tGfaou4ijstR9X/PgvJNby8btBXJF3lDfS9ImT6iw2nyXrjM0e4Hjwf8dhl6nkEzwy4mlTDKWWvcGJQhzMA+LOA0rkIJNSEMeq1I4gVM44464W+6ee+iGcgGPMwO/jHv8Bv0KrG0=</latexit> 
+
+S
+
+<latexit sha1_base64="SM7yAjqjh5nyny/JR68Y6FQvGr0=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjZ25mEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3/KSrGk=</latexit> 
+
+O
+
+<latexit sha1_base64="d/swuYlwXPbLyn1Xto9cldB9CZg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjba5WEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3+LerGM=</latexit> 
+
+I
+
+<latexit sha1_base64="mv0Fgy70F52+3umFp7qx53vaWLY=">AAADFHichVJLS8NAEB7j+9lWL4KXYlG8WDYFH3gSvdhbH7YVWilJ3NrQNFmSbUsN/QP+AD2IBwUV8S94K4Inbx76E8RjRS8enKQBUbGdkN3Zb+ebmf0YmWmqxQlp9Qn9A4NDwyOjY+MTk1M+f2A6bRkVU6EpxdAMc0+WLKqpOk1xlWt0j5lUKssazcilbec+U6WmpRr6Lq8zul+WDnW1oCoSRyjvD0RzRYtJCrWXxXCE8UY07w+RMHEt+NcRPScEnsUM/zvk4AAMUKACZaCgA0dfAwks/LIgAgGG2D7YiJnoqe49hQaMIbeCURQjJERLuB7iKeuhOp6dnJbLVrCKhr+JzCAskGdyS9rkkdyRF/L5by7bzeH0Usdd7nApy/uOZ5MfPVll3DkUv1k9GQXs0NHA6vI+G2quPnWvq26RDKs7cY5q3XPKXTM5mnLsbt3VUsUemYs4Kiud91WPTtvJjcSCvUguySvqe0FapIkK69U35SpOE2c4HuLvYfjrpCNhcTW8Eo+ENre8QRmBOZiHJZyGNdiEHYhBCqvW4Byu4UY4Ee6FpvDQCRX6PM4M/DDh6Qv6PLLn</latexit> 
+
+II 
+
+<latexit sha1_base64="7Ait/SI91OqjV7FdpbElncDItPY=">AAADJHichVI7SwNBEB7Pd3zk1EawUUPExmMv4AMr0Ua7GI0KGsLdudEj91juNpF4pBb8AxZWCgoitvoDbCzsxMLGXiwVbSycuxyIBi973O7Mt/PNzH6Mygzd5YQ8NQnNLa1t7R2dsa7unt642Ne/5tolR6NZzTZsZ0NVXGroFs1ynRt0gzlUMVWDrqvFBf9+vUwdV7etVV5hNGcqO5Ze0DWFI5QXR5a2dl2maNSbkKUU49U6Py8miESCNVxvyKGRgHClbfEDtmAbbNCgBCZQsICjbYACLn6bIAMBhlgOPMQctPTgnkIVYsgtYRTFCAXRIu476G2GqIW+n9MN2BpWMfB3kDkMSfJILsgbuSOX5IV8/ZvLC3L4vVTwVGtcyvLxw8GVz4YsE08Ouz+showCduhr4Ea8z4O9QJ9K2FVUJMPqfpyvWnRONTKTrynH7mYCLXXskQWIr7JWe195/+htZTaT9MbIKXlFfU/IE7lFha3yu3a2TDPHOB7y32GoN9ZSkjwlTS6nEnPz4aB0wBCMwjhOwzTMwSKkIYtVD+AKruFGOBfuhQfhsRYqNIWcAfi1hOdv1qG5Og==</latexit> 
+
+III 
+
+<latexit sha1_base64="mv0Fgy70F52+3umFp7qx53vaWLY=">AAADFHichVJLS8NAEB7j+9lWL4KXYlG8WDYFH3gSvdhbH7YVWilJ3NrQNFmSbUsN/QP+AD2IBwUV8S94K4Inbx76E8RjRS8enKQBUbGdkN3Zb+ebmf0YmWmqxQlp9Qn9A4NDwyOjY+MTk1M+f2A6bRkVU6EpxdAMc0+WLKqpOk1xlWt0j5lUKssazcilbec+U6WmpRr6Lq8zul+WDnW1oCoSRyjvD0RzRYtJCrWXxXCE8UY07w+RMHEt+NcRPScEnsUM/zvk4AAMUKACZaCgA0dfAwks/LIgAgGG2D7YiJnoqe49hQaMIbeCURQjJERLuB7iKeuhOp6dnJbLVrCKhr+JzCAskGdyS9rkkdyRF/L5by7bzeH0Usdd7nApy/uOZ5MfPVll3DkUv1k9GQXs0NHA6vI+G2quPnWvq26RDKs7cY5q3XPKXTM5mnLsbt3VUsUemYs4Kiud91WPTtvJjcSCvUguySvqe0FapIkK69U35SpOE2c4HuLvYfjrpCNhcTW8Eo+ENre8QRmBOZiHJZyGNdiEHYhBCqvW4Byu4UY4Ee6FpvDQCRX6PM4M/DDh6Qv6PLLn</latexit> 
+
+II 
+
+<latexit sha1_base64="SM7yAjqjh5nyny/JR68Y6FQvGr0=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjZ25mEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3/KSrGk=</latexit> 
+
+O
+
+<latexit sha1_base64="d/swuYlwXPbLyn1Xto9cldB9CZg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjba5WEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3+LerGM=</latexit> 
+
+I
+
+<latexit sha1_base64="nKm8cll8/rZ6fHA/HGRmQL0Nu20=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp7AR9YBW0s8zAPiCHcnRtdci/uLpF42Flpq1hYKVioldja2fgHLPITxDKijYVzlwPR4GWO2539dr6Z2Y8RdZmZFiHtADcwODQ8EhwNjY1PTIYjU9MFU2sYEs1LmqwZJVEwqcxUmreYJdOSblBBEWVaFOsbzn2xSQ2TaeqW1dJpRRF2VVZjkmAhlMlVIzGSIK5Fex3ec2LgWVqLfMA27IAGEjRAAQoqWOjLIICJXxl4IKAjVgEbMQM95t5TOIQQchsYRTFCQLSO6y6eyh6q4tnJabpsCavI+BvIjEKcvJAb0iHP5I68kq9/c9luDqeXFu5il0v1avh4NvfZl6XgbsHeD6svo4YdOhqYPu+zYd/Vp+V15RepY3UnzlHNP6fom8nR1MLuVl0tGfaou4ijstR9X/PgvJNby8btBXJF3lDfS9ImT6iw2nyXrjM0e4Hjwf8dhl6nkEzwy4mlTDKWWvcGJQhzMA+LOA0rkIJNSEMeq1I4gVM44464W+6ee+iGcgGPMwO/jHv8Bv0KrG0=</latexit> 
+
+S
+
+<latexit sha1_base64="nKm8cll8/rZ6fHA/HGRmQL0Nu20=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQp7AR9YBW0s8zAPiCHcnRtdci/uLpF42Flpq1hYKVioldja2fgHLPITxDKijYVzlwPR4GWO2539dr6Z2Y8RdZmZFiHtADcwODQ8EhwNjY1PTIYjU9MFU2sYEs1LmqwZJVEwqcxUmreYJdOSblBBEWVaFOsbzn2xSQ2TaeqW1dJpRRF2VVZjkmAhlMlVIzGSIK5Fex3ec2LgWVqLfMA27IAGEjRAAQoqWOjLIICJXxl4IKAjVgEbMQM95t5TOIQQchsYRTFCQLSO6y6eyh6q4tnJabpsCavI+BvIjEKcvJAb0iHP5I68kq9/c9luDqeXFu5il0v1avh4NvfZl6XgbsHeD6svo4YdOhqYPu+zYd/Vp+V15RepY3UnzlHNP6fom8nR1MLuVl0tGfaou4ijstR9X/PgvJNby8btBXJF3lDfS9ImT6iw2nyXrjM0e4Hjwf8dhl6nkEzwy4mlTDKWWvcGJQhzMA+LOA0rkIJNSEMeq1I4gVM44464W+6ee+iGcgGPMwO/jHv8Bv0KrG0=</latexit> 
+
+S <latexit sha1_base64="d/swuYlwXPbLyn1Xto9cldB9CZg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjba5WEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3+LerGM=</latexit> 
+
+I
+
+<latexit sha1_base64="SM7yAjqjh5nyny/JR68Y6FQvGr0=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQqbgA+sgjZ25mEeEEO4Ozdxyb24u0TiYWelrWJhpWChVmJrZ+MfsMhPEMuINhbOXQ5Eg5c5bnf22/lmZj9G0CRmmIS0fdzA4NDwiH80MDY+MRkMTU3nDbWhizQnqpKqFwXeoBJTaM5kpkSLmk55WZBoQahv2PeFJtUNpirbZkujZZmvKazKRN5EKL1VCUVIjDgW7nXirhMB11Jq6AN2YBdUEKEBMlBQwERfAh4M/EoQBwIaYmWwENPRY849hUMIILeBURQjeETruNbwVHJRBc92TsNhi1hFwl9HZhii5IXckA55JnfklXz9m8tycti9tHAXulyqVYLHs9nPviwZdxP2flh9GVXs0NbA8HifBfuOPi23K69IDavbcbZq3jkFz0y2piZ2t+poybBHzUFslcXu+5oH553sWiZqLZAr8ob6XpI2eUKFlea7eJ2mmQscj/jfYeh18olYfDm2lE5EkuvuoPhhDuZhEadhBZKwCSnIYVUKJ3AKZ9wRd8vdcw/dUM7ncmbgl3GP3/KSrGk=</latexit> 
+
+O
+
+<latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g <latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g <latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g
+
+<latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g <latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g <latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g
+
+<latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g <latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g <latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g
+
+FIG. 3. Phase diagrams in the dense-network limit for (a) ν = 1, (b) ν = 2, and (c) ν = 3 with a Poisson out-degree distribution; (d) ν = 1, (e) ν = 2, and (f) ν = 3 with a uniform out-degree distribution ( r = 0 .99); (g) ν = 1, (h) ν = 2, and (i) ν = 3 with a power-law out-degree distribution. The phases S, O, I, II, and III correspond to the starvation phase, overnutrition phase, metabolic phase, bistable phase between metabolic and overnutrition states, and bistable phase between high-growth metabolic and low-growth metabolic states, respectively. The parameter αcat = 0 .7 is used. 
+
+boundary between Phases O and I is completely indepen-dent of the out-degree distribution. This is because the boundary is determined by the instability of the over-nutrition state. For ν ≥ 2, however, the overnutrition state remains stable throughout the region αnut g > 1 for any out-degree distribution (see Appendix Sec. D), and hence Phase II appears commonly. The boundary be-tween Phases O and II for ν ≥ 2 is determined by the instability of the metabolic state and therefore slightly depends on the out-degree distribution. For ν = 3, the phase boundary between Phases I and III emerges as a continuation of the boundary between Phases O and II. Although the qualitative structure of the phase diagram is unchanged by the out-degree distribution, Phase III narrows as the network becomes more heterogeneous. The detailed behavior of the physical quantities around these bistable phases is examined in Sec. VII. 
+
+VI. STARVATION SUPPRESSION 
+
+We now examine the DMFT results under low nutrient supply. For ν = 1, it has been reported in Ref. [36] that more heterogeneous networks exhibit higher cell growth rates. In particular, for the uniform distribution with 
+
+r = 1 and the power-law distribution, the growth rate remains positive for any αnut g, leading to the absence of the metabolic–starvation transition. As shown in Sec. V, the starvation phase also disappears for the power-law out-degree distribution for ν = 2 and 3. Here, we exam-ine how the cell growth rate behaves under nutrient-poor conditions for ν = 2 and 3. Figures 4 (a) and (b) show the dependence of the growth rate μ∗ on αnut g for the Poisson, uniform ( r =0.9, 0.99 , 0.999 , 1), and power-law distributions for ν = 2 and 3, respectively. The growth rate μ∗ is smallest for the Poisson out-degree distribution and largest for the power-law out-degree distribution, suggesting that net-work heterogeneity enhances cell growth under nutrient-poor conditions. Indeed, for the uniform distribution, μ∗
+
+increases as the heterogeneity parameter r increases. As in the case of ν = 1, network heterogeneity also helps prevent starvation. As shown in Figs. 4(c) and (d), for the Poisson out-degree distribution, μ∗ becomes nega-tive when αnut g < 1 − αcat (see also Fig. 2), whereas for the uniform distribution, the positive-μ∗ region ex-pands as r increases, with μ∗ remaining positive for any 
+
+αnut g at r = 1. For the power-law distribution, μ∗
+
+also remains positive for any αnut g, and the metabolic– starvation transition is absent. 700.01 0.02 0.03 0.04 0.05 0.06 0 0.1 0.2 0.3 0.4 0.5 
+
+00.02 0.04 0.06 0.08 0.1 0.12 0.14 0 0.1 0.2 0.3 0.4 0.5 poisson uniform =0.9 0.99 0.999 1.0 power-law 
+
+10 -30 10 -25 10 -20 10 -15 10 -10 10 -5 10 00 0.1 0.2 0.3 
+
+10 -30 10 -25 10 -20 10 -15 10 -10 10 -5 10 00 0.1 0.2 0.3 
+
+<latexit sha1_base64="7e92XAx3tBnxzRwYHsO7FmcU4mo=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCpMfCMIQRvLPMwDkhB210lcsi92N5EY/IF0VoKpFCzExk5stfEHLPIJYhnRxsI7mwXRYDLLztw5c8+dM4crGops2YS0PdzQ8MjomHfcNzE5Ne0PzMymLb1qSjQl6YpuZkXBooqs0ZQt2wrNGiYVVFGhGbGyx84zNWpasq4d2HWDFlShrMklWRJshDJ5rcrv8KvFQJCEiTP43iDiBkFwR0wPfEAeDkEHCaqgAgUNbIwVEMDCLwcRIGAgVoAGYiZGsnNO4RR8yK1iFsUMAdEKzmXc5VxUwz2raTlsCW9R8DeRyUOIvJAb0iHP5Ja8kq9/azWcGkxLHVexy6VG0d+cT34OZKm42nD0wxrIKKFC5oHV530NOHb8qbuq+mUaeDvLY671ryn2rcQ8tVHdluOljBoNB2EuS9331U7OO8ntRKixRK7IG/p7SdrkCR3Wau/SdZwmWtgekb/N0BukV8KRjfB6fC0Y3XUbxQsLsAjL2A2bEIV9iEHK0XYGF9Dimtwdd889dFM5j8uZg1+De/wGH3quRw==</latexit> 
+
+ω = 3 
+
+> <latexit  sha1_base64="jTXiWeAtSx6g144l6mP5k0qx1WA=">AAADBnichVI7SwNBEJ6crxgfidoINsEQEYuwJ76wCtpY5mEekMRwd27ikntxd4nEYC82lipWChYi2ImtYOMfsMhPEMuINhbOXQ5Eg8kctzv77Xwzsx8j6jIzLUKaHq6vf2BwyDvsGxkdG/cHJibTplY1JJqSNFkzsqJgUpmpNGUxS6ZZ3aCCIso0I1Y27ftMjRom09Rtq67TgiKUVVZikmAhlMor1Z2FYiBEIsSxYKfDu04IXItpgQ/Iwy5oIEEVFKCggoW+DAKY+OWABwI6YgVoIGagx5x7CofgQ24VoyhGCIhWcC3jKeeiKp7tnKbDlrCKjL+BzCCEyQu5IS3yTG7JK/n6N1fDyWH3UsddbHOpXvQfTyc/e7IU3C3Y+2H1ZJSwQ1sDs8v7GrDv6FN3u+oWqWN1O85WrXtOsWsmW1MLu1tztGTYo+4gtspS+321g9NWcj0RbsyRK/KG+l6SJnlChdXau3Qdp4kLHA/+7zB0OunFCL8SWY4vhaIb7qB4YQZmYR6nYRWisAUxSGFVBidwBufcEXfH3XMP7VDO43Km4Jdxj99k8q4K</latexit>
+> μ→<latexit  sha1_base64="jTXiWeAtSx6g144l6mP5k0qx1WA=">AAADBnichVI7SwNBEJ6crxgfidoINsEQEYuwJ76wCtpY5mEekMRwd27ikntxd4nEYC82lipWChYi2ImtYOMfsMhPEMuINhbOXQ5Eg8kctzv77Xwzsx8j6jIzLUKaHq6vf2BwyDvsGxkdG/cHJibTplY1JJqSNFkzsqJgUpmpNGUxS6ZZ3aCCIso0I1Y27ftMjRom09Rtq67TgiKUVVZikmAhlMor1Z2FYiBEIsSxYKfDu04IXItpgQ/Iwy5oIEEVFKCggoW+DAKY+OWABwI6YgVoIGagx5x7CofgQ24VoyhGCIhWcC3jKeeiKp7tnKbDlrCKjL+BzCCEyQu5IS3yTG7JK/n6N1fDyWH3UsddbHOpXvQfTyc/e7IU3C3Y+2H1ZJSwQ1sDs8v7GrDv6FN3u+oWqWN1O85WrXtOsWsmW1MLu1tztGTYo+4gtspS+321g9NWcj0RbsyRK/KG+l6SJnlChdXau3Qdp4kLHA/+7zB0OunFCL8SWY4vhaIb7qB4YQZmYR6nYRWisAUxSGFVBidwBufcEXfH3XMP7VDO43Km4Jdxj99k8q4K</latexit>
+> μ→
+> <latexit  sha1_base64="jTXiWeAtSx6g144l6mP5k0qx1WA=">AAADBnichVI7SwNBEJ6crxgfidoINsEQEYuwJ76wCtpY5mEekMRwd27ikntxd4nEYC82lipWChYi2ImtYOMfsMhPEMuINhbOXQ5Eg8kctzv77Xwzsx8j6jIzLUKaHq6vf2BwyDvsGxkdG/cHJibTplY1JJqSNFkzsqJgUpmpNGUxS6ZZ3aCCIso0I1Y27ftMjRom09Rtq67TgiKUVVZikmAhlMor1Z2FYiBEIsSxYKfDu04IXItpgQ/Iwy5oIEEVFKCggoW+DAKY+OWABwI6YgVoIGagx5x7CofgQ24VoyhGCIhWcC3jKeeiKp7tnKbDlrCKjL+BzCCEyQu5IS3yTG7JK/n6N1fDyWH3UsddbHOpXvQfTyc/e7IU3C3Y+2H1ZJSwQ1sDs8v7GrDv6FN3u+oWqWN1O85WrXtOsWsmW1MLu1tztGTYo+4gtspS+321g9NWcj0RbsyRK/KG+l6SJnlChdXau3Qdp4kLHA/+7zB0OunFCL8SWY4vhaIb7qB4YQZmYR6nYRWisAUxSGFVBidwBufcEXfH3XMP7VDO43Km4Jdxj99k8q4K</latexit>
+> μ→<latexit  sha1_base64="jTXiWeAtSx6g144l6mP5k0qx1WA=">AAADBnichVI7SwNBEJ6crxgfidoINsEQEYuwJ76wCtpY5mEekMRwd27ikntxd4nEYC82lipWChYi2ImtYOMfsMhPEMuINhbOXQ5Eg8kctzv77Xwzsx8j6jIzLUKaHq6vf2BwyDvsGxkdG/cHJibTplY1JJqSNFkzsqJgUpmpNGUxS6ZZ3aCCIso0I1Y27ftMjRom09Rtq67TgiKUVVZikmAhlMor1Z2FYiBEIsSxYKfDu04IXItpgQ/Iwy5oIEEVFKCggoW+DAKY+OWABwI6YgVoIGagx5x7CofgQ24VoyhGCIhWcC3jKeeiKp7tnKbDlrCKjL+BzCCEyQu5IS3yTG7JK/n6N1fDyWH3UsddbHOpXvQfTyc/e7IU3C3Y+2H1ZJSwQ1sDs8v7GrDv6FN3u+oWqWN1O85WrXtOsWsmW1MLu1tztGTYo+4gtspS+321g9NWcj0RbsyRK/KG+l6SJnlChdXau3Qdp4kLHA/+7zB0OunFCL8SWY4vhaIb7qB4YQZmYR6nYRWisAUxSGFVBidwBufcEXfH3XMP7VDO43Km4Jdxj99k8q4K</latexit>
+> μ→
+
+(a)  (b) 
+
+(c)  (d) 
+
+<latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g <latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g
+
+<latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g<latexit sha1_base64="w4iWOljwYlx/TiZqxmlFkaCrWjk=">AAADFXichVJLS8NAEJ7GV62P1noRvARLxVPZii88Fb147MNWoS0liWsNzYtkU63BP+Af8CAICqLib/CkiDdPHvoTxGNFLx6cpAHRYjshu7Pfzjcz+zGiocgWI6QZ4Pr6BwaHgsOhkdGx8XBkIlqwdNuUaF7SFd3cFgWLKrJG80xmCt02TCqookK3xNq6e79Vp6Yl69omaxi0rApVTd6VJYEhVIlES4Ji7AkVp2SqvGazI75aicRIgnjGdzpJ34mBb2k98gEl2AEdJLBBBQoaMPQVEMDCrwhJIGAgVgYHMRM92buncAQh5NoYRTFCQLSGaxVPRR/V8OzmtDy2hFUU/E1k8hAnL+SGtMgTuSWv5OvfXI6Xw+2lgbvY5lKjEj6eyn32ZKm4M9j7YfVk7GKHrgZWl/c5sO/p0/C76hZpYHU3zlWte06xayZXU4bdrXhaytij4SGuylL7ffXDk1ZuNRt3ZskFeUN9z0mT3KPCWv1duszQ7CmOR/LvMHQ6hflEcimxmFmIpdb8QQnCNMzAHE7DMqRgA9KQx6oHcAZXcM2dcHfcA/fYDuUCPmcSfhn3/A2we7Pp</latexit> 
+
+ωnut g
+
+r
+
+<latexit sha1_base64="TVm3Fs1ldTcD1qoBUXRBGpOFtKE=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCpMgi8EIWhjmYd5QBLC7jqJQ/bF7iYSgz+QzkowlYKF2NiJrTb+gEU+QSwj2lh4d7MgGkxm2Zk7Z+65c+ZwRV1mpkVIx8ONjI6NT3gnfVPTM7P+wNx8xtRqhkTTkiZrRk4UTCozlaYtZsk0pxtUUESZZsXqnn2erVPDZJp6YDV0WlSEisrKTBIshLIFtcbv8NFSIEjCxBl8fxBxgyC4I64FPqAAh6CBBDVQgIIKFsYyCGDil4cIENARK0ITMQMj5pxTOAUfcmuYRTFDQLSKcwV3eRdVcW/XNB22hLfI+BvI5CFEXsgN6ZJnckteyde/tZpODVtLA1exx6V6yd9aTH0OZSm4WnD0wxrKKKNC2wNzwPuacOz403BVDcrU8XY7z3ZtcE1xYCXbUwvVbTleMtSoO4jtstR7X/3kvJvaToaaK+SKvKG/l6RDntBhtf4uXSdoso3tEfnbDP1BJhqObITXE2vB2K7bKF5YgmVYxW7YhBjsQxzSjrYzuIA21+LuuHvuoZfKeVzOAvwa3OM3HNyuRg==</latexit> 
+
+ω = 2 
+
+<latexit sha1_base64="rKQtiJnHcg+0oz6631+HNjIErtc=">AAADBnichVK9S8NQED/jd/2qugguxVJxKhfxC0EQXRz7YdpCLSWJT32YJiFJK7W4i4ujipOCgwhu4iq4+A849E8QR0UXBy9pQLSYXsh7937vfnf3fpxiatx2EOttQntHZ1d3T2+or39gcCg8PJKxjbKlMkk1NMPKKbLNNK4zyeGOxnKmxeSSorGssrvq3mcrzLK5oa87VZMVSvK2zre4KjsESZtLYhyL4SjG0bNIsyP6ThR8SxjhD9iATTBAhTKUgIEODvkayGDTlwcREEzCClAjzCKPe/cMDiBE3DJFMYqQCd2ldZtOeR/V6ezmtD22SlU0+i1iRiCGz3iNb/iEN/iCX//mqnk53F6qtCsNLjOLQ0dj6c+WrBLtDuz8sFoytqhDVwM74H012PP0qfpdBUWaVN2Nc1ULzqkEZnI1dai7BU9LTj2aHuKqrDbeV9k/eUsvpmK1SbzEV9L3Auv4SArrlXf1KslS5zQe4t9haHYy03FxLj6bnIkur/iD0gPjMAFTNA3zsAxrkACJqnI4hlM4Ew6FW+FOuG+ECm0+ZxR+mfDwDdsYrXQ=</latexit> 
+
+d = 1 .0 <latexit sha1_base64="SJl4Ik/TIk+26afrFU5kWbVH6pw=">AAADBnichVI7S8RAEJ6Lr/N5pzaCzeGhWIWJbwTh0MZST+MJKpLE9VwuL5LcyRnsxcZSxUrBQgQ7sRVs/AMW/gSxVLSxcJILiIpxQnZnv51vZvZjVFvnrof4mBDq6hsam5LNLa1t7R2pdGfXkmuVHY3JmqVbzrKquEznJpM97uls2XaYYqg6K6ilmeC+UGGOyy1z0avabM1Qiibf5JriESRvTKE4vJ7OooihZX47UuRkIbI5K/0Gq7ABFmhQBgMYmOCRr4MCLn0rIAGCTdga+IQ55PHwnsEutBC3TFGMIhRCS7QW6bQSoSadg5xuyNaoik6/Q8wM9OMDXuAL3uMlPuHHn7n8MEfQS5V2tcZl9npqv2fh/V+WQbsHW1+sfxmb1GGggRvzPh+2Q32qUVdxkTZVD+IC1eJzqrGZAk096m4i1JJTj3aIBCprtfdVdg5fFibz/f4AnuEz6XuKj3hHCpuVV+18nuVPaDykn8Pw21kaEqUxcXR+JJubjgYlCb3QB4M0DeOQg1mYA5mqcjiAIzgW9oQr4Vq4qYUKiYjTDd9MuP0E4FKtdg==</latexit> 
+
+d = 0 .3
+
+FIG. 4. The growth rate μ∗ against αnut g under nutrient-poor conditions, obtained from the DMFT for (a) ν = 2 and (b) ν = 3, and the semi-log plots for (c) ν = 2 and (d) ν = 3. Different curves represent different network topologies: re-sults for Poisson, uniform ( r = 0 .9, 0.99 , 0.999 , 1), and power-law out-degree distributions are shown. The black solid curves in panels (c) and (d) represent the asymptotic solutions for 
+
+αnut g ≪ 1. The parameter αcat = 0 .7 is commonly used and 
+
+d = 1 .0 and 0 .3 are used for ν = 2 and ν = 3, respectively. 
+
+Assuming μ∗ ≪ αnut g ≪ 1, we can obtain the asymptotic forms of m∗
+
+cat , m ∗
+
+in , and μ∗ for the uniform distribution with r = 1 and the power-law distribution (see Appendix Sec. E for a de-tailed derivation). For both distributions, m∗
+
+cat con-verges to (1 − αnut g)/α cat . Using this relation in Eq. (10) and evaluating X(μ∗, (m∗
+
+cat )ν ), we obtain μ∗ =2( m∗
+
+cat )ν exp 
+
+
+
+− 2(1 −αnut g)
+
+αcat m∗
+
+in 
+
+
+
+for the uniform distribution with r = 1 and μ∗ = ( m∗
+
+cat )ν exp 
+
+
+
+− 32 − 1−αnut g
+
+2αcat m∗
+
+in 
+
+
+
+for the power-law distribution. Moreover, when μ∗ ≪ αnut g ≪
+
+1, m∗
+
+in is proportional to αnut g; hence, μ∗ takes an essen-tial singularity form of exp( −C/α nut g) irrespective of ν,where C is a positive constant. These asymptotic solu-tions are also shown in Figs. 4 (c) and (d). Mathematically, these asymptotic behaviors originate from the logarithmic divergence of X(μ∗, (m∗
+
+cat )ν ) as 
+
+μ∗ → 0. This divergence, in turn, originates from the divergence of x∗
+
+cat ,uv , given by Eq. (8), as v/c → 0. Thus, the presence or absence of Phase S is determined by whether the network contains catalytic chemical species with extremely small out-degrees, for which the outgoing reaction flux is negligible compared with the incoming flux. This mechanism is therefore independent of ν.00.2 0.4 0.6 0.8 10 0.1 0.2 0.3 theory =150 100 50 30 20 
+
+00.2 0.4 0.6 0.8 11.2 0 0.1 0.2 0.3 
+
+00.05 0.1 0.15 0 0.1 0.2 0.3 
+
+00.05 0.1 0.15 0 0.1 0.2 0.3 
+
+00.2 0.4 0.6 0.8 11.2 0 0.1 0.2 0.3 
+
+00.05 0.1 0 0.1 0.2 0.3 
+
+c
+
+(a)  (b) 
+
+(c)  (d) 
+
+(e)  (f) 
+
+> <latexit  sha1_base64="cejlqzNqRuorp0jroDZQvbDMQb0=">AAADBHichVI5SwNREJ6sV4xHojaCTTBErMJb8cIqaGOZwxyQhLC7vsQle7FHJC62FoKtKawULEQ7sbWx8Q9Y5CeIZUQbC2c3C6LBzSz73rzvzTcz72N4TRINk5BOgBkaHhkdC46HJianpsORmdm8oVq6QHOCKql6kecMKokKzZmiKdGiplNO5iVa4Bs7zn2hSXVDVJU9s6XRiszVFbEmCpyJULYsW9VIjCSIa9F+h/WcGHiWUiMfUIZ9UEEAC2SgoICJvgQcGPiVgAUCGmIVsBHT0RPdewrHEEKuhVEUIzhEG7jW8VTyUAXPTk7DZQtYRcJfR2YU4uSF3JAueSa35JV8/ZvLdnM4vbRw53tcqlXDp/PZz4EsGXcTDn5YAxk17NDRwPB5nw2Hrj4tryu/SA2rO3GOav45ed9MjqYmdrfpailij5qLOCoLvfc1j9rd7FYmbi+RK/KG+l6SDnlChZXmu3CdppkLHA/27zD0O/mVBLueWEuvxpLb3qAEYQEWYRmnYQOSsAspyGHVOpzBObSZE+aOuWceeqFMwOPMwS9jHr8BsgStbg==</latexit>
+> μ<latexit  sha1_base64="cejlqzNqRuorp0jroDZQvbDMQb0=">AAADBHichVI5SwNREJ6sV4xHojaCTTBErMJb8cIqaGOZwxyQhLC7vsQle7FHJC62FoKtKawULEQ7sbWx8Q9Y5CeIZUQbC2c3C6LBzSz73rzvzTcz72N4TRINk5BOgBkaHhkdC46HJianpsORmdm8oVq6QHOCKql6kecMKokKzZmiKdGiplNO5iVa4Bs7zn2hSXVDVJU9s6XRiszVFbEmCpyJULYsW9VIjCSIa9F+h/WcGHiWUiMfUIZ9UEEAC2SgoICJvgQcGPiVgAUCGmIVsBHT0RPdewrHEEKuhVEUIzhEG7jW8VTyUAXPTk7DZQtYRcJfR2YU4uSF3JAueSa35JV8/ZvLdnM4vbRw53tcqlXDp/PZz4EsGXcTDn5YAxk17NDRwPB5nw2Hrj4tryu/SA2rO3GOav45ed9MjqYmdrfpailij5qLOCoLvfc1j9rd7FYmbi+RK/KG+l6SDnlChZXmu3CdppkLHA/27zD0O/mVBLueWEuvxpLb3qAEYQEWYRmnYQOSsAspyGHVOpzBObSZE+aOuWceeqFMwOPMwS9jHr8BsgStbg==</latexit>
+> μ<latexit  sha1_base64="cejlqzNqRuorp0jroDZQvbDMQb0=">AAADBHichVI5SwNREJ6sV4xHojaCTTBErMJb8cIqaGOZwxyQhLC7vsQle7FHJC62FoKtKawULEQ7sbWx8Q9Y5CeIZUQbC2c3C6LBzSz73rzvzTcz72N4TRINk5BOgBkaHhkdC46HJianpsORmdm8oVq6QHOCKql6kecMKokKzZmiKdGiplNO5iVa4Bs7zn2hSXVDVJU9s6XRiszVFbEmCpyJULYsW9VIjCSIa9F+h/WcGHiWUiMfUIZ9UEEAC2SgoICJvgQcGPiVgAUCGmIVsBHT0RPdewrHEEKuhVEUIzhEG7jW8VTyUAXPTk7DZQtYRcJfR2YU4uSF3JAueSa35JV8/ZvLdnM4vbRw53tcqlXDp/PZz4EsGXcTDn5YAxk17NDRwPB5nw2Hrj4tryu/SA2rO3GOav45ed9MjqYmdrfpailij5qLOCoLvfc1j9rd7FYmbi+RK/KG+l6SDnlChZXmu3CdppkLHA/27zD0O/mVBLueWEuvxpLb3qAEYQEWYRmnYQOSsAspyGHVOpzBObSZE+aOuWceeqFMwOPMwS9jHr8BsgStbg==</latexit>
+> μ
+> <latexit  sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit>
+> mcat  <latexit  sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit>
+> mcat  <latexit  sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit>
+> mcat
+
+<latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d <latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d
+
+<latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d
+
+<latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d
+
+<latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d <latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d
+
+<latexit sha1_base64="wD4X9REvDoUOAQw0ECqWjfioRG4=">AAADGnichVJLS8NAEJ7Gd31VPSh4CRbFU9gUXwiC6MVjW60VrIQkrm1oXiSbSg3+Af+AB72oeBD1T+hF8aoHf4J4VPTiwUkaEBXjhOzOfjvfzOzHKLauuYyQxwTX1NzS2tbekezs6u7pTfX1r7qW56i0oFq65awpskt1zaQFpjGdrtkOlQ1Fp0WluhjcF2vUcTXLXGF1m24YctnUtjRVZghJqcGSrNsVWfJLjsGbHtvly/ycKGSkVJoIJDT+tyNGThoiy1qpNyjBJligggcGUDCBoa+DDC5+6yACARuxDfARc9DTwnsKu5BErodRFCNkRKu4lvG0HqEmnoOcbshWsYqOv4NMHkbJAzkjL+SGnJMn8vFnLj/MEfRSx11pcKkt9e4NLb//yzJwZ1D5Yv3L2MIOAw3cmPf5sB3qU4+6iou0sXoQF6gWn1OJzRRoyrC7mVBLDXu0QyRQWW28r7az/7I8mx/1x8gxeUZ9j8gjuUaFzdqrepqj+QMcD/HnMPx2VjOCOCVM5ibS8wvRoLTDMIzAOE7DNMzDEmShEFY9gQu45A65K+6Wu2uEcomIMwDfjLv/BANrtQk=</latexit> 
+
+ωnut g = 1 .2
+
+<latexit sha1_base64="8eC5OAf5KLTbBtlRzh7HPiV1hng=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhVmAz6wCtpY5mEeEEPYXSc6ZLO77GwiMfgD6awEUylYiI2d2GrjD1jkE8Qyoo2FdzcLosHNLDtz58w9d84crmyojFuEdH3CyOjY+IR/MjA1PTMbDM3N57heNxWaVXRVNwuyxKnKNJq1mKXSgmFSqSarNC9Xd+zzfIOanOnantU0aKkmHWqswhTJQiif1BnnulYORUiMOCM8GIhuEAF3JPXQB+zDAeigQB1qQEEDC2MVJOD4FUEEAgZiJWghZmLEnHMKpxBAbh2zKGZIiFZxPsRd0UU13Ns1ucNW8BYVfxOZYYiSF3JDeuSZ3JJX8vVvrZZTw9bSxFXuc6lRDrYXM59DWTVcLTj6YQ1lVFCh7QH3eF8Ljh1/mq4qr0wDb7fzbNe8a8qelWxPLVS36XjJUKPhILbLSv99jZPzXmYrHW2tkCvyhv5eki55Qoe1xrtynaLpDraH+LcZBoNcPCaux9ZS8Uhi220UPyzBMqxiN2xAAnYhCVlH2xlcQEdoC3fCvfDQTxV8LmcBfg3h8Ruzwa9B</latexit> 
+
+Poisson 
+
+<latexit sha1_base64="7vYT6vmF0ykHClie9hqlVSO2yi4=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUmAR9YBW0s83CTQAxhd53okH2xu4nExR9IZyWYSsFCbOzEVht/wCKfIJYRbSy8u1kQDW5m2ZkzZ+65c+dwRV1mpkVIN8CNjI6NTwQnQ1PTM7PhyNx8wdQahkR5SZM1oyQKJpWZSnmLWTIt6QYVFFGmRbG+45wXm9QwmabuWS2dVhThUGU1JgkWUkUesWYo1UiMJIg7ooMg6YEYeCOjRT5gHw5AAwkaoAAFFSzEMghg4leGJBDQkauAjZyBiLnnFE4hhNoGRlGMEJCt43yIu7LHqrh3cpquWsJbZPwNVEYhTl7IDemRZ3JLXsnXv7lsN4dTSwtXsa+lejXcXsx/DlUpuFpw9KMaqqhhhY4Hps/7bDh2/Wl5VflF6ni7E+e45p9T9M3keGphdZuulwxr1F3GcVnqv695ct7Lb+Xi9gq5Im/o7yXpkid0WG2+S9dZmutgeyT/NsMgKKQSyfXEWjYVS297jRKEJViGVeyGDUjDLmSAd2s7gwvocG3ujrvnHvqhXMDTLMCvwT1+A5bkrzY=</latexit> 
+
+Uniform <latexit sha1_base64="wA63v131PaI1BnT8qQz7BNFISNE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIJJJDZhNuADQQjaWOZhHhBD2F0nccm+2N1E4uIPpLMSTKVgITZ2YquNP2CRTxDLiDYW3t0siAaTWXbmzpl77pw5XF6TRMMkpONhRkbHxie8k76p6ZlZf2BuPmeodV2gWUGVVL3AcwaVRIVmTdGUaEHTKSfzEs3ztV37PN+guiGqyr7Z1GhJ5qqKWBEFzkQoHw3r22x4tRwIkRhxRrA/YN0gBO5IqoEPOIBDUEGAOshAQQETYwk4MPArAgsENMRKYCGmYyQ65xROwYfcOmZRzOAQreFcxV3RRRXc2zUNhy3gLRL+OjKDECEv5IZ0yTO5Ja/k699allPD1tLEle9xqVb2txYzn0NZMq4mHP2whjIqqND2wBjwPguOHX+arqpBmRrebufZrg2uyQ+sZHtqorpNx0sRNWoOYrss9N7XODnvZrbSEWuFXJE39PeSdMgTOqw03oXrFE23sT3Yv83QH+TiMXY9tpaKhxI7bqN4YQmWIYrdsAEJ2IMkZB1tZ3ABbabF3DH3zEMvlfG4nAX4NZjHb+d1rc8=</latexit> 
+
+(r = 1) 
+
+<latexit sha1_base64="jamKgYi4XMeGLisAZcCi0DYPZfI=">AAADCnichVI7S8NQFD6Nr1ofrboILsVScbHcFHzgVHRx7MM+pJaSxNsamhdJ2lKDf0DcHBzUQcFB3NzEUQf/gEN/gjhWdHHwJA2IFtMTcu+53z3fOed+HF6TRMMkpO1jBgaHhkf8o4Gx8YnJYGhqOmeodV2gWUGVVL3AcwaVRIVmTdGUaEHTKSfzEs3ztU37Pt+guiGqyrbZ0mhJ5qqKWBEFzkRoJ6k2qb4kcc1yKEJixLFwr8O6TgRcS6qhD9iFPVBBgDrIQEEBE30JODDwKwILBDTESmAhpqMnOvcUDiGA3DpGUYzgEK3hWsVT0UUVPNs5DYctYBUJfx2ZYYiSF3JDOuSZ3JJX8vVvLsvJYffSwp3vcqlWDh7NZj77smTcTdj/YfVlVLBDWwPD430WNB19Wm5XXpEaVrfjbNW8c/KemWxNTexuzdFSxB41B7FVFrrvaxycdjLr6ai1QK7IG+p7SdrkERVWGu/CdYqmz3A82L/D0Ovk4jF2JbacikcSG+6g+GEO5mERp2EVErAFSchiVRlO4BwumGPmjrlnHrqhjM/lzMAvY56+AYYmr+g=</latexit> 
+
+Power-law 
+
+<latexit sha1_base64="7e92XAx3tBnxzRwYHsO7FmcU4mo=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCpMfCMIQRvLPMwDkhB210lcsi92N5EY/IF0VoKpFCzExk5stfEHLPIJYhnRxsI7mwXRYDLLztw5c8+dM4crGops2YS0PdzQ8MjomHfcNzE5Ne0PzMymLb1qSjQl6YpuZkXBooqs0ZQt2wrNGiYVVFGhGbGyx84zNWpasq4d2HWDFlShrMklWRJshDJ5rcrv8KvFQJCEiTP43iDiBkFwR0wPfEAeDkEHCaqgAgUNbIwVEMDCLwcRIGAgVoAGYiZGsnNO4RR8yK1iFsUMAdEKzmXc5VxUwz2raTlsCW9R8DeRyUOIvJAb0iHP5Ja8kq9/azWcGkxLHVexy6VG0d+cT34OZKm42nD0wxrIKKFC5oHV530NOHb8qbuq+mUaeDvLY671ryn2rcQ8tVHdluOljBoNB2EuS9331U7OO8ntRKixRK7IG/p7SdrkCR3Wau/SdZwmWtgekb/N0BukV8KRjfB6fC0Y3XUbxQsLsAjL2A2bEIV9iEHK0XYGF9Dimtwdd889dFM5j8uZg1+De/wGH3quRw==</latexit> 
+
+ω = 3 
+
+FIG. 5. The growth rate μ and the average abundance of catalytic chemical species mcat against the permeability d for 
+
+ν = 3 and αnut g = 1 .2; (a) μ and (b) mcat with a Poisson out-degree distribution; (c) μ and (d) mcat with a uniform out-degree distribution ( r = 1); (e) μ and (f) mcat with a power-law out-degree distribution. The black curve represents 
+
+μ∗ and m∗
+
+cat obtained from the DMFT. The data points are obtained from numerical simulations with finite connectivities 
+
+c = 150 , 100 , 50 , 30 , 20 and N = 10 5. The simulation data are averaged over 10 network realizations. In the simulations, d
+
+is swept upward and then downward, as indicated by the red and blue arrows, respectively. At each value of d, the system is evolved for t = 400, and μ(t) and mcat (t) at the final state are plotted, and the final state is then used as the initial state for the next value of d.
+
+VII. BISTABILITY 
+
+We next examine the behavior of physical quantities under high nutrient supply. For ν = 2 and 3, Phase II, in which the overnutrition and metabolic states coexist, appears in the region αnut g > 1 (see Fig. 3). For ν = 3, Phase III also appears in the region αnut g < 1, where low- and high-growth metabolic states coexist. In the presence of such bistable phases, hysteretic behavior can arise when the parameters are varied dynamically. To ex-amine this hysteresis, we perform numerical simulations of Eq. (1) on networks with Poisson, uniform ( r = 1), and 800.05 0.1 0.15 0 0.1 0.2 0.3 0.4 0.5  00.2 0.4 0.6 0.8 10 0.1 0.2 0.3 0.4 0.5 theory =150 100 50 30 20 
+
+00.2 0.4 0.6 0.8 11.2 0 0.1 0.2 0.3 0.4 0.5 
+
+00.2 0.4 0.6 0.8 11.2 0 0.1 0.2 0.3 0.4 0.5 
+
+00.05 0.1 0.15 0 0.1 0.2 0.3 0.4 0.5 
+
+00.05 0.1 0 0.1 0.2 0.3 0.4 0.5 
+
+> <latexit  sha1_base64="cejlqzNqRuorp0jroDZQvbDMQb0=">AAADBHichVI5SwNREJ6sV4xHojaCTTBErMJb8cIqaGOZwxyQhLC7vsQle7FHJC62FoKtKawULEQ7sbWx8Q9Y5CeIZUQbC2c3C6LBzSz73rzvzTcz72N4TRINk5BOgBkaHhkdC46HJianpsORmdm8oVq6QHOCKql6kecMKokKzZmiKdGiplNO5iVa4Bs7zn2hSXVDVJU9s6XRiszVFbEmCpyJULYsW9VIjCSIa9F+h/WcGHiWUiMfUIZ9UEEAC2SgoICJvgQcGPiVgAUCGmIVsBHT0RPdewrHEEKuhVEUIzhEG7jW8VTyUAXPTk7DZQtYRcJfR2YU4uSF3JAueSa35JV8/ZvLdnM4vbRw53tcqlXDp/PZz4EsGXcTDn5YAxk17NDRwPB5nw2Hrj4tryu/SA2rO3GOav45ed9MjqYmdrfpailij5qLOCoLvfc1j9rd7FYmbi+RK/KG+l6SDnlChZXmu3CdppkLHA/27zD0O/mVBLueWEuvxpLb3qAEYQEWYRmnYQOSsAspyGHVOpzBObSZE+aOuWceeqFMwOPMwS9jHr8BsgStbg==</latexit>
+> μ<latexit  sha1_base64="cejlqzNqRuorp0jroDZQvbDMQb0=">AAADBHichVI5SwNREJ6sV4xHojaCTTBErMJb8cIqaGOZwxyQhLC7vsQle7FHJC62FoKtKawULEQ7sbWx8Q9Y5CeIZUQbC2c3C6LBzSz73rzvzTcz72N4TRINk5BOgBkaHhkdC46HJianpsORmdm8oVq6QHOCKql6kecMKokKzZmiKdGiplNO5iVa4Bs7zn2hSXVDVJU9s6XRiszVFbEmCpyJULYsW9VIjCSIa9F+h/WcGHiWUiMfUIZ9UEEAC2SgoICJvgQcGPiVgAUCGmIVsBHT0RPdewrHEEKuhVEUIzhEG7jW8VTyUAXPTk7DZQtYRcJfR2YU4uSF3JAueSa35JV8/ZvLdnM4vbRw53tcqlXDp/PZz4EsGXcTDn5YAxk17NDRwPB5nw2Hrj4tryu/SA2rO3GOav45ed9MjqYmdrfpailij5qLOCoLvfc1j9rd7FYmbi+RK/KG+l6SDnlChZXmu3CdppkLHA/27zD0O/mVBLueWEuvxpLb3qAEYQEWYRmnYQOSsAspyGHVOpzBObSZE+aOuWceeqFMwOPMwS9jHr8BsgStbg==</latexit>
+> μ<latexit  sha1_base64="cejlqzNqRuorp0jroDZQvbDMQb0=">AAADBHichVI5SwNREJ6sV4xHojaCTTBErMJb8cIqaGOZwxyQhLC7vsQle7FHJC62FoKtKawULEQ7sbWx8Q9Y5CeIZUQbC2c3C6LBzSz73rzvzTcz72N4TRINk5BOgBkaHhkdC46HJianpsORmdm8oVq6QHOCKql6kecMKokKzZmiKdGiplNO5iVa4Bs7zn2hSXVDVJU9s6XRiszVFbEmCpyJULYsW9VIjCSIa9F+h/WcGHiWUiMfUIZ9UEEAC2SgoICJvgQcGPiVgAUCGmIVsBHT0RPdewrHEEKuhVEUIzhEG7jW8VTyUAXPTk7DZQtYRcJfR2YU4uSF3JAueSa35JV8/ZvLdnM4vbRw53tcqlXDp/PZz4EsGXcTDn5YAxk17NDRwPB5nw2Hrj4tryu/SA2rO3GOav45ed9MjqYmdrfpailij5qLOCoLvfc1j9rd7FYmbi+RK/KG+l6SDnlChZXmu3CdppkLHA/27zD0O/mVBLueWEuvxpLb3qAEYQEWYRmnYQOSsAspyGHVOpzBObSZE+aOuWceeqFMwOPMwS9jHr8BsgStbg==</latexit>
+> μ
+> <latexit  sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit>
+> mcat  <latexit  sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit>
+> mcat  <latexit  sha1_base64="vNEZMbgghCRwaLEC8CGZZRPmcd8=">AAADDHichVI7S8NQFD6Nr1ofrboILsVScSq34gunootjH/YBbSlJvNVL8yJJKzX0Dzi4iYOgKDiIq5s4CeIfcOhPEMeKLg6epAHRYnpCcs/57vnOPffLETSJGSYhbR83MDg0POIfDYyNT0wGQ1PTOUOt6yLNiqqk6gWBN6jEFJo1mSnRgqZTXhYkmhdqW/Z+vkF1g6nKjtnUaFnm9xRWZSJvIlSUK1ZJl8MYtSqhCIkRx8K9Ttx1IuBaUg19QAl2QQUR6iADBQVM9CXgwcCnCHEgoCFWBgsxHT3m7FNoQQC5dcyimMEjWsPvHkZFF1UwtmsaDlvEUyR8dWSGIUpeyA3pkGdyS17J17+1LKeG3UsTV6HLpVoleDSb+ezLknE1Yf+H1ZdRxQ5tDQyP+1lw4OjTdLvyytTwdDvPVs27puBZydbUxO7WHS0Z9qg5iK2y2L1f4/C0k9lIR60FckXeUN9L0iaPqLDSeBevUzR9huMR/zsMvU5uKRZfja2kliOJTXdQ/DAH87CI07AGCdiGJGSd/3kC53DBHXN33D330E3lfC5nBn4Z9/QNEsyw1w==</latexit>
+> mcat
+
+<latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d <latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d
+
+<latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d
+
+<latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d
+
+<latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d <latexit sha1_base64="x6KsFlzT9jQ3Y1DaOwWhzrgAMpg=">AAADAnichVI7SwNBEJ6crxgfidoINsEQsQob8YVV0MYyD/OAGMLdZROP3Iu7SyQedlbaKhZWChZqJbZ2Nv4Bi/wEsYxoY+Hs5UA0eJnjdme/nW9m9mMEXZZMi5C2jxsYHBoe8Y8GxsYnJoOhqemcqTUMkWZFTdaMgsCbVJZUmrUkS6YF3aC8Isg0L9S32H2+SQ1T0tQdq6XTksLXVKkqibyFUKpSDkVIjDgW7nXirhMB15Ja6AN2oQIaiNAABSioYKEvAw8mfkWIAwEdsRLYiBnoSc49hUMIILeBURQjeETruNbwVHRRFc8sp+mwRawi428gMwxR8kJuSIc8kzvySr7+zWU7OVgvLdyFLpfq5eDxbOazL0vB3YK9H1ZfRhU7ZBqYHu+zYd/Rp+V25RWpY3UWx1Tzzil4ZmKaWtjduqOlhD3qDsJUFrvvax6cdzIb6ai9QK7IG+p7SdrkCRVWm+/idYqmL3A84n+HodfJLcXiq7GV1HIksekOih/mYB4WcRrWIAHbkIQsVqVwAqdwxh1xt9w999AN5XwuZwZ+Gff4DSo3rIA=</latexit> 
+
+d
+
+c
+
+<latexit sha1_base64="edWk+DAmhK91lkymkIRgkd9rlNI=">AAADHHichVJLS8NAEB7juz5a9aJ4CRbFU5mKbxCKXjxatSrYUpK4bUPzItlWaije/QMeBEHBgwj6I/QgiEcFf4J4VPTiwUkaEC3WCdmd/Xa+mdmPkS1NdTjiU5PQ3NLa1t7RGerq7ukNR/r6NxyzZCsspZiaaW/JksM01WAprnKNbVk2k3RZY5tyccm73ywz21FNY51XLJbRpbyh5lRF4gRlI0NpSbMKUtZN27polHhVzIsLIsbmprORKMbQN7HeiQdOFAJbMSPvkIYdMEGBEujAwABOvgYSOPRtQxwQLMIy4BJmk6f69wyqECJuiaIYRUiEFmnN02k7QA06ezkdn61QFY1+m5gijOIDnuMr3uIFPuPnn7lcP4fXS4V2ucZlVjZ8MLj28S9Lp51D4Zv1LyNHHXoaOA3e58Kur08l6KpRpEXVvThPtcY55YaZPE05dTfra6lSj5aPeCortfeV9w5f1+ZXR90xPMUX0vcEn/CaFDbKb8pZkq0e0XjEfw9DvbMxEYtPx6aSk9HEYjAoHTAMIzBO0zADCViGFUhR1X04g0u4Eo6FG+FOuK+FCk0BZwB+mPD4BVCJtXk=</latexit> 
+
+ωnut g = 0 .96 
+
+<latexit sha1_base64="8eC5OAf5KLTbBtlRzh7HPiV1hng=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhVmAz6wCtpY5mEeEEPYXSc6ZLO77GwiMfgD6awEUylYiI2d2GrjD1jkE8Qyoo2FdzcLosHNLDtz58w9d84crmyojFuEdH3CyOjY+IR/MjA1PTMbDM3N57heNxWaVXRVNwuyxKnKNJq1mKXSgmFSqSarNC9Xd+zzfIOanOnantU0aKkmHWqswhTJQiif1BnnulYORUiMOCM8GIhuEAF3JPXQB+zDAeigQB1qQEEDC2MVJOD4FUEEAgZiJWghZmLEnHMKpxBAbh2zKGZIiFZxPsRd0UU13Ns1ucNW8BYVfxOZYYiSF3JDeuSZ3JJX8vVvrZZTw9bSxFXuc6lRDrYXM59DWTVcLTj6YQ1lVFCh7QH3eF8Ljh1/mq4qr0wDb7fzbNe8a8qelWxPLVS36XjJUKPhILbLSv99jZPzXmYrHW2tkCvyhv5eki55Qoe1xrtynaLpDraH+LcZBoNcPCaux9ZS8Uhi220UPyzBMqxiN2xAAnYhCVlH2xlcQEdoC3fCvfDQTxV8LmcBfg3h8Ruzwa9B</latexit> 
+
+Poisson 
+
+<latexit sha1_base64="7vYT6vmF0ykHClie9hqlVSO2yi4=">AAADCHichVK7SgNBFL1ZXzE+ErURbIIhYhUmAR9YBW0s83CTQAxhd53okH2xu4nExR9IZyWYSsFCbOzEVht/wCKfIJYRbSy8u1kQDW5m2ZkzZ+65c+dwRV1mpkVIN8CNjI6NTwQnQ1PTM7PhyNx8wdQahkR5SZM1oyQKJpWZSnmLWTIt6QYVFFGmRbG+45wXm9QwmabuWS2dVhThUGU1JgkWUkUesWYo1UiMJIg7ooMg6YEYeCOjRT5gHw5AAwkaoAAFFSzEMghg4leGJBDQkauAjZyBiLnnFE4hhNoGRlGMEJCt43yIu7LHqrh3cpquWsJbZPwNVEYhTl7IDemRZ3JLXsnXv7lsN4dTSwtXsa+lejXcXsx/DlUpuFpw9KMaqqhhhY4Hps/7bDh2/Wl5VflF6ni7E+e45p9T9M3keGphdZuulwxr1F3GcVnqv695ct7Lb+Xi9gq5Im/o7yXpkid0WG2+S9dZmutgeyT/NsMgKKQSyfXEWjYVS297jRKEJViGVeyGDUjDLmSAd2s7gwvocG3ujrvnHvqhXMDTLMCvwT1+A5bkrzY=</latexit> 
+
+Uniform <latexit sha1_base64="wA63v131PaI1BnT8qQz7BNFISNE=">AAADCHichVK7SgNBFL1ZXzE+ErURbIJJJDZhNuADQQjaWOZhHhBD2F0nccm+2N1E4uIPpLMSTKVgITZ2YquNP2CRTxDLiDYW3t0siAaTWXbmzpl77pw5XF6TRMMkpONhRkbHxie8k76p6ZlZf2BuPmeodV2gWUGVVL3AcwaVRIVmTdGUaEHTKSfzEs3ztV37PN+guiGqyr7Z1GhJ5qqKWBEFzkQoHw3r22x4tRwIkRhxRrA/YN0gBO5IqoEPOIBDUEGAOshAQQETYwk4MPArAgsENMRKYCGmYyQ65xROwYfcOmZRzOAQreFcxV3RRRXc2zUNhy3gLRL+OjKDECEv5IZ0yTO5Ja/k699allPD1tLEle9xqVb2txYzn0NZMq4mHP2whjIqqND2wBjwPguOHX+arqpBmRrebufZrg2uyQ+sZHtqorpNx0sRNWoOYrss9N7XODnvZrbSEWuFXJE39PeSdMgTOqw03oXrFE23sT3Yv83QH+TiMXY9tpaKhxI7bqN4YQmWIYrdsAEJ2IMkZB1tZ3ABbabF3DH3zEMvlfG4nAX4NZjHb+d1rc8=</latexit> 
+
+(r = 1) 
+
+<latexit sha1_base64="jamKgYi4XMeGLisAZcCi0DYPZfI=">AAADCnichVI7S8NQFD6Nr1ofrboILsVScbHcFHzgVHRx7MM+pJaSxNsamhdJ2lKDf0DcHBzUQcFB3NzEUQf/gEN/gjhWdHHwJA2IFtMTcu+53z3fOed+HF6TRMMkpO1jBgaHhkf8o4Gx8YnJYGhqOmeodV2gWUGVVL3AcwaVRIVmTdGUaEHTKSfzEs3ztU37Pt+guiGqyrbZ0mhJ5qqKWBEFzkRoJ6k2qb4kcc1yKEJixLFwr8O6TgRcS6qhD9iFPVBBgDrIQEEBE30JODDwKwILBDTESmAhpqMnOvcUDiGA3DpGUYzgEK3hWsVT0UUVPNs5DYctYBUJfx2ZYYiSF3JDOuSZ3JJX8vVvLsvJYffSwp3vcqlWDh7NZj77smTcTdj/YfVlVLBDWwPD430WNB19Wm5XXpEaVrfjbNW8c/KemWxNTexuzdFSxB41B7FVFrrvaxycdjLr6ai1QK7IG+p7SdrkERVWGu/CdYqmz3A82L/D0Ovk4jF2JbacikcSG+6g+GEO5mERp2EVErAFSchiVRlO4BwumGPmjrlnHrqhjM/lzMAvY56+AYYmr+g=</latexit> 
+
+Power-law 
+
+(a)  (b) 
+
+(c)  (d) 
+
+(e)  (f) 
+
+<latexit sha1_base64="7e92XAx3tBnxzRwYHsO7FmcU4mo=">AAADCHichVK7SgNBFL1ZXzE+ErURbBZDxCpMfCMIQRvLPMwDkhB210lcsi92N5EY/IF0VoKpFCzExk5stfEHLPIJYhnRxsI7mwXRYDLLztw5c8+dM4crGops2YS0PdzQ8MjomHfcNzE5Ne0PzMymLb1qSjQl6YpuZkXBooqs0ZQt2wrNGiYVVFGhGbGyx84zNWpasq4d2HWDFlShrMklWRJshDJ5rcrv8KvFQJCEiTP43iDiBkFwR0wPfEAeDkEHCaqgAgUNbIwVEMDCLwcRIGAgVoAGYiZGsnNO4RR8yK1iFsUMAdEKzmXc5VxUwz2raTlsCW9R8DeRyUOIvJAb0iHP5Ja8kq9/azWcGkxLHVexy6VG0d+cT34OZKm42nD0wxrIKKFC5oHV530NOHb8qbuq+mUaeDvLY671ryn2rcQ8tVHdluOljBoNB2EuS9331U7OO8ntRKixRK7IG/p7SdrkCR3Wau/SdZwmWtgekb/N0BukV8KRjfB6fC0Y3XUbxQsLsAjL2A2bEIV9iEHK0XYGF9Dimtwdd889dFM5j8uZg1+De/wGH3quRw==</latexit> 
+
+ω = 3 
+
+FIG. 6. The growth rate μ and the average abundance of catalytic chemical species mcat against the permeability d for 
+
+ν = 3 and αnut g = 0 .96; (a) μ and (b) mcat with a Poisson out-degree distribution; (c) μ and (d) mcat with a uniform out-degree distribution ( r = 1); (e) μ and (f) mcat with a power-law out-degree distribution (exponent β = 3). The black curve represents μ∗ and m∗
+
+cat obtained from the DMFT. The data points are obtained from numerical simulations with finite connectivities c = 150 , 100 , 50 , 30 , 20 and N = 10 5. The simulation data are averaged over 10 network realizations. In the simulations, d is swept upward and then downward, as indicated by the red and blue arrows, respectively. At each value of d, the system is evolved for t = 400, and μ(t) and 
+
+mcat (t) at the final state are plotted, and the final state is then used as the initial state for the next value of d.
+
+power-law out-degree distributions at finite mean connec-tivities c = 150, 100, 50, 30, and 20, with N = 1 .0 × 10 5.Starting from a small value of d, we gradually increase 
+
+d, relaxing the system at each d, and then decrease d in the same manner (see Appendix Sec. A for details of the numerical procedure). Figures 5(a) and (b) show the hysteretic behaviors of the cell growth rate μ and mcat at αnut g = 1 .2 for the Poisson out-degree distribution for ν = 3. For c ≥ 20, the simulation results are in good agreement with the DMFT predictions. During the d-increasing process, the system remains in the metabolic state until it suddenly jumps to the overnutrition state. In contrast, during the 
+
+d-decreasing process, the system remains in the overnu-trition state and does not return to the metabolic state even when d is decreased to zero. This is because, for 
+
+ν ≥ 2, the overnutrition state remains stable for any d
+
+whenever αnut g > 1 (see Appendix Sec. D). As shown in Figs. 5(c)–(f), the uniform and power-law out-degree distributions exhibit qualitatively the same hysteretic be-havior, although Phase II is narrower than in the Pois-son case. However, μ and mcat gradually shift down-ward from the DMFT predictions as c decreases. Finite-connectivity effects also shift the phase boundary: for the uniform distribution at c = 20, the metabolic state is destabilized at a smaller value of d than predicted by DMFT, as shown in Figs. 5(c) and (d). Figures 6(a) and (b) show the hysteretic behavior of the cell growth rate μ and mcat at αnut g = 0 .96 for ν = 3 with the Poisson out-degree distribution. During the d-increasing process, the system transitions from the high-growth to the low-growth metabolic state. During the 
+
+d-decreasing process, the reverse transition occurs at a smaller value of d, resulting in a hysteresis loop. Finite-connectivity effects are weak for the Poisson distribution for c ≥ 30. However, for c = 20, the transition from the low-growth to the high-growth metabolic state does not occur even down to d = 0 for some network realizations, suggesting that network sparsity suppresses the destabi-lization of the low-growth metabolic state. This finite-connectivity effect becomes more pro-nounced for the uniform and power-law out-degree dis-tributions. As shown in Figs. 6(c)–(f), both distributions exhibit smaller hysteresis loops than the Poisson distri-bution, consistent with the narrower Phase III regions shown in Figs. 3 (f) and (i). As observed for αnut g = 1 .2, the simulation results deviate increasingly from the theo-retical curves as c decreases during the d-increasing pro-cess. Moreover, for the uniform distribution at c = 30 and 20 and for the power-law distribution at c = 20, the low-growth metabolic state persists even when d is de-creased to zero, indicating a stronger stabilization of the low-growth metabolic state due to network sparsity. 
+
+VIII. SUMMARY AND DISCUSSION 
+
+In this study, we generalized the Furusawa–Kaneko model to multicatalyst reactions, in which each reaction is catalyzed by ν chemical species, and analyzed the re-sulting dynamics using DMFT. In the dense-connectivity and thermodynamic limits, we derived effective dynam-ical equations applicable to arbitrary degree distribu-tions and examined Poisson, uniform, and power-law out-degree distributions. From the fixed-point analysis, we find the phase behavior only depends on the out-degree distribution. Under nutrient-poor conditions, network heterogeneity suppresses starvation irrespective of ν, and the starvation phase disappears for the power-law out-degree distribution. Under nutrient-rich conditions, mul-9ticatalyst reactions qualitatively change the bifurcation structure: for ν ≥ 2, a bistable phase emerges in which the metabolic and overnutrition states coexist, accompa-nied by a discontinuous transition, while for ν ≥ 3, an additional bistable phase appears in which two metabolic states with different cell growth rates coexist, leading to discontinuous switching between the two states. These qualitative phase structures are common to the Poisson, uniform, and power-law out-degree distributions. Nu-merical simulations at finite mean connectivity further showed that the DMFT predictions provide a good de-scription of the finite-connectivity systems, while devia-tions become more pronounced as the network becomes sparse. For the Poisson out-degree distribution, the origin of the discontinuous transitions can be understood directly from the reduced dynamics of mcat . Because the dy-namical equation closes in terms of mcat alone, the bifur-cation structure can be classified comprehensively from the shape of fν (mcat ) = mν−1cat (1 − mcat ), in particular, from the numbers of its extrema and inflection points. A notable feature is that the original model with triadic interactions ( ν = 1) exhibits only continuous transitions, whereas tetradic interactions ( ν = 2) give rise to bista-bility and discontinuous transitions. For pentadic inter-actions ( ν = 3), the bifurcation structure changes fur-ther, leading to the coexistence of two distinct metabolic states with different growth rates. For the uniform and power-law out-degree distributions, the dynamics cannot be reduced to a single equation for mcat . Nevertheless, their qualitative phase behavior remains the same as in the Poisson case. This robustness may be attributed to the nonlinear factor ( m∗
+
+> cat
+
+)ν appearing in Eqs. (10) and (11), which governs the number of fixed-point solutions. The qualitative changes in phase behavior induced by increasing the interaction order may have broader impli-cations beyond multicatalyst reaction networks. Recent studies of gene-regulatory and ecological networks have often modeled higher-order effects through triadic inter-actions [62–64]; our results suggest that extending such descriptions to tetradic and pentadic interactions may capture even richer dynamical phenomena. Finally, several issues should be noted although our results may provide useful insights into real metabolic networks. First, the Furusawa–Kaneko model is a coarse-grained model, and its dynamical variables do not cor-respond one-to-one to individual chemical species in real cells, such as mRNAs and metabolites. Our multicat-alyst reactions are motivated by linear reaction path-ways in which successive reactions are catalyzed by dif-ferent enzymes, with the enzymes potentially organized in multienzyme complexes [55–57]. We phenomenologi-cally represent such pathways by a single multicatalyst reaction. How this effective description can be derived microscopically and whether it can generate bistability and abrupt switching in real metabolic networks remain an open problem. Another important limitation concerns network sparsity. Real metabolic networks are sparse and are reported to have a mean connectivity of typi-cally c = 3 [47]. In contrast, our exact analysis is per-formed in the dense-connectivity limit, and our numerical simulations were performed for c ≥ 20, which is still con-siderably denser than real metabolic networks. Although the discontinuity appears to persist at finite connectiv-ity, obvious finite-connectivity effects are observed even for c ≥ 20. The effect of network sparsity on the phase behavior therefore requires further systematic study. De-spite these limitations, exact analysis of a simple model provides a useful theoretical baseline for understanding more realistic metabolic networks. 
+
+> ACKNOWLEDGMENTS
+
+This work was supported by Japan Society for the Pro-motion of Science KAKENHI (Grant Nos. 25K17354 and 24K00594, K.M.; Grant No. 24H01931 and 26H00951, S.I.) 
+
+> Appendix A: Simulation methods
+
+We specify the multicatalyst reaction network by a binary adjacency tensor Ck1...k ν 
+
+> ij
+
+∈ { 0, 1}. The tensor Ck1...k ν
+
+> ij
+
+takes the value 1 if the reaction j + k1 + · · · + kν → i + k1 + · · · + kν exists, and 0 otherwise. The network used in the numerical simulations is generated in three steps. First, we construct a directed network described by an adjacency matrix Aij ∈ { 0, 1}, where Aij = 1 indicates that the reaction channel j → i is allowed. Second, we divide the nodes into two groups according to the type of chemical species they represent: catalytic species, Gcat, and nutrients, Gnut. The fractions assigned to these groups are fixed to be αcat and αnut , respectively, with αcat + αnut = 1. Finally, for each directed edge with Aij = 1, we independently assign a tuple of catalysts ( k1, k 2, . . . , k ν ) with each kℓ chosen uniformly at random from Gcat [31, 36]. For the Poisson out-degree distribution, we employ an Erd˝ os-R´ enyi random network. Aij is set to 1 with probability 
+
+c/N and to 0 otherwise [2, 3, 60]. For the uniform and power-law out-degree distributions, we use a configuration model [59, 65, 66]. For the uniform case, the in- and out-degree distributions, p(in)  
+
+> u
+
+and p(out)  
+
+> v
+
+, are both taken to be uniform over the interval [(1 − r)c, (1 + r)c]. For the power-law case, we take p(in)  
+
+> u
+
+= δu,c and p(out)  
+
+> v
+
+=2c(c + 1) /(v + c)( v + c + 1)( v + c + 2). We independently draw an in-degree ui and an out-degree vi for each node i from p(in)  
+
+> u
+
+and p(out)  
+
+> v
+
+, respectively, and then determine each element of the adjacency matrix according to 10 
+
+P (Aij ) = uivj 
+
+> N c
+
+δAij ,1 +  1 − uivj
+
+> N c
+
+δAij ,0.For the numerical simulation of Eq. (1) for ν = 3, we set the initial abundance of all chemical species to xi = 1. Starting from d = 0 .02, we evolve the system for 400 time units to relax. We then increase d by 0 .02, use the resulting state as the initial condition, and evolve the system for another 400 time units. This procedure is repeated until d
+
+reaches 0 .5. Subsequently, starting from the final state at d = 0 .5, we decrease d by 0 .02 at each step and repeat the same relaxation procedure until d reaches 0 .02. We solve Eq. (1) by using the fourth-order Runge-Kutta method. The time resolution ∆ t = 0 .02 is used. 
+
+Appendix B: Nondimensionalization of dynamical equation 
+
+We present the detailed description of the dynamical equation, Eq. (1), and the nondimensionalization of the variables and parameters. Let ni be the number of molecules of chemical species i in a cell of volume V [L 3], and let 
+
+ρi = ni/V [L −3] be its concentration. The time derivative of ρi is written as 
+
+dρ i
+
+dt = 1
+
+Vdn i
+
+dt − ρi
+
+1
+
+VdV dt . (B1) The first term on the right-hand side represents changes in the molecule number due to multicatalyst reactions and exchange with the external environment. We write it as 1
+
+Vdn i
+
+dt = η X
+
+> j, {k}
+
+Ck1...k ν 
+
+> ij
+
+ρj ρk1 · · · ρkν − η X
+
+> j, {k}
+
+Ck1...k ν 
+
+> ji
+
+ρiρk1 · · · ρkν + di(gi − ρi), (B2) where η [L 3ν T−1] is the reaction rate constant, Ck1...k ν 
+
+> ij
+
+∈ { 0, 1} is a binary tensor specifying whether the reaction 
+
+j + k1 + · · · + kν → i + k1 + · · · + kν exists, di [T −1] is the exchange rate with the external environment, and gi [L −3]is the equilibrium concentration outside the cell. We define the cell growth rate as μ = (1 /V )dV /dt [T −1]. The concentration dynamics before nondimensionalization is therefore 
+
+dρ i
+
+dt = η X
+
+> j, {k}
+
+Ck1...k ν 
+
+> ij
+
+ρj ρk1 · · · ρkν − η X
+
+> j, {k}
+
+Ck1...k ν 
+
+> ji
+
+ρiρk1 · · · ρkν + di(gi − ρi) − μρ i. (B3) Let Ntot be the total number of molecules in the cell, i.e., Ntot = PNi=1 ni. By taking the sum of Eq. (B2), one finds 
+
+dN tot 
+
+dt = V
+
+> N
+
+X
+
+> i=1
+
+di(gi − ρi). (B4) Now, we employ a minimal description of the cell-volume regulation that the total molecular concentration, Ntot /V ,remains constant in time. This assumption implies 1
+
+VdV dt = 1
+
+Ntot 
+
+dN tot 
+
+dt (B5) as follows from ddt log( Ntot /V ) = 0. Using Eq. (B5), the growth rate is obtained as 
+
+μ = VNtot 
+
+> N
+
+X
+
+> i=1
+
+di(gi − ρi). (B6) Thus, maintaining a constant total molecular concentration determines the growth rate as given above. Let us introduce a dimensionless abundance xi = ρi/ρ 0, where ρ0 = Ntot /V N is the concentration scale, to satisfy the normalization given by Eq. (2). We also nondimensionalize time as ˜ t = cηρ ν 
+
+> 0
+
+t, where c is the mean connectivity of the reaction network. Substituting these rescaled variables into the dimensional concentration dynamics, we obtain the dimensionless dynamical equation as 
+
+dx i
+
+d˜t = 1
+
+c
+
+X
+
+> j, {k}
+
+Ck1...k ν 
+
+> ij
+
+xj xk1 · · · xkν − 1
+
+c
+
+X
+
+> j, {k}
+
+Ck1...k ν 
+
+> ji
+
+xixk1 · · · xkν + ˜di(˜ gi − xi) − ˜μx i, (B7) where ˜di = di/cηρ ν 
+
+> 0
+
+, ˜ gi = gi/ρ 0, and ˜ μ = μ/cηρ ν 
+
+> 0
+
+= 1
+
+> N
+
+PNi=1 ˜di(˜ gi − xi) are dimensionless permeability, equilibrium abundance outside the cell, cellular growth rate, respectively. Because we have assumed that Ntot /V is constant, ˜di
+
+and ˜ gi can be treated as constant parameters. In the main text, we denote them simply as di, gi, and μ, respectively. 11 
+
+Appendix C: Derivation of the dynamical mean-field equation 
+
+We consider a multicatalyst reaction network model consisting of N chemical species [31, 32, 36]. The chemical species are divided into catalytic chemical species and nutrients, denoted by Gcat and Gnut , respectively. The fractions of chemical species belonging to these groups are denoted by αcat and αnut , respectively, satisfying αcat + αnut = 1. The model dynamics are described by the following differential equations: ˙xi(t) = 1
+
+c
+
+> N
+
+X
+
+> j=1
+
+X
+
+> {k}∈G cat
+
+Ck1...k ν 
+
+> ij
+
+xj (t)xk1 (t) · · · xkν (t)
+
+− 1
+
+c
+
+> N
+
+X
+
+> j=1
+
+X
+
+> {k}∈G cat
+
+Ck1...k ν 
+
+> ji
+
+xi(t)xk1 (t) · · · xkν (t) + di(gi − xi(t)) − μ(t)xi(t) + hi(t) + ξi(t), (C1) where the parameters ( di, g i) are defined as (0 , 0) for i ∈ G cat and ( d, g ) for i ∈ G nut . μ = 1
+
+> N
+
+PNi=1 di(gi − xi) denotes the cell growth rate, and the term −μ(t)xi(t) represents the dilution of chemical abundances due to the cell growth. The site-dependent field hi(t) is introduced for theoretical convenience and is set to zero at the end of the calculation. The variable ξi(t) represents a white Gaussian noise with zero mean and variance η2 (in the main text, we present results for ξi(t) = 0). The tensor Ck1...k ν 
+
+> ij
+
+is equal to 1 if the reaction j + k1 + · · · + kν → i + k1 + · · · + kν exists, and is equal to 0 otherwise. We suppose that the nutrients cannot act as catalysts, i.e., Ck1...k ν 
+
+> ij
+
+= 0 if any k belongs to Gnut .
+
+Ck1...k ν 
+
+> ij
+
+is generated using the configuration model [3, 59]. Specifically, we first draw the in-degree ui and out-degree 
+
+vi for all nodes i independently from the distributions p(in)  
+
+> u
+
+and p(out)  
+
+> v
+
+. The probability distribution of Ck1...k ν 
+
+> ij
+
+is then given by 
+
+P (Ck1...k ν 
+
+> ij
+
+) = uivj
+
+(N α cat )ν N c δCk1...kν ij ,1 +
+
+
+
+1 − uivj
+
+(N α cat )ν N c 
+
+
+
+δCk1...kν ij ,0, (C2) where c is the mean connectivity, i.e., lim N →∞ 1
+
+> N
+
+P 
+
+> i,j, {k}
+
+Ck1...k ν 
+
+> ij
+
+= P 
+
+> u
+
+p(in)  
+
+> u
+
+u = P 
+
+> v
+
+p(out)  
+
+> v
+
+v = c. The factor 1/(N α cat )ν accounts for the random selection of the ν catalysts from the N α cat catalytic chemical species in Gcat .We solve the dynamics of Eq. (C1) on a network generated by Eq. (C2) using dynamical mean-field theory [37–43]. The theory is based on the generating functional 
+
+Z[h, ψ] = 
+
+Z NY
+
+> i=1
+
+Dx i
+
+!
+
+P[x, h]ei R dt PNi=1 xi(t)ψi(t). (C3) The path probability distribution of x can be written as 
+
+P[x, h] = P0(x(0)) 
+
+Z NY
+
+> i=1
+
+Dξ i
+
+!
+
+Pη [ξ]
+
+× δF
+
+"
+
+˙xi(t) − 1
+
+c
+
+X
+
+> j, {k}
+
+Ck1...k ν 
+
+> ij
+
+xj (t)xk1 (t) · · · xkν (t) − 1
+
+c
+
+X
+
+> j, {k}
+
+Ck1...k ν 
+
+> ji
+
+xi(t)xk1 (t) · · · xkν (t)
+
+− di(gi − xi(t)) + μ(t)xi(t) − hi(t) − ξi(t)
+
+#
+
+, (C4) where Pη [ξ] is the path probability distribution of the Gaussian noise 
+
+Pη [ξ] ∼ exp − 12η2
+
+Z
+
+dt 
+
+> N
+
+X
+
+> i=1
+
+ξ2 
+
+> i
+
+(t)
+
+!
+
+(C5) and P0(x(0)) represents the joint initial distribution for all nodes i. Using a functional integral representation of δF12 and integrating out the Gaussian noise ξi, we obtain 
+
+Z[h, ψ] = 
+
+Z NY
+
+> i=1
+
+Dx iDˆxi
+
+!
+
+P0(x(0)) exp − ic
+
+X
+
+> i,j, {k}
+
+Ck1...k ν
+
+> ij
+
+Z
+
+dt ˆxi(t)xj (t)xk1 (t) · · · xkν (t)+ ic
+
+X
+
+> i,j, {k}
+
+Ck1...k ν
+
+> ji
+
+Z
+
+dt ˆxi(t)xi(t)xk1 (t) · · · xkν (t)
+
+!
+
+× exp i
+
+Z
+
+dt 
+
+> N
+
+X
+
+> i=1
+
+Ai(xi(t), ˆxi(t), h i(t), ψ i(t)) 
+
+!
+
+, (C6) where a single-site action is defined as 
+
+Ai(xi(t), ˆxi(t), h i(t), ψ i(t)) = xi(t)ψi(t) + iη 2
+
+2 ˆx2 
+
+> i
+
+(t) + ˆ xi(t)[ ˙ xi(t) − di(gi − xi(t)) + μ(t)xi(t) − hi(t)] . (C7) From Eqs. (C6) and (C7), one finds that the fields hi(t) and ψi(t) are coupled to the dynamical variables ˆ xi(t) and 
+
+xi(t), respectively. This leads to the following formulae, 
+
+⟨xi(t)⟩ξ = ( −i) lim 
+
+> h,ψ→0
+
+δZ [h, ψ]
+
+δψ i(t) , (C8) 
+
+⟨ˆxi(t)⟩ξ = i lim 
+
+> h,ψ→0
+
+δZ [h, ψ]
+
+δh i(t) = 0 , (C9) 
+
+R(t1, t 2) = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+lim 
+
+> ψi→0
+
+δ ⟨xi(t2)⟩ξ
+
+δh i(t1) = ( −i) lim 
+
+> h,ψ→0
+
+1
+
+N
+
+> N
+
+X
+
+> i=1
+
+δnZ[h, ψ]
+
+δh i(t1)δψ i(t2) = −iN
+
+> N
+
+X
+
+> i=1
+
+⟨ˆxi(t1)xi(t2)⟩ξ , (C10) where ⟨· · ·⟩ ξ denotes the average over the noise and R(t1, t 2) represents the response function. Because of the causality, 
+
+R(t1, t 2) = 0 if t2 ≤ t1, although lim t2→t−
+
+> 1
+
+R(t1, t 2)̸ = 0. We also note that the generating functional satisfies the normalization condition Z[h, 0] = 1, leading to ⟨ˆxi(t)⟩ξ = 0, as given in Eq. (C9). Let us evaluate the generating functional Z[h, ψ] averaged over the network topology 
+
+n
+
+Ck1...k ν
+
+> ij
+
+o
+
+. In general, this averaged generating functional can be written as 
+
+Z[h, ψ] = 
+
+Z NY
+
+> i=1
+
+Dx iDˆxi
+
+!
+
+P0(x(0))∆[ x, ˆx] exp i
+
+Z
+
+dt 
+
+> N
+
+X
+
+> i=1
+
+Ai(xi(t), ˆxi(t), h i(t), ψ i(t)) 
+
+!
+
+, (C11) where ∆[ x, ˆx] = exp 
+
+− ic
+
+X
+
+> i,j, {k}
+
+Ck1...k ν
+
+> ij
+
+Z
+
+dt ˆxi(t)xj (t)xk1 (t) · · · xkν (t) + ic
+
+X
+
+> i,j, {k}
+
+Ck1...k ν
+
+> ij
+
+Z
+
+dt ˆxi(t)xi(t)xk1 (t) · · · xkν (t)
+
+
+
+= Y
+
+> i,j, {k}
+
+exp 
+
+
+
+− ic Ck1...k ν
+
+> ij
+
+Z
+
+dt (ˆ xi(t) − ˆxj (t)) xj (t)xk1 (t) · · · xkν (t)
+
+
+
+= exp 
+
+ X
+
+> i,j, {k}
+
+ln 
+
+
+
+1 + uivj
+
+(N α cat )ν N c 
+
+
+
+exp 
+
+
+
+− ic
+
+Z
+
+dt (ˆ xi(t) − ˆxj (t)) xj (t)xk1 (t) · · · xkν (t)
+
+
+
+− 1
+
+ . (C12) To decouple the interaction terms between different sites in ∆[ x, ˆx], we introduce the following functional order 13 parameters [44–46]: 
+
+Ucat ,u [ˆ x] = 1
+
+αcat p(in)  
+
+> u
+
+N
+
+X
+
+> i∈G cat
+
+δui,u δF[ˆ x(t) − ˆxi(t)] , (C13) 
+
+Unut ,u [ˆ x] = 1
+
+αnut p(in)  
+
+> u
+
+N
+
+X
+
+> i∈G nut
+
+δui,u δF[ˆ x(t) − ˆxi(t)] , (C14) 
+
+Vcat ,v [x, ˆx] = 1
+
+αcat p(out)  
+
+> v
+
+N
+
+X
+
+> i∈G cat
+
+δvi,v δF[x(t) − xi(t)] δF[ˆ x(t) − ˆxi(t)] , (C15) 
+
+Vnut ,v [x, ˆx] = 1
+
+αnut p(out)  
+
+> v
+
+N
+
+X
+
+> i∈G nut
+
+δvi,v δF[x(t) − xi(t)] δF[ˆ x(t) − ˆxi(t)] , (C16) 
+
+W [x] = 1
+
+αcat N
+
+X
+
+> i∈G cat
+
+δF[x(t) − xi(t)] . (C17) For notational convenience, we introduce Uσ,u and Vσ,v with σ = cat , nut. Using these order parameters, we can write ∆[ x, ˆx] as ∆[ x, ˆx] = exp 
+
+"
+
+N X
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out) 
+
+> v
+
+Z
+
+DˆxDyD ˆyDz 1 · · · Dz ν (X
+
+> σ
+
+ασ Uσ,u [ˆ x])( X
+
+> σ
+
+ασ Vσ,v [y, ˆy]) W [z1] · · · W [zν ]fuv [ˆ x, y, ˆy, {z}]
+
+#
+
+,
+
+(C18) where 
+
+fuv [ˆ x, y, ˆy, {z}] = N (N α cat )ν ln 
+
+
+
+1 + uv 
+
+(N α cat )ν N c 
+
+
+
+exp 
+
+
+
+− ic
+
+Z
+
+dt (ˆ x(t) − ˆy(t)) y(t)z1(t) · · · zν (t)
+
+
+
+− 1
+
+ 
+
+. (C19) In the dense connectivity limit, the leading terms in powers of 1 /c are relevant. Hence, by expanding the exponential in Eq. (C19) with respect to 1 /c and taking the thermodynamic limit N → ∞ and, we obtain 
+
+fuv [ˆ x, y, ˆy, {z}] = −i uv c2
+
+Z
+
+dt (ˆ x(t) − ˆy(t)) y(t)z1(t) · · · zν (t). (C20) By inserting the following identities, 1 = 
+
+Z
+
+DU σ,u δF
+
+h
+
+ασ p(in)  
+
+> u
+
+N U σ,u [ˆ x] − X
+
+> i∈G σ
+
+δui,u δF[ˆ x(t) − ˆxi(t)] 
+
+i
+
+= 12π
+
+Z
+
+DU σ,u D ˆUσ,u eiα σ p(in)        
+
+> uNRDˆxˆUσ,u [ˆ x]Uσ,u [ˆ x]−iP
+> i∈G σδui,u ˆUσ,u [ˆ xi]
+
+, (C21) 1 = 
+
+Z
+
+DV σ,v δF
+
+h
+
+ασ p(out)  
+
+> v
+
+N V σ,v [x, ˆx] − X
+
+> i∈G σ
+
+δvi,v δF[x(t) − xi(t)] δF[ˆ x(t) − ˆxi(t)] 
+
+i
+
+= 12π
+
+Z
+
+DV σ,v D ˆVσ,v eiα σ p(out)           
+
+> vNRDxD ˆxˆVσ,v [x, ˆx]Vσ,v [x, ˆx]−iP
+> i∈G σδvi,v ˆVσ,v [xi,ˆxi]
+
+, (C22) 1 = 
+
+Z
+
+DW cat δF
+
+h
+
+αcat N W cat [x] − X
+
+> i∈G cat
+
+δF[x(t) − xi(t)] 
+
+i
+
+= 12π
+
+Z
+
+DW D ˆW e iα cat N R Dx ˆW [x]W [x]−i P 
+
+> i∈G cat
+> ˆW[xi]
+
+, (C23) into the averaged generating functional Z[h, ψ], We obtain 
+
+Z[h, ψ] = 
+
+Z Y
+
+> σ,u
+
+DU σ,u D ˆUσ,u 
+
+! Y
+
+> σ,v
+
+DV σ,v D ˆVσ,v 
+
+!
+
+DW D ˆW exp 
+
+
+
+N Φ[ U , ˆU , V , ˆV , W, ˆW ]
+
+
+
+, (C24) 14 where Φ = X
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out) 
+
+> v
+
+Z
+
+DˆxDyD ˆyDz 1 · · · Dz ν (X
+
+> σ
+
+ασ Uσ,u [ˆ x])( X
+
+> σ
+
+ασ Vσ,v [y, ˆy]) W [z1] · · · W [zν ]fuv [ˆ x, y, ˆy, {z}]+ i X
+
+> σ
+
+ασ
+
+X
+
+> u
+
+p(in) 
+
+> u
+
+Z
+
+DˆxU σ,u [ˆ x] ˆUσ,u [ˆ x] + X
+
+> v
+
+p(out) 
+
+> v
+
+Z
+
+DxD ˆxV σ,v [x, ˆx] ˆVσ,v [x, ˆx]
+
+!
+
++ να cat 
+
+Z
+
+DxW [x] ˆW [x]+ αcat 
+
+X
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+ln 
+
+Z
+
+DxD ˆxP 0(x(0)) 
+
+× exp 
+
+
+
+i
+
+Z
+
+dtA cat (x(t), ˆx(t), h cat ,uv (t), ψ cat ,uv (t)) − i ˆUcat ,u [ˆ x] − i ˆVcat ,v [x, ˆx] − iν ˆW [x]
+
+
+
++ αnut 
+
+X
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+ln 
+
+Z
+
+DxD ˆxP 0(x(0)) 
+
+× exp 
+
+
+
+i
+
+Z
+
+dtA nut (x(t), ˆx(t), h nut ,uv (t), ψ nut ,uv (t)) − i ˆUnut ,u [ˆ x] − i ˆVnut ,v [x, ˆx]
+
+
+
+. (C25) Here, we assume that hi(t) and ψi(t) depend only on the in-degree u, out-degree v, and group Gσ of the i-th chemical species; this assumption leads to the factorized form of the last term in Eq. (C25). The integral in Eq. (C24) can be evaluated by applying the saddle-point method in the large N limit, and then the resulting saddle-point equations read ˆUσ,u [ˆ x] = i X
+
+> v
+
+p(out) 
+
+> v
+
+Z
+
+DyD ˆyDz 1 · · · Dz ν (X
+
+> σ
+
+ασ Vσ,v [y, ˆy]) W [z1] · · · W [zν ]fuv [ˆ x, y, ˆy, {z}] ≡ ˆUu[ˆ x], (C26) ˆVσ,v [y, ˆy] = i X
+
+> u
+
+p(in) 
+
+> u
+
+Z
+
+DˆxDz 1 · · · Dz ν (X
+
+> σ
+
+ασ Uσ,u [ˆ x]) W [z1] · · · W [zν ]fuv [ˆ x, y, ˆy, {z}] ≡ ˆVv [y, ˆy], (C27) ˆW [z] = i X
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out) 
+
+> v
+
+Z
+
+DˆxDyD ˆyDz 1 · · · Dz ν−1(X
+
+> σ
+
+ασ Uσ,u [ˆ x])( X
+
+> σ
+
+ασ Vσ,v [y, ˆy]) W [z1] · · · W [zν−1]fuv [ˆ x, y, ˆy, {z}],
+
+(C28) 
+
+Uσ,u [ˆ x] = X
+
+> v
+
+p(out) 
+
+> v
+
+Z
+
+Dxγ σ [x, ˆx|u, v ], (C29) 
+
+Vσ,v [y, ˆy] = X
+
+> u
+
+p(out)  
+
+> v
+
+γσ [y, ˆy|u, v ], (C30) 
+
+W [z] = X
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out) 
+
+> v
+
+Z
+
+Dˆzγ cat [z, ˆz|u, v ], (C31) where 
+
+γcat [x, ˆx|u, v ] = exp 
+
+h
+
+i R dtA cat (x(t), ˆx(t), h cat ,uv (t), ψ cat ,uv (t)) − i ˆUu[ˆ x] − i ˆVv [x, ˆx] − iν ˆW [x]
+
+iR DxD ˆx exp 
+
+h
+
+i R dtA cat (x(t), ˆx(t), h cat ,uv (t), ψ cat ,uv (t)) − i ˆUu[ˆ x] − i ˆVv [x, ˆx] − iν ˆW [x]
+
+i , (C32) 
+
+γnut [x, ˆx|u, v ] = exp 
+
+h
+
+i R dtA nut (x(t), ˆx(t), h nut ,uv (t), ψ nut ,uv (t)) − i ˆUu[ˆ x] − i ˆVv [x, ˆx]
+
+iR DxD ˆx exp 
+
+h
+
+i R dtA nut (x(t), ˆx(t), h nut ,uv (t), ψ nut ,uv (t)) − i ˆUu[ˆ x] − i ˆVv [x, ˆx]
+
+i . (C33) It should be noted that the saddle-point equations for the conjugate (hatted) order parameters ˆUσ,u and ˆVσ,v do not depend on the species group σ; therefore, we introduce the shorthand notation, ˆUu[ˆ x] and ˆVv [y, ˆy]. To interpret the probability distribution γσ [x, ˆx|u, v ], we define the expectation with respect to γσ [x, ˆx|u, v ] as 
+
+⟨· · ·⟩ σ,uv =
+
+Z
+
+DxD ˆx · · · γσ [x, ˆx|u, v ]. (C34) By calculating the functional derivatives of the expression for the generating functional Z[h, ψ] in Eq. (C24) with 15 respect to ψσ,uv (t) and hσ,uv (t), we find the following relations: 
+
+⟨x(t)⟩σ,uv =
+
+Z
+
+DxD ˆxx (t)γσ [x, ˆx|u, v ] = ( −i) lim 
+
+> h,ψ→0
+
+δZ[h, ψ]
+
+δψ σ,uv (t)= ( −i) lim 
+
+> h,ψ→0
+
+1
+
+ασ p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+N
+
+X
+
+> i∈G σ
+
+δui,u δvi,v 
+
+δZ[h, ψ]
+
+δψ i(t)= 1
+
+ασ p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+N
+
+X
+
+> i∈G σ
+
+δui,u δvi,v ⟨xi(t)⟩ξ , (C35) 
+
+⟨ˆx(t)⟩σ,uv =
+
+Z
+
+DxD ˆxˆx(t)γσ [x, ˆx|u, v ] = i lim 
+
+> h,ψ→0
+
+δZ[h, ψ]
+
+δh σ,uv (t)= i lim 
+
+> h,ψ→0
+
+1
+
+ασ p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+N
+
+X
+
+> i∈G σ
+
+δui,u δvi,v 
+
+δZ[h, ψ]
+
+δh i(t)= 1
+
+ασ p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+N
+
+X
+
+> i∈G σ
+
+δui,u δvi,v ⟨ˆxi(t)⟩ξ = 0 , (C36) 
+
+⟨x(t)ˆ x(t′)⟩σ,uv =
+
+Z
+
+DxD ˆxx (t)ˆ x(t′)γσ [x, ˆx|u, v ] = 1
+
+ασ p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+N
+
+X
+
+> i∈G σ
+
+δui,u δvi,v ⟨x(t)ˆ xi(t′)⟩ξ . (C37) Comparing these relations with Eqs. (C8)-(C10), one can regard R Dˆxγ σ [x, ˆx|u, v ] as the path probability describing the typical dynamics of the abundance of the chemical species belonging to Gσ , conditioned on the in-degree u and out-degree v.Using Eqs. (C35)-(C37) and substituting Eqs. (C20), (C29)-(C31) into Eq. (C28), we find ˆW [z] = X
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out) 
+
+> v
+
+uv c2
+
+"Z
+
+dt (X
+
+> σ
+
+ασ
+
+X
+
+> v′
+
+p(out)  
+
+> v′
+
+⟨ˆx(t)⟩σ,uv ′ )( X
+
+> σ
+
+ασ
+
+X
+
+> v′
+
+p(in)  
+
+> u′
+
+⟨y(t)⟩σ,u ′v ) ⟨z(t)⟩ν−1cat ,uv z(t)
+
+− (X
+
+> σ
+
+ασ
+
+X
+
+> u′
+
+p(in)  
+
+> u′
+
+⟨y(t)ˆ y(t)⟩σ,u ′v ) ⟨z(t)⟩ν−1cat ,uv z(t)
+
+#
+
+= 0 . (C38) Here, we use ⟨ˆx(t)⟩σ,uv = 0 and ⟨ˆx(t)x(t)⟩σ,uv = 0. Vanishing of ˆW [z] implies that the catalyzed chemical species do not provide feedback to the catalytic chemical species through the catalytic activity. Similarly to ˆW [z], the other hatted order parameters can be calculated as ˆUu[ˆ x] = X
+
+> v
+
+p(out) 
+
+> v
+
+uv c2
+
+"Z
+
+dt ˆx(t)( X
+
+> σ
+
+ασ
+
+X
+
+> u′
+
+p(in)  
+
+> u′
+
+⟨y(t)⟩σ,u ′v )( X
+
+> u′,v ′
+
+p(in)  
+
+> u′
+
+p(out)  
+
+> v′
+
+⟨z(t)⟩cat ,u ′v′ )ν
+
+− (X
+
+> σ
+
+ασ
+
+X
+
+> u′
+
+p(in)  
+
+> u′
+
+⟨ˆy(t)y(t)⟩σ,u ′v )( X
+
+> u′,v ′
+
+p(in)  
+
+> u′
+
+p(out)  
+
+> v′
+
+⟨z(t)⟩cat ,u ′v′ )ν
+
+#
+
+= uc
+
+Z
+
+dt ˆx(t)min (t)mν
+
+> cat
+
+(t), (C39) ˆVv [y, ˆy] = X
+
+> u
+
+p(in) 
+
+> u
+
+uv c2
+
+"Z
+
+dt (X
+
+> σ
+
+ασ
+
+X
+
+> v′
+
+p(out)  
+
+> v′
+
+⟨ˆx(t)⟩σ,uv ′ )y(t)( X
+
+> u′,v ′
+
+p(in)  
+
+> u′
+
+p(out)  
+
+> v′
+
+⟨z(t)⟩cat ,u ′v′ )ν
+
+− ˆy(t)y(t)( X
+
+> u′,v ′
+
+p(in)  
+
+> u′
+
+p(out)  
+
+> v′
+
+⟨z(t)⟩cat ,u ′v′ )ν
+
+#
+
+= − vc
+
+Z
+
+dt ˆy(t)y(t)mν
+
+> cat
+
+(t), (C40) 16 where 
+
+min (t) = X
+
+> σ,u,v
+
+vc ασ p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+⟨x(t)⟩σ,uv , (C41) 
+
+mcat (t) = X
+
+> u,v
+
+p(in)  
+
+> u
+
+p(out)  
+
+> v
+
+⟨x(t)⟩cat ,uv . (C42) Substituting Eqs. (C39) and (C40) into γσ [x, ˆx|u, v ], we obtain 
+
+γσ [x, ˆx|u, v ] = exp i R dtA σ (x(t), ˆx(t), h σ,uv (t), ψ σ,uv (t)) − iˆx(t)( uc min (t)mν
+
+> cat
+
+(t) − vc x(t)mν
+
+> cat
+
+(t)) R DxD ˆx exp i R dtA σ (x(t), ˆx(t), h σ,uv (t), ψ σ,uv (t)) − iˆx(t)( uc min (t)mν
+
+> cat
+
+(t) − vc x(t)mν
+
+> cat
+
+(t))  . (C43) The path probability of the effective dynamical equation for the abundance of catalytic chemical species and nutrients, conditioned on the in-degree u and out-degree v, can then be written as 
+
+Pcat ,uv [x, h ] = Pcat ,uv 0(x(0)) 
+
+Z
+
+Dξ Pη [ξ]
+
+× δF
+
+h
+
+˙x(t) − uc min (t)mν
+
+> cat
+
+(t) + vc mν
+
+> cat
+
+(t)x(t) + μ(t)x(t) − h(t) − ξ(t)
+
+i
+
+, (C44) 
+
+Pnut ,uv [x, h ] = Pnut ,uv 0(x(0)) 
+
+Z
+
+Dξ Pη [ξ]
+
+× δF
+
+h
+
+˙x(t) − uc min (t)mν
+
+> cat
+
+(t) + vc mν
+
+> cat
+
+(t)x(t) − d(g − x(t)) + μ(t)x(t) − h(t) − ξ(t)
+
+i
+
+, (C45) respectively. Hence, we finally obtain the effective dynamical equations as ˙xcat ,uv (t) = uc min (t)mcat (t) − vc mcat (t)xcat ,uv (t) − μ(t)xcat ,uv (t) + hcat ,uv (t) + ξcat ,uv (t), (C46) ˙xnut ,uv (t) = uc min (t)mcat (t) − vc mcat (t)xnut ,uv (t) + d(g − xnut ,uv (t)) − μ(t)xnut ,uv (t) + hnut ,uv (t) + ξnut ,uv (t), (C47) respectively. In the main text, we analyze the case of hσ,uv (t) = ξσ,uv (t) = 0. 
+
+Appendix D: Linear stability analysis 
+
+To examine the stability of the overnutrition state for ν ≥ 2, which emerges when αnut g > 1, we linearize the DMFT equations, given by Eq. (C46) and Eq. (C47), around the fixed point by introducing a small perturbation 
+
+ξσ,uv (t) [43, 67, 68]. In the case of ν = 1, which has been reported in Ref. [36], the overnutrition state becomes unstable at d < d c = 1 /(αnut g − 1). The perturbation is assumed to be an independent white Gaussian noise for each 
+
+σ, u, and v. We define the deviations from the fixed point as δx σ,uv (t) = xσ,uv (t) − x∗ 
+
+> σ,uv
+
+, δm cat (t) = mcat (t) − m∗
+
+> cat
+
+,
+
+δm in (t) = min (t) − m∗
+
+> in
+
+, and δμ (t) = μ(t) − μ∗. If the solution is stable, all these deviations fluctuate around zero in the long-time limit. The linearized dynamics around a given fixed point are written as 
+
+δ ˙xσ,uv (t) = uc (νm ∗
+
+> in
+
+δm cat (t)( m∗
+
+> cat
+
+)ν−1 + δm in (t)( m∗
+
+> cat
+
+)ν ) − vc (( m∗
+
+> cat
+
+)ν δx σ,uv (t) + νδm cat (t)( m∗
+
+> cat
+
+)ν−1x∗ 
+
+> σ,uv
+
+)
+
+− (dσ + μ∗)δx σ,uv (t) − δμ (t)x∗ 
+
+> σ,uv
+
++ ξσ,uv . (D1) In the overnutrition state, m∗ 
+
+> cat
+
+= 0; hence, Eq. (D1) becomes δ ˙xσ,uv (t) = −(dσ + μ∗)δx σ,uv (t) − δμ (t)x∗ 
+
+> σ,uv
+
++ ξσ,uv .Denoting by ˜f (ω) the Fourier transform of a function f (t), Eq. (D1) can be rewritten as 
+
+δ˜xσ,uv (ω) = δ ˜μ(ω)x∗ 
+
+> σ,uv
+
+− ˜ξσ,uv (ω)
+
+iω + dσ + μ∗ . (D2) Substituting the non-metabolic solution into Eq. (D2), we obtain the following expressions for 
+
+δ˜xcat ,uv (ω) = − ˜ξcat ,uv (ω)
+
+iω + d(αnut g − 1) , (D3) 
+
+δ˜xnut ,uv (ω) = δ ˜μ(ω)/α nut − ˜ξnut ,uv (ω)
+
+iω + dα nut g . (D4) 17 We then square these expressions and average over the Gaussian noise ξσ,uv to obtain 
+
+|δ˜xcat ,uv (ω)|2 = Icat ,uv 
+
+ω2 + d2(αnut g − 1) 2 , (D5) 
+
+|δ˜xcat ,uv (ω)|2 = |δ ˜μ(ω)/α nut |2 + Inut ,uv 
+
+ω2 + d2α2nut g2 , (D6) where ⟨· · ·⟩ denotes the average over ξσ,uv and Iσ,uv =
+
+D
+
+| ˜ξσ,uv |2
+
+E
+
+≥ 0. In the limit ω → 0, one finds that |δ˜xcat ,uv (ω)|2
+
+diverges at αnut g = 1, leading to the instability of overnutrition state for any permeability d at αnut g = 1. From the definition of the growth rate μ, we obtain 
+
+|δ ˜μ(ω)|2 = ( dα cat )2 |δ ˜mcat (ω)|2 ∼ 1/(ω2 + d2(αnut g − 1) 2), (D7) which also diverges at αnut g = 1 in the limit ω → 0; hence, Eqs. (D5) and (D6) diverge only when αnut g = 1. We therefore find that the overnutirition state is stable for any d when αnut g > 1. 
+
+Appendix E: Asymptotic solutions for low nutrient supply 
+
+In this section we consider the low–growth situation discussed in Sec. VI, where μ∗ ≪ αnut g ≪ 1 and μ∗ ≪ d. We show that, for both the uniform distribution with r = 1 and the power-law distribution, the asymptotic behavior of 
+
+μ∗ as a function of αnut g exhibits the exponential form exp( −C/α nut g), where C is a positive constant. The average abundance of catalytic chemical species and nutrients are given by m∗ 
+
+> cat
+
+= m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν X(μ∗, (m∗
+
+> cat
+
+)ν )and m∗ 
+
+> nut
+
+= ( dg + m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν )X(μ∗ + d, (m∗
+
+> cat
+
+)ν ) in the main text, respectively, where X(a, b ) = P 
+
+> v
+
+p(out)  
+
+> v
+
+/(a + vc b). Hence, if μ∗ ≪ d, fixed-point values of the average abundances of catalytic chemical species and nutrients are given by 
+
+m∗ 
+
+> cat
+
+= X(μ∗, (m∗
+
+> cat
+
+)ν )m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν , (E1) 
+
+m∗ 
+
+> nut
+
+≃ X(d, (m∗
+
+> cat
+
+)ν )( dg + m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν ), (E2) respectively. Using Eq. (6), we also find 
+
+m∗ 
+
+> cat
+
+≃ 1 − αnut gαcat 
+
+. (E3) Substituting this into Eq. (E1), we obtain the relation 
+
+X(μ∗, (m∗
+
+> cat
+
+)ν ) ≃ 1 − αnut gαcat m∗
+
+> in
+
+(m∗
+
+> cat
+
+)ν . (E4) Because the uniform distribution with r = 1 and the power-law distribution with β = 3 with dense connectivity, c ≫ 1, are written as p(v/c ) = 1 /2 with the interval [0 , 2] and p(v/c ) = 2 /(1 + v/c )3 with the interval [0 , ∞), respectively, the function X(a, b ) can be evaluated as 
+
+X(a, b ) = X
+
+> v
+
+p(out)  
+
+> v
+
+/(a + vc b)=
+
+( R 20 dv ′1/2( a + v′b) (uniform) 
+
+R ∞ 
+
+> 0
+
+2/(1 + v′)3(a + v′b) (power-law) =
+
+( 12b log a+2 ba (uniform) 
+
+> 1(a−b)2
+
+ 2b2 
+
+> a−b
+
+log ba + a − 3b
+
+
+
+(power-law) , (E5) where v′ = v/c . One finds that the value of X(a, b ) logarithmically diverges as a → +0. Thus, when μ∗ ≪ αnut g ≪ 1, the relation given by Eq. (E4) leads to 
+
+μ∗ =
+
+
+
+2( m∗
+
+> cat
+
+)ν exp 
+
+
+
+−2 1−αnut gαcat m∗
+
+> in
+
+
+
+(uniform) (m∗
+
+> cat
+
+)ν exp 
+
+
+
+− 32 − 1−αnut g
+
+> 2αcat m∗
+> in
+
+
+
+(power-law) . (E6) 18 Substituting Eqs. (E3) and (E2) into Eq. (5), we can derive m∗ 
+
+> in
+
+as a function of αnut g as 
+
+m∗ 
+
+> in
+
+= (1 − dX (d, (m∗
+
+> cat
+
+)ν )) αnut g
+
+(1 − α1)( m∗
+
+> cat
+
+)ν X(d, (m∗
+
+> cat
+
+)ν ) , (E7) which is proportional to αnut g. Thus, the asymptotic behavior of μ∗ as a function of αnut g exhibits the exponential form exp( −C/α nut g). 
+
+[1] R. Albert and A.-L. Barab´ asi, Statistical mechanics of complex networks, Rev. Mod. Phys. 74 , 47–97 (2002). [2] A.-L. Barab´ asi, Network Science (Cambridge University Press, Cambridge, 2016). [3] M. E. J. Newman, Networks (Oxford University Press, Oxford, 2010). [4] R. Cohen and S. Havlin, Complex networks: structure, robustness and function (Cambridge university press, Cambridge, 2010). [5] A. Vespignani, Modelling dynamical processes in complex socio-technical systems, Nat. Phys. 8, 32–39 (2011). [6] C. Castellano, S. Fortunato, and V. Loreto, Statistical physics of social dynamics, Rev. Mod. Phys. 81 , 591–646 (2009). [7] J. M. Montoya, S. L. Pimm, and R. V. Sol´ e, Ecological networks and their fragility, Nature 442 , 259–264 (2006). [8] G. Caldarelli, O. Artime, G. Fischetti, S. Guarino, A. Nowak, F. Saracco, P. Holme, and M. De Domenico, The physics of news, rumors, and opinions, Physics Re-ports 1186 , 1–75 (2026). [9] C. Seguin, O. Sporns, and A. Zalesky, Brain network communication: concepts, models and applications, Nat. Rev. Neurosci. 24 , 557–574 (2023). [10] A.-L. Barab´ asi and Z. N. Oltvai, Network biology: un-derstanding the cell’s functional organization, Nat. Rev. Genet. 5, 101 (2004). [11] S. Ghosh, M. G. Baltussen, N. M. Ivanov, R. Haije, M. Jakˇ stait˙ e, T. Zhou, and W. T. S. Huck, Exploring emergent properties in enzymatic reaction networks: De-sign and control of dynamic functional systems, Chem. Rev. 124 , 2553–2582 (2024). [12] S. Boccaletti, V. Latora, Y. Moreno, M. Chavez, and D. Hwang, Complex networks: Structure and dynamics, Phys. Rep. 424 , 175–308 (2006). [13] S. N. Dorogovtsev, A. V. Goltsev, and J. F. F. Mendes, Critical phenomena in complex networks, Rev. Mod. Phys. 80 , 1275 (2008). [14] B. Barzel and A.-L. Barab´ asi, Universality in network dynamics, Nat. Phys. 9, 673–681 (2013). [15] F. Battiston, G. Cencetti, I. Iacopini, V. Latora, M. Lu-cas, A. Patania, J.-G. Young, and G. Petri, Networks beyond pairwise interactions: Structure and dynamics, Phys. Rep. 874 , 1–92 (2020). [16] F. Battiston, E. Amico, A. Barrat, G. Bianconi, G. Fer-raz de Arruda, B. Franceschiello, I. Iacopini, S. K´ efi, V. Latora, Y. Moreno, M. M. Murray, T. P. Peixoto, F. Vaccarino, and G. Petri, The physics of higher-order interactions in complex systems, Nat. Phys. 17 ,1093–1098 (2021). [17] E. Gardner, Spin glasses with p-spin interactions, Nucl. Phys. B 257 , 747 (1985). [18] N. Sourlas, Spin-glass models as error-correcting codes, Nature 339 , 693 (1989). [19] L. Wang and J. Ross, Chaos, multiplicity, crisis, and syn-chronicity in higher-order neural networks, Phys. Rev. A 
+
+44 , R2259 (1991). [20] Y. Kabashima, T. Murayama, and D. Saad, Typical per-formance of gallager-type error-correcting codes, Phys. Rev. Lett. 84 , 1355 (2000). [21] S. Franz, M. M´ ezard, F. Ricci-Tersenghi, M. Weigt, and R. Zecchina, A ferromagnet with a glass transition, Eu-rophys. Lett. 55 , 465 (2001). [22] S. Davatolhagh, D. Dariush, and L. Separdar, Nature of the glassy transition in simulations of the ferromagnetic plaquette ising model, Phys. Rev. E 81 , 10.1103/phys-reve.81.031501 (2010). [23] P. S. Skardal and A. Arenas, Higher order interac-tions in complex networks of phase oscillators promote abrupt synchronization switching, Commun. Phys. 3,10.1038/s42005-020-00485-0 (2020). [24] G. F. de Arruda, G. Petri, and Y. Moreno, Social con-tagion models on hypergraphs, Phys. Rev. Research 2,10.1103/physrevresearch.2.023032 (2020). [25] H. Sun, F. Radicchi, J. Kurths, and G. Bianconi, The dynamic nature of percolation on networks with tri-adic interactions, Nat. Commun. 14 , 10.1038/s41467-023-37019-5 (2023). [26] M. S. Anwar, N. Frolov, A. E. Hramov, and D. Ghosh, Self-organized bistability on globally coupled higher-order networks, Phys. Rev. E 109 , 10.1103/phys-reve.109.014225 (2024). [27] S. Dutta, P. Kundu, P. Khanra, C. Hens, and P. Pal, Transition to synchronization in the adaptive sakaguchi-kuramoto model with higher-order interactions, Phys. Rev. E 110 , 10.1103/physreve.110.064317 (2024). [28] A. G. Cavaliere, R. Nagasawa, S. Yokoi, T. Obuchi, and H. Yoshino, Graphical model for factorization and com-pletion of relatively high rank tensors by sparse sampling, SciPost Phys. 20 , 10.21468/scipostphys.20.4.110 (2026). [29] S. Klamt, U.-U. Haus, and F. Theis, Hypergraphs and cellular networks, PLoS Comput. Biol. 5, e1000385 (2009). [30] S. G. Marehalli Srinivas, M. Esposito, and N. Freitas, Hypergraph-based models of random chemical reaction networks: Conservation laws, connectivity, and percola-tion, J. Chem. Phys. 163 , 10.1063/5.0292914 (2025). [31] C. Furusawa and K. Kaneko, Zipf’s law in gene expres-sion, Phys. Rev. Lett. 90 , 088102 (2003). [32] C. Furusawa and K. Kaneko, Evolutionary origin of power-laws in a biochemical reaction network: Embed-ding the distribution of abundance into topology, Phys. Rev. E 73 , 011912 (2006). [33] C. Furusawa and K. Kaneko, Adaptation to optimal cell growth through self-organized criticality, Phys. Rev. 19 
+
+Lett. 108 , 208103 (2012). [34] K. Kaneko, Life: an introduction to complex systems bi-ology (Springer, Berlin, Heidelberg, 2006). [35] K. Kaneko, Universal Biology: The Physics of Life through the Macro-Micro Consistency Principle (Cam-bridge University Press, Cambridge, 2025). [36] K. Mitsumoto and S. Ishihara, Starvation suppres-sion in dense scale-free metabolic networks: Dynamical mean-field analysis of catalytic reaction networks, Proc. Natl. Acad. Sci. U. S. A. 123 , 10.1073/pnas.2614238123 (2026). [37] P. C. Martin, E. D. Siggia, and H. A. Rose, Statistical dynamics of classical systems, Phys. Rev. A 8, 423–437 (1973). [38] H. Janssen, On a lagrangean for classical field dynam-ics and renormalization group calculations of dynamical critical properties, Z. Phys. B 23 , 377–380 (1976). [39] C. De Dominicis, Dynamics as a substitute for replicas in systems with quenched random impurities, Phys. Rev. B 18 , 4913–4919 (1978). [40] H. Sompolinsky and A. Zippelius, Relaxational dynamics of the edwards-anderson model and the mean-field theory of spin-glasses, Phys. Rev. B 25 , 6860–6875 (1982). [41] L. F. Cugliandolo and J. Kurchan, Analytical solution of the off-equilibrium dynamics of a long-range spin-glass model, Phys. Rev. Lett. 71 , 173–176 (1993). [42] T. Castellani and A. Cavagna, Spin-glass theory for pedestrians, J. Stat. Mech.: Theory Exp. 2005 (05), P05012. [43] T. Galla, Generating-functional analysis of random lotka-volterra systems: A step-by-step guide, arXiv preprint arXiv:2405.14289 (2024). [44] K. Mimura and A. C. C. Coolen, Parallel dynamics of dis-ordered ising spin systems on finitely connected directed random graphs with arbitrary degree distributions, J. Phys. A: Math. Theor. 42 , 415001 (2009). [45] L. Poley, T. Galla, and J. W. Baron, Interaction networks in persistent lotka-volterra communities, Phys. Rev. E 
+
+111 , 014318 (2025). [46] F. L. Metz, Dynamical mean-field theory of complex sys-tems on sparse directed networks, Phys. Rev. Lett. 134 ,037401 (2025). [47] H. Jeong, B. Tombor, R. Albert, Z. N. Oltvai, and A.-L. Barab´ asi, The large-scale organization of metabolic networks, Nature 407 , 651–654 (2000). [48] H. Jeong, S. P. Mason, A.-L. Barab´ asi, and Z. N. Oltvai, Lethality and centrality in protein networks, Nature 411 ,41–42 (2001). [49] A. D. Broido and A. Clauset, Scale-free networks are rare, Nat. Commun. 10 , 10.1038/s41467-019-08746-5 (2019). [50] M. Ramirez-Gaona et al. , YMDB 2.0: a significantly ex-panded version of the yeast metabolome database, Nu-cleic Acids Res. 45 , D440–D445 (2016). [51] K. Haug et al. , Metabolights: a resource evolving in re-sponse to the needs of its scientific community, Nucleic Acids Res. , D440–D444 (2020). [52] D. S. Wishart et al. , HMDB 5.0: the human metabolome database for 2022, Nucleic Acids Res. 50 , D622–D631 (2022). [53] S. Kim et al. , Pubchem 2025 update, Nucleic Acids Re-search 53 , D1516–D1525 (2025). [54] M. Kanehisa, M. Furumichi, Y. Sato, Y. Matsuura, and M. Ishiguro-Watanabe, KEGG: biological systems database as a model of the real world, Nucleic Acids Res. 
+
+53 , D672–D677 (2025). [55] P. A. Srere, Complexes of sequential metabolic enzymes, Annu. Rev. Biochem. 56 , 89 (1987). [56] C. L. Kohnhorst, M. Kyoung, M. Jeon, D. L. Schmitt, E. L. Kennedy, J. Ramirez, S. M. Bracey, B. T. Luu, S. J. Russell, and S. An, Identification of a multienzyme complex for glucose metabolism in living cells, J. Biol. Chem. 292 , 9191 (2017). [57] V. Pareek, Z. Sha, J. He, N. S. Wingreen, and S. J. Benkovic, Metabolic channeling: predictions, deductions, and evidence, Mol. Cell 81 , 3775 (2021). [58] B. Bollob´ as, A probabilistic proof of an asymptotic for-mula for the number of labelled regular graphs, Eur. J. Combinatorics 1, 311–316 (1980). [59] F. Chung and L. Lu, Connected components in random graphs with given expected degree sequences, Ann. Com-binatorics 6, 125–145 (2002). [60] P. Erd˝ os and A. R´ enyi, On random graphs I, Publ. math. debrecen 6, 18 (1959). [61] S. N. Dorogovtsev, J. F. F. Mendes, and A. N. Samukhin, Structure of growing networks with preferential linking, Phys. Rev. Lett. 85 , 4633–4636 (2000). [62] M. Niedostatek, A. Baptista, J. Yamamoto, J. Kurths, R. Sanchez Garcia, B. D. MacArthur, and G. Bianconi, Mining higher-order triadic interactions, Nat. Commun. 
+
+16 , 10.1038/s41467-025-66577-z (2025). [63] E. Bairey, E. D. Kelsic, and R. Kishony, High-order species interactions shape ecosystem diversity, Nat. Com-mun. 7, 10.1038/ncomms12285 (2016). [64] J. Grilli, G. Barab´ as, M. J. Michalska-Smith, and S. Allesina, Higher-order interactions stabilize dynamics in competitive network models, Nature 548 , 210 (2017). [65] S. H. Lee, M. Ha, H. Jeong, J. D. Noh, and H. Park, Critical behavior of the ising model in annealed scale-free networks, Phys. Rev. E 80 , 10.1103/physreve.80.051127 (2009). [66] C. H. Kim and B. Kahng, Heterogeneous network topology induces the widom line, Phys. Rev. E 113 ,10.1103/qvrb-yg3g (2026). [67] M. Opper and S. Diederich, Phase transition and 1/fnoise in a game dynamical model, Phys. Rev. Lett. 69 ,1616–1619 (1992). [68] F. Roy, G. Biroli, G. Bunin, and C. Cammarota, Nu-merical implementation of dynamical mean field theory for disordered systems: application to the lotka–volterra model of ecosystems, J. Phys. A: Math. Theor. 52 ,484001 (2019).

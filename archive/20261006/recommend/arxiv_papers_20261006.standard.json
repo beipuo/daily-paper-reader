@@ -1,16 +1,128 @@
 {
   "mode": "standard",
-  "generated_at": "2026-10-06T00:30:45.198016+00:00",
+  "generated_at": "2026-10-06T23:37:32.170571+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
     "deep_divecandidates": 0,
     "deep_cap": 6,
     "deep_selected": 0,
-    "quick_candidates": 0,
+    "quick_candidates": 3,
     "quick_skim_target": 11,
-    "quick_selected": 0
+    "quick_selected": 3
   },
   "deep_dive": [],
-  "quick_skim": []
+  "quick_skim": [
+    {
+      "id": "2610.04843v1",
+      "title": "Multicatalyst reactions induce abrupt transition in a dense catalytic reaction network model",
+      "abstract": "We generalize the Furusawa--Kaneko model, a simple model of intracellular catalytic reaction networks, to multicatalyst reactions and analyze the generalized model using dynamical mean-field theory. In the thermodynamic and dense-network limit, we derive exact effective equations and analyze their fixed points for arbitrary degree distributions. Under nutrient-poor conditions, network heterogeneity suppresses the metabolic--starvation transition irrespective of the number of catalysts per reaction. In contrast, under nutrient-rich conditions, the bifurcation structure changes with the number of catalysts. With one catalyst per reaction, only continuous transitions occur, whereas two or more catalysts give rise to bistable phases and discontinuous transitions. The bifurcation structure also differs between two and three catalysts per reaction, with three catalysts allowing bistability between metabolic states with different cell growth rates. Our results provide a possible mechanism for bistability and abrupt switching in metabolic dynamics.",
+      "authors": [
+        "Kota Mitsumoto",
+        "Shuji Ishihara"
+      ],
+      "primary_category": "cond-mat.stat-mech",
+      "categories": [
+        "cond-mat.stat-mech",
+        "cond-mat.dis-nn",
+        "physics.bio-ph"
+      ],
+      "published": "2026-10-04T00:55:55+00:00",
+      "link": "https://arxiv.org/pdf/2610.04843v1",
+      "tags": [
+        "keyword:植物氨基酸",
+        "query:植物氨基酸"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Intracellular catalytic reaction network model",
+      "llm_evidence_cn": "细胞内催化反应网络模型",
+      "llm_evidence": "细胞内催化反应网络模型",
+      "canonical_evidence": "细胞内催化反应网络模型",
+      "llm_tldr_en": "Analysis of dense catalytic reaction networks and metabolic transitions under varying nutrient conditions.",
+      "llm_tldr_cn": "分析不同营养条件下密集催化反应网络和代谢转变。",
+      "llm_tldr": "分析不同营养条件下密集催化反应网络和代谢转变。",
+      "llm_tags": [
+        "query:profile-4:composite"
+      ],
+      "matched_query_tag": "query:profile-4:composite",
+      "matched_query_text": "Papers central to 植物中氨基酸的合成与代谢机制, especially work that connects or combines: biochemical pathways of amino acid synthesis in plants; role of GS-GOGAT cycle in plant amino acid production; amino acid metabolism during plant photorespiration; biochemical pathways of amino acid metabolism in plants; nitrogen assimilation and amino acid synthesis in plants; degradation and catabolism of amino acids in plant tissues; molecular mechanisms of amino acid biosynthesis in higher plants; regulation of nitrogen metabolism and amino acid production in plants; enzymatic pathways for essential amino acid synthesis in crops; biochemical pathways of amino acid synthesis and degradation in plants.",
+      "matched_requirement_id": "req-composite-profile-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.05242v1",
+      "title": "Approximating Parameter Regions for Multistationarity and Multistability in Mass-Action Systems",
+      "abstract": "Identifying kinetic parameters and conserved quantities that support multistationarity and multistability remains challenging in chemical reaction network analysis. Structural theory provides existence and exclusion results, but does not always yield explicit, interpretable descriptions of the corresponding parameter regimes. We present a computational and machine-learning framework for discovering and characterizing parameter regimes with numerical evidence of multistationarity and multistability in mass-action systems. We refer to these numerically detected behaviors as approximate multistationarity and approximate multistability. The framework combines Latin hypercube sampling, adaptive sampling, and interpretable surrogate modeling. Logistic-regression and neural-network surrogates are trained separately on accumulated detection labels and independently guide later sampling toward regions with high scores for approximate multistationarity or multistability. Boundary refinement targets transitions between detected and undetected numerical classes. Buckingham--Pi groups are then used with CN2 rule induction to obtain interpretable empirical descriptions of detected regimes. Illustrative networks yield rules consistent with known multistationarity conditions, while the Schlögl model demonstrates adaptive enrichment of multistationarity detections. In the hybrid histidine kinase model and the sequential dual phosphorylation cycle, adaptive sampling substantially increased the number of parameter - total pairs with detected multistability relative to global sampling under equal sampling budgets. The framework complements analytical chemical reaction network theory by providing efficient, parameter-resolved discovery and characterization of multistationary and multistable regimes.",
+      "authors": [
+        "Dylan Antonio S. J. Talabis",
+        "Victoria May P. Mendoza",
+        "Bryan S. Hernandez"
+      ],
+      "primary_category": "q-bio.QM",
+      "categories": [
+        "q-bio.QM",
+        "math.DS",
+        "q-bio.MN"
+      ],
+      "published": "2026-10-04T14:18:13+00:00",
+      "link": "https://arxiv.org/pdf/2610.05242v1",
+      "tags": [
+        "keyword:植物氨基酸",
+        "query:植物氨基酸"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "interpretable surrogate models for chemical reaction networks",
+      "llm_evidence_cn": "化学反应网络的可解释代理模型",
+      "llm_evidence": "化学反应网络的可解释代理模型",
+      "canonical_evidence": "化学反应网络的可解释代理模型",
+      "llm_tldr_en": "Uses machine learning to discover parameter regimes for multistability in chemical reaction networks.",
+      "llm_tldr_cn": "利用机器学习发现化学反应网络中多稳态的参数范围，提供可解释的描述。",
+      "llm_tldr": "利用机器学习发现化学反应网络中多稳态的参数范围，提供可解释的描述。",
+      "llm_tags": [
+        "query:xrlsr:composite"
+      ],
+      "matched_query_tag": "query:xrlsr:composite",
+      "matched_query_text": "Papers central to 可解释强化学习驱动的符号回归方程发现论文查找, especially work that connects or combines: symbolic regression for equation discovery; reinforcement learning driven symbolic regression; interpretable machine learning for symbolic regression; automated discovery of physical laws and equations; policy gradient methods in symbolic regression; interpretable reinforcement learning for symbolic regression papers; deep reinforcement learning methods for automated equation discovery; state of the art in reinforcement learning based symbolic regression; frameworks for explainable symbolic regression using RL agents.",
+      "matched_requirement_id": "req-composite-xrlsr",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.06042v1",
+      "title": "GO-Based Clustering for Learning Cluster-Level Causal Gene Regulatory Networks",
+      "abstract": "Discovery of causal relationships in high-dimensional Gene Regulatory Networks (GRN) is computationally challenging and often difficult to interpret due to dense connections. Therefore, grouping genes together into functional modules can improve tractability and biological interpretability. However, existing cluster level causal discovery methods assume access to a predefined admissible partitions, requiring the graph over clusters to be acyclic. Constructing such partitions is therefore challenging. In this work, we introduce GO-based Clustering for Causal Discovery (GO4CD), an algorithm that uses Gene Ontology (GO) to construct biologically meaningful gene partitions at multiple levels of granularity, while favoring those more likely to be admissible for causal discovery. GO4CD groups together genes participating in a shared biological process, and propagates gene annotations through the ontology hierarchy to achieve different granularity of partitions. Furthermore, we integrate GO4CD with Causal Learning over Clusters (CLOC) algorithm and evaluate recovery of true Markov equivalence class both with an oracle of conditional independencies and on simulated gene expression data using multivariate conditional independence tests. We evaluate GO4CD on multiple E.coli regulatory subnetworks and find that it is inadmissible in 18.1% of the cases, compared with 65.3-82.3% for the semantic-similarity baselines. Our results indicate that GO4CD is substantially better suited to learning causal GRNs defined over biologically meaningful gene clusters.",
+      "authors": [
+        "Azlaan Mustafa Samad",
+        "Wei Zhang",
+        "Adèle H Ribeiro"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-10-05T09:41:04+00:00",
+      "link": "https://arxiv.org/pdf/2610.06042v1",
+      "tags": [
+        "keyword:植物氨基酸",
+        "query:植物氨基酸"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "causal gene regulatory networks and Gene Ontology",
+      "llm_evidence_cn": "因果基因调节网络与基因本体论",
+      "llm_evidence": "因果基因调节网络与基因本体论",
+      "canonical_evidence": "因果基因调节网络与基因本体论",
+      "llm_tldr_en": "Uses Gene Ontology to cluster genes for learning interpretable causal gene regulatory networks.",
+      "llm_tldr_cn": "利用基因本体论对基因进行聚类，以学习可解释的因果基因调节网络。",
+      "llm_tldr": "利用基因本体论对基因进行聚类，以学习可解释的因果基因调节网络。",
+      "llm_tags": [
+        "query:profile-4:composite"
+      ],
+      "matched_query_tag": "query:profile-4:composite",
+      "matched_query_text": "Papers central to 植物中氨基酸的合成与代谢机制, especially work that connects or combines: biochemical pathways of amino acid synthesis in plants; role of GS-GOGAT cycle in plant amino acid production; amino acid metabolism during plant photorespiration; biochemical pathways of amino acid metabolism in plants; nitrogen assimilation and amino acid synthesis in plants; degradation and catabolism of amino acids in plant tissues; molecular mechanisms of amino acid biosynthesis in higher plants; regulation of nitrogen metabolism and amino acid production in plants; enzymatic pathways for essential amino acid synthesis in crops; biochemical pathways of amino acid synthesis and degradation in plants.",
+      "matched_requirement_id": "req-composite-profile-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
 }
